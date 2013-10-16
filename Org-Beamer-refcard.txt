@@ -1,0 +1,513 @@
+#+TITLE:     Org Beamer Reference Card NEW
+#+AUTHOR:    Fabrice Niessen
+#+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
+#+Time-stamp: <2013-10-16 Wed 13:55>
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  en_US
+#+OPTIONS:   H:2 num:nil toc:nil
+
+#+SETUPFILE: ~/src/org-style/bigblow-local-abs.setup
+
+#+PROPERTY: eval no
+
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [presentation]
+#+BEAMER_THEME: Boadilla
+#+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
+#+PROPERTY: BEAMER_col_ALL 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0.0 :ETC
+
+#+BEAMER_THEME: Boadilla
+#+BEAMER_COLOR_THEME: default
+
+#+INCLUDE: "~/src/stage-latex-dunkerque-2013/style/listings.org"
+
+
+#+LaTeX_HEADER: \usepackage{tikz}
+# For every picture that defines or uses external nodes, you'll have to
+# apply the 'remember picture' style. To avoid some typing, we'll apply
+# the style to all pictures.
+#+LaTeX: \tikzstyle{every picture}+=[remember picture]
+
+* Tasks                                                             :noexport:
+
+See http://www.let.rug.nl/alfa/tex/tetex30/latex/beamer/examples/beamerexample1.tex
+plus all environments defined in Beamer theme Org
+plus all environments defined in org-beamer-mode
+plus https://bitbucket.org/rivanvx/beamer/src/876db01f1cba91f62254805d059f210548c87ab1/emacs/beamer.el?at=default
+
+* Org Beamer reference card
+
+Welcome to Org Beamer reference card. It contains the reference documentation
+that describes how to *write presentations* using Org Babel 8.
+
+** ox-beamer
+
+#+begin_src emacs-lisp
+M-x load-library RET ox-beamer RET
+#+end_src
+
+to load the Beamer back-end library
+
+#+begin_src emacs-lisp
+M-x org-beamer-mode RET
+#+end_src
+
+to load a minor mode easing structure edition of the document.
+
+** Keywords
+
+The =beamer= back-end also introduces the following keywords:
+
+#+begin_src org
+#+BEAMER_THEME: Boadilla
+#+end_src
+
+is equivalent to:
+
+#+begin_src org
+#+BEAMER_COLOR_THEME: dolphin
+#+BEAMER_FONT_THEME: default
+#+BEAMER_INNER_THEME: [shadow]rounded
+#+BEAMER_OUTER_THEME: infolines
+#+end_src
+
+#+begin_src org
+#+BEAMER_HEADER:
+#+end_src
+
+* Environment tags
+
+** againframe
+
+** appendix
+
+You can add an appendix to your talk by using the =\appendix= command. You
+should put frames and perhaps whole subsections into the appendix that you do
+not intend to show during your presentation, but which might be useful to
+answer a question. The =\appendix= command essentially just starts a new part
+named =\appendixname=. However, it also sets up certain hyperlinks. Like other
+parts, the appendix is kept separate from your actual talk.
+
+** column
+
+** columns
+
+** frame
+
+- Headlines become frames when their level is equal to =org-beamer-frame-level=
+  (or =H= value in the =OPTIONS= line).
+
+- Though, if a headline in the current tree has a =BEAMER_env= property set to
+  either =frame= or =fullframe=, its level overrides the variable.
+
+** fullframe                                                     :B_fullframe:
+   :PROPERTIES:
+   :BEAMER_env: fullframe
+   :END:
+
+- A =fullframe= is a =frame= with an ignored title
+  + =frametitle= is set to the empty string
+
+** ignoreheading                                             :B_ignoreheading:
+   :PROPERTIES:
+   :BEAMER_env: ignoreheading
+   :END:
+
+- A headline with an =ignoreheading= environment will have its contents only
+  inserted in the output.
+  + Contents is not inserted in any =frame= environment...
+
+- This special value is useful to have data between frames, or to properly
+  close a =column= environment.
+
+** note
+
+** noteNH
+
+* Figures and tables
+
+** Figures
+
+#+ATTR_LaTeX: :width 3cm
+[[file:images/dot.png]]
+# \pgfuseimage{myfigure}
+
+#+ATTR_LaTeX: :width 3cm
+#+CAPTION: The caption is /always/ placed *below* the figure.
+[[file:images/square.png]]
+# myotherfigure
+
+** TikZ
+
+http://tex.stackexchange.com/questions/64075/beamers-visible-inside-a-tikz-node
+
+#+begin_latex
+\begin{tikzpicture}
+  \node[align=center] {I'm {\visible<+->{very}}\\happy.};
+\end{tikzpicture}
+#+end_latex
+
+* Splitting a frame into multiple columns
+
+** BMCOL
+
+TODO Specify 5cm
+
+BMCOL
+
+*** First column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.39
+    :END:
+
+Two \\ lines.
+
+*** Second column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.39
+    :END:
+
+One line (but aligned).
+
+** Multiple columns
+
+*** First column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.39
+    :END:
+
+Two \\ lines.
+
+*** Second column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.39
+    :END:
+
+#+ATTR_LaTeX: :width 3cm
+[[file:images/square.png]]
+# mygraphic.jpg
+
+* Environments on blocks (=BEAMER_env=)
+
+** =structureenv= environment
+
+- For highlighting text.
+- To help the audience see the structure of your presentation.
+
+*** structureenv                                              :B_structureenv:
+    :PROPERTIES:
+    :BEAMER_env: structureenv
+    :END:
+
+Paragraph Heading.
+
+*** End of structureenv                                      :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
+
+** =block= environment
+
+*** Answered Questions                                               :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+How many primes are there?
+
+*** Open Questions                                                   :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+Is every even number the sum of two primes?
+
+*** End of block                                             :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
+
+** =alertblock= environment                                       :B_alertblock:
+   :PROPERTIES:
+   :BEAMER_env: alertblock
+   :END:
+
+- Inserts a block whose title is highlighted.
+- Behaves like the =block= environment otherwise.
+
+*** Wrong theorem
+
+/1=2/.
+
+*** End of alertblock                                        :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
+
+** =exampleblock= environment
+
+- Inserts a block that is supposed to be an example.
+- Behaves like the =block= environment otherwise.
+
+*** Example                                                   :B_exampleblock:
+    :PROPERTIES:
+    :BEAMER_env: exampleblock
+    :END:
+
+The set /{1,2,3,5}/ has four elements.
+
+*** End of exampleblock                                      :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
+
+** =theorem= environment
+
+- Inserts a theorem.
+
+***                                                                :B_theorem:
+    :PROPERTIES:
+    :BEAMER_env: theorem
+    :END:
+
+There is no largest prime number.
+
+*** End of theorem                                           :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
+
+** =definition= environment
+
+- Behaves like the =theorem= environment, except that the theorem style
+  =definition= is used.
+- In this style, the body of a =theorem= is typeset in an upright font.
+
+*** definition                                                  :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+
+Contents of definition
+
+*** End of definition                                        :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
+
+** =example= environment
+
+- Behaves like the theorem environment, except that the theorem style =example=
+  is used.
+- A side-effect of using this theorem style is that the contents is put in an
+  =exampleblock= instead of a =block=.
+
+*** Example                                                        :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+
+Contents of example
+
+*** End of example                                           :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
+
+** =proof= environment
+
+- Typesets a proof.
+
+*** proof                                                            :B_proof:
+    :PROPERTIES:
+    :BEAMER_env: proof
+    :END:
+
+- <1-| alert@1> Suppose /p/ were the largest prime number.
+- <2-> Let /q/ be the product of the first /p/ numbers.
+- <3-> Then /q + 1/ is not divisible by any of them.
+- <1-> But /q + 1/ is greater than /1/, thus divisible by some prime number
+  not in the first /p/ numbers.\qedhere
+
+*** End of proof                                             :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
+
+** =beamercolorbox= environment
+
+- Create colored boxes.
+
+*** beamercolorbox                                          :B_beamercolorbox:
+    :PROPERTIES:
+    :BEAMER_env: beamercolorbox
+    :END:
+
+Text
+
+*** End of beamercolorbox                                    :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
+
+** =verse= environment
+
+*** verse                                                            :B_verse:
+    :PROPERTIES:
+    :BEAMER_env: verse
+    :END:
+
+Contents of verse
+
+*** End of verse                                             :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
+
+** =quotation= environment
+
+- Use =quote= or =quotation= to typeset quoted text.
+- =quotation= has paragraph indentation.
+
+*** quotation                                                    :B_quotation:
+    :PROPERTIES:
+    :BEAMER_env: quotation
+    :END:
+
+Contents of quotation
+
+*** End of quotation                                         :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
+
+** =quote= environment
+
+- Use =quote= or =quotation= to typeset quoted text.
+- =quote= hasn't paragraph indentation.
+
+*** quote                                                            :B_quote:
+    :PROPERTIES:
+    :BEAMER_env: quote
+    :END:
+
+Contents of quote
+
+*** End of quote                                             :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
+
+** Verbatim
+
+#+begin_src c
+int main (void)
+{
+  std::vector<bool> is_prime (100, true);
+  for (int i = 2; i < 100; i++)
+    if (is_prime[i])
+      {
+        std::cout << i << " ";
+        for (int j = i; j < 100;
+             is_prime [j] = false, j+=i);
+      }
+  return 0;
+}
+#+end_src
+
+** Extra environments
+
+For simple environments, use:
+
+#+attr_latex: :options {3}
+#+begin_myenvironment
+Test of a new
+environment
+#+end_myenvironment
+
+I think we should changes some environment placeholders:
+
+  + Introduce %r which would stand for the raw headline (without any
+    processing)
+  + %H and %U would use the raw headline text instead.
+
+The previous definition would become:
+
+  '("textpos1" "w" "\\begin{textblock}%r \\visible %a {" "} \\end{textblock}")
+
+WDYT?
+
+* Overlay/action specification (=BEAMER_act=)
+
+** Overlay/action specification (=act=)
+
+- Or default overlay specification when enclosed within square brackets
+
+* Options for the current frame (=BEAMER_opt=)
+
+** Options for the current frame (=opt=)
+
+- =fragile= option is added automatically
+
+- You might want to put =allowframebreaks=0.9= there
+
+* Power
+
+Skip proof
+
+[[Proof details]]
+
+* Summary
+
+** Summary
+
+** For further reading
+
+# Mettre ox-beamer, beamer.pdf
+
+\beamertemplatebookbibitems
+
+\begin{thebibliography}{10}
+
+\bibitem{sal:b:formal-languages}
+  A.~Salomaa.
+  \newblock {\em Formal Languages}.
+  \newblock Academic Press, 1973.
+  \pause
+
+\beamertemplatearticlebibitems
+\bibitem{dij:j:smoothsort}
+  E.~Dijkstra.
+  \newblock Smoothsort, an alternative for sorting in situ.
+  \newblock {\em Science of Computer Programming}, 1(3):223--233,
+  1982.
+  \pause
+
+\bibitem{FeldmanO1973}
+  E.~Feldman and J.~Owings, Jr.
+  \newblock A class of universal linear bounded automata.
+  \newblock {\em Information Sciences}, 6:187--190, 1973.
+  \pause
+
+\bibitem{JancarMPV1995}
+  P.~Jan{\v c}ar, F.~Mr{\'a}z, M.~Pl{\'a}tek, and J.~Vogel.
+  \newblock Restarting automata.
+  \newblock {\em FCT Conference 1995}, LNCS 985, pages
+  282--292. 1995.
+\end{thebibliography}
+
+* Appendix NAME XX XX XX                                          :B_appendix:
+  :PROPERTIES:
+  :BEAMER_env: appendix
+  :END:
+
+** Proof details
+
+Text omitted in main talk.
+
+** More details
+
+Even more additional material.
+
+** Abbreviations
