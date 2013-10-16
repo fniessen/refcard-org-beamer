@@ -1,7 +1,7 @@
 #+TITLE:     Org Beamer Reference Card NEW
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2013-10-16 Wed 13:55>
+#+Time-stamp: <2013-10-16 Wed 14:07>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en_US
@@ -28,13 +28,6 @@
 # apply the 'remember picture' style. To avoid some typing, we'll apply
 # the style to all pictures.
 #+LaTeX: \tikzstyle{every picture}+=[remember picture]
-
-* Tasks                                                             :noexport:
-
-See http://www.let.rug.nl/alfa/tex/tetex30/latex/beamer/examples/beamerexample1.tex
-plus all environments defined in Beamer theme Org
-plus all environments defined in org-beamer-mode
-plus https://bitbucket.org/rivanvx/beamer/src/876db01f1cba91f62254805d059f210548c87ab1/emacs/beamer.el?at=default
 
 * Org Beamer reference card
 
