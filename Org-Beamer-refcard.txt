@@ -1,15 +1,14 @@
-#+TITLE:     Org Beamer Reference Card NEW
+#+TITLE:     Org Beamer quick reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2013-10-16 Wed 14:07>
+#+Time-stamp: <2014-03-27 Thu 12:23>
 #+DESCRIPTION:
 #+KEYWORDS:
-#+LANGUAGE:  en_US
+#+LANGUAGE:  en
 #+OPTIONS:   H:2 num:nil toc:nil
 
-#+SETUPFILE: ~/src/org-style/bigblow-local-abs.setup
-
 #+PROPERTY: eval no
+#+SETUPFILE: ~/src/org-style/setup/bigblow-local-abs.setup
 
 #+LaTeX_CLASS: beamer
 #+LaTeX_CLASS_OPTIONS: [presentation]
@@ -31,8 +30,10 @@
 
 * Org Beamer reference card
 
+** Description
+
 Welcome to Org Beamer reference card. It contains the reference documentation
-that describes how to *write presentations* using Org Babel 8.
+that describes how to *write presentations* using Org mode 8+.
 
 ** ox-beamer
 
@@ -40,33 +41,77 @@ that describes how to *write presentations* using Org Babel 8.
 M-x load-library RET ox-beamer RET
 #+end_src
 
-to load the Beamer back-end library
+to load the Beamer back-end library.
+
+** Editing support
 
 #+begin_src emacs-lisp
 M-x org-beamer-mode RET
 #+end_src
 
-to load a minor mode easing structure edition of the document.
+to load the minor mode =org-beamer-mode= easing the edition of the document
+structure (through the key binding =C-c C-b=).
+
+You can also turn it on with:
+
+#+begin_src org
+,#+STARTUP: beamer
+#+end_src
+
+in your document.
+
+** Beamer-related keywords
+
+The =beamer= back-end introduces the following keywords:
+
+#+begin_src org
+,#+BEAMER_THEME: Boadilla
+#+end_src
+
+which (for Boadilla) is equivalent to:
+
+#+begin_src org
+,#+BEAMER_COLOR_THEME: dolphin
+,#+BEAMER_FONT_THEME:  default
+,#+BEAMER_INNER_THEME: [shadow]rounded
+,#+BEAMER_OUTER_THEME: infolines
+#+end_src
+
+Append any line of code in the LaTeX preamble with:
+
+#+begin_src org
+,#+BEAMER_HEADER:
+#+end_src
+
+XXX Is it [BEAMER-EXTRA] or [BEAMER-HEADER-EXTRA] in org-latex-classes?
 
 ** Keywords
 
-The =beamer= back-end also introduces the following keywords:
+=ox-beamer.el= reads both =ATTR_LATEX= and =ATTR_BEAMER=, when it makes sense.
+
+** Properties
+
+If you set
 
 #+begin_src org
-#+BEAMER_THEME: Boadilla
+,#+OPTIONS: H:2
 #+end_src
 
-is equivalent to:
+then:
+
+- *Second*-level headlines become the *frames*, and
+- Top-level headlines become *sections* (listed in the *table of contents*, which
+  is created by default).
+
+* Creating a frame
+
+** Creating a frame
 
 #+begin_src org
-#+BEAMER_COLOR_THEME: dolphin
-#+BEAMER_FONT_THEME: default
-#+BEAMER_INNER_THEME: [shadow]rounded
-#+BEAMER_OUTER_THEME: infolines
-#+end_src
+,** A title
+   #+BEAMER: \framesubtitle{A subtitle}
 
-#+begin_src org
-#+BEAMER_HEADER:
+Some content.
 #+end_src
 
 * Environment tags
@@ -94,7 +139,7 @@ parts, the appendix is kept separate from your actual talk.
 - Though, if a headline in the current tree has a =BEAMER_env= property set to
   either =frame= or =fullframe=, its level overrides the variable.
 
-** fullframe                                                     :B_fullframe:
+** fullframe                                                      :B_fullframe:
    :PROPERTIES:
    :BEAMER_env: fullframe
    :END:
@@ -102,7 +147,7 @@ parts, the appendix is kept separate from your actual talk.
 - A =fullframe= is a =frame= with an ignored title
   + =frametitle= is set to the empty string
 
-** ignoreheading                                             :B_ignoreheading:
+** ignoreheading                                              :B_ignoreheading:
    :PROPERTIES:
    :BEAMER_env: ignoreheading
    :END:
@@ -117,6 +162,23 @@ parts, the appendix is kept separate from your actual talk.
 ** note
 
 ** noteNH
+
+* Building a presentation
+
+** Explicit page breaking
+
+If the text does not fit on a single slide, all you have to do to automatically
+break up the frame into several frames, is set the option =allowframebreaks=:
+
+#+begin_src org
+,** A long "frame" with breaks
+   :PROPERTIES:
+   :BEAMER_opt: allowframebreaks,label=
+   :END:
+#+end_src
+
+Until the Beamer [[https://bitbucket.org/rivanvx/beamer/issue/265/including-frame-label-option-stops ][issue #265]] is solved, we need to unset the framelabel as shown
+above (=label==).
 
 * Figures and tables
 
@@ -141,7 +203,7 @@ http://tex.stackexchange.com/questions/64075/beamers-visible-inside-a-tikz-node
 \end{tikzpicture}
 #+end_latex
 
-* Splitting a frame into multiple columns
+* Splitting a frame (slide) into multiple columns
 
 ** BMCOL
 
@@ -149,14 +211,14 @@ TODO Specify 5cm
 
 BMCOL
 
-*** First column                                                       :BMCOL:
+*** First column                                                        :BMCOL:
     :PROPERTIES:
     :BEAMER_col: 0.39
     :END:
 
 Two \\ lines.
 
-*** Second column                                                      :BMCOL:
+*** Second column                                                       :BMCOL:
     :PROPERTIES:
     :BEAMER_col: 0.39
     :END:
@@ -165,14 +227,14 @@ One line (but aligned).
 
 ** Multiple columns
 
-*** First column                                                       :BMCOL:
+*** First column                                                        :BMCOL:
     :PROPERTIES:
     :BEAMER_col: 0.39
     :END:
 
 Two \\ lines.
 
-*** Second column                                                      :BMCOL:
+*** Second column                                                       :BMCOL:
     :PROPERTIES:
     :BEAMER_col: 0.39
     :END:
@@ -181,6 +243,14 @@ Two \\ lines.
 [[file:images/square.png]]
 # mygraphic.jpg
 
+** Result of an evaluation on two columns
+
+#+LaTeX: \begin{multicols}{2}
+
+... a fancy verbatim block ...
+
+#+LaTeX: \end{multicols}
+
 * Environments on blocks (=BEAMER_env=)
 
 ** =structureenv= environment
@@ -188,40 +258,40 @@ Two \\ lines.
 - For highlighting text.
 - To help the audience see the structure of your presentation.
 
-*** structureenv                                              :B_structureenv:
+*** structureenv                                               :B_structureenv:
     :PROPERTIES:
     :BEAMER_env: structureenv
     :END:
 
 Paragraph Heading.
 
-*** End of structureenv                                      :B_ignoreheading:
+*** End of structureenv                                       :B_ignoreheading:
     :PROPERTIES:
     :BEAMER_env: ignoreheading
     :END:
 
 ** =block= environment
 
-*** Answered Questions                                               :B_block:
+*** Answered Questions                                                :B_block:
     :PROPERTIES:
     :BEAMER_env: block
     :END:
 
 How many primes are there?
 
-*** Open Questions                                                   :B_block:
+*** Open Questions                                                    :B_block:
     :PROPERTIES:
     :BEAMER_env: block
     :END:
 
 Is every even number the sum of two primes?
 
-*** End of block                                             :B_ignoreheading:
+*** End of block                                              :B_ignoreheading:
     :PROPERTIES:
     :BEAMER_env: ignoreheading
     :END:
 
-** =alertblock= environment                                       :B_alertblock:
+** =alertblock= environment                                      :B_alertblock:
    :PROPERTIES:
    :BEAMER_env: alertblock
    :END:
@@ -233,7 +303,7 @@ Is every even number the sum of two primes?
 
 /1=2/.
 
-*** End of alertblock                                        :B_ignoreheading:
+*** End of alertblock                                         :B_ignoreheading:
     :PROPERTIES:
     :BEAMER_env: ignoreheading
     :END:
@@ -243,14 +313,14 @@ Is every even number the sum of two primes?
 - Inserts a block that is supposed to be an example.
 - Behaves like the =block= environment otherwise.
 
-*** Example                                                   :B_exampleblock:
+*** Example                                                    :B_exampleblock:
     :PROPERTIES:
     :BEAMER_env: exampleblock
     :END:
 
 The set /{1,2,3,5}/ has four elements.
 
-*** End of exampleblock                                      :B_ignoreheading:
+*** End of exampleblock                                       :B_ignoreheading:
     :PROPERTIES:
     :BEAMER_env: ignoreheading
     :END:
@@ -259,17 +329,29 @@ The set /{1,2,3,5}/ has four elements.
 
 - Inserts a theorem.
 
-***                                                                :B_theorem:
+***                                                                 :B_theorem:
     :PROPERTIES:
     :BEAMER_env: theorem
     :END:
 
 There is no largest prime number.
 
-*** End of theorem                                           :B_ignoreheading:
+*** End of theorem                                            :B_ignoreheading:
     :PROPERTIES:
     :BEAMER_env: ignoreheading
     :END:
+
+** =theorem= environment
+
+- Inserts a theorem.
+- Simpler solution
+  + More readable
+  + Less powerful: you can't nest blocks of the same type with this syntax
+
+#+attr_latex: :options {Theorem}
+#+begin_block
+There is no largest prime number.
+#+end_block
 
 ** =definition= environment
 
@@ -277,14 +359,14 @@ There is no largest prime number.
   =definition= is used.
 - In this style, the body of a =theorem= is typeset in an upright font.
 
-*** definition                                                  :B_definition:
+*** definition                                                   :B_definition:
     :PROPERTIES:
     :BEAMER_env: definition
     :END:
 
 Contents of definition
 
-*** End of definition                                        :B_ignoreheading:
+*** End of definition                                         :B_ignoreheading:
     :PROPERTIES:
     :BEAMER_env: ignoreheading
     :END:
@@ -296,23 +378,31 @@ Contents of definition
 - A side-effect of using this theorem style is that the contents is put in an
   =exampleblock= instead of a =block=.
 
-*** Example                                                        :B_example:
+*** Example                                                         :B_example:
     :PROPERTIES:
     :BEAMER_env: example
     :END:
 
 Contents of example
 
-*** End of example                                           :B_ignoreheading:
+*** End of example                                            :B_ignoreheading:
     :PROPERTIES:
     :BEAMER_env: ignoreheading
     :END:
+
+** =example= environment
+
+- Simpler solution:
+
+#+begin_example
+Contents of example
+#+end_example
 
 ** =proof= environment
 
 - Typesets a proof.
 
-*** proof                                                            :B_proof:
+*** proof                                                             :B_proof:
     :PROPERTIES:
     :BEAMER_env: proof
     :END:
@@ -323,7 +413,7 @@ Contents of example
 - <1-> But /q + 1/ is greater than /1/, thus divisible by some prime number
   not in the first /p/ numbers.\qedhere
 
-*** End of proof                                             :B_ignoreheading:
+*** End of proof                                              :B_ignoreheading:
     :PROPERTIES:
     :BEAMER_env: ignoreheading
     :END:
@@ -332,45 +422,53 @@ Contents of example
 
 - Create colored boxes.
 
-*** beamercolorbox                                          :B_beamercolorbox:
+*** beamercolorbox                                           :B_beamercolorbox:
     :PROPERTIES:
     :BEAMER_env: beamercolorbox
     :END:
 
 Text
 
-*** End of beamercolorbox                                    :B_ignoreheading:
+*** End of beamercolorbox                                     :B_ignoreheading:
     :PROPERTIES:
     :BEAMER_env: ignoreheading
     :END:
 
 ** =verse= environment
 
-*** verse                                                            :B_verse:
+*** verse                                                             :B_verse:
     :PROPERTIES:
     :BEAMER_env: verse
     :END:
 
 Contents of verse
 
-*** End of verse                                             :B_ignoreheading:
+*** End of verse                                              :B_ignoreheading:
     :PROPERTIES:
     :BEAMER_env: ignoreheading
     :END:
+
+** =verse= environment
+
+- Simpler solution:
+
+#+begin_verse
+Contents of verse
+#+end_verse
 
 ** =quotation= environment
 
 - Use =quote= or =quotation= to typeset quoted text.
 - =quotation= has paragraph indentation.
 
-*** quotation                                                    :B_quotation:
+*** quotation                                                     :B_quotation:
     :PROPERTIES:
     :BEAMER_env: quotation
     :END:
 
 Contents of quotation
 
-*** End of quotation                                         :B_ignoreheading:
+*** End of quotation                                          :B_ignoreheading:
     :PROPERTIES:
     :BEAMER_env: ignoreheading
     :END:
@@ -380,17 +478,27 @@ Contents of quotation
 - Use =quote= or =quotation= to typeset quoted text.
 - =quote= hasn't paragraph indentation.
 
-*** quote                                                            :B_quote:
+*** quote                                                             :B_quote:
     :PROPERTIES:
     :BEAMER_env: quote
     :END:
 
 Contents of quote
 
-*** End of quote                                             :B_ignoreheading:
+*** End of quote                                              :B_ignoreheading:
     :PROPERTIES:
     :BEAMER_env: ignoreheading
     :END:
+
+** =quote= environment
+
+- Use =quote= or =quotation= to typeset quoted text.
+- =quote= hasn't paragraph indentation.
+- Simpler solution:
+
+#+begin_quote
+Contents of quote
+#+end_quote
 
 ** Verbatim
 
@@ -431,15 +539,61 @@ The previous definition would become:
 
 WDYT?
 
+- Environment options may be given using the BEAMER_opt property. They will
+  be enclosed in square brackets and inserted where %o appears in the
+  environment definition.
+  (with an example, but I can't think of one now)
+
+- Additional arguments may be written into the environment's headline, and
+  inserted into the LaTeX string using %r (raw headline text, no processing).
+
 * Overlay/action specification (=BEAMER_act=)
 
 ** Overlay/action specification (=act=)
 
-- Or default overlay specification when enclosed within square brackets
+- Headlines support =BEAMER_ACT= properties.
+
+- It is translated as an overlay/action specification, or a default overlay
+  specification when enclosed within square brackets.
+
+Dynamic list are possible on a case by case basis :
+
+#+begin_src org
+- @@beamer:<1->@@ Item
+- @@beamer:<2->@@ Item
+#+end_src
+
+and as a frame property:
+
+#+begin_src org
+,* Headline
+  :PROPERTIES:
+  :BEAMER_ACT: [+-]
+  :END:
+
+  - Item
+  - Item
+#+end_src
 
 * Options for the current frame (=BEAMER_opt=)
 
 ** Options for the current frame (=opt=)
+
+- Headlines support =BEAMER_OPT= properties.
+
+I'd still like to see something more like a "for-dummies" explanation of
+passing options and arguments to LaTeX entities. I'm not saying the
+documentation is woefully inadequate (hardly that -- Suvayu's page got me
+rather far, and I got stuck on a couple of details). My experience was: it
+never would have occurred to me on my own to use the headline text for
+LaTeX code, and if there was a hint anywhere in the docs to suggest that
+this would be the way to go, I didn't find it. That's a conceptual leap
+that passed me by.
+
+- This is for frames, and for environments within a frame
+
+- It specifies options for the current frame or block, and will automatically
+  be enclosed within square brackets.
 
 - =fragile= option is added automatically
 
@@ -490,7 +644,7 @@ Skip proof
   282--292. 1995.
 \end{thebibliography}
 
-* Appendix NAME XX XX XX                                          :B_appendix:
+* Appendix NAME XXX                                                :B_appendix:
   :PROPERTIES:
   :BEAMER_env: appendix
   :END:
