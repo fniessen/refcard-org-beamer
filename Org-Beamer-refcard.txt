@@ -1,14 +1,15 @@
 #+TITLE:     Org Beamer quick reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2014-03-27 Thu 12:23>
+#+Time-stamp: <2014-03-27 Thu 23:56>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
-#+OPTIONS:   H:2 num:nil toc:nil
+#+OPTIONS:   H:2 num:nil toc:t ^:{}
 
 #+PROPERTY: eval no
-#+SETUPFILE: ~/src/org-style/setup/bigblow-local-abs.setup
+# #+SETUPFILE: ~/src/org-style/setup/bigblow-local-abs.setup
+#+SETUPFILE: ~/src/org-style/setup/leuven-local-abs.setup
 
 #+LaTeX_CLASS: beamer
 #+LaTeX_CLASS_OPTIONS: [presentation]
@@ -28,28 +29,70 @@
 # the style to all pictures.
 #+LaTeX: \tikzstyle{every picture}+=[remember picture]
 
-* Org Beamer reference card
+* Overview
 
 ** Description
 
-Welcome to Org Beamer reference card. It contains the reference documentation
-that describes how to *write presentations* using Org mode 8+.
+Welcome to *Org Beamer reference card*.  It contains the reference documentation
+that describes how to *write presentations* using Org mode 8+ and the LaTeX
+Beamer class (which allows producing *high quality* *PDF files* which are going to
+look on every computer exactly the way they looked on your computer).
 
-** ox-beamer
+** Objectives
+
+Preparing presentations with Org mode is different from preparing them with
+WYSWYG programs such as PowerPoint, Impress or Keynote, as they are created
+*like any other Org mode document*.
+
+The obvious advantage of this approach is that *you don't have to know LaTeX* in
+order to use Org mode's Beamer export and *create presentations*.
+
+Org mode presentations contain headings at different levels.  By default,
+headings at the first outline level will become titles of the different slides
+(called frames in Beamer), and deeper levels will be used as structural
+environments.
+
+** Requirements
+
+A working LaTeX installation is required for exporting to PDF. If it is not
+yet installed on your system, install (for example) [[http://www.tug.org/texlive/][TeX Live]].
+
+* Usage
+
+** Library =ox-beamer.el=
+
+*** Beamer back-end (for Org export engine)
+
+Type:
 
 #+begin_src emacs-lisp
 M-x load-library RET ox-beamer RET
 #+end_src
 
-to load the Beamer back-end library.
+to load the Beamer back-end library, and to obtain *extra commands* in the LaTeX
+export menu:
 
-** Editing support
+- =C-c C-e l B= ::
+     As LaTeX buffer (Beamer).
+
+- =C-c C-e l b= ::
+     As LaTeX file (Beamer).
+
+- =C-c C-e l P= ::
+     As PDF file (Beamer).
+
+- =C-c C-e l O= ::
+     As PDF file and open (Beamer).
+
+*** Editing support
+
+Type:
 
 #+begin_src emacs-lisp
 M-x org-beamer-mode RET
 #+end_src
 
-to load the minor mode =org-beamer-mode= easing the edition of the document
+to load the minor mode =org-beamer-mode= *easing the edition* of the document
 structure (through the key binding =C-c C-b=).
 
 You can also turn it on with:
@@ -60,9 +103,11 @@ You can also turn it on with:
 
 in your document.
 
+* Options
+
 ** Beamer-related keywords
 
-The =beamer= back-end introduces the following keywords:
+The =Beamer= back-end introduces the following keywords:
 
 #+begin_src org
 ,#+BEAMER_THEME: Boadilla
@@ -113,6 +158,9 @@ then:
 
 Some content.
 #+end_src
+
+The "subtitle feature" does not have an Org syntax because it's specific to one
+back-end only.
 
 * Environment tags
 
