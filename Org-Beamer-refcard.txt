@@ -1,18 +1,18 @@
 #+TITLE:     Org Beamer quick reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2014-03-27 Thu 23:56>
+#+Time-stamp: <2014-03-28 Fri 14:27>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
-#+OPTIONS:   H:2 num:nil toc:t ^:{}
+#+OPTIONS:   H:2 num:nil ^:{}
 
 #+PROPERTY: eval no
 # #+SETUPFILE: ~/src/org-style/setup/bigblow-local-abs.setup
 #+SETUPFILE: ~/src/org-style/setup/leuven-local-abs.setup
 
 #+LaTeX_CLASS: beamer
-#+LaTeX_CLASS_OPTIONS: [presentation]
+#+LaTeX_CLASS_OPTIONS: [presentation, t]
 #+BEAMER_THEME: Boadilla
 #+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
 #+PROPERTY: BEAMER_col_ALL 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0.0 :ETC
@@ -35,14 +35,16 @@
 
 Welcome to *Org Beamer reference card*.  It contains the reference documentation
 that describes how to *write presentations* using Org mode 8+ and the LaTeX
-Beamer class (which allows producing *high quality* *PDF files* which are going to
-look on every computer exactly the way they looked on your computer).
+Beamer class.
+
+That allows you to produce *high quality* *PDF files* which are going to look on
+every computer exactly the way they looked on your computer.
 
 ** Objectives
 
-Preparing presentations with Org mode is different from preparing them with
-WYSWYG programs such as PowerPoint, Impress or Keynote, as they are created
-*like any other Org mode document*.
+Preparing presentations with Org mode is very different from preparing them
+with WYSWYG programs such as PowerPoint, Impress or Keynote, as they are
+created *like any other Org mode document*.
 
 The obvious advantage of this approach is that *you don't have to know LaTeX* in
 order to use Org mode's Beamer export and *create presentations*.
@@ -54,14 +56,12 @@ environments.
 
 ** Requirements
 
-A working LaTeX installation is required for exporting to PDF. If it is not
-yet installed on your system, install (for example) [[http://www.tug.org/texlive/][TeX Live]].
+A working LaTeX installation is required for exporting to PDF. If it is not yet
+installed on your system, install [[http://www.tug.org/texlive/][TeX Live]] (for example).
 
-* Usage
+* Usage of library =ox-beamer.el=
 
-** Library =ox-beamer.el=
-
-*** Beamer back-end (for Org export engine)
+** Beamer back-end (for Org export engine)
 
 Type:
 
@@ -72,19 +72,19 @@ M-x load-library RET ox-beamer RET
 to load the Beamer back-end library, and to obtain *extra commands* in the LaTeX
 export menu:
 
-- =C-c C-e l B= ::
+- ~C-c C-e l B~ ::
      As LaTeX buffer (Beamer).
 
-- =C-c C-e l b= ::
+- ~C-c C-e l b~ ::
      As LaTeX file (Beamer).
 
-- =C-c C-e l P= ::
+- ~C-c C-e l P~ ::
      As PDF file (Beamer).
 
-- =C-c C-e l O= ::
+- ~C-c C-e l O~ ::
      As PDF file and open (Beamer).
 
-*** Editing support
+** Editing support
 
 Type:
 
@@ -92,8 +92,9 @@ Type:
 M-x org-beamer-mode RET
 #+end_src
 
-to load the minor mode =org-beamer-mode= *easing the edition* of the document
-structure (through the key binding =C-c C-b=).
+to load the minor mode ~org-beamer-mode~ *easing the edition* of the document
+structure (through the key binding ~C-c C-b~, which offers fast selection of
+a [[id:77f1b7a3-6e7d-4f2b-bd1f-02e6f02bba2f][Beamer environment]]).
 
 You can also turn it on with:
 
@@ -103,17 +104,15 @@ You can also turn it on with:
 
 in your document.
 
-* Options
+* Keywords specific to the Beamer back-end
 
-** Beamer-related keywords
-
-The =Beamer= back-end introduces the following keywords:
+** Appearance of the presentation
 
 #+begin_src org
 ,#+BEAMER_THEME: Boadilla
 #+end_src
 
-which (for Boadilla) is equivalent to:
+is equivalent (for Boadilla) to:
 
 #+begin_src org
 ,#+BEAMER_COLOR_THEME: dolphin
@@ -122,21 +121,33 @@ which (for Boadilla) is equivalent to:
 ,#+BEAMER_OUTER_THEME: infolines
 #+end_src
 
+** LaTeX preamble
+
 Append any line of code in the LaTeX preamble with:
 
 #+begin_src org
-,#+BEAMER_HEADER:
+,#+BEAMER_HEADER: \usepackage{...}
 #+end_src
 
-XXX Is it [BEAMER-EXTRA] or [BEAMER-HEADER-EXTRA] in org-latex-classes?
+It will go in the ~[EXTRA]~ placeholder of the header associated to the ~beamer~
+LaTeX class (see ~org-latex-classes~).
 
-** Keywords
+** Affiliated keywords
 
-=ox-beamer.el= reads both =ATTR_LATEX= and =ATTR_BEAMER=, when it makes sense.
+The Beamer back-end reads both
 
-** Properties
+- ~#+ATTR_LATEX:~ and
+- ~#+ATTR_BEAMER:~
 
-If you set
+affiliated keywords.
+
+* Creating presentations
+
+** Creating a title page
+
+** Creating a table of contents
+
+If you set the ~H~ option from the ~#+OPTIONS:~ keyword such as:
 
 #+begin_src org
 ,#+OPTIONS: H:2
@@ -144,23 +155,27 @@ If you set
 
 then:
 
-- *Second*-level headlines become the *frames*, and
-- Top-level headlines become *sections* (listed in the *table of contents*, which
-  is created by default).
+- Top-level headlines become *sections* listed in the *table of contents* (created
+  by default), and
+- *Second*-level headlines become the *frames*.
 
-* Creating a frame
+In many themes, sections and subsections appear in the sidebar or headline.
 
-** Creating a frame
+** Creating a simple frame
 
 #+begin_src org
+,* Introduction
+
 ,** A title
    #+BEAMER: \framesubtitle{A subtitle}
 
 Some content.
 #+end_src
 
-The "subtitle feature" does not have an Org syntax because it's specific to one
+The *subtitle* does not have an Org syntax because it's specific to the Beamer
 back-end only.
+
+** Create a handout
 
 * Environment tags
 
@@ -168,11 +183,11 @@ back-end only.
 
 ** appendix
 
-You can add an appendix to your talk by using the =\appendix= command. You
+You can add an appendix to your talk by using the ~\appendix~ command. You
 should put frames and perhaps whole subsections into the appendix that you do
 not intend to show during your presentation, but which might be useful to
-answer a question. The =\appendix= command essentially just starts a new part
-named =\appendixname=. However, it also sets up certain hyperlinks. Like other
+answer a question. The ~\appendix~ command essentially just starts a new part
+named ~\appendixname~. However, it also sets up certain hyperlinks. Like other
 parts, the appendix is kept separate from your actual talk.
 
 ** column
@@ -181,127 +196,46 @@ parts, the appendix is kept separate from your actual talk.
 
 ** frame
 
-- Headlines become frames when their level is equal to =org-beamer-frame-level=
-  (or =H= value in the =OPTIONS= line).
+- Headlines become frames when their level is equal to ~org-beamer-frame-level~
+  (or ~H~ value in the ~OPTIONS~ line).
 
-- Though, if a headline in the current tree has a =BEAMER_env= property set to
-  either =frame= or =fullframe=, its level overrides the variable.
+- Though, if a headline in the current tree has a ~BEAMER_env~ property set to
+  either ~frame~ or ~fullframe~, its level overrides the variable.
 
 ** fullframe                                                      :B_fullframe:
    :PROPERTIES:
    :BEAMER_env: fullframe
    :END:
 
-- A =fullframe= is a =frame= with an ignored title
-  + =frametitle= is set to the empty string
+- A ~fullframe~ is a ~frame~ with an ignored title
+  + ~frametitle~ is set to the empty string
 
 ** ignoreheading                                              :B_ignoreheading:
    :PROPERTIES:
    :BEAMER_env: ignoreheading
    :END:
 
-- A headline with an =ignoreheading= environment will have its contents only
+- A headline with an ~ignoreheading~ environment will have its contents only
   inserted in the output.
-  + Contents is not inserted in any =frame= environment...
+  + Contents is not inserted in any ~frame~ environment...
 
 - This special value is useful to have data between frames, or to properly
-  close a =column= environment.
+  close a ~column~ environment.
 
 ** note
 
 ** noteNH
 
-* Building a presentation
+* Environments
+  :PROPERTIES:
+  :ID:       77f1b7a3-6e7d-4f2b-bd1f-02e6f02bba2f
+  :END:
 
-** Explicit page breaking
+** Environment specification (BEAMER_env)
 
-If the text does not fit on a single slide, all you have to do to automatically
-break up the frame into several frames, is set the option =allowframebreaks=:
+Use a different environment in current block.
 
-#+begin_src org
-,** A long "frame" with breaks
-   :PROPERTIES:
-   :BEAMER_opt: allowframebreaks,label=
-   :END:
-#+end_src
-
-Until the Beamer [[https://bitbucket.org/rivanvx/beamer/issue/265/including-frame-label-option-stops ][issue #265]] is solved, we need to unset the framelabel as shown
-above (=label==).
-
-* Figures and tables
-
-** Figures
-
-#+ATTR_LaTeX: :width 3cm
-[[file:images/dot.png]]
-# \pgfuseimage{myfigure}
-
-#+ATTR_LaTeX: :width 3cm
-#+CAPTION: The caption is /always/ placed *below* the figure.
-[[file:images/square.png]]
-# myotherfigure
-
-** TikZ
-
-http://tex.stackexchange.com/questions/64075/beamers-visible-inside-a-tikz-node
-
-#+begin_latex
-\begin{tikzpicture}
-  \node[align=center] {I'm {\visible<+->{very}}\\happy.};
-\end{tikzpicture}
-#+end_latex
-
-* Splitting a frame (slide) into multiple columns
-
-** BMCOL
-
-TODO Specify 5cm
-
-BMCOL
-
-*** First column                                                        :BMCOL:
-    :PROPERTIES:
-    :BEAMER_col: 0.39
-    :END:
-
-Two \\ lines.
-
-*** Second column                                                       :BMCOL:
-    :PROPERTIES:
-    :BEAMER_col: 0.39
-    :END:
-
-One line (but aligned).
-
-** Multiple columns
-
-*** First column                                                        :BMCOL:
-    :PROPERTIES:
-    :BEAMER_col: 0.39
-    :END:
-
-Two \\ lines.
-
-*** Second column                                                       :BMCOL:
-    :PROPERTIES:
-    :BEAMER_col: 0.39
-    :END:
-
-#+ATTR_LaTeX: :width 3cm
-[[file:images/square.png]]
-# mygraphic.jpg
-
-** Result of an evaluation on two columns
-
-#+LaTeX: \begin{multicols}{2}
-
-... a fancy verbatim block ...
-
-#+LaTeX: \end{multicols}
-
-* Environments on blocks (=BEAMER_env=)
-
-** =structureenv= environment
+** ~structureenv~ environment
 
 - For highlighting text.
 - To help the audience see the structure of your presentation.
@@ -318,7 +252,7 @@ Paragraph Heading.
     :BEAMER_env: ignoreheading
     :END:
 
-** =block= environment
+** ~block~ environment
 
 *** Answered Questions                                                :B_block:
     :PROPERTIES:
@@ -339,13 +273,13 @@ Is every even number the sum of two primes?
     :BEAMER_env: ignoreheading
     :END:
 
-** =alertblock= environment                                      :B_alertblock:
+** ~alertblock~ environment                                      :B_alertblock:
    :PROPERTIES:
    :BEAMER_env: alertblock
    :END:
 
 - Inserts a block whose title is highlighted.
-- Behaves like the =block= environment otherwise.
+- Behaves like the ~block~ environment otherwise.
 
 *** Wrong theorem
 
@@ -356,10 +290,10 @@ Is every even number the sum of two primes?
     :BEAMER_env: ignoreheading
     :END:
 
-** =exampleblock= environment
+** ~exampleblock~ environment
 
 - Inserts a block that is supposed to be an example.
-- Behaves like the =block= environment otherwise.
+- Behaves like the ~block~ environment otherwise.
 
 *** Example                                                    :B_exampleblock:
     :PROPERTIES:
@@ -373,7 +307,7 @@ The set /{1,2,3,5}/ has four elements.
     :BEAMER_env: ignoreheading
     :END:
 
-** =theorem= environment
+** ~theorem~ environment
 
 - Inserts a theorem.
 
@@ -389,7 +323,7 @@ There is no largest prime number.
     :BEAMER_env: ignoreheading
     :END:
 
-** =theorem= environment
+** ~theorem~ environment
 
 - Inserts a theorem.
 - Simpler solution
@@ -401,11 +335,11 @@ There is no largest prime number.
 There is no largest prime number.
 #+end_block
 
-** =definition= environment
+** ~definition~ environment
 
-- Behaves like the =theorem= environment, except that the theorem style
-  =definition= is used.
-- In this style, the body of a =theorem= is typeset in an upright font.
+- Behaves like the ~theorem~ environment, except that the theorem style
+  ~definition~ is used.
+- In this style, the body of a ~theorem~ is typeset in an upright font.
 
 *** definition                                                   :B_definition:
     :PROPERTIES:
@@ -419,12 +353,12 @@ Contents of definition
     :BEAMER_env: ignoreheading
     :END:
 
-** =example= environment
+** ~example~ environment
 
-- Behaves like the theorem environment, except that the theorem style =example=
+- Behaves like the theorem environment, except that the theorem style ~example~
   is used.
 - A side-effect of using this theorem style is that the contents is put in an
-  =exampleblock= instead of a =block=.
+  ~exampleblock~ instead of a ~block~.
 
 *** Example                                                         :B_example:
     :PROPERTIES:
@@ -438,7 +372,7 @@ Contents of example
     :BEAMER_env: ignoreheading
     :END:
 
-** =example= environment
+** ~example~ environment
 
 - Simpler solution:
 
@@ -446,7 +380,7 @@ Contents of example
 Contents of example
 #+end_example
 
-** =proof= environment
+** ~proof~ environment
 
 - Typesets a proof.
 
@@ -466,7 +400,7 @@ Contents of example
     :BEAMER_env: ignoreheading
     :END:
 
-** =beamercolorbox= environment
+** ~beamercolorbox~ environment
 
 - Create colored boxes.
 
@@ -482,7 +416,7 @@ Text
     :BEAMER_env: ignoreheading
     :END:
 
-** =verse= environment
+** ~verse~ environment
 
 *** verse                                                             :B_verse:
     :PROPERTIES:
@@ -496,7 +430,7 @@ Contents of verse
     :BEAMER_env: ignoreheading
     :END:
 
-** =verse= environment
+** ~verse~ environment
 
 - Simpler solution:
 
@@ -504,10 +438,10 @@ Contents of verse
 Contents of verse
 #+end_verse
 
-** =quotation= environment
+** ~quotation~ environment
 
-- Use =quote= or =quotation= to typeset quoted text.
-- =quotation= has paragraph indentation.
+- Use ~quote~ or ~quotation~ to typeset quoted text.
+- ~quotation~ has paragraph indentation.
 
 *** quotation                                                     :B_quotation:
     :PROPERTIES:
@@ -521,10 +455,10 @@ Contents of quotation
     :BEAMER_env: ignoreheading
     :END:
 
-** =quote= environment
+** ~quote~ environment
 
-- Use =quote= or =quotation= to typeset quoted text.
-- =quote= hasn't paragraph indentation.
+- Use ~quote~ or ~quotation~ to typeset quoted text.
+- ~quote~ hasn't paragraph indentation.
 
 *** quote                                                             :B_quote:
     :PROPERTIES:
@@ -538,10 +472,10 @@ Contents of quote
     :BEAMER_env: ignoreheading
     :END:
 
-** =quote= environment
+** ~quote~ environment
 
-- Use =quote= or =quotation= to typeset quoted text.
-- =quote= hasn't paragraph indentation.
+- Use ~quote~ or ~quotation~ to typeset quoted text.
+- ~quote~ hasn't paragraph indentation.
 - Simpler solution:
 
 #+begin_quote
@@ -569,11 +503,11 @@ int main (void)
 
 For simple environments, use:
 
-#+attr_latex: :options {3}
-#+begin_myenvironment
-Test of a new
-environment
-#+end_myenvironment
+# #+attr_latex: :options {3}
+# #+begin_myenvironment
+# Test of a new
+# environment
+# #+end_myenvironment
 
 I think we should changes some environment placeholders:
 
@@ -583,7 +517,7 @@ I think we should changes some environment placeholders:
 
 The previous definition would become:
 
-  '("textpos1" "w" "\\begin{textblock}%r \\visible %a {" "} \\end{textblock}")
+  # '("textpos1" "w" "\\begin{textblock}%r \\visible %a {" "} \\end{textblock}")
 
 WDYT?
 
@@ -595,23 +529,14 @@ WDYT?
 - Additional arguments may be written into the environment's headline, and
   inserted into the LaTeX string using %r (raw headline text, no processing).
 
-* Overlay/action specification (=BEAMER_act=)
+* Overlays
 
-** Overlay/action specification (=act=)
+** Overlay specification (BEAMER_act)
 
-- Headlines support =BEAMER_ACT= properties.
+Set *overlay* specifications in current block to *create dynamic effects* (/multiple
+slides/, called /overlays/, for a single frame).
 
-- It is translated as an overlay/action specification, or a default overlay
-  specification when enclosed within square brackets.
-
-Dynamic list are possible on a case by case basis :
-
-#+begin_src org
-- @@beamer:<1->@@ Item
-- @@beamer:<2->@@ Item
-#+end_src
-
-and as a frame property:
+Headlines support the ~BEAMER_ACT~ property:
 
 #+begin_src org
 ,* Headline
@@ -619,15 +544,37 @@ and as a frame property:
   :BEAMER_ACT: [+-]
   :END:
 
+  # Diff with [<+->]?
+
   - Item
   - Item
 #+end_src
 
-* Options for the current frame (=BEAMER_opt=)
+It is translated as an overlay/action specification, or a default overlay
+specification when enclosed within square brackets.
 
-** Options for the current frame (=opt=)
+Dynamic lists are possible on a case by case basis :
 
-- Headlines support =BEAMER_OPT= properties.
+#+begin_src org
+,#+ATTR_BEAMER: :overlay +-
+- Item 1
+- Item 2
+#+end_src
+
+#+begin_src org
+- @@beamer:<1->@@ Item 1
+- @@beamer:<2->@@ Item 2
+#+end_src
+
+* Options
+
+** Option specification (BEAMER_opt)
+
+Insert optional arguments for the current frame (or in current block???).
+
+** Options for the current frame (~opt~)
+
+- Headlines support ~BEAMER_OPT~ properties.
 
 I'd still like to see something more like a "for-dummies" explanation of
 passing options and arguments to LaTeX entities. I'm not saying the
@@ -643,9 +590,99 @@ that passed me by.
 - It specifies options for the current frame or block, and will automatically
   be enclosed within square brackets.
 
-- =fragile= option is added automatically
+- ~fragile~ option is added automatically
 
-- You might want to put =allowframebreaks=0.9= there
+- You might want to put ~allowframebreaks=0.9~ there
+
+* Guidelines for creating presentations
+
+** Frame structure (Explicit page breaking)
+
+If the text does not fit on a single slide, all you have to do to automatically
+break up the frame into several frames, is set the option ~allowframebreaks~:
+
+#+begin_src org
+,** A long "frame" with breaks
+   :PROPERTIES:
+   :BEAMER_opt: allowframebreaks,label=
+   :END:
+#+end_src
+
+Until the Beamer [[https://bitbucket.org/rivanvx/beamer/issue/265/including-frame-label-option-stops ][issue #265]] is solved, we need to unset the framelabel as shown
+above (~label~=).
+
+** Splitting a frame into multiple columns
+
+*** BMCOL
+
+TODO Specify 5cm
+
+BMCOL
+
+**** First column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.39
+    :END:
+
+Two \\ lines.
+
+**** Second column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.39
+    :END:
+
+One line (but aligned).
+
+*** Multiple columns
+
+**** First column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.39
+    :END:
+
+Two \\ lines.
+
+**** Second column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.39
+    :END:
+
+#+ATTR_LaTeX: :width 3cm
+[[file:images/square.png]]
+# mygraphic.jpg
+
+*** Result of an evaluation on two columns
+
+#+LaTeX_HEADER: \usepackage{multicol}
+
+#+LaTeX: \begin{multicols}{2}
+
+... a fancy verbatim block ...
+
+#+LaTeX: \end{multicols}
+
+** Using graphics
+
+*** Figures
+
+#+ATTR_LaTeX: :width 3cm
+[[file:images/dot.png]]
+# \pgfuseimage{myfigure}
+
+#+ATTR_LaTeX: :width 3cm
+#+CAPTION: The caption is /always/ placed *below* the figure.
+[[file:images/square.png]]
+# myotherfigure
+
+*** TikZ
+
+http://tex.stackexchange.com/questions/64075/beamers-visible-inside-a-tikz-node
+
+#+begin_latex
+\begin{tikzpicture}
+  \node[align=center] {I'm {\visible<+->{very}}\\happy.};
+\end{tikzpicture}
+#+end_latex
 
 * Power
 

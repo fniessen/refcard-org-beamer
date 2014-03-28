@@ -87,30 +87,39 @@ type="text/javascript">
           </li>
 
           <li>
-            <a href="#sec-2">Usage</a>
+            <a href="#sec-2">Usage of library <code>ox-beamer.el</code></a>
 
             <ul>
-              <li><a href="#sec-2-1">Library <code>ox-beamer.el</code></a></li>
+              <li><a href="#sec-2-1">Beamer back-end (for Org export
+              engine)</a></li>
+
+              <li><a href="#sec-2-2">Editing support</a></li>
             </ul>
           </li>
 
           <li>
-            <a href="#sec-3">Options</a>
+            <a href="#sec-3">Keywords specific to the Beamer back-end</a>
 
             <ul>
-              <li><a href="#sec-3-1">Beamer-related keywords</a></li>
+              <li><a href="#sec-3-1">Appearance of the presentation</a></li>
 
-              <li><a href="#sec-3-2">Keywords</a></li>
+              <li><a href="#sec-3-2">LaTeX preamble</a></li>
 
-              <li><a href="#sec-3-3">Properties</a></li>
+              <li><a href="#sec-3-3">Affiliated keywords</a></li>
             </ul>
           </li>
 
           <li>
-            <a href="#sec-4">Creating a frame</a>
+            <a href="#sec-4">Creating presentations</a>
 
             <ul>
-              <li><a href="#sec-4-1">Creating a frame</a></li>
+              <li><a href="#sec-4-1">Creating a title page</a></li>
+
+              <li><a href="#sec-4-2">Creating a table of contents</a></li>
+
+              <li><a href="#sec-4-3">Creating a simple frame</a></li>
+
+              <li><a href="#sec-4-4">Create a handout</a></li>
             </ul>
           </li>
 
@@ -143,129 +152,113 @@ type="text/javascript">
           </li>
 
           <li>
-            <a href="#sec-6">Building a presentation</a>
+            <a href="#sec-6">Environments</a>
 
             <ul>
-              <li><a href="#sec-6-1">Explicit page breaking</a></li>
-            </ul>
-          </li>
+              <li><a href="#sec-6-1">Environment specification
+              (BEAMER_env)</a></li>
 
-          <li>
-            <a href="#sec-7">Figures and tables</a>
-
-            <ul>
-              <li><a href="#sec-7-1">Figures</a></li>
-
-              <li><a href="#sec-7-2">TikZ</a></li>
-            </ul>
-          </li>
-
-          <li>
-            <a href="#sec-8">Splitting a frame (slide) into multiple
-            columns</a>
-
-            <ul>
-              <li><a href="#sec-8-1">BMCOL</a></li>
-
-              <li><a href="#sec-8-2">Multiple columns</a></li>
-
-              <li><a href="#sec-8-3">Result of an evaluation on two
-              columns</a></li>
-            </ul>
-          </li>
-
-          <li>
-            <a href="#sec-9">Environments on blocks
-            (<code>BEAMER_env</code>)</a>
-
-            <ul>
-              <li><a href="#sec-9-1"><code>structureenv</code>
+              <li><a href="#sec-6-2"><code>structureenv</code>
               environment</a></li>
 
-              <li><a href="#sec-9-2"><code>block</code> environment</a></li>
+              <li><a href="#sec-6-3"><code>block</code> environment</a></li>
 
-              <li><a href="#sec-9-3"><code>alertblock</code>
+              <li><a href="#sec-6-4"><code>alertblock</code>
               environment&nbsp;&nbsp;&nbsp;<span class="tag"><span class=
               "B_alertblock">B_alertblock</span></span></a></li>
 
-              <li><a href="#sec-9-4"><code>exampleblock</code>
+              <li><a href="#sec-6-5"><code>exampleblock</code>
               environment</a></li>
 
-              <li><a href="#sec-9-5"><code>theorem</code> environment</a></li>
+              <li><a href="#sec-6-6"><code>theorem</code> environment</a></li>
 
-              <li><a href="#sec-9-6"><code>theorem</code> environment</a></li>
+              <li><a href="#sec-6-7"><code>theorem</code> environment</a></li>
 
-              <li><a href="#sec-9-7"><code>definition</code>
+              <li><a href="#sec-6-8"><code>definition</code>
               environment</a></li>
 
-              <li><a href="#sec-9-8"><code>example</code> environment</a></li>
+              <li><a href="#sec-6-9"><code>example</code> environment</a></li>
 
-              <li><a href="#sec-9-9"><code>example</code> environment</a></li>
+              <li><a href="#sec-6-10"><code>example</code> environment</a></li>
 
-              <li><a href="#sec-9-10"><code>proof</code> environment</a></li>
+              <li><a href="#sec-6-11"><code>proof</code> environment</a></li>
 
-              <li><a href="#sec-9-11"><code>beamercolorbox</code>
+              <li><a href="#sec-6-12"><code>beamercolorbox</code>
               environment</a></li>
 
-              <li><a href="#sec-9-12"><code>verse</code> environment</a></li>
+              <li><a href="#sec-6-13"><code>verse</code> environment</a></li>
 
-              <li><a href="#sec-9-13"><code>verse</code> environment</a></li>
+              <li><a href="#sec-6-14"><code>verse</code> environment</a></li>
 
-              <li><a href="#sec-9-14"><code>quotation</code>
+              <li><a href="#sec-6-15"><code>quotation</code>
               environment</a></li>
 
-              <li><a href="#sec-9-15"><code>quote</code> environment</a></li>
+              <li><a href="#sec-6-16"><code>quote</code> environment</a></li>
 
-              <li><a href="#sec-9-16"><code>quote</code> environment</a></li>
+              <li><a href="#sec-6-17"><code>quote</code> environment</a></li>
 
-              <li><a href="#sec-9-17">Verbatim</a></li>
+              <li><a href="#sec-6-18">Verbatim</a></li>
 
-              <li><a href="#sec-9-18">Extra environments</a></li>
+              <li><a href="#sec-6-19">Extra environments</a></li>
             </ul>
           </li>
 
           <li>
-            <a href="#sec-10">Overlay/action specification
-            (<code>BEAMER_act</code>)</a>
+            <a href="#sec-7">Overlays</a>
 
             <ul>
-              <li><a href="#sec-10-1">Overlay/action specification
-              (<code>act</code>)</a></li>
+              <li><a href="#sec-7-1">Overlay specification
+              (BEAMER_act)</a></li>
             </ul>
           </li>
 
           <li>
-            <a href="#sec-11">Options for the current frame
-            (<code>BEAMER_opt</code>)</a>
+            <a href="#sec-8">Options</a>
 
             <ul>
-              <li><a href="#sec-11-1">Options for the current frame
+              <li><a href="#sec-8-1">Option specification (BEAMER_opt)</a></li>
+
+              <li><a href="#sec-8-2">Options for the current frame
               (<code>opt</code>)</a></li>
             </ul>
           </li>
 
-          <li><a href="#sec-12">Power</a></li>
-
           <li>
-            <a href="#sec-13">Summary</a>
+            <a href="#sec-9">Guidelines for creating presentations</a>
 
             <ul>
-              <li><a href="#sec-13-1">Summary</a></li>
+              <li><a href="#sec-9-1">Frame structure (Explicit page
+              breaking)</a></li>
 
-              <li><a href="#sec-13-2">For further reading</a></li>
+              <li><a href="#sec-9-2">Splitting a frame into multiple
+              columns</a></li>
+
+              <li><a href="#sec-9-3">Using graphics</a></li>
+            </ul>
+          </li>
+
+          <li><a href="#sec-10">Power</a></li>
+
+          <li>
+            <a href="#sec-11">Summary</a>
+
+            <ul>
+              <li><a href="#sec-11-1">Summary</a></li>
+
+              <li><a href="#sec-11-2">For further reading</a></li>
             </ul>
           </li>
 
           <li>
-            <a href="#sec-14">Appendix NAME XXX&nbsp;&nbsp;&nbsp;<span class=
+            <a href="#sec-12">Appendix NAME XXX&nbsp;&nbsp;&nbsp;<span class=
             "tag"><span class="B_appendix">B_appendix</span></span></a>
 
             <ul>
-              <li><a href="#sec-14-1">Proof details</a></li>
+              <li><a href="#sec-12-1">Proof details</a></li>
 
-              <li><a href="#sec-14-2">More details</a></li>
+              <li><a href="#sec-12-2">More details</a></li>
 
-              <li><a href="#sec-14-3">Abbreviations</a></li>
+              <li><a href="#sec-12-3">Abbreviations</a></li>
             </ul>
           </li>
         </ul>
@@ -283,10 +276,11 @@ type="text/javascript">
         <div class="outline-text-3" id="text-1-1">
           <p>Welcome to <b>Org Beamer reference card</b>. It contains the
           reference documentation that describes how to <b>write
-          presentations</b> using Org mode 8+ and the LaTeX Beamer class (which
-          allows producing <b>high quality</b> <b>PDF files</b> which are going
-          to look on every computer exactly the way they looked on your
-          computer).</p>
+          presentations</b> using Org mode 8+ and the LaTeX Beamer class.</p>
+
+          <p>That allows you to produce <b>high quality</b> <b>PDF files</b>
+          which are going to look on every computer exactly the way they looked
+          on your computer.</p>
         </div>
       </div>
 
@@ -294,9 +288,10 @@ type="text/javascript">
         <h3 id="sec-1-2">Objectives</h3>
 
         <div class="outline-text-3" id="text-1-2">
-          <p>Preparing presentations with Org mode is different from preparing
-          them with WYSWYG programs such as PowerPoint, Impress or Keynote, as
-          they are created <b>like any other Org mode document</b>.</p>
+          <p>Preparing presentations with Org mode is very different from
+          preparing them with WYSWYG programs such as PowerPoint, Impress or
+          Keynote, as they are created <b>like any other Org mode
+          document</b>.</p>
 
           <p>The obvious advantage of this approach is that <b>you don’t have
           to know LaTeX</b> in order to use Org mode’s Beamer export and
@@ -314,100 +309,92 @@ type="text/javascript">
 
         <div class="outline-text-3" id="text-1-3">
           <p>A working LaTeX installation is required for exporting to PDF. If
-          it is not yet installed on your system, install (for example)
-          <a href="http://www.tug.org/texlive/">TeX Live</a>.</p>
+          it is not yet installed on your system, install <a href=
+          "http://www.tug.org/texlive/">TeX Live</a> (for example).</p>
         </div>
       </div>
     </div>
 
     <div id="outline-container-sec-2" class="outline-2">
-      <h2 id="sec-2">Usage</h2>
+      <h2 id="sec-2">Usage of library <code>ox-beamer.el</code></h2>
 
       <div class="outline-text-2" id="text-2"></div>
 
       <div id="outline-container-sec-2-1" class="outline-3">
-        <h3 id="sec-2-1">Library <code>ox-beamer.el</code></h3>
+        <h3 id="sec-2-1">Beamer back-end (for Org export engine)</h3>
 
-        <div class="outline-text-3" id="text-2-1"></div>
+        <div class="outline-text-3" id="text-2-1">
+          <p>Type:</p>
 
-        <ul class="org-ul">
-          <li>Beamer back-end (for Org export engine)<br />
-
-            <div class="outline-text-4" id="text-2-1-1">
-              <p>Type:</p>
-
-              <div class="org-src-container">
-                <pre class="src src-emacs-lisp">
+          <div class="org-src-container">
+            <pre class="src src-emacs-lisp">
 M-x load-library RET ox-beamer RET
 </pre>
-              </div>
+          </div>
 
-              <p>to load the Beamer back-end library, and to obtain <b>extra
-              commands</b> in the LaTeX export menu:</p>
+          <p>to load the Beamer back-end library, and to obtain <b>extra
+          commands</b> in the LaTeX export menu:</p>
 
-              <dl class="org-dl">
-                <dt><code>C-c C-e l B</code></dt>
+          <dl class="org-dl">
+            <dt><code>C-c C-e l B</code></dt>
 
-                <dd>As LaTeX buffer (Beamer).</dd>
+            <dd>As LaTeX buffer (Beamer).</dd>
 
-                <dt><code>C-c C-e l b</code></dt>
+            <dt><code>C-c C-e l b</code></dt>
 
-                <dd>As LaTeX file (Beamer).</dd>
+            <dd>As LaTeX file (Beamer).</dd>
 
-                <dt><code>C-c C-e l P</code></dt>
+            <dt><code>C-c C-e l P</code></dt>
 
-                <dd>As PDF file (Beamer).</dd>
+            <dd>As PDF file (Beamer).</dd>
 
-                <dt><code>C-c C-e l O</code></dt>
+            <dt><code>C-c C-e l O</code></dt>
 
-                <dd>As PDF file and open (Beamer).</dd>
-              </dl>
-            </div>
-          </li>
+            <dd>As PDF file and open (Beamer).</dd>
+          </dl>
+        </div>
+      </div>
 
-          <li>Editing support<br />
+      <div id="outline-container-sec-2-2" class="outline-3">
+        <h3 id="sec-2-2">Editing support</h3>
 
-            <div class="outline-text-4" id="text-2-1-2">
-              <p>Type:</p>
+        <div class="outline-text-3" id="text-2-2">
+          <p>Type:</p>
 
-              <div class="org-src-container">
-                <pre class="src src-emacs-lisp">
+          <div class="org-src-container">
+            <pre class="src src-emacs-lisp">
 M-x org-beamer-mode RET
 </pre>
-              </div>
+          </div>
 
-              <p>to load the minor mode <code>org-beamer-mode</code> <b>easing
-              the edition</b> of the document structure (through the key
-              binding <code>C-c C-b</code>).</p>
+          <p>to load the minor mode <code>org-beamer-mode</code> <b>easing the
+          edition</b> of the document structure (through the key binding
+          <code>C-c C-b</code>, which offers fast selection of a <a href=
+          "#sec-6">Beamer environment</a>).</p>
 
-              <p>You can also turn it on with:</p>
+          <p>You can also turn it on with:</p>
 
-              <div class="org-src-container">
-                <pre class="src src-org">
+          <div class="org-src-container">
+            <pre class="src src-org">
 <span style=
 "color: #008ED1; background-color: #EAEAFF;">#+STARTUP: beamer</span>
 </pre>
-              </div>
+          </div>
 
-              <p>in your document.</p>
-            </div>
-          </li>
-        </ul>
+          <p>in your document.</p>
+        </div>
       </div>
     </div>
 
     <div id="outline-container-sec-3" class="outline-2">
-      <h2 id="sec-3">Options</h2>
+      <h2 id="sec-3">Keywords specific to the Beamer back-end</h2>
 
       <div class="outline-text-2" id="text-3"></div>
 
       <div id="outline-container-sec-3-1" class="outline-3">
-        <h3 id="sec-3-1">Beamer-related keywords</h3>
+        <h3 id="sec-3-1">Appearance of the presentation</h3>
 
         <div class="outline-text-3" id="text-3-1">
-          <p>The <code>Beamer</code> back-end introduces the following
-          keywords:</p>
-
           <div class="org-src-container">
             <pre class="src src-org">
 <span style=
@@ -415,7 +402,7 @@ M-x org-beamer-mode RET
 </pre>
           </div>
 
-          <p>which (for Boadilla) is equivalent to:</p>
+          <p>is equivalent (for Boadilla) to:</p>
 
           <div class="org-src-container">
             <pre class="src src-org">
@@ -429,35 +416,60 @@ M-x org-beamer-mode RET
 "color: #008ED1; background-color: #EAEAFF;">#+BEAMER_OUTER_THEME: infolines</span>
 </pre>
           </div>
+        </div>
+      </div>
 
+      <div id="outline-container-sec-3-2" class="outline-3">
+        <h3 id="sec-3-2">LaTeX preamble</h3>
+
+        <div class="outline-text-3" id="text-3-2">
           <p>Append any line of code in the LaTeX preamble with:</p>
 
           <div class="org-src-container">
             <pre class="src src-org">
 <span style=
-"color: #008ED1; background-color: #EAEAFF;">#+BEAMER_HEADER:</span>
+"color: #008ED1; background-color: #EAEAFF;">#+BEAMER_HEADER: \usepackage{...}</span>
 </pre>
           </div>
 
-          <p>XXX Is it [BEAMER-EXTRA] or [BEAMER-HEADER-EXTRA] in
-          org-latex-classes?</p>
-        </div>
-      </div>
-
-      <div id="outline-container-sec-3-2" class="outline-3">
-        <h3 id="sec-3-2">Keywords</h3>
-
-        <div class="outline-text-3" id="text-3-2">
-          <p><code>ox-beamer.el</code> reads both <code>ATTR_LATEX</code> and
-          <code>ATTR_BEAMER</code>, when it makes sense.</p>
+          <p>It will go in the <code>[EXTRA]</code> placeholder of the header
+          associated to the <code>beamer</code> LaTeX class (see
+          <code>org-latex-classes</code>).</p>
         </div>
       </div>
 
       <div id="outline-container-sec-3-3" class="outline-3">
-        <h3 id="sec-3-3">Properties</h3>
+        <h3 id="sec-3-3">Affiliated keywords</h3>
 
         <div class="outline-text-3" id="text-3-3">
-          <p>If you set</p>
+          <p>The Beamer back-end reads both</p>
+
+          <ul class="org-ul">
+            <li><code>#+ATTR_LATEX:</code> and</li>
+
+            <li><code>#+ATTR_BEAMER:</code></li>
+          </ul>
+
+          <p>affiliated keywords.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="outline-container-sec-4" class="outline-2">
+      <h2 id="sec-4">Creating presentations</h2>
+
+      <div class="outline-text-2" id="text-4"></div>
+
+      <div id="outline-container-sec-4-1" class="outline-3">
+        <h3 id="sec-4-1">Creating a title page</h3>
+      </div>
+
+      <div id="outline-container-sec-4-2" class="outline-3">
+        <h3 id="sec-4-2">Creating a table of contents</h3>
+
+        <div class="outline-text-3" id="text-4-2">
+          <p>If you set the <code>H</code> option from the
+          <code>#+OPTIONS:</code> keyword such as:</p>
 
           <div class="org-src-container">
             <pre class="src src-org">
@@ -468,27 +480,26 @@ M-x org-beamer-mode RET
           <p>then:</p>
 
           <ul class="org-ul">
-            <li><b>Second</b>-level headlines become the <b>frames</b>,
-            and</li>
+            <li>Top-level headlines become <b>sections</b> listed in the
+            <b>table of contents</b> (created by default), and</li>
 
-            <li>Top-level headlines become <b>sections</b> (listed in the
-            <b>table of contents</b>, which is created by default).</li>
+            <li><b>Second</b>-level headlines become the <b>frames</b>.</li>
           </ul>
+
+          <p>In many themes, sections and subsections appear in the sidebar or
+          headline.</p>
         </div>
       </div>
-    </div>
 
-    <div id="outline-container-sec-4" class="outline-2">
-      <h2 id="sec-4">Creating a frame</h2>
+      <div id="outline-container-sec-4-3" class="outline-3">
+        <h3 id="sec-4-3">Creating a simple frame</h3>
 
-      <div class="outline-text-2" id="text-4"></div>
-
-      <div id="outline-container-sec-4-1" class="outline-3">
-        <h3 id="sec-4-1">Creating a frame</h3>
-
-        <div class="outline-text-3" id="text-4-1">
+        <div class="outline-text-3" id="text-4-3">
           <div class="org-src-container">
             <pre class="src src-org">
+<span style=
+"color: #3C3C3C; background-color: #F0F0F0; font-size: 130%; font-weight: bold; text-decoration: overline;">* Introduction</span>
+
 <span style=
 "color: #123555; background-color: #E5F4FB; font-weight: bold; text-decoration: overline;">** A title</span>
 <span style=
@@ -498,9 +509,13 @@ Some content.
 </pre>
           </div>
 
-          <p>The “subtitle feature” does not have an Org syntax because it’s
-          specific to one back-end only.</p>
+          <p>The <b>subtitle</b> does not have an Org syntax because it’s
+          specific to the Beamer back-end only.</p>
         </div>
+      </div>
+
+      <div id="outline-container-sec-4-4" class="outline-3">
+        <h3 id="sec-4-4">Create a handout</h3>
       </div>
     </div>
 
@@ -600,149 +615,23 @@ Some content.
     </div>
 
     <div id="outline-container-sec-6" class="outline-2">
-      <h2 id="sec-6">Building a presentation</h2>
+      <h2 id="sec-6"><a id="ID-77f1b7a3-6e7d-4f2b-bd1f-02e6f02bba2f" name=
+      "ID-77f1b7a3-6e7d-4f2b-bd1f-02e6f02bba2f"></a>Environments</h2>
 
       <div class="outline-text-2" id="text-6"></div>
 
       <div id="outline-container-sec-6-1" class="outline-3">
-        <h3 id="sec-6-1">Explicit page breaking</h3>
+        <h3 id="sec-6-1">Environment specification (BEAMER_env)</h3>
 
         <div class="outline-text-3" id="text-6-1">
-          <p>If the text does not fit on a single slide, all you have to do to
-          automatically break up the frame into several frames, is set the
-          option <code>allowframebreaks</code>:</p>
-
-          <div class="org-src-container">
-            <pre class="src src-org">
-<span style=
-"color: #123555; background-color: #E5F4FB; font-weight: bold; text-decoration: overline;">** A long "frame" with breaks</span>
-<span style=
-"color: #00BB00; background-color: #EAFFEA; font-weight: bold;">   :PROPERTIES:</span>
-   <span style=
-"color: #00BB00; background-color: #EAFFEA; font-weight: bold;">:BEAMER</span><span style="color: #336699; background-color: #ffffff; font-weight: bold;">opt</span><span style="color: #00BB00; background-color: #EAFFEA; font-weight: bold;">:</span> <span style="color: #00A000;">allowframebreaks,label=</span>
-<span style=
-"color: #00BB00; background-color: #EAFFEA; font-weight: bold;">   :END:</span>
-</pre>
-          </div>
-
-          <p>Until the Beamer <a href=
-          "https://bitbucket.org/rivanvx/beamer/issue/265/including-frame-label-option-stops%20">
-          issue #265</a> is solved, we need to unset the framelabel as shown
-          above (<code>label=</code>).</p>
-        </div>
-      </div>
-    </div>
-
-    <div id="outline-container-sec-7" class="outline-2">
-      <h2 id="sec-7">Figures and tables</h2>
-
-      <div class="outline-text-2" id="text-7"></div>
-
-      <div id="outline-container-sec-7-1" class="outline-3">
-        <h3 id="sec-7-1">Figures</h3>
-
-        <div class="outline-text-3" id="text-7-1">
-          <div class="figure">
-            <p><img src="images/dot.png" alt="dot.png" /></p>
-          </div>
-
-          <div class="figure">
-            <p><img src="images/square.png" alt="square.png" /></p>
-
-            <p><span class="figure-number">Figure 1:</span> The caption is
-            <i>always</i> placed <b>below</b> the figure.</p>
-          </div>
+          <p>Use a different environment in current block.</p>
         </div>
       </div>
 
-      <div id="outline-container-sec-7-2" class="outline-3">
-        <h3 id="sec-7-2">TikZ</h3>
+      <div id="outline-container-sec-6-2" class="outline-3">
+        <h3 id="sec-6-2"><code>structureenv</code> environment</h3>
 
-        <div class="outline-text-3" id="text-7-2">
-          <p><a href=
-          "http://tex.stackexchange.com/questions/64075/beamers-visible-inside-a-tikz-node">
-          http://tex.stackexchange.com/questions/64075/beamers-visible-inside-a-tikz-node</a></p>
-        </div>
-      </div>
-    </div>
-
-    <div id="outline-container-sec-8" class="outline-2">
-      <h2 id="sec-8">Splitting a frame (slide) into multiple columns</h2>
-
-      <div class="outline-text-2" id="text-8"></div>
-
-      <div id="outline-container-sec-8-1" class="outline-3">
-        <h3 id="sec-8-1">BMCOL</h3>
-
-        <div class="outline-text-3" id="text-8-1">
-          <p>TODO Specify 5cm</p>
-
-          <p>BMCOL</p>
-        </div>
-
-        <ul class="org-ul">
-          <li>First column&nbsp;&nbsp;&nbsp;<span class="tag"><span class=
-          "BMCOL">BMCOL</span></span><br />
-
-            <div class="outline-text-4" id="text-8-1-1">
-              <p>Two \\ lines.</p>
-            </div>
-          </li>
-
-          <li>Second column&nbsp;&nbsp;&nbsp;<span class="tag"><span class=
-          "BMCOL">BMCOL</span></span><br />
-
-            <div class="outline-text-4" id="text-8-1-2">
-              <p>One line (but aligned).</p>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <div id="outline-container-sec-8-2" class="outline-3">
-        <h3 id="sec-8-2">Multiple columns</h3>
-
-        <div class="outline-text-3" id="text-8-2"></div>
-
-        <ul class="org-ul">
-          <li>First column&nbsp;&nbsp;&nbsp;<span class="tag"><span class=
-          "BMCOL">BMCOL</span></span><br />
-
-            <div class="outline-text-4" id="text-8-2-1">
-              <p>Two \\ lines.</p>
-            </div>
-          </li>
-
-          <li>Second column&nbsp;&nbsp;&nbsp;<span class="tag"><span class=
-          "BMCOL">BMCOL</span></span><br />
-
-            <div class="outline-text-4" id="text-8-2-2">
-              <div class="figure">
-                <p><img src="images/square.png" alt="square.png" /></p>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <div id="outline-container-sec-8-3" class="outline-3">
-        <h3 id="sec-8-3">Result of an evaluation on two columns</h3>
-
-        <div class="outline-text-3" id="text-8-3">
-          <p>… a fancy verbatim block …</p>
-        </div>
-      </div>
-    </div>
-
-    <div id="outline-container-sec-9" class="outline-2">
-      <h2 id="sec-9">Environments on blocks (<code>BEAMER_env</code>)</h2>
-
-      <div class="outline-text-2" id="text-9"></div>
-
-      <div id="outline-container-sec-9-1" class="outline-3">
-        <h3 id="sec-9-1"><code>structureenv</code> environment</h3>
-
-        <div class="outline-text-3" id="text-9-1">
+        <div class="outline-text-3" id="text-6-2">
           <ul class="org-ul">
             <li>For highlighting text.</li>
 
@@ -755,7 +644,7 @@ Some content.
           <li>structureenv&nbsp;&nbsp;&nbsp;<span class="tag"><span class=
           "B_structureenv">B_structureenv</span></span><br />
 
-            <div class="outline-text-4" id="text-9-1-1">
+            <div class="outline-text-4" id="text-6-2-1">
               <p>Paragraph Heading.</p>
             </div>
           </li>
@@ -764,21 +653,21 @@ Some content.
           "tag"><span class=
           "B_ignoreheading">B_ignoreheading</span></span><br />
 
-            <div class="outline-text-4" id="text-9-1-2"></div>
+            <div class="outline-text-4" id="text-6-2-2"></div>
           </li>
         </ul>
       </div>
 
-      <div id="outline-container-sec-9-2" class="outline-3">
-        <h3 id="sec-9-2"><code>block</code> environment</h3>
+      <div id="outline-container-sec-6-3" class="outline-3">
+        <h3 id="sec-6-3"><code>block</code> environment</h3>
 
-        <div class="outline-text-3" id="text-9-2"></div>
+        <div class="outline-text-3" id="text-6-3"></div>
 
         <ul class="org-ul">
           <li>Answered Questions&nbsp;&nbsp;&nbsp;<span class=
             "tag"><span class="B_block">B_block</span></span><br />
 
-            <div class="outline-text-4" id="text-9-2-1">
+            <div class="outline-text-4" id="text-6-3-1">
               <p>How many primes are there?</p>
             </div>
           </li>
@@ -786,7 +675,7 @@ Some content.
           <li>Open Questions&nbsp;&nbsp;&nbsp;<span class="tag"><span class=
           "B_block">B_block</span></span><br />
 
-            <div class="outline-text-4" id="text-9-2-2">
+            <div class="outline-text-4" id="text-6-3-2">
               <p>Is every even number the sum of two primes?</p>
             </div>
           </li>
@@ -794,17 +683,17 @@ Some content.
           <li>End of block&nbsp;&nbsp;&nbsp;<span class="tag"><span class=
           "B_ignoreheading">B_ignoreheading</span></span><br />
 
-            <div class="outline-text-4" id="text-9-2-3"></div>
+            <div class="outline-text-4" id="text-6-3-3"></div>
           </li>
         </ul>
       </div>
 
-      <div id="outline-container-sec-9-3" class="outline-3">
-        <h3 id="sec-9-3"><code>alertblock</code>
+      <div id="outline-container-sec-6-4" class="outline-3">
+        <h3 id="sec-6-4"><code>alertblock</code>
         environment&nbsp;&nbsp;&nbsp;<span class="tag"><span class=
         "B_alertblock">B_alertblock</span></span></h3>
 
-        <div class="outline-text-3" id="text-9-3">
+        <div class="outline-text-3" id="text-6-4">
           <ul class="org-ul">
             <li>Inserts a block whose title is highlighted.</li>
 
@@ -815,7 +704,7 @@ Some content.
         <ul class="org-ul">
           <li>Wrong theorem<br />
 
-            <div class="outline-text-4" id="text-9-3-1">
+            <div class="outline-text-4" id="text-6-4-1">
               <p><i>1=2</i>.</p>
             </div>
           </li>
@@ -824,15 +713,15 @@ Some content.
             "tag"><span class="B_ignoreheading">B_ignoreheading</span></span><br />
 
 
-            <div class="outline-text-4" id="text-9-3-2"></div>
+            <div class="outline-text-4" id="text-6-4-2"></div>
           </li>
         </ul>
       </div>
 
-      <div id="outline-container-sec-9-4" class="outline-3">
-        <h3 id="sec-9-4"><code>exampleblock</code> environment</h3>
+      <div id="outline-container-sec-6-5" class="outline-3">
+        <h3 id="sec-6-5"><code>exampleblock</code> environment</h3>
 
-        <div class="outline-text-3" id="text-9-4">
+        <div class="outline-text-3" id="text-6-5">
           <ul class="org-ul">
             <li>Inserts a block that is supposed to be an example.</li>
 
@@ -844,7 +733,7 @@ Some content.
           <li>Example&nbsp;&nbsp;&nbsp;<span class="tag"><span class=
           "B_exampleblock">B_exampleblock</span></span><br />
 
-            <div class="outline-text-4" id="text-9-4-1">
+            <div class="outline-text-4" id="text-6-5-1">
               <p>The set <i>{1,2,3,5}</i> has four elements.</p>
             </div>
           </li>
@@ -853,15 +742,15 @@ Some content.
           "tag"><span class=
           "B_ignoreheading">B_ignoreheading</span></span><br />
 
-            <div class="outline-text-4" id="text-9-4-2"></div>
+            <div class="outline-text-4" id="text-6-5-2"></div>
           </li>
         </ul>
       </div>
 
-      <div id="outline-container-sec-9-5" class="outline-3">
-        <h3 id="sec-9-5"><code>theorem</code> environment</h3>
+      <div id="outline-container-sec-6-6" class="outline-3">
+        <h3 id="sec-6-6"><code>theorem</code> environment</h3>
 
-        <div class="outline-text-3" id="text-9-5">
+        <div class="outline-text-3" id="text-6-6">
           <ul class="org-ul">
             <li>Inserts a theorem.</li>
           </ul>
@@ -871,7 +760,7 @@ Some content.
           <li>&nbsp;&nbsp;&nbsp;<span class="tag"><span class=
           "B_theorem">B_theorem</span></span><br />
 
-            <div class="outline-text-4" id="text-9-5-1">
+            <div class="outline-text-4" id="text-6-6-1">
               <p>There is no largest prime number.</p>
             </div>
           </li>
@@ -879,15 +768,15 @@ Some content.
           <li>End of theorem&nbsp;&nbsp;&nbsp;<span class="tag"><span class=
           "B_ignoreheading">B_ignoreheading</span></span><br />
 
-            <div class="outline-text-4" id="text-9-5-2"></div>
+            <div class="outline-text-4" id="text-6-6-2"></div>
           </li>
         </ul>
       </div>
 
-      <div id="outline-container-sec-9-6" class="outline-3">
-        <h3 id="sec-9-6"><code>theorem</code> environment</h3>
+      <div id="outline-container-sec-6-7" class="outline-3">
+        <h3 id="sec-6-7"><code>theorem</code> environment</h3>
 
-        <div class="outline-text-3" id="text-9-6">
+        <div class="outline-text-3" id="text-6-7">
           <ul class="org-ul">
             <li>Inserts a theorem.</li>
 
@@ -908,10 +797,10 @@ Some content.
         </div>
       </div>
 
-      <div id="outline-container-sec-9-7" class="outline-3">
-        <h3 id="sec-9-7"><code>definition</code> environment</h3>
+      <div id="outline-container-sec-6-8" class="outline-3">
+        <h3 id="sec-6-8"><code>definition</code> environment</h3>
 
-        <div class="outline-text-3" id="text-9-7">
+        <div class="outline-text-3" id="text-6-8">
           <ul class="org-ul">
             <li>Behaves like the <code>theorem</code> environment, except that
             the theorem style <code>definition</code> is used.</li>
@@ -925,7 +814,7 @@ Some content.
           <li>definition&nbsp;&nbsp;&nbsp;<span class="tag"><span class=
           "B_definition">B_definition</span></span><br />
 
-            <div class="outline-text-4" id="text-9-7-1">
+            <div class="outline-text-4" id="text-6-8-1">
               <p>Contents of definition</p>
             </div>
           </li>
@@ -934,15 +823,15 @@ Some content.
             "tag"><span class="B_ignoreheading">B_ignoreheading</span></span><br />
 
 
-            <div class="outline-text-4" id="text-9-7-2"></div>
+            <div class="outline-text-4" id="text-6-8-2"></div>
           </li>
         </ul>
       </div>
 
-      <div id="outline-container-sec-9-8" class="outline-3">
-        <h3 id="sec-9-8"><code>example</code> environment</h3>
+      <div id="outline-container-sec-6-9" class="outline-3">
+        <h3 id="sec-6-9"><code>example</code> environment</h3>
 
-        <div class="outline-text-3" id="text-9-8">
+        <div class="outline-text-3" id="text-6-9">
           <ul class="org-ul">
             <li>Behaves like the theorem environment, except that the theorem
             style <code>example</code> is used.</li>
@@ -957,7 +846,7 @@ Some content.
           <li>Example&nbsp;&nbsp;&nbsp;<span class="tag"><span class=
           "B_example">B_example</span></span><br />
 
-            <div class="outline-text-4" id="text-9-8-1">
+            <div class="outline-text-4" id="text-6-9-1">
               <p>Contents of example</p>
             </div>
           </li>
@@ -965,15 +854,15 @@ Some content.
           <li>End of example&nbsp;&nbsp;&nbsp;<span class="tag"><span class=
           "B_ignoreheading">B_ignoreheading</span></span><br />
 
-            <div class="outline-text-4" id="text-9-8-2"></div>
+            <div class="outline-text-4" id="text-6-9-2"></div>
           </li>
         </ul>
       </div>
 
-      <div id="outline-container-sec-9-9" class="outline-3">
-        <h3 id="sec-9-9"><code>example</code> environment</h3>
+      <div id="outline-container-sec-6-10" class="outline-3">
+        <h3 id="sec-6-10"><code>example</code> environment</h3>
 
-        <div class="outline-text-3" id="text-9-9">
+        <div class="outline-text-3" id="text-6-10">
           <ul class="org-ul">
             <li>Simpler solution:</li>
           </ul>
@@ -983,10 +872,10 @@ Contents of example
         </div>
       </div>
 
-      <div id="outline-container-sec-9-10" class="outline-3">
-        <h3 id="sec-9-10"><code>proof</code> environment</h3>
+      <div id="outline-container-sec-6-11" class="outline-3">
+        <h3 id="sec-6-11"><code>proof</code> environment</h3>
 
-        <div class="outline-text-3" id="text-9-10">
+        <div class="outline-text-3" id="text-6-11">
           <ul class="org-ul">
             <li>Typesets a proof.</li>
           </ul>
@@ -996,7 +885,7 @@ Contents of example
           <li>proof&nbsp;&nbsp;&nbsp;<span class="tag"><span class=
           "B_proof">B_proof</span></span><br />
 
-            <div class="outline-text-4" id="text-9-10-1">
+            <div class="outline-text-4" id="text-6-11-1">
               <ul class="org-ul">
                 <li>&lt;1-| alert@1&gt; Suppose <i>p</i> were the largest prime
                 number.</li>
@@ -1017,15 +906,15 @@ Contents of example
           <li>End of proof&nbsp;&nbsp;&nbsp;<span class="tag"><span class=
           "B_ignoreheading">B_ignoreheading</span></span><br />
 
-            <div class="outline-text-4" id="text-9-10-2"></div>
+            <div class="outline-text-4" id="text-6-11-2"></div>
           </li>
         </ul>
       </div>
 
-      <div id="outline-container-sec-9-11" class="outline-3">
-        <h3 id="sec-9-11"><code>beamercolorbox</code> environment</h3>
+      <div id="outline-container-sec-6-12" class="outline-3">
+        <h3 id="sec-6-12"><code>beamercolorbox</code> environment</h3>
 
-        <div class="outline-text-3" id="text-9-11">
+        <div class="outline-text-3" id="text-6-12">
           <ul class="org-ul">
             <li>Create colored boxes.</li>
           </ul>
@@ -1035,7 +924,7 @@ Contents of example
           <li>beamercolorbox&nbsp;&nbsp;&nbsp;<span class="tag"><span class=
           "B_beamercolorbox">B_beamercolorbox</span></span><br />
 
-            <div class="outline-text-4" id="text-9-11-1">
+            <div class="outline-text-4" id="text-6-12-1">
               <p>Text</p>
             </div>
           </li>
@@ -1044,21 +933,21 @@ Contents of example
           "tag"><span class=
           "B_ignoreheading">B_ignoreheading</span></span><br />
 
-            <div class="outline-text-4" id="text-9-11-2"></div>
+            <div class="outline-text-4" id="text-6-12-2"></div>
           </li>
         </ul>
       </div>
 
-      <div id="outline-container-sec-9-12" class="outline-3">
-        <h3 id="sec-9-12"><code>verse</code> environment</h3>
+      <div id="outline-container-sec-6-13" class="outline-3">
+        <h3 id="sec-6-13"><code>verse</code> environment</h3>
 
-        <div class="outline-text-3" id="text-9-12"></div>
+        <div class="outline-text-3" id="text-6-13"></div>
 
         <ul class="org-ul">
           <li>verse&nbsp;&nbsp;&nbsp;<span class="tag"><span class=
           "B_verse">B_verse</span></span><br />
 
-            <div class="outline-text-4" id="text-9-12-1">
+            <div class="outline-text-4" id="text-6-13-1">
               <p>Contents of verse</p>
             </div>
           </li>
@@ -1066,15 +955,15 @@ Contents of example
           <li>End of verse&nbsp;&nbsp;&nbsp;<span class="tag"><span class=
           "B_ignoreheading">B_ignoreheading</span></span><br />
 
-            <div class="outline-text-4" id="text-9-12-2"></div>
+            <div class="outline-text-4" id="text-6-13-2"></div>
           </li>
         </ul>
       </div>
 
-      <div id="outline-container-sec-9-13" class="outline-3">
-        <h3 id="sec-9-13"><code>verse</code> environment</h3>
+      <div id="outline-container-sec-6-14" class="outline-3">
+        <h3 id="sec-6-14"><code>verse</code> environment</h3>
 
-        <div class="outline-text-3" id="text-9-13">
+        <div class="outline-text-3" id="text-6-14">
           <ul class="org-ul">
             <li>Simpler solution:</li>
           </ul>
@@ -1083,10 +972,10 @@ Contents of example
         </div>
       </div>
 
-      <div id="outline-container-sec-9-14" class="outline-3">
-        <h3 id="sec-9-14"><code>quotation</code> environment</h3>
+      <div id="outline-container-sec-6-15" class="outline-3">
+        <h3 id="sec-6-15"><code>quotation</code> environment</h3>
 
-        <div class="outline-text-3" id="text-9-14">
+        <div class="outline-text-3" id="text-6-15">
           <ul class="org-ul">
             <li>Use <code>quote</code> or <code>quotation</code> to typeset
             quoted text.</li>
@@ -1099,7 +988,7 @@ Contents of example
           <li>quotation&nbsp;&nbsp;&nbsp;<span class="tag"><span class=
           "B_quotation">B_quotation</span></span><br />
 
-            <div class="outline-text-4" id="text-9-14-1">
+            <div class="outline-text-4" id="text-6-15-1">
               <p>Contents of quotation</p>
             </div>
           </li>
@@ -1108,15 +997,15 @@ Contents of example
             "tag"><span class="B_ignoreheading">B_ignoreheading</span></span><br />
 
 
-            <div class="outline-text-4" id="text-9-14-2"></div>
+            <div class="outline-text-4" id="text-6-15-2"></div>
           </li>
         </ul>
       </div>
 
-      <div id="outline-container-sec-9-15" class="outline-3">
-        <h3 id="sec-9-15"><code>quote</code> environment</h3>
+      <div id="outline-container-sec-6-16" class="outline-3">
+        <h3 id="sec-6-16"><code>quote</code> environment</h3>
 
-        <div class="outline-text-3" id="text-9-15">
+        <div class="outline-text-3" id="text-6-16">
           <ul class="org-ul">
             <li>Use <code>quote</code> or <code>quotation</code> to typeset
             quoted text.</li>
@@ -1129,7 +1018,7 @@ Contents of example
           <li>quote&nbsp;&nbsp;&nbsp;<span class="tag"><span class=
           "B_quote">B_quote</span></span><br />
 
-            <div class="outline-text-4" id="text-9-15-1">
+            <div class="outline-text-4" id="text-6-16-1">
               <p>Contents of quote</p>
             </div>
           </li>
@@ -1137,15 +1026,15 @@ Contents of example
           <li>End of quote&nbsp;&nbsp;&nbsp;<span class="tag"><span class=
           "B_ignoreheading">B_ignoreheading</span></span><br />
 
-            <div class="outline-text-4" id="text-9-15-2"></div>
+            <div class="outline-text-4" id="text-6-16-2"></div>
           </li>
         </ul>
       </div>
 
-      <div id="outline-container-sec-9-16" class="outline-3">
-        <h3 id="sec-9-16"><code>quote</code> environment</h3>
+      <div id="outline-container-sec-6-17" class="outline-3">
+        <h3 id="sec-6-17"><code>quote</code> environment</h3>
 
-        <div class="outline-text-3" id="text-9-16">
+        <div class="outline-text-3" id="text-6-17">
           <ul class="org-ul">
             <li>Use <code>quote</code> or <code>quotation</code> to typeset
             quoted text.</li>
@@ -1161,10 +1050,10 @@ Contents of example
         </div>
       </div>
 
-      <div id="outline-container-sec-9-17" class="outline-3">
-        <h3 id="sec-9-17">Verbatim</h3>
+      <div id="outline-container-sec-6-18" class="outline-3">
+        <h3 id="sec-6-18">Verbatim</h3>
 
-        <div class="outline-text-3" id="text-9-17">
+        <div class="outline-text-3" id="text-6-18">
           <div class="org-src-container">
             <pre class="src src-c">
 <span style="color: #6434A3;">int</span> <span style=
@@ -1190,15 +1079,11 @@ Contents of example
         </div>
       </div>
 
-      <div id="outline-container-sec-9-18" class="outline-3">
-        <h3 id="sec-9-18">Extra environments</h3>
+      <div id="outline-container-sec-6-19" class="outline-3">
+        <h3 id="sec-6-19">Extra environments</h3>
 
-        <div class="outline-text-3" id="text-9-18">
+        <div class="outline-text-3" id="text-6-19">
           <p>For simple environments, use:</p>
-
-          <div class="myenvironment">
-            <p>Test of a new environment</p>
-          </div>
 
           <p>I think we should changes some environment placeholders:</p>
 
@@ -1210,9 +1095,6 @@ Contents of example
           </ul>
 
           <p>The previous definition would become:</p>
-
-          <p>‘(“textpos1” “w” “\\begin{textblock}%r \\visible %a {" "}
-          \\end{textblock}”)</p>
 
           <p>WDYT?</p>
 
@@ -1230,34 +1112,20 @@ Contents of example
       </div>
     </div>
 
-    <div id="outline-container-sec-10" class="outline-2">
-      <h2 id="sec-10">Overlay/action specification
-      (<code>BEAMER_act</code>)</h2>
+    <div id="outline-container-sec-7" class="outline-2">
+      <h2 id="sec-7">Overlays</h2>
 
-      <div class="outline-text-2" id="text-10"></div>
+      <div class="outline-text-2" id="text-7"></div>
 
-      <div id="outline-container-sec-10-1" class="outline-3">
-        <h3 id="sec-10-1">Overlay/action specification (<code>act</code>)</h3>
+      <div id="outline-container-sec-7-1" class="outline-3">
+        <h3 id="sec-7-1">Overlay specification (BEAMER_act)</h3>
 
-        <div class="outline-text-3" id="text-10-1">
-          <ul class="org-ul">
-            <li>Headlines support <code>BEAMER_ACT</code> properties.</li>
+        <div class="outline-text-3" id="text-7-1">
+          <p>Set <b>overlay</b> specifications in current block to <b>create
+          dynamic effects</b> (<i>multiple slides</i>, called <i>overlays</i>,
+          for a single frame).</p>
 
-            <li>It is translated as an overlay/action specification, or a
-            default overlay specification when enclosed within square
-            brackets.</li>
-          </ul>
-
-          <p>Dynamic list are possible on a case by case basis :</p>
-
-          <div class="org-src-container">
-            <pre class="src src-org">
-- @@beamer:&lt;1-&gt;@@ Item
-- @@beamer:&lt;2-&gt;@@ Item
-</pre>
-          </div>
-
-          <p>and as a frame property:</p>
+          <p>Headlines support the <code>BEAMER_ACT</code> property:</p>
 
           <div class="org-src-container">
             <pre class="src src-org">
@@ -1270,24 +1138,56 @@ Contents of example
 <span style=
 "color: #00BB00; background-color: #EAFFEA; font-weight: bold;">  :END:</span>
 
+<span style=
+"color: #8D8D84; font-style: italic;">  # Diff with [&lt;+-&gt;]?</span>
+
   - Item
   - Item
+</pre>
+          </div>
+
+          <p>It is translated as an overlay/action specification, or a default
+          overlay specification when enclosed within square brackets.</p>
+
+          <p>Dynamic lists are possible on a case by case basis :</p>
+
+          <div class="org-src-container">
+            <pre class="src src-org">
+<span style=
+"color: #008ED1; background-color: #EAEAFF;">#+ATTR_BEAMER: :overlay +-</span>
+- Item 1
+- Item 2
+</pre>
+          </div>
+
+          <div class="org-src-container">
+            <pre class="src src-org">
+- @@beamer:&lt;1-&gt;@@ Item 1
+- @@beamer:&lt;2-&gt;@@ Item 2
 </pre>
           </div>
         </div>
       </div>
     </div>
 
-    <div id="outline-container-sec-11" class="outline-2">
-      <h2 id="sec-11">Options for the current frame
-      (<code>BEAMER_opt</code>)</h2>
+    <div id="outline-container-sec-8" class="outline-2">
+      <h2 id="sec-8">Options</h2>
 
-      <div class="outline-text-2" id="text-11"></div>
+      <div class="outline-text-2" id="text-8"></div>
 
-      <div id="outline-container-sec-11-1" class="outline-3">
-        <h3 id="sec-11-1">Options for the current frame (<code>opt</code>)</h3>
+      <div id="outline-container-sec-8-1" class="outline-3">
+        <h3 id="sec-8-1">Option specification (BEAMER_opt)</h3>
 
-        <div class="outline-text-3" id="text-11-1">
+        <div class="outline-text-3" id="text-8-1">
+          <p>Insert optional arguments for the current frame (or in current
+          block???).</p>
+        </div>
+      </div>
+
+      <div id="outline-container-sec-8-2" class="outline-3">
+        <h3 id="sec-8-2">Options for the current frame (<code>opt</code>)</h3>
+
+        <div class="outline-text-3" id="text-8-2">
           <ul class="org-ul">
             <li>Headlines support <code>BEAMER_OPT</code> properties.</li>
           </ul>
@@ -1316,29 +1216,161 @@ Contents of example
       </div>
     </div>
 
-    <div id="outline-container-sec-12" class="outline-2">
-      <h2 id="sec-12">Power</h2>
+    <div id="outline-container-sec-9" class="outline-2">
+      <h2 id="sec-9">Guidelines for creating presentations</h2>
 
-      <div class="outline-text-2" id="text-12">
-        <p>Skip proof</p>
+      <div class="outline-text-2" id="text-9"></div>
 
-        <p><a href="#sec-14-1">Proof details</a></p>
+      <div id="outline-container-sec-9-1" class="outline-3">
+        <h3 id="sec-9-1">Frame structure (Explicit page breaking)</h3>
+
+        <div class="outline-text-3" id="text-9-1">
+          <p>If the text does not fit on a single slide, all you have to do to
+          automatically break up the frame into several frames, is set the
+          option <code>allowframebreaks</code>:</p>
+
+          <div class="org-src-container">
+            <pre class="src src-org">
+<span style=
+"color: #123555; background-color: #E5F4FB; font-weight: bold; text-decoration: overline;">** A long "frame" with breaks</span>
+<span style=
+"color: #00BB00; background-color: #EAFFEA; font-weight: bold;">   :PROPERTIES:</span>
+   <span style=
+"color: #00BB00; background-color: #EAFFEA; font-weight: bold;">:BEAMER</span><span style="color: #336699; background-color: #ffffff; font-weight: bold;">opt</span><span style="color: #00BB00; background-color: #EAFFEA; font-weight: bold;">:</span> <span style="color: #00A000;">allowframebreaks,label=</span>
+<span style=
+"color: #00BB00; background-color: #EAFFEA; font-weight: bold;">   :END:</span>
+</pre>
+          </div>
+
+          <p>Until the Beamer <a href=
+          "https://bitbucket.org/rivanvx/beamer/issue/265/including-frame-label-option-stops%20">
+          issue #265</a> is solved, we need to unset the framelabel as shown
+          above (~label~=).</p>
+        </div>
+      </div>
+
+      <div id="outline-container-sec-9-2" class="outline-3">
+        <h3 id="sec-9-2">Splitting a frame into multiple columns</h3>
+
+        <div class="outline-text-3" id="text-9-2"></div>
+
+        <ul class="org-ul">
+          <li>BMCOL<br />
+
+            <div class="outline-text-4" id="text-9-2-1">
+              <p>TODO Specify 5cm</p>
+
+              <p>BMCOL</p>
+            </div>
+
+            <ul class="org-ul">
+              <li>First column&nbsp;&nbsp;&nbsp;<span class=
+                "tag"><span class="BMCOL">BMCOL</span></span><br />
+
+                <div class="outline-text-5" id="text-9-2-1-1">
+                  <p>Two \\ lines.</p>
+                </div>
+              </li>
+
+              <li>Second column&nbsp;&nbsp;&nbsp;<span class=
+                "tag"><span class="BMCOL">BMCOL</span></span><br />
+
+                <div class="outline-text-5" id="text-9-2-1-2">
+                  <p>One line (but aligned).</p>
+                </div>
+              </li>
+            </ul>
+          </li>
+
+          <li>Multiple columns<br />
+
+            <ul class="org-ul">
+              <li>First column&nbsp;&nbsp;&nbsp;<span class=
+                "tag"><span class="BMCOL">BMCOL</span></span><br />
+
+                <div class="outline-text-5" id="text-9-2-2-1">
+                  <p>Two \\ lines.</p>
+                </div>
+              </li>
+
+              <li>Second column&nbsp;&nbsp;&nbsp;<span class=
+                "tag"><span class="BMCOL">BMCOL</span></span><br />
+
+                <div class="outline-text-5" id="text-9-2-2-2">
+                  <div class="figure">
+                    <p><img src="images/square.png" alt="square.png" /></p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+
+          <li>Result of an evaluation on two columns<br />
+
+            <div class="outline-text-4" id="text-9-2-3">
+              <p>… a fancy verbatim block …</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div id="outline-container-sec-9-3" class="outline-3">
+        <h3 id="sec-9-3">Using graphics</h3>
+
+        <div class="outline-text-3" id="text-9-3"></div>
+
+        <ul class="org-ul">
+          <li>Figures<br />
+
+            <div class="outline-text-4" id="text-9-3-1">
+              <div class="figure">
+                <p><img src="images/dot.png" alt="dot.png" /></p>
+              </div>
+
+              <div class="figure">
+                <p><img src="images/square.png" alt="square.png" /></p>
+
+                <p><span class="figure-number">Figure 1:</span> The caption is
+                <i>always</i> placed <b>below</b> the figure.</p>
+              </div>
+            </div>
+          </li>
+
+          <li>TikZ<br />
+
+            <div class="outline-text-4" id="text-9-3-2">
+              <p><a href=
+              "http://tex.stackexchange.com/questions/64075/beamers-visible-inside-a-tikz-node">
+              http://tex.stackexchange.com/questions/64075/beamers-visible-inside-a-tikz-node</a></p>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
 
-    <div id="outline-container-sec-13" class="outline-2">
-      <h2 id="sec-13">Summary</h2>
+    <div id="outline-container-sec-10" class="outline-2">
+      <h2 id="sec-10">Power</h2>
 
-      <div class="outline-text-2" id="text-13"></div>
+      <div class="outline-text-2" id="text-10">
+        <p>Skip proof</p>
 
-      <div id="outline-container-sec-13-1" class="outline-3">
-        <h3 id="sec-13-1">Summary</h3>
+        <p><a href="#sec-12-1">Proof details</a></p>
+      </div>
+    </div>
+
+    <div id="outline-container-sec-11" class="outline-2">
+      <h2 id="sec-11">Summary</h2>
+
+      <div class="outline-text-2" id="text-11"></div>
+
+      <div id="outline-container-sec-11-1" class="outline-3">
+        <h3 id="sec-11-1">Summary</h3>
       </div>
 
-      <div id="outline-container-sec-13-2" class="outline-3">
-        <h3 id="sec-13-2">For further reading</h3>
+      <div id="outline-container-sec-11-2" class="outline-3">
+        <h3 id="sec-11-2">For further reading</h3>
 
-        <div class="outline-text-3" id="text-13-2">
+        <div class="outline-text-3" id="text-11-2">
           <p>\beamertemplatebookbibitems</p>\begin{thebibliography}{10}
           \bibitem{sal:b:formal-languages} A.~Salomaa. \newblock {\em Formal
           Languages}. \newblock Academic Press, 1973. \pause
@@ -1356,30 +1388,30 @@ Contents of example
       </div>
     </div>
 
-    <div id="outline-container-sec-14" class="outline-2">
-      <h2 id="sec-14">Appendix NAME XXX&nbsp;&nbsp;&nbsp;<span class=
+    <div id="outline-container-sec-12" class="outline-2">
+      <h2 id="sec-12">Appendix NAME XXX&nbsp;&nbsp;&nbsp;<span class=
       "tag"><span class="B_appendix">B_appendix</span></span></h2>
 
-      <div class="outline-text-2" id="text-14"></div>
+      <div class="outline-text-2" id="text-12"></div>
 
-      <div id="outline-container-sec-14-1" class="outline-3">
-        <h3 id="sec-14-1">Proof details</h3>
+      <div id="outline-container-sec-12-1" class="outline-3">
+        <h3 id="sec-12-1">Proof details</h3>
 
-        <div class="outline-text-3" id="text-14-1">
+        <div class="outline-text-3" id="text-12-1">
           <p>Text omitted in main talk.</p>
         </div>
       </div>
 
-      <div id="outline-container-sec-14-2" class="outline-3">
-        <h3 id="sec-14-2">More details</h3>
+      <div id="outline-container-sec-12-2" class="outline-3">
+        <h3 id="sec-12-2">More details</h3>
 
-        <div class="outline-text-3" id="text-14-2">
+        <div class="outline-text-3" id="text-12-2">
           <p>Even more additional material.</p>
         </div>
       </div>
 
-      <div id="outline-container-sec-14-3" class="outline-3">
-        <h3 id="sec-14-3">Abbreviations</h3>
+      <div id="outline-container-sec-12-3" class="outline-3">
+        <h3 id="sec-12-3">Abbreviations</h3>
       </div>
     </div>
   </div>
