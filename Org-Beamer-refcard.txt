@@ -1,7 +1,7 @@
 #+TITLE:     Org Beamer quick reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2014-03-28 Fri 14:27>
+#+Time-stamp: <2014-04-30 Wed 23:40>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -34,91 +34,112 @@
 ** Description
 
 Welcome to *Org Beamer reference card*.  It contains the reference documentation
-that describes how to *write presentations* using Org mode 8+ and the LaTeX
-Beamer class.
+that describes how to *write presentations* using:
 
-That allows you to produce *high quality* *PDF files* which are going to look on
-every computer exactly the way they looked on your computer.
+- [[http://orgmode.org/][Org mode]] 8 and
+- the [[https://bitbucket.org/rivanvx/beamer/][LaTeX Beamer class]].
+
+That allows you to easily produce *high quality* *PDF files* which are going to
+look on /every/ computer exactly the way they looked on /your/ computer.
 
 ** Objectives
 
-Preparing presentations with Org mode is very different from preparing them
-with WYSWYG programs such as PowerPoint, Impress or Keynote, as they are
-created *like any other Org mode document*.
+As they are created *like any other Org mode document*, preparing presentations
+with Org mode is very different from preparing them with WYSWYG programs such
+as PowerPoint, Impress or Keynote.
 
 The obvious advantage of this approach is that *you don't have to know LaTeX* in
-order to use Org mode's Beamer export and *create presentations*.
-
-Org mode presentations contain headings at different levels.  By default,
-headings at the first outline level will become titles of the different slides
-(called frames in Beamer), and deeper levels will be used as structural
-environments.
+order to *create Beamer presentations*.
 
 ** Requirements
 
 A working LaTeX installation is required for exporting to PDF. If it is not yet
 installed on your system, install [[http://www.tug.org/texlive/][TeX Live]] (for example).
 
-* Usage of library =ox-beamer.el=
+* Creating presentations
 
-** Beamer back-end (for Org export engine)
+** Creating a title page
 
-Type:
+A title page is automatically inserted into the first frame.
 
-#+begin_src emacs-lisp
-M-x load-library RET ox-beamer RET
-#+end_src
+By default, it will arrange the following elements on the title page:
+- the document *title* (file name, if not specified),
+- the *author(s)*'s names (~user-full-name~, if not specified),
+- their affiliation,
+- a title graphic, and
+- a *date* (~\today~, if nothing specified).
 
-to load the Beamer back-end library, and to obtain *extra commands* in the LaTeX
-export menu:
+The following commands are useful for this template:
+· \insertinstitute inserts the institute.
+· \insertsubtitle inserts a version of the document title that is useful for the title page.
+· \inserttitlegraphic inserts the title graphic into a template.
 
-- ~C-c C-e l B~ ::
-     As LaTeX buffer (Beamer).
-
-- ~C-c C-e l b~ ::
-     As LaTeX file (Beamer).
-
-- ~C-c C-e l P~ ::
-     As PDF file (Beamer).
-
-- ~C-c C-e l O~ ::
-     As PDF file and open (Beamer).
-
-** Editing support
-
-Type:
-
-#+begin_src emacs-lisp
-M-x org-beamer-mode RET
-#+end_src
-
-to load the minor mode ~org-beamer-mode~ *easing the edition* of the document
-structure (through the key binding ~C-c C-b~, which offers fast selection of
-a [[id:77f1b7a3-6e7d-4f2b-bd1f-02e6f02bba2f][Beamer environment]]).
-
-You can also turn it on with:
+Email?
 
 #+begin_src org
-,#+STARTUP: beamer
+,#+TITLE:     Document title
+,#+AUTHOR:    Author's name
+,#+DATE:      Date
+
+,#+BEAMER_HEADER_EXTRA:  \institute[short name]{My awesome institute}
 #+end_src
 
-in your document.
+The inner theme dictates how the title page is rendered.
+
+** Global structure
+
+Org mode presentations contain headings at different levels.
+
+By default,
+
+- Headings at the *first* outline level will become *titles* of the different
+  slides (called *frames* in Beamer),
+
+- Deeper levels will be used as structural environments, and
+
+- The "Contents" frame is blank.
+
+** Creating a table of contents
+
+If you set the ~H~ option from the ~#+OPTIONS:~ keyword such as:
+
+#+begin_src org
+,#+OPTIONS: H:2
+#+end_src
+
+then:
+
+- Top-level headlines become *sections* listed in the *table of contents* (created
+  by default), and
+
+- *Second*-level headlines become the *frames*.
+
+In many themes, sections and subsections (when ~H:3~) appear in the sidebar or
+headline.
+
+** Creating a simple frame
+
+#+begin_src org
+,* Introduction
+
+,** A title
+   #+BEAMER: \framesubtitle{A subtitle}
+
+Some content.
+#+end_src
+
+The *subtitle* does not have an Org syntax because it's specific to the Beamer
+back-end only.
+
+** Create a handout
 
 * Keywords specific to the Beamer back-end
 
-** Appearance of the presentation
+** LaTeX class
 
 #+begin_src org
-,#+BEAMER_THEME: Boadilla
-#+end_src
-
-is equivalent (for Boadilla) to:
-
-#+begin_src org
-,#+BEAMER_COLOR_THEME: dolphin
-,#+BEAMER_FONT_THEME:  default
-,#+BEAMER_INNER_THEME: [shadow]rounded
-,#+BEAMER_OUTER_THEME: infolines
+,#+LATEX_CLASS: beamer
+,#+LATEX_CLASS_OPTIONS:
 #+end_src
 
 ** LaTeX preamble
@@ -141,41 +162,65 @@ The Beamer back-end reads both
 
 affiliated keywords.
 
-* Creating presentations
-
-** Creating a title page
-
-** Creating a table of contents
-
-If you set the ~H~ option from the ~#+OPTIONS:~ keyword such as:
+** Appearance of the presentation
 
 #+begin_src org
-,#+OPTIONS: H:2
+,#+BEAMER_THEME: Boadilla
 #+end_src
 
-then:
-
-- Top-level headlines become *sections* listed in the *table of contents* (created
-  by default), and
-- *Second*-level headlines become the *frames*.
-
-In many themes, sections and subsections appear in the sidebar or headline.
-
-** Creating a simple frame
+is equivalent (for Boadilla) to:
 
 #+begin_src org
-,* Introduction
-
-,** A title
-   #+BEAMER: \framesubtitle{A subtitle}
-
-Some content.
+,#+BEAMER_COLOR_THEME: dolphin
+,#+BEAMER_FONT_THEME:  default
+,#+BEAMER_INNER_THEME: [shadow]rounded
+,#+BEAMER_OUTER_THEME: infolines
 #+end_src
 
-The *subtitle* does not have an Org syntax because it's specific to the Beamer
-back-end only.
+* Usage of library =ox-beamer.el=
 
-** Create a handout
+** Beamer back-end (for Org export engine)
+
+Type:
+
+#+begin_src emacs-lisp
+M-x load-library RET ox-beamer RET
+#+end_src
+
+to load the Beamer back-end library, and to obtain *extra commands* in the LaTeX
+export menu:
+
+- ~C-c C-e l B~ ::
+     Export as LaTeX buffer (Beamer).
+
+- ~C-c C-e l b~ ::
+     Export as LaTeX file (Beamer).
+
+- ~C-c C-e l P~ ::
+     Export as PDF file (Beamer).
+
+- ~C-c C-e l O~ ::
+     Export as PDF file and open (Beamer).
+
+** Editing support
+
+Type:
+
+#+begin_src emacs-lisp
+M-x org-beamer-mode RET
+#+end_src
+
+to load the minor mode ~org-beamer-mode~ *easing the edition* of the document
+structure (through the key binding ~C-c C-b~, which offers fast selection of
+a [[id:77f1b7a3-6e7d-4f2b-bd1f-02e6f02bba2f][Beamer environment]]).
+
+You can also turn it on with:
+
+#+begin_src org
+,#+STARTUP: beamer
+#+end_src
+
+in your document.
 
 * Environment tags
 
@@ -566,6 +611,55 @@ Dynamic lists are possible on a case by case basis :
 - @@beamer:<2->@@ Item 2
 #+end_src
 
+** Question on ML
+
+#+begin_src latex
+\begin{figure}
+  \begin{center}
+    \includegraphics<1>[width=.7\textwidth]{figure1}
+    \includegraphics<2>[width=.7\textwidth]{figure2}
+    \includegraphics<3->[width=.7\textwidth]{figure3}
+   \end{center}
+\end{figure}
+#+end_src
+
+The following works for me:
+
+#+begin_src org
+ #+beamer: \only<1>{
+ [[file:figure1.png]]
+ #+beamer: }\only<2>{
+ [[file:figure2.png]]
+ #+beamer: }\only<3->{
+ [[file:figures3.png]]
+ #+beamer: }
+#+end_src
+
+There is the BEAMER_ACT property that can be used to apply overlay
+information on blocks but I don't think it's possible on individual
+figures.  Of course, you could put each figure in a separate block.  The
+following/attached will match what you had originally.
+
+#+begin_src org
+ #+options: H:1
+ * The slide
+ ** figure 1
+    :PROPERTIES:
+    :beamer_act: <1>
+    :END:
+    [[file:chromosome.png]]
+ ** figure 2
+    :PROPERTIES:
+    :beamer_act: <2>
+    :END:
+    [[file:diagram.png]]
+ ** figure 3
+    :PROPERTIES:
+    :beamer_act: <3->
+    :END:
+ [[file:equation1.png]]
+#+end_src
+
 * Options
 
 ** Option specification (BEAMER_opt)
@@ -593,6 +687,25 @@ that passed me by.
 - ~fragile~ option is added automatically
 
 - You might want to put ~allowframebreaks=0.9~ there
+
+
+
+  ╭────
+  │ > How can I put options that would apply to a frame (e.g.,
+  │ > \allowframebreaks)?
+  │
+  │ #+BIND: org-beamer-frame-default-options "[allowframebreaks]"
+  │
+  │ for allowing frame breaks for the whole document,
+  │
+  │ *** A very long slide
+  │     :PROPERTIES:
+  │     :BEAMER_env: [allowframebreaks]
+  │     :END:
+  │
+  │ for allowing on a frame by frame basis.
+  ╰────
+
 
 * Guidelines for creating presentations
 
