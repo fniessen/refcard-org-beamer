@@ -1,7 +1,7 @@
 #+TITLE:     Org Beamer quick reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2014-04-30 Wed 23:40>
+#+Time-stamp: <2014-05-02 Fri 11:59>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -133,6 +133,15 @@ back-end only.
 
 ** Create a handout
 
+#+begin_src org
+,#+LATEX_CLASS_OPTIONS: [handout]
+
+,#+LaTeX_HEADER: \usepackage{pgfpages}
+,#+LaTeX_HEADER: \mode<handout>{\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]}
+#+end_src
+
+** Print as article
+
 * Keywords specific to the Beamer back-end
 
 ** LaTeX class
@@ -141,6 +150,14 @@ back-end only.
 ,#+LATEX_CLASS: beamer
 ,#+LATEX_CLASS_OPTIONS:
 #+end_src
+
+Common options:
+
+- 8pt, 9pt, 10pt, *11pt*, 12pt, 14pt, 17pt, 20pt
+- draft: no graphics, footlines,...
+- handout: no overlays
+
+,#+LaTeX_CLASS_options: [bigger,allowframebreaks]
 
 ** LaTeX preamble
 
@@ -197,12 +214,12 @@ export menu:
      Export as LaTeX file (Beamer).
 
 - ~C-c C-e l P~ ::
-     Export as PDF file (Beamer).
+     *Export as PDF file* (Beamer).
 
 - ~C-c C-e l O~ ::
      Export as PDF file and open (Beamer).
 
-** Editing support
+** Structure editing support
 
 Type:
 
@@ -210,8 +227,8 @@ Type:
 M-x org-beamer-mode RET
 #+end_src
 
-to load the minor mode ~org-beamer-mode~ *easing the edition* of the document
-structure (through the key binding ~C-c C-b~, which offers fast selection of
+to load the minor mode ~org-beamer-mode~ *easing the edition* of the *document
+structure* (through the key binding ~C-c C-b~, which offers fast selection of
 a [[id:77f1b7a3-6e7d-4f2b-bd1f-02e6f02bba2f][Beamer environment]]).
 
 You can also turn it on with:
@@ -222,24 +239,22 @@ You can also turn it on with:
 
 in your document.
 
-* Environment tags
+* Column view
 
-** againframe
+For a column view of options and configurations for the individual frames
 
-** appendix
+#+begin_src org
+,#+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
+,#+COLUMNS: %20ITEM %13BEAMER_env(Env) %6BEAMER_envargs(Args) %4BEAMER_col(Col) %7BEAMER_extra(Extra)
+#+end_src
 
-You can add an appendix to your talk by using the ~\appendix~ command. You
-should put frames and perhaps whole subsections into the appendix that you do
-not intend to show during your presentation, but which might be useful to
-answer a question. The ~\appendix~ command essentially just starts a new part
-named ~\appendixname~. However, it also sets up certain hyperlinks. Like other
-parts, the appendix is kept separate from your actual talk.
+* Environments
 
-** column
+** Environment specification (~BEAMER_env~ property)
 
-** columns
+** Frames
 
-** frame
+*** frame
 
 - Headlines become frames when their level is equal to ~org-beamer-frame-level~
   (or ~H~ value in the ~OPTIONS~ line).
@@ -247,128 +262,130 @@ parts, the appendix is kept separate from your actual talk.
 - Though, if a headline in the current tree has a ~BEAMER_env~ property set to
   either ~frame~ or ~fullframe~, its level overrides the variable.
 
-** fullframe                                                      :B_fullframe:
+*** fullframe                                                     :B_fullframe:
+    :PROPERTIES:
+    :BEAMER_env: fullframe
+    :END:
+
+- A ~fullframe~ is a ~frame~ with an ignored title: ~frametitle~ is set to the empty
+  string.
+
+** Blocks
    :PROPERTIES:
-   :BEAMER_env: fullframe
+   :ID:       77f1b7a3-6e7d-4f2b-bd1f-02e6f02bba2f
    :END:
 
-- A ~fullframe~ is a ~frame~ with an ignored title
-  + ~frametitle~ is set to the empty string
+*** Environment specification (~BEAMER_env~ property)
 
-** ignoreheading                                              :B_ignoreheading:
-   :PROPERTIES:
-   :BEAMER_env: ignoreheading
-   :END:
+Use a different *block type for the current "block" environment* (default:
+~block~).
 
-- A headline with an ~ignoreheading~ environment will have its contents only
-  inserted in the output.
-  + Contents is not inserted in any ~frame~ environment...
-
-- This special value is useful to have data between frames, or to properly
-  close a ~column~ environment.
-
-** note
-
-** noteNH
-
-* Environments
-  :PROPERTIES:
-  :ID:       77f1b7a3-6e7d-4f2b-bd1f-02e6f02bba2f
-  :END:
-
-** Environment specification (BEAMER_env)
-
-Use a different environment in current block.
-
-** ~structureenv~ environment
+*** ~structureenv~ environment
 
 - For highlighting text.
 - To help the audience see the structure of your presentation.
 
-*** structureenv                                               :B_structureenv:
-    :PROPERTIES:
-    :BEAMER_env: structureenv
-    :END:
+**** structureenv                                              :B_structureenv:
+     :PROPERTIES:
+     :BEAMER_env: structureenv
+     :END:
 
 Paragraph Heading.
 
-*** End of structureenv                                       :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
+**** End of structureenv                                      :B_ignoreheading:
+     :PROPERTIES:
+     :BEAMER_env: ignoreheading
+     :END:
 
-** ~block~ environment
+*** ~block~ environment
 
-*** Answered Questions                                                :B_block:
-    :PROPERTIES:
-    :BEAMER_env: block
-    :END:
+**** Answered Questions                                               :B_block:
+     :PROPERTIES:
+     :BEAMER_env: block
+     :END:
 
 How many primes are there?
 
-*** Open Questions                                                    :B_block:
-    :PROPERTIES:
-    :BEAMER_env: block
-    :END:
+**** Open Questions                                                   :B_block:
+     :PROPERTIES:
+     :BEAMER_env: block
+     :END:
 
 Is every even number the sum of two primes?
 
-*** End of block                                              :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
+**** End of block                                             :B_ignoreheading:
+     :PROPERTIES:
+     :BEAMER_env: ignoreheading
+     :END:
 
-** ~alertblock~ environment                                      :B_alertblock:
-   :PROPERTIES:
-   :BEAMER_env: alertblock
-   :END:
+*** ~block~ environment = the default? Yes, but white lines NOT suppressed!
+
+**** Answered Questions
+
+How many primes are there?
+
+**** Open Questions
+
+Is every even number the sum of two primes?
+
+*** ~alertblock~ environment                                     :B_alertblock:
+    :PROPERTIES:
+    :BEAMER_env: alertblock
+    :END:
 
 - Inserts a block whose title is highlighted.
 - Behaves like the ~block~ environment otherwise.
 
-*** Wrong theorem
+**** Wrong theorem
 
 /1=2/.
 
-*** End of alertblock                                         :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
+**** End of alertblock                                        :B_ignoreheading:
+     :PROPERTIES:
+     :BEAMER_env: ignoreheading
+     :END:
 
-** ~exampleblock~ environment
+*** ~exampleblock~ environment
 
 - Inserts a block that is supposed to be an example.
 - Behaves like the ~block~ environment otherwise.
 
-*** Example                                                    :B_exampleblock:
-    :PROPERTIES:
-    :BEAMER_env: exampleblock
-    :END:
+**** Example                                                   :B_exampleblock:
+     :PROPERTIES:
+     :BEAMER_env: exampleblock
+     :END:
 
 The set /{1,2,3,5}/ has four elements.
 
-*** End of exampleblock                                       :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
+**** End of exampleblock                                      :B_ignoreheading:
+      :PROPERTIES:
+      :BEAMER_env: ignoreheading
+      :END:
 
-** ~theorem~ environment
+*** ~theorem~ environment
 
 - Inserts a theorem.
 
-***                                                                 :B_theorem:
-    :PROPERTIES:
-    :BEAMER_env: theorem
-    :END:
+**** This title won't be displayed                                  :B_theorem:
+     :PROPERTIES:
+     :BEAMER_env: theorem
+     :END:
 
 There is no largest prime number.
 
-*** End of theorem                                            :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
+Org mode + Beamer = productivity^{2}
 
-** ~theorem~ environment
+#+LaTeX: \hfill \(\qed\)
+
+**** End of theorem                                           :B_ignoreheading:
+     :PROPERTIES:
+     :BEAMER_env: ignoreheading
+     :END:
+
+If there is nothing after the block, no need to insert a heading for
+demarcating the end.
+
+*** ~theorem~ environment
 
 - Inserts a theorem.
 - Simpler solution
@@ -380,44 +397,44 @@ There is no largest prime number.
 There is no largest prime number.
 #+end_block
 
-** ~definition~ environment
+*** ~definition~ environment
 
 - Behaves like the ~theorem~ environment, except that the theorem style
   ~definition~ is used.
 - In this style, the body of a ~theorem~ is typeset in an upright font.
 
-*** definition                                                   :B_definition:
-    :PROPERTIES:
-    :BEAMER_env: definition
-    :END:
+**** definition                                                  :B_definition:
+     :PROPERTIES:
+     :BEAMER_env: definition
+     :END:
 
 Contents of definition
 
-*** End of definition                                         :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
+**** End of definition                                        :B_ignoreheading:
+     :PROPERTIES:
+     :BEAMER_env: ignoreheading
+     :END:
 
-** ~example~ environment
+*** ~example~ environment
 
 - Behaves like the theorem environment, except that the theorem style ~example~
   is used.
 - A side-effect of using this theorem style is that the contents is put in an
   ~exampleblock~ instead of a ~block~.
 
-*** Example                                                         :B_example:
-    :PROPERTIES:
-    :BEAMER_env: example
-    :END:
+**** Example                                                        :B_example:
+     :PROPERTIES:
+     :BEAMER_env: example
+     :END:
 
 Contents of example
 
-*** End of example                                            :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
+**** End of example                                           :B_ignoreheading:
+     :PROPERTIES:
+     :BEAMER_env: ignoreheading
+     :END:
 
-** ~example~ environment
+*** ~example~ environment
 
 - Simpler solution:
 
@@ -425,14 +442,14 @@ Contents of example
 Contents of example
 #+end_example
 
-** ~proof~ environment
+*** ~proof~ environment
 
-- Typesets a proof.
+- Typesets a proof. FINAL dot added...
 
-*** proof                                                             :B_proof:
-    :PROPERTIES:
-    :BEAMER_env: proof
-    :END:
+**** proof                                                            :B_proof:
+     :PROPERTIES:
+     :BEAMER_env: proof
+     :END:
 
 - <1-| alert@1> Suppose /p/ were the largest prime number.
 - <2-> Let /q/ be the product of the first /p/ numbers.
@@ -440,42 +457,43 @@ Contents of example
 - <1-> But /q + 1/ is greater than /1/, thus divisible by some prime number
   not in the first /p/ numbers.\qedhere
 
-*** End of proof                                              :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
+**** End of proof                                             :B_ignoreheading:
+     :PROPERTIES:
+     :BEAMER_env: ignoreheading
+     :END:
 
-** ~beamercolorbox~ environment
+*** ~beamercolorbox~ environment
 
 - Create colored boxes.
+- The ~beamer color~ is the headline text, for example ~title in head/foot~.
 
-*** beamercolorbox                                           :B_beamercolorbox:
-    :PROPERTIES:
-    :BEAMER_env: beamercolorbox
-    :END:
+**** beamercolorbox                                          :B_beamercolorbox:
+     :PROPERTIES:
+     :BEAMER_env: beamercolorbox
+     :END:
 
 Text
 
-*** End of beamercolorbox                                     :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
+**** End of beamercolorbox                                    :B_ignoreheading:
+     :PROPERTIES:
+     :BEAMER_env: ignoreheading
+     :END:
 
-** ~verse~ environment
+*** ~verse~ environment
 
-*** verse                                                             :B_verse:
-    :PROPERTIES:
-    :BEAMER_env: verse
-    :END:
+**** verse                                                            :B_verse:
+     :PROPERTIES:
+     :BEAMER_env: verse
+     :END:
 
 Contents of verse
 
-*** End of verse                                              :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
+**** End of verse                                             :B_ignoreheading:
+     :PROPERTIES:
+     :BEAMER_env: ignoreheading
+     :END:
 
-** ~verse~ environment
+*** ~verse~ environment
 
 - Simpler solution:
 
@@ -483,41 +501,41 @@ Contents of verse
 Contents of verse
 #+end_verse
 
-** ~quotation~ environment
+*** ~quotation~ environment
 
 - Use ~quote~ or ~quotation~ to typeset quoted text.
 - ~quotation~ has paragraph indentation.
 
-*** quotation                                                     :B_quotation:
-    :PROPERTIES:
-    :BEAMER_env: quotation
-    :END:
+**** quotation                                                    :B_quotation:
+     :PROPERTIES:
+     :BEAMER_env: quotation
+     :END:
 
 Contents of quotation
 
-*** End of quotation                                          :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
+**** End of quotation                                         :B_ignoreheading:
+     :PROPERTIES:
+     :BEAMER_env: ignoreheading
+     :END:
 
-** ~quote~ environment
+*** ~quote~ environment
 
 - Use ~quote~ or ~quotation~ to typeset quoted text.
 - ~quote~ hasn't paragraph indentation.
 
-*** quote                                                             :B_quote:
-    :PROPERTIES:
-    :BEAMER_env: quote
-    :END:
+**** quote                                                            :B_quote:
+     :PROPERTIES:
+     :BEAMER_env: quote
+     :END:
 
 Contents of quote
 
-*** End of quote                                              :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
+**** End of quote                                             :B_ignoreheading:
+     :PROPERTIES:
+     :BEAMER_env: ignoreheading
+     :END:
 
-** ~quote~ environment
+*** ~quote~ environment
 
 - Use ~quote~ or ~quotation~ to typeset quoted text.
 - ~quote~ hasn't paragraph indentation.
@@ -527,7 +545,7 @@ Contents of quote
 Contents of quote
 #+end_quote
 
-** Verbatim
+*** Verbatim
 
 #+begin_src c
 int main (void)
@@ -544,7 +562,7 @@ int main (void)
 }
 #+end_src
 
-** Extra environments
+*** Add extra environments
 
 For simple environments, use:
 
@@ -574,9 +592,55 @@ WDYT?
 - Additional arguments may be written into the environment's headline, and
   inserted into the LaTeX string using %r (raw headline text, no processing).
 
+** Special cases
+
+*** appendix
+
+You can add an appendix to your talk by using the ~\appendix~ command. You
+should put frames and perhaps whole subsections into the appendix that you do
+not intend to show during your presentation, but which might be useful to
+answer a question. The ~\appendix~ command essentially just starts a new part
+named ~\appendixname~. However, it also sets up certain hyperlinks. Like other
+parts, the appendix is kept separate from your actual talk.
+
+*** note
+
+#+begin_src org
+,#+LaTeX_HEADER: \setbeameroption{show notes}
+
+,*** Some note                                                          :B_note:
+    :PROPERTIES:
+    :BEAMER_env: note
+    :END:
+
+- Stress this first.
+- Then this.
+#+end_src
+
+*** noteNH
+
+Note with its title ignored.
+
+*** againframe
+
+A ~BEAMER_REF~ property is mandatory in order to refer to the frame being
+resumed, and contents are ignored.
+
+*** ignoreheading                                             :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
+
+- A headline with an ~ignoreheading~ environment will have its contents only
+  inserted in the output.
+  + Contents is not inserted in any ~frame~ environment...
+
+- This special value is useful to have data between frames, or to properly
+  close a ~column~ environment.
+
 * Overlays
 
-** Overlay specification (BEAMER_act)
+** Overlay specification (~BEAMER_act~ property)
 
 Set *overlay* specifications in current block to *create dynamic effects* (/multiple
 slides/, called /overlays/, for a single frame).
@@ -662,13 +726,12 @@ following/attached will match what you had originally.
 
 * Options
 
-** Option specification (BEAMER_opt)
+** Option specification (~BEAMER_opt~ property)
 
-Insert optional arguments for the current frame (or in current block???).
+Insert *optional arguments for the current ~frame~ environment* using the
+~BEAMER_OPT~ property.
 
-** Options for the current frame (~opt~)
-
-- Headlines support ~BEAMER_OPT~ properties.
+XXX or block?  See http://orgmode.org/manual/Beamer-export.html.
 
 I'd still like to see something more like a "for-dummies" explanation of
 passing options and arguments to LaTeX entities. I'm not saying the
@@ -688,26 +751,77 @@ that passed me by.
 
 - You might want to put ~allowframebreaks=0.9~ there
 
+* Columns
 
+** Column specification (~BEAMER_COL~ property)
 
-  ╭────
-  │ > How can I put options that would apply to a frame (e.g.,
-  │ > \allowframebreaks)?
-  │
-  │ #+BIND: org-beamer-frame-default-options "[allowframebreaks]"
-  │
-  │ for allowing frame breaks for the whole document,
-  │
-  │ *** A very long slide
-  │     :PROPERTIES:
-  │     :BEAMER_env: [allowframebreaks]
-  │     :END:
-  │
-  │ for allowing on a frame by frame basis.
-  ╰────
+** Splitting a frame into multiple columns
 
+To get multiple columns in a frame:
+
+1. Press ~C-c C-b |~ (~BMCOL~) on the headlines (inside the frame) which will
+   become columns
+
+   The headline of column environments won't be outputted in the PDF file.
+
+2. Specify the *column width* as a *percentage* of ~\textwidth~
+
+Instead of ~block~, those structural environments will become ~column~ (with the
+width parameter as a factor of ~\textwidth~).
+
+Consecutive ~column~ environments will be put in a ~columns~ environment.
+
+**** First column                                                       :BMCOL:
+     :PROPERTIES:
+     :BEAMER_col: 0.39
+     :END:
+
+Two \\ lines.
+
+**** Second column                                                      :BMCOL:
+     :PROPERTIES:
+     :BEAMER_col: 0.39
+     :END:
+
+One line (but aligned).
+
+*** Multiple columns
+
+**** First column                                                       :BMCOL:
+     :PROPERTIES:
+     :BEAMER_col: 0.39
+     :END:
+
+Two \\ lines.
+
+**** Second column                                                      :BMCOL:
+     :PROPERTIES:
+     :BEAMER_col: 0.39
+     :END:
+
+#+ATTR_LaTeX: :width 3cm
+[[file:images/square.png]]
+# mygraphic.jpg
+
+** ~column~
+
+** ~columns~
 
 * Guidelines for creating presentations
+
+ > How can I put options that would apply to a frame (e.g.,
+ > \allowframebreaks)?
+
+ #+BIND: org-beamer-frame-default-options "[allowframebreaks]"
+
+ for allowing frame breaks for the whole document,
+
+ *** A very long slide
+     :PROPERTIES:
+     :BEAMER_env: [allowframebreaks]
+     :END:
+
+ for allowing on a frame by frame basis.
 
 ** Frame structure (Explicit page breaking)
 
@@ -722,49 +836,33 @@ break up the frame into several frames, is set the option ~allowframebreaks~:
 #+end_src
 
 Until the Beamer [[https://bitbucket.org/rivanvx/beamer/issue/265/including-frame-label-option-stops ][issue #265]] is solved, we need to unset the framelabel as shown
-above (~label~=).
+above (~label=~).
 
-** Splitting a frame into multiple columns
+** Vertical alignment
 
-*** BMCOL
+You can specify /top/ *vertical alignment* globally by the ~t~ class option:
 
-TODO Specify 5cm
+#+begin_src org
+,#+LaTeX_CLASS_OPTIONS: [t]
+#+end_src
 
-BMCOL
+For single frames, you can use the same option locally:
 
-**** First column                                                       :BMCOL:
-    :PROPERTIES:
-    :BEAMER_col: 0.39
-    :END:
+#+begin_src org
+,* Vertically top-aligned
+  :PROPERTIES:
+  :BEAMER_opt: t
+  :END:
 
-Two \\ lines.
+...
+#+end_src
 
-**** Second column                                                      :BMCOL:
-    :PROPERTIES:
-    :BEAMER_col: 0.39
-    :END:
-
-One line (but aligned).
-
-*** Multiple columns
-
-**** First column                                                       :BMCOL:
-    :PROPERTIES:
-    :BEAMER_col: 0.39
-    :END:
-
-Two \\ lines.
-
-**** Second column                                                      :BMCOL:
-    :PROPERTIES:
-    :BEAMER_col: 0.39
-    :END:
-
-#+ATTR_LaTeX: :width 3cm
-[[file:images/square.png]]
-# mygraphic.jpg
+You can add that *special property* by editing the ~Opt~ column within the "column
+view" (first press ~C-c C-x C-c~) .
 
 *** Result of an evaluation on two columns
+
+Balancing text in columns.
 
 #+LaTeX_HEADER: \usepackage{multicol}
 
@@ -772,7 +870,28 @@ Two \\ lines.
 
 ... a fancy verbatim block ...
 
+- Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  tempor incididunt ut labore et dolore magna aliqua.
+
+- Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+  aliquip ex ea commodo consequat.
+
+- Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+  eu fugiat nulla pariatur.
+
+- Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+  deserunt mollit anim id est laborum.
+
 #+LaTeX: \end{multicols}
+
+*** Big title in the middle
+
+\begin{center}
+  \begin{minipage}[h]{.75\textwidth}
+    \centering
+    {\Large This is my BIG title!}
+  \end{minipage}
+\end{center}
 
 ** Using graphics
 
