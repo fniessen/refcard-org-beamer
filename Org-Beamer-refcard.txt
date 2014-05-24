@@ -1,7 +1,7 @@
 #+TITLE:     Org Beamer quick reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2014-05-02 Fri 11:59>
+#+Time-stamp: <2014-05-21 Wed 23:22>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -29,6 +29,12 @@
 # the style to all pictures.
 #+LaTeX: \tikzstyle{every picture}+=[remember picture]
 
+* Tasks
+
+** TODO Beamerarticle
+
+** TODO Citations
+
 * Overview
 
 ** Description
@@ -39,8 +45,8 @@ that describes how to *write presentations* using:
 - [[http://orgmode.org/][Org mode]] 8 and
 - the [[https://bitbucket.org/rivanvx/beamer/][LaTeX Beamer class]].
 
-That allows you to easily produce *high quality* *PDF files* which are going to
-look on /every/ computer exactly the way they looked on /your/ computer.
+Those *free* tools allow you to easily produce *high quality* *PDF files* which are
+going to look on /every/ computer exactly the way they looked on /your/ computer.
 
 ** Objectives
 
@@ -64,10 +70,19 @@ A title page is automatically inserted into the first frame.
 
 By default, it will arrange the following elements on the title page:
 - the document *title* (file name, if not specified),
-- the *author(s)*'s names (~user-full-name~, if not specified),
+- the *author(s)*'s names (~user-full-name~, if not specified), and
+- a *date* (~\today~, if nothing specified).
+
+#+begin_src org
+,#+TITLE:     Document title
+,#+AUTHOR:    Author's name
+,#+DATE:      Date
+#+end_src
+
+Other elements:
+- the document subtitle,
 - their affiliation,
 - a title graphic, and
-- a *date* (~\today~, if nothing specified).
 
 The following commands are useful for this template:
 · \insertinstitute inserts the institute.
@@ -77,11 +92,9 @@ The following commands are useful for this template:
 Email?
 
 #+begin_src org
-,#+TITLE:     Document title
-,#+AUTHOR:    Author's name
-,#+DATE:      Date
-
-,#+BEAMER_HEADER_EXTRA:  \institute[short name]{My awesome institute}
+,#+LaTeX_HEADER:       \institute[short name]{My institute 1}
+,#+LaTeX_HEADER_EXTRA: \institute[short name]{My institute 2}
+,#+BEAMER_HEADER:      \institute[short name]{My institute 3}
 #+end_src
 
 The inner theme dictates how the title page is rendered.
@@ -142,6 +155,8 @@ back-end only.
 
 ** Print as article
 
+** Present a bibliography
+
 * Keywords specific to the Beamer back-end
 
 ** LaTeX class
@@ -169,6 +184,14 @@ Append any line of code in the LaTeX preamble with:
 
 It will go in the ~[EXTRA]~ placeholder of the header associated to the ~beamer~
 LaTeX class (see ~org-latex-classes~).
+
+Other possibilities:
+
+#+begin_src org
+,#+LaTeX_HEADER:       \institute[short name]{My institute 1}
+,#+LaTeX_HEADER_EXTRA: \institute[short name]{My institute 2}
+,#+BEAMER_HEADER:      \institute[short name]{My institute 3}
+#+end_src
 
 ** Affiliated keywords
 
@@ -250,7 +273,9 @@ For a column view of options and configurations for the individual frames
 
 * Environments
 
-** Environment specification (~BEAMER_env~ property)
+** Environment specification (=BEAMER_env= property)
+
+- This becomes visible through the =B_frame= tag (visual aid only).
 
 ** Frames
 
@@ -260,15 +285,19 @@ For a column view of options and configurations for the individual frames
   (or ~H~ value in the ~OPTIONS~ line).
 
 - Though, if a headline in the current tree has a ~BEAMER_env~ property set to
-  either ~frame~ or ~fullframe~, its level overrides the variable.
+  either ~frame~ or ~fullframe~, its level overrides the variable, giving you some
+  flexibility in deciding *what is* and what isn't *a frame*.
+
+  This works in both "directions": to *add or* to *remove sectioning levels*
+  above the current headline (which becomes a frame)!
 
 *** fullframe                                                     :B_fullframe:
     :PROPERTIES:
     :BEAMER_env: fullframe
     :END:
 
-- A ~fullframe~ is a ~frame~ with an ignored title: ~frametitle~ is set to the empty
-  string.
+- A ~fullframe~ is a ~frame~ with an ignored title (~frametitle~ is set to the empty
+  string).
 
 ** Blocks
    :PROPERTIES:
@@ -397,6 +426,10 @@ demarcating the end.
 There is no largest prime number.
 #+end_block
 
+*** ~corollary~ environment
+
+*** ~lemma~ environment
+
 *** ~definition~ environment
 
 - Behaves like the ~theorem~ environment, except that the theorem style
@@ -414,6 +447,10 @@ Contents of definition
      :PROPERTIES:
      :BEAMER_env: ignoreheading
      :END:
+
+*** ~definitions~ environment
+
+*** ~fact~ environment
 
 *** ~example~ environment
 
@@ -441,6 +478,8 @@ Contents of example
 #+begin_example
 Contents of example
 #+end_example
+
+*** ~examples~ environment
 
 *** ~proof~ environment
 
@@ -545,6 +584,15 @@ Contents of quote
 Contents of quote
 #+end_quote
 
+#+begin_quote
+"Getting ragged-left text in a Beamer presentation exported from Org does not
+seem as easy as I expected."
+#+end_quote
+
+#+LaTeX: \begin{raggedleft}
+From "Loris' Adventures in Orgland"
+#+LaTeX: \par\end{raddedleft}
+
 *** Verbatim
 
 #+begin_src c
@@ -561,6 +609,15 @@ int main (void)
   return 0;
 }
 #+end_src
+
+- This code block is properly indented in both Org and in PDF
+
+  #+begin_src java
+  if (test)
+  {
+      doit
+  }
+  #+end_src
 
 *** Add extra environments
 
@@ -596,12 +653,21 @@ WDYT?
 
 *** appendix
 
-You can add an appendix to your talk by using the ~\appendix~ command. You
-should put frames and perhaps whole subsections into the appendix that you do
-not intend to show during your presentation, but which might be useful to
-answer a question. The ~\appendix~ command essentially just starts a new part
-named ~\appendixname~. However, it also sets up certain hyperlinks. Like other
-parts, the appendix is kept separate from your actual talk.
+You can add an appendix (frames that you do not intend to show during your
+talk, but which might be useful to answer a question) by inserting such a *level
+1 headline* after the last regular slide of your actual presentation:
+
+#+begin_src org
+,* Appendix material follows                                        :B_appendix:
+  :PROPERTIES:
+  :BEAMER_env: appendix
+  :END:
+
+# Backup slides
+#+end_src
+
+Ignoring page number in backup slides can be achieved by setting the option
+~noframenumbering~ on all "backup" slides.
 
 *** note
 
@@ -623,34 +689,70 @@ Note with its title ignored.
 
 *** againframe
 
-A ~BEAMER_REF~ property is mandatory in order to refer to the frame being
-resumed, and contents are ignored.
+You can "continue" frames that you previously started somewhere (but where
+certain details have been suppressed) at a much later point (for example only
+in the appendix) to show additional slides there.
+
+For convenience (since those are mandatory), when asking for an ~againframe~, Org
+Beamer always asks for:
+
+- ~BEAMER_ref~ property to *refer*, using link syntax, to (the label of) the *frame
+  being resumed*, and
+
+- ~BEAMER_act~ property to set the *overlay specification*.
+
+An advantage is that you don't need to know the label of the frame being
+resumed: ~:BEAMER_ref: *My frame title~.
+
+#+begin_src latex
+\againframe<BEAMER_act>{BEAMER_ref's name}
+#+end_src
+
+*Contents are ignored*.
+
+XXX How to label a frame?  Via ~:BEAMER_opt: label=id~ or via other means?
 
 *** ignoreheading                                             :B_ignoreheading:
     :PROPERTIES:
     :BEAMER_env: ignoreheading
     :END:
 
-- A headline with an ~ignoreheading~ environment will have its contents only
+- A headline with an ~ignoreheading~ environment will have only its contents
   inserted in the output.
   + Contents is not inserted in any ~frame~ environment...
 
 - This special value is useful to have data between frames, or to properly
-  close a ~column~ environment.
+  *close a ~column~ environment*.
 
 * Overlays
+
+overprint
+
+> What may not be easy or possible is to use the \only directive, which is
+> what I used in my previous response to you.
+
+You can always use the only environment.
+<https://github.com/suvayu/.emacs.d/blob/master/org-mode-config.el#L215>
+
+That said, I think overlays with only is not as smooth as with simple
+overlay specifications to regular environments or macros like
+\includegraphics, \item, etc.
+
+As for an :overlay specification, I believe it is already supported but
+only for lists (ox-beamer.el:725).  I would love to have that for images
+too!
 
 ** Overlay specification (~BEAMER_act~ property)
 
 Set *overlay* specifications in current block to *create dynamic effects* (/multiple
-slides/, called /overlays/, for a single frame).
+slides/, called /overlays/, for a single frame) = old ~BEAMER_envargs~ property.
 
-Headlines support the ~BEAMER_ACT~ property:
+Headlines support the ~BEAMER_act~ property:
 
 #+begin_src org
 ,* Headline
   :PROPERTIES:
-  :BEAMER_ACT: [+-]
+  :BEAMER_act: [+-]
   :END:
 
   # Diff with [<+->]?
@@ -659,8 +761,12 @@ Headlines support the ~BEAMER_ACT~ property:
   - Item
 #+end_src
 
-It is translated as an overlay/action specification, or a default overlay
-specification when enclosed within square brackets.
+It is translated as:
+
+- an overlay/action specification, or
+- a default overlay specification when enclosed within square brackets.
+
+XXX <> seem to be added when they aren't present. Copied as is if present.
 
 Dynamic lists are possible on a case by case basis :
 
@@ -674,6 +780,16 @@ Dynamic lists are possible on a case by case basis :
 - @@beamer:<1->@@ Item 1
 - @@beamer:<2->@@ Item 2
 #+end_src
+
+** The Queen's old armchair                                           :B_block:
+  :PROPERTIES:
+  :BEAMER_env: block
+  :BEAMER_envargs: <1->
+  :END:
+
+- Princess Anne
+- Prince Charles
+- corgis
 
 ** Question on ML
 
@@ -699,7 +815,7 @@ The following works for me:
  #+beamer: }
 #+end_src
 
-There is the BEAMER_ACT property that can be used to apply overlay
+There is the ~BEAMER_act~ property that can be used to apply overlay
 information on blocks but I don't think it's possible on individual
 figures.  Of course, you could put each figure in a separate block.  The
 following/attached will match what you had originally.
@@ -766,6 +882,9 @@ To get multiple columns in a frame:
 
 2. Specify the *column width* as a *percentage* of ~\textwidth~
 
+   *!CAUTION!*  *No absolute width*, such as 4cm, which wouldn't be correctly
+   translated...
+
 Instead of ~block~, those structural environments will become ~column~ (with the
 width parameter as a factor of ~\textwidth~).
 
@@ -812,7 +931,9 @@ Two \\ lines.
  > How can I put options that would apply to a frame (e.g.,
  > \allowframebreaks)?
 
- #+BIND: org-beamer-frame-default-options "[allowframebreaks]"
+ #+begin_src org
+ ,#+BI--ND: org-beamer-frame-default-options "allowframebreaks"
+ #+end_src
 
  for allowing frame breaks for the whole document,
 
@@ -895,6 +1016,8 @@ Balancing text in columns.
 
 ** Using graphics
 
+How to center pictures horizontally?
+
 *** Figures
 
 #+ATTR_LaTeX: :width 3cm
@@ -928,38 +1051,40 @@ Skip proof
 
 ** For further reading
 
-# Mettre ox-beamer, beamer.pdf
+# Mettre ox-beamer, beamer.pdf, org manual, etc. comme références
 
-\beamertemplatebookbibitems
-
+#+begin_latex
 \begin{thebibliography}{10}
 
-\bibitem{sal:b:formal-languages}
-  A.~Salomaa.
-  \newblock {\em Formal Languages}.
-  \newblock Academic Press, 1973.
-  \pause
+  \beamertemplatebookbibitems
+  \bibitem{sal:b:formal-languages}
+    A.~Salomaa.
+    \newblock {\em Formal Languages}.
+    \newblock Academic Press, 1973.
+    \pause
 
-\beamertemplatearticlebibitems
-\bibitem{dij:j:smoothsort}
-  E.~Dijkstra.
-  \newblock Smoothsort, an alternative for sorting in situ.
-  \newblock {\em Science of Computer Programming}, 1(3):223--233,
-  1982.
-  \pause
+  \beamertemplatearticlebibitems
+  \bibitem{dij:j:smoothsort}
+    E.~Dijkstra.
+    \newblock Smoothsort, an alternative for sorting in situ.
+    \newblock {\em Science of Computer Programming}, 1(3):223--233,
+    1982.
+    \pause
 
-\bibitem{FeldmanO1973}
-  E.~Feldman and J.~Owings, Jr.
-  \newblock A class of universal linear bounded automata.
-  \newblock {\em Information Sciences}, 6:187--190, 1973.
-  \pause
+  \bibitem{FeldmanO1973}
+    E.~Feldman and J.~Owings, Jr.
+    \newblock A class of universal linear bounded automata.
+    \newblock {\em Information Sciences}, 6:187--190, 1973.
+    \pause
 
-\bibitem{JancarMPV1995}
-  P.~Jan{\v c}ar, F.~Mr{\'a}z, M.~Pl{\'a}tek, and J.~Vogel.
-  \newblock Restarting automata.
-  \newblock {\em FCT Conference 1995}, LNCS 985, pages
-  282--292. 1995.
+  \bibitem{JancarMPV1995}
+    P.~Jan{\v c}ar, F.~Mr{\'a}z, M.~Pl{\'a}tek, and J.~Vogel.
+    \newblock Restarting automata.
+    \newblock {\em FCT Conference 1995}, LNCS 985, pages
+    282--292. 1995.
+
 \end{thebibliography}
+#+end_latex
 
 * Appendix NAME XXX                                                :B_appendix:
   :PROPERTIES:
