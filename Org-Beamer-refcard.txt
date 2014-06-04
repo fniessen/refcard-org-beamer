@@ -1,7 +1,7 @@
 #+TITLE:     Org Beamer quick reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2014-05-21 Wed 23:22>
+#+Time-stamp: <2014-06-05 Thu 00:14>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -69,9 +69,9 @@ installed on your system, install [[http://www.tug.org/texlive/][TeX Live]] (for
 A title page is automatically inserted into the first frame.
 
 By default, it will arrange the following elements on the title page:
-- the document *title* (file name, if not specified),
-- the *author(s)*'s names (~user-full-name~, if not specified), and
-- a *date* (~\today~, if nothing specified).
+- the document *title* (file name, if none specified),
+- the *author(s)*'s names (~user-full-name~, if none specified), and
+- a *date* (~\today~, if none specified).
 
 #+begin_src org
 ,#+TITLE:     Document title
@@ -79,17 +79,27 @@ By default, it will arrange the following elements on the title page:
 ,#+DATE:      Date
 #+end_src
 
+The author's email can be included with:
+
+#+begin_src org
+,#+AUTHOR:    \href{mailto:email@example.com}{Author}
+,#+AUTHOR:    \texorpdfstring{Author\newline\url{email@example.com}}{Author} % DOES NOT WORK XXX -> BEAMER_HEADER???
+,#+BEAMER_HEADER: \author{\texorpdfstring{Author\newline\url{email@example.com}}{Author}} % BAD ORDER XXX
+#+end_src
+
 Other elements:
-- the document subtitle,
-- their affiliation,
-- a title graphic, and
+- the document *subtitle*,
+- their affiliation (*institute*), and
+- a *title graphic*
+can be included with the following commands:
 
-The following commands are useful for this template:
-· \insertinstitute inserts the institute.
-· \insertsubtitle inserts a version of the document title that is useful for the title page.
-· \inserttitlegraphic inserts the title graphic into a template.
+#+BEGIN_SRC org
+,#+BEAMER_HEADER: \subtitle{Document subtitle}
+,#+BEAMER_HEADER: \institute[INST]{Institute's name\\\url{http://www.institute.edu}}
+,#+BEAMER_HEADER: \titlegraphic{\includegraphics[height=1.5cm]{InstLogo}}
+#+END_SRC
 
-Email?
+The [[id:f6d1f139-2460-4844-93f1-c71277c810e0][inner theme]] dictates how the title page is rendered.
 
 #+begin_src org
 ,#+LaTeX_HEADER:       \institute[short name]{My institute 1}
@@ -97,7 +107,7 @@ Email?
 ,#+BEAMER_HEADER:      \institute[short name]{My institute 3}
 #+end_src
 
-The inner theme dictates how the title page is rendered.
+#+BEAMER_HEADER: \logo{\includegraphics[height=.9cm]{InstLogo}}
 
 ** Global structure
 
@@ -203,6 +213,9 @@ The Beamer back-end reads both
 affiliated keywords.
 
 ** Appearance of the presentation
+   :PROPERTIES:
+   :ID:       f6d1f139-2460-4844-93f1-c71277c810e0
+   :END:
 
 #+begin_src org
 ,#+BEAMER_THEME: Boadilla
