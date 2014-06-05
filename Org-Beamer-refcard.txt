@@ -1,7 +1,7 @@
 #+TITLE:     Org Beamer quick reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2014-06-05 Thu 00:14>
+#+Time-stamp: <2014-06-05 Thu 23:45>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -59,8 +59,26 @@ order to *create Beamer presentations*.
 
 ** Requirements
 
-A working LaTeX installation is required for exporting to PDF. If it is not yet
-installed on your system, install [[http://www.tug.org/texlive/][TeX Live]] (for example).
+- A working LaTeX installation is required for exporting to PDF. If it is not
+  yet installed on your system, install [[http://www.tug.org/texlive/][TeX Live]] (for example).
+
+- You must define a ~beamer~ class in ~org-latex-export-classes~:
+
+  #+BEGIN_SRC emacs-lisp
+  (require 'ox-latex)
+
+  ;; update the list of LaTeX classes and associated header (encoding, etc.) and
+  ;; structure
+  (add-to-list 'org-latex-classes
+               `("beamer"
+                 ,(concat "\\documentclass[presentation]{beamer}\n"
+                          "[DEFAULT-PACKAGES]"
+                          "[PACKAGES]"
+                          "[EXTRA]\n")
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+  #+END_SRC
 
 * Creating presentations
 
@@ -93,21 +111,19 @@ Other elements:
 - a *title graphic*
 can be included with the following commands:
 
-#+BEGIN_SRC org
+#+BEGIN_SRC org :eval no
 ,#+BEAMER_HEADER: \subtitle{Document subtitle}
 ,#+BEAMER_HEADER: \institute[INST]{Institute's name\\\url{http://www.institute.edu}}
 ,#+BEAMER_HEADER: \titlegraphic{\includegraphics[height=1.5cm]{InstLogo}}
 #+END_SRC
 
+XXX Why do I have to use :eval no (in Org blocks)?
+
 The [[id:f6d1f139-2460-4844-93f1-c71277c810e0][inner theme]] dictates how the title page is rendered.
 
-#+begin_src org
-,#+LaTeX_HEADER:       \institute[short name]{My institute 1}
-,#+LaTeX_HEADER_EXTRA: \institute[short name]{My institute 2}
-,#+BEAMER_HEADER:      \institute[short name]{My institute 3}
-#+end_src
-
-#+BEAMER_HEADER: \logo{\includegraphics[height=.9cm]{InstLogo}}
+#+BEGIN_SRC org :eval no
+,#+BEAMER_HEADER: \logo{\includegraphics[height=.9cm]{InstLogo}}
+#+END_SRC
 
 ** Global structure
 
@@ -186,22 +202,16 @@ Common options:
 
 ** LaTeX preamble
 
-Append any line of code in the LaTeX preamble with:
+Append any line of code in the *LaTeX preamble* with:
 
 #+begin_src org
-,#+BEAMER_HEADER: \usepackage{...}
+,#+LaTeX_HEADER:       \usepackage{...}
+,#+LaTeX_HEADER_EXTRA: \usepackage{...}
+,#+BEAMER_HEADER:      \institute[short name]{Institute's name}
 #+end_src
 
-It will go in the ~[EXTRA]~ placeholder of the header associated to the ~beamer~
-LaTeX class (see ~org-latex-classes~).
-
-Other possibilities:
-
-#+begin_src org
-,#+LaTeX_HEADER:       \institute[short name]{My institute 1}
-,#+LaTeX_HEADER_EXTRA: \institute[short name]{My institute 2}
-,#+BEAMER_HEADER:      \institute[short name]{My institute 3}
-#+end_src
+It will go (in that order) in the ~[EXTRA]~ placeholder of the header associated
+to the ~beamer~ LaTeX class (see ~org-latex-classes~).
 
 ** Affiliated keywords
 
@@ -286,7 +296,9 @@ For a column view of options and configurations for the individual frames
 
 * Environments
 
-** Environment specification (=BEAMER_env= property)
+** Environment specification (BEAMER_env property)
+
+XXX Put = around BEAMER_env in title...
 
 - This becomes visible through the =B_frame= tag (visual aid only).
 
@@ -317,7 +329,9 @@ For a column view of options and configurations for the individual frames
    :ID:       77f1b7a3-6e7d-4f2b-bd1f-02e6f02bba2f
    :END:
 
-*** Environment specification (~BEAMER_env~ property)
+*** Environment specification (BEAMER_env property)
+
+XXX Use ~ or = in title
 
 Use a different *block type for the current "block" environment* (default:
 ~block~).
@@ -370,7 +384,7 @@ How many primes are there?
 
 Is every even number the sum of two primes?
 
-*** ~alertblock~ environment                                     :B_alertblock:
+*** ~alertblock~ environment                                       :B_alertblock:
     :PROPERTIES:
     :BEAMER_env: alertblock
     :END:
@@ -602,9 +616,10 @@ Contents of quote
 seem as easy as I expected."
 #+end_quote
 
-#+LaTeX: \begin{raggedleft}
-From "Loris' Adventures in Orgland"
-#+LaTeX: \par\end{raddedleft}
+XXX
+# #+LaTeX: \begin{raggedleft}
+# From "Loris' Adventures in Orgland"
+# #+LaTeX: \par\end{raddedleft}
 
 *** Verbatim
 
@@ -749,7 +764,7 @@ You can always use the only environment.
 
 That said, I think overlays with only is not as smooth as with simple
 overlay specifications to regular environments or macros like
-\includegraphics, \item, etc.
+~\includegraphics~, ~\item~, etc.
 
 As for an :overlay specification, I believe it is already supported but
 only for lists (ox-beamer.el:725).  I would love to have that for images
@@ -942,9 +957,9 @@ Two \\ lines.
 * Guidelines for creating presentations
 
  > How can I put options that would apply to a frame (e.g.,
- > \allowframebreaks)?
+ > ~allowframebreaks~)?
 
- #+begin_src org
+ #+begin_src org :eval no
  ,#+BI--ND: org-beamer-frame-default-options "allowframebreaks"
  #+end_src
 
@@ -1051,6 +1066,24 @@ http://tex.stackexchange.com/questions/64075/beamers-visible-inside-a-tikz-node
   \node[align=center] {I'm {\visible<+->{very}}\\happy.};
 \end{tikzpicture}
 #+end_latex
+
+** Absolute positioning
+
+You can also place the logo on an absolute position of the titlepage using ~tikz~
+or ~textpos~.
+
+Here an example using ~tikz~:
+
+#+BEGIN_SRC latex
+\begin{frame}
+   \tikz [remember picture,overlay]
+    \node at
+        ([yshift=3cm]current page.south)
+        %or: (current page.center)
+        {\includegraphics[width=\textwidth,height=.5\textheight]{someimage}};
+   \titlepage
+\end{frame}
+#+END_SRC
 
 * Power
 
