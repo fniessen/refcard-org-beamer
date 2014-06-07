@@ -1,7 +1,7 @@
 #+TITLE:     Org Beamer quick reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2014-06-07 Sat 22:11>
+#+Time-stamp: <2014-06-07 Sat 23:06>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -17,11 +17,13 @@
 #+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
 #+PROPERTY: BEAMER_col_ALL 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0.0 :ETC
 
-#+BEAMER_THEME: Boadilla
-#+BEAMER_COLOR_THEME: default
+#+BEAMER_THEME: AnnArbor
+#+BEAMER_COLOR_THEME: crane
 
 #+INCLUDE: "~/src/stage-latex-dunkerque-2013/style/listings.org"
 
+#+LaTeX_HEADER: \definecolor{mylinkcolor}{HTML}{006DAF}
+#+LaTeX_HEADER: \hypersetup{colorlinks=true, linkcolor=mylinkcolor, urlcolor=mylinkcolor}
 
 #+LaTeX_HEADER: \usepackage{tikz}
 # For every picture that defines or uses external nodes, you'll have to
@@ -29,7 +31,7 @@
 # the style to all pictures.
 #+LaTeX: \tikzstyle{every picture}+=[remember picture]
 
-* Tasks
+* Tasks                                                              :noexport:
 
 ** TODO Beamerarticle
 
@@ -65,19 +67,19 @@ LaTeX* in order to *create Beamer presentations*.
 - You must define a ~beamer~ class in ~org-latex-export-classes~:
 
   #+begin_src emacs-lisp
-  (require 'ox-latex)
+  (eval-after-load "ox-latex"
 
-  ;; update the list of LaTeX classes and associated header (encoding, etc.) and
-  ;; structure
-  (add-to-list 'org-latex-classes
-               `("beamer"
-                 ,(concat "\\documentclass[presentation]{beamer}\n"
-                          "[DEFAULT-PACKAGES]"
-                          "[PACKAGES]"
-                          "[EXTRA]\n")
-                 ("\\section{%s}" . "\\section*{%s}")
-                 ("\\subsection{%s}" . "\\subsection*{%s}")
-                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+    ;; update the list of LaTeX classes and associated header (encoding, etc.)
+    ;; and structure
+    '(add-to-list 'org-latex-classes
+                  `("beamer"
+                    ,(concat "\\documentclass[presentation]{beamer}\n"
+                             "[DEFAULT-PACKAGES]"
+                             "[PACKAGES]"
+                             "[EXTRA]\n")
+                    ("\\section{%s}" . "\\section*{%s}")
+                    ("\\subsection{%s}" . "\\subsection*{%s}")
+                    ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
   #+end_src
 
 * Creating presentations
@@ -87,15 +89,30 @@ LaTeX* in order to *create Beamer presentations*.
 A title page is automatically inserted into the first frame.
 
 By default, it will arrange the following elements on the title page:
-- the document *title* (file name, if none specified),
-- the *author(s)*'s names (~user-full-name~, if none specified), and
-- a *date* (~\today~, if none specified).
 
-#+begin_src org
-,#+TITLE:     Document title
-,#+AUTHOR:    Author's name
-,#+DATE:      Date
-#+end_src
+- the document *title*
+
+  #+begin_src org
+  ,#+TITLE: Document title
+  #+end_src
+
+  (file name, if none specified)
+
+- the *author(s)*'s name
+
+  #+begin_src org
+  ,#+AUTHOR: Author
+  #+end_src
+
+  (~user-full-name~, if none specified)
+
+- a *date*
+
+  #+begin_src org
+  ,#+DATE: 2014-06-11
+  #+end_src
+
+  (~\today~, if none specified)
 
 The author's email can be included with:
 
@@ -134,26 +151,39 @@ By default,
 - Headings at the *first* outline level will become *titles* of the different
   slides (called *frames* in Beamer),
 
-- Deeper levels will be used as structural environments, and
+- *Deeper* levels will be used as *structural environments*, and
 
-- The "Contents" frame is blank.
+- The *table of contents* frame is blank.
 
 ** Creating a table of contents
 
-If you set the ~H~ option from the ~#+OPTIONS:~ keyword such as:
+- If you set the ~H~ option from the ~#+OPTIONS:~ keyword such as:
 
-#+begin_src org
-,#+OPTIONS: H:2
-#+end_src
+  #+begin_src org
+  ,#+OPTIONS: H:2
+  #+end_src
 
-then:
+  then:
 
-- Top-level headlines become *sections* listed in the *table of contents* (created
-  by default), and
+  + *First*-level headlines become *sections* listed in the *table of contents* (created
+    by default), and
 
-- *Second*-level headlines become the *frames*.
+  + *Second*-level headlines become the *frames*.
 
-In many themes, sections and subsections (when ~H:3~) appear in the sidebar or
+- If you set the ~H~ option such as:
+
+  #+begin_src org
+  ,#+OPTIONS: H:3
+  #+end_src
+
+  then:
+
+  + *First*- and *second*-level headlines become *sections* and *subsections* listed in
+    the *table of contents*, and
+
+  + *Third*-level headlines become the *frames*.
+
+In many themes, sections (and subsections, when ~H:3~) appear in the sidebar or
 headline.
 
 ** Creating a simple frame
