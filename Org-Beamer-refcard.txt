@@ -1,7 +1,7 @@
 #+TITLE:     Org Beamer quick reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2014-06-05 Thu 23:45>
+#+Time-stamp: <2014-06-07 Sat 22:11>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -54,8 +54,8 @@ As they are created *like any other Org mode document*, preparing presentations
 with Org mode is very different from preparing them with WYSWYG programs such
 as PowerPoint, Impress or Keynote.
 
-The obvious advantage of this approach is that *you don't have to know LaTeX* in
-order to *create Beamer presentations*.
+The obvious advantage of the Org Beamer approach is that *you don't have to know
+LaTeX* in order to *create Beamer presentations*.
 
 ** Requirements
 
@@ -64,7 +64,7 @@ order to *create Beamer presentations*.
 
 - You must define a ~beamer~ class in ~org-latex-export-classes~:
 
-  #+BEGIN_SRC emacs-lisp
+  #+begin_src emacs-lisp
   (require 'ox-latex)
 
   ;; update the list of LaTeX classes and associated header (encoding, etc.) and
@@ -78,7 +78,7 @@ order to *create Beamer presentations*.
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
-  #+END_SRC
+  #+end_src
 
 * Creating presentations
 
@@ -697,7 +697,7 @@ talk, but which might be useful to answer a question) by inserting such a *level
 Ignoring page number in backup slides can be achieved by setting the option
 ~noframenumbering~ on all "backup" slides.
 
-*** note
+*** COMMENT note
 
 #+begin_src org
 ,#+LaTeX_HEADER: \setbeameroption{show notes}
@@ -770,7 +770,7 @@ As for an :overlay specification, I believe it is already supported but
 only for lists (ox-beamer.el:725).  I would love to have that for images
 too!
 
-** Overlay specification (~BEAMER_act~ property)
+** Overlay specification (BEAMER_act property)
 
 Set *overlay* specifications in current block to *create dynamic effects* (/multiple
 slides/, called /overlays/, for a single frame) = old ~BEAMER_envargs~ property.
@@ -870,7 +870,7 @@ following/attached will match what you had originally.
 
 * Options
 
-** Option specification (~BEAMER_opt~ property)
+** Option specification (BEAMER_opt property)
 
 Insert *optional arguments for the current ~frame~ environment* using the
 ~BEAMER_OPT~ property.
@@ -897,7 +897,7 @@ that passed me by.
 
 * Columns
 
-** Column specification (~BEAMER_COL~ property)
+** Column specification (BEAMER_COL property)
 
 ** Splitting a frame into multiple columns
 
@@ -1075,15 +1075,17 @@ or ~textpos~.
 Here an example using ~tikz~:
 
 #+BEGIN_SRC latex
-\begin{frame}
+\XXXbegin{frame}
    \tikz [remember picture,overlay]
     \node at
         ([yshift=3cm]current page.south)
         %or: (current page.center)
         {\includegraphics[width=\textwidth,height=.5\textheight]{someimage}};
    \titlepage
-\end{frame}
+\XXXend{frame}
 #+END_SRC
+
+** More on Org: Exporting a subtree
 
 * Power
 
