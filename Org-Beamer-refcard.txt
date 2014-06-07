@@ -1,7 +1,7 @@
 #+TITLE:     Org Beamer quick reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2014-06-07 Sat 23:06>
+#+Time-stamp: <2014-06-08 Sun 01:35>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -36,6 +36,15 @@
 ** TODO Beamerarticle
 
 ** TODO Citations
+
+** TODO Improve handouts
+
+Add:
+- additional text (speaker notes) for visual slides,
+- more information and
+- references.
+
+http://www.speakingaboutpresenting.com/delivery/presentation-handouts/
 
 * Overview
 
@@ -202,12 +211,65 @@ back-end only.
 
 ** Create a handout
 
+You can print your presentation in the form of handouts.  When there are
+animations, it will just print the last "slide" of each frame.
+
 #+begin_src org
 ,#+LATEX_CLASS_OPTIONS: [handout]
 
 ,#+LaTeX_HEADER: \usepackage{pgfpages}
-,#+LaTeX_HEADER: \mode<handout>{\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]}
+,#+LaTeX_HEADER: \mode<handout>
+,#+LaTeX_HEADER: {
+,#+LaTeX_HEADER:   ... see below ...
+,#+LaTeX_HEADER: }
 #+end_src
+
+- with *one frame* on a page
+
+  #+begin_src org
+  ,#+LaTeX_HEADER:   \pgfpagesuselayout{resize to}[a4paper,landscape]
+  #+end_src
+
+- with *two frames* on a page
+
+  #+begin_src org
+  ,#+LaTeX_HEADER:   \pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+  #+end_src
+
+- with *four frames* on a page
+
+  #+begin_src org
+  ,#+LaTeX_HEADER:   \pgfpagesuselayout{4 on 1}[a4paper,border shrink=5mm,%
+  ,#+LaTeX_HEADER:                              landscape]
+  #+end_src
+
+** Draw a border around the frames in the handout
+
+Add a rectangle around each frame:
+
+#+begin_src org
+,#+LaTeX_HEADER: \setbeamertemplate{background canvas}{
+,#+LaTeX_HEADER:   \tikz \draw (current page.north west) rectangle
+,#+LaTeX_HEADER:               (current page.south east);
+,#+LaTeX_HEADER: }
+#+end_src
+
+** Show speaker notes
+
+Show reminders about what to say during each part of your presentation.
+
+Your laptop monitor and your projector should have the same resolution.
+
+http://freakazoid.teamblind.de/2011/03/30/latex-presentations-with-notes-on-windows-7/
+
+** Print handout with speaker notes
+
+XXX
+
+#+BEGIN_SRC org :eval no
+,#+LaTeX_HEADER: \usepackage{handoutWithNotes}
+,#+LaTeX_HEADER: \pgfpagesuselayout{3 on 1 with notes}[a4paper,border shrink=5mm]
+#+END_SRC
 
 ** Print as article
 
@@ -729,6 +791,9 @@ Ignoring page number in backup slides can be achieved by setting the option
 
 *** COMMENT note
 
+To keep your presentation notes (reminders about what to say), add a headline
+below the frame, and select the ~note~ environment.
+
 #+begin_src org
 ,#+LaTeX_HEADER: \setbeameroption{show notes}
 
@@ -782,7 +847,7 @@ XXX How to label a frame?  Via ~:BEAMER_opt: label=id~ or via other means?
 - This special value is useful to have data between frames, or to properly
   *close a ~column~ environment*.
 
-* Overlays
+* Overlays [Animations?]
 
 overprint
 
@@ -1101,6 +1166,9 @@ http://tex.stackexchange.com/questions/64075/beamers-visible-inside-a-tikz-node
 
 You can also place the logo on an absolute position of the titlepage using ~tikz~
 or ~textpos~.
+
+Note -- ~textpos~ is incompatible to ~pgfpages~, even though it is mentioned in the
+beamer userguide as the way to go for absolute positioning.
 
 Here an example using ~tikz~:
 

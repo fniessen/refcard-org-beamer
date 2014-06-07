@@ -100,9 +100,16 @@ type="text/javascript">
 
               <li><a href="#sec-2-5">Create a handout</a></li>
 
-              <li><a href="#sec-2-6">Print as article</a></li>
+              <li><a href="#sec-2-6">Draw a border around the frames in the
+              handout</a></li>
 
-              <li><a href="#sec-2-7">Present a bibliography</a></li>
+              <li><a href="#sec-2-7">Show speaker notes</a></li>
+
+              <li><a href="#sec-2-8">Print handout with speaker notes</a></li>
+
+              <li><a href="#sec-2-9">Print as article</a></li>
+
+              <li><a href="#sec-2-10">Present a bibliography</a></li>
             </ul>
           </li>
 
@@ -149,7 +156,7 @@ type="text/javascript">
           </li>
 
           <li>
-            <a href="#sec-7">Overlays</a>
+            <a href="#sec-7">Overlays [Animations?]</a>
 
             <ul>
               <li><a href="#sec-7-1">Overlay specification (BEAMER_act
@@ -525,6 +532,10 @@ Some content.
         <h3 id="sec-2-5">Create a handout</h3>
 
         <div class="outline-text-3" id="text-2-5">
+          <p>You can print your presentation in the form of handouts. When
+          there are animations, it will just print the last “slide” of each
+          frame.</p>
+
           <div class="org-src-container">
             <pre class="src src-org">
 <span style=
@@ -533,18 +544,112 @@ Some content.
 <span style=
 "color: #008ED1; background-color: #EAEAFF;">#+LaTeX_HEADER: \usepackage{pgfpages}</span>
 <span style=
-"color: #008ED1; background-color: #EAEAFF;">#+LaTeX_HEADER: \mode&lt;handout&gt;{\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]}</span>
+"color: #008ED1; background-color: #EAEAFF;">#+LaTeX_HEADER: \mode&lt;handout&gt;</span>
+<span style=
+"color: #008ED1; background-color: #EAEAFF;">#+LaTeX_HEADER: {</span>
+<span style=
+"color: #008ED1; background-color: #EAEAFF;">#+LaTeX_HEADER:   ... see below ...</span>
+<span style=
+"color: #008ED1; background-color: #EAEAFF;">#+LaTeX_HEADER: }</span>
+</pre>
+          </div>
+
+          <ul class="org-ul">
+            <li>with <b>one frame</b> on a page
+
+              <div class="org-src-container">
+                <pre class="src src-org">
+<span style=
+"color: #008ED1; background-color: #EAEAFF;">#+LaTeX_HEADER:   \pgfpagesuselayout{resize to}[a4paper,landscape]</span>
+</pre>
+              </div>
+            </li>
+
+            <li>with <b>two frames</b> on a page
+
+              <div class="org-src-container">
+                <pre class="src src-org">
+<span style=
+"color: #008ED1; background-color: #EAEAFF;">#+LaTeX_HEADER:   \pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]</span>
+</pre>
+              </div>
+            </li>
+
+            <li>with <b>four frames</b> on a page
+
+              <div class="org-src-container">
+                <pre class="src src-org">
+<span style=
+"color: #008ED1; background-color: #EAEAFF;">#+LaTeX_HEADER:   \pgfpagesuselayout{4 on 1}[a4paper,border shrink=5mm,%</span>
+<span style=
+"color: #008ED1; background-color: #EAEAFF;">#+LaTeX_HEADER:                              landscape]</span>
+</pre>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="outline-container-sec-2-6" class="outline-3">
+        <h3 id="sec-2-6">Draw a border around the frames in the handout</h3>
+
+        <div class="outline-text-3" id="text-2-6">
+          <p>Add a rectangle around each frame:</p>
+
+          <div class="org-src-container">
+            <pre class="src src-org">
+<span style=
+"color: #008ED1; background-color: #EAEAFF;">#+LaTeX_HEADER: \setbeamertemplate{background canvas}{</span>
+<span style=
+"color: #008ED1; background-color: #EAEAFF;">#+LaTeX_HEADER:   \tikz \draw (current page.north west) rectangle</span>
+<span style=
+"color: #008ED1; background-color: #EAEAFF;">#+LaTeX_HEADER:               (current page.south east);</span>
+<span style=
+"color: #008ED1; background-color: #EAEAFF;">#+LaTeX_HEADER: }</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="outline-container-sec-2-6" class="outline-3">
-        <h3 id="sec-2-6">Print as article</h3>
+      <div id="outline-container-sec-2-7" class="outline-3">
+        <h3 id="sec-2-7">Show speaker notes</h3>
+
+        <div class="outline-text-3" id="text-2-7">
+          <p>Show reminders about what to say during each part of your
+          presentation.</p>
+
+          <p>Your laptop monitor and your projector should have the same
+          resolution.</p>
+
+          <p><a href=
+          "http://freakazoid.teamblind.de/2011/03/30/latex-presentations-with-notes-on-windows-7/">
+          http://freakazoid.teamblind.de/2011/03/30/latex-presentations-with-notes-on-windows-7/</a></p>
+        </div>
       </div>
 
-      <div id="outline-container-sec-2-7" class="outline-3">
-        <h3 id="sec-2-7">Present a bibliography</h3>
+      <div id="outline-container-sec-2-8" class="outline-3">
+        <h3 id="sec-2-8">Print handout with speaker notes</h3>
+
+        <div class="outline-text-3" id="text-2-8">
+          <p>XXX</p>
+
+          <div class="org-src-container">
+            <pre class="src src-org">
+<span style=
+"color: #008ED1; background-color: #EAEAFF;">#+LaTeX_HEADER: \usepackage{handoutWithNotes}</span>
+<span style=
+"color: #008ED1; background-color: #EAEAFF;">#+LaTeX_HEADER: \pgfpagesuselayout{3 on 1 with notes}[a4paper,border shrink=5mm]</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="outline-container-sec-2-9" class="outline-3">
+        <h3 id="sec-2-9">Print as article</h3>
+      </div>
+
+      <div id="outline-container-sec-2-10" class="outline-3">
+        <h3 id="sec-2-10">Present a bibliography</h3>
       </div>
     </div>
 
@@ -1469,7 +1574,7 @@ Contents of example
     </div>
 
     <div id="outline-container-sec-7" class="outline-2">
-      <h2 id="sec-7">Overlays</h2>
+      <h2 id="sec-7">Overlays [Animations?]</h2>
 
       <div class="outline-text-2" id="text-7">
         <p>overprint</p>
@@ -1945,6 +2050,10 @@ Contents of example
         <div class="outline-text-3" id="text-10-4">
           <p>You can also place the logo on an absolute position of the
           titlepage using <code>tikz</code> or <code>textpos</code>.</p>
+
+          <p>Note – <code>textpos</code> is incompatible to
+          <code>pgfpages</code>, even though it is mentioned in the beamer
+          userguide as the way to go for absolute positioning.</p>
 
           <p>Here an example using <code>tikz</code>:</p>
 
