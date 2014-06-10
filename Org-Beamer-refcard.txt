@@ -1,7 +1,7 @@
 #+TITLE:     Org Beamer quick reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2014-06-08 Sun 01:35>
+#+Time-stamp: <2014-06-10 Tue 22:52>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -13,12 +13,28 @@
 
 #+LaTeX_CLASS: beamer
 #+LaTeX_CLASS_OPTIONS: [presentation, t]
-#+BEAMER_THEME: Boadilla
 #+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
 #+PROPERTY: BEAMER_col_ALL 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0.0 :ETC
 
-#+BEAMER_THEME: AnnArbor
+#+BEAMER_THEME: Boadilla
+# #+BEAMER_THEME: AnnArbor
+
+# include navigation bars
+# #+BEAMER_THEME: Antibes
+
+# include a table of contents sidebar
+# #+BEAMER_THEME: Hannover
+
+# include a "Mini Frame Navigation"
+# #+BEAMER_THEME: Singapore
+
+# have the section and subsection titles at the top of each frame
+# #+BEAMER_THEME: Warsaw
+
 #+BEAMER_COLOR_THEME: crane
+
+#+BEAMER_HEADER: \usepackage{lxfonts}
+#+BEAMER_HEADER: \usefonttheme{professionalfonts}
 
 #+INCLUDE: "~/src/stage-latex-dunkerque-2013/style/listings.org"
 
@@ -62,11 +78,11 @@ going to look on /every/ computer exactly the way they looked on /your/ computer
 ** Objectives
 
 As they are created *like any other Org mode document*, preparing presentations
-with Org mode is very different from preparing them with WYSWYG programs such
+with Org Beamer is very different from preparing them with WYSWYG programs such
 as PowerPoint, Impress or Keynote.
 
-The obvious advantage of the Org Beamer approach is that *you don't have to know
-LaTeX* in order to *create Beamer presentations*.
+The obvious advantage of this approach is that *you don't have to know LaTeX* in
+order to *create Beamer presentations*.
 
 ** Requirements
 
@@ -94,6 +110,9 @@ LaTeX* in order to *create Beamer presentations*.
 * Creating presentations
 
 ** Creating a title page
+   :PROPERTIES:
+   :BEAMER_opt: allowframebreaks,label=
+   :END:
 
 A title page is automatically inserted into the first frame.
 
@@ -113,7 +132,7 @@ By default, it will arrange the following elements on the title page:
   ,#+AUTHOR: Author
   #+end_src
 
-  (~user-full-name~, if none specified)
+  (Emacs Lisp variable ~user-full-name~, if none specified)
 
 - a *date*
 
@@ -121,7 +140,11 @@ By default, it will arrange the following elements on the title page:
   ,#+DATE: 2014-06-11
   #+end_src
 
-  (~\today~, if none specified)
+  (LaTeX macro ~\today~, if none specified)
+
+#+ATTR_BEAMER: \framebreak
+#+ATTR_LaTeX: \framebreak
+\framebreak
 
 The author's email can be included with:
 
@@ -139,7 +162,7 @@ can be included with the following commands:
 
 #+BEGIN_SRC org :eval no
 ,#+BEAMER_HEADER: \subtitle{Document subtitle}
-,#+BEAMER_HEADER: \institute[INST]{Institute's name\\\url{http://www.institute.edu}}
+,#+BEAMER_HEADER: \institute[INST]{Institute\\\url{http://www.institute.edu}}
 ,#+BEAMER_HEADER: \titlegraphic{\includegraphics[height=1.5cm]{InstLogo}}
 #+END_SRC
 
@@ -163,6 +186,29 @@ By default,
 - *Deeper* levels will be used as *structural environments*, and
 
 - The *table of contents* frame is blank.
+
+  You can remove it by setting the ~toc~ option from the ~#+OPTIONS:~ keyword to
+  ~nil~:
+
+  #+begin_src org
+  ,#+OPTIONS: toc:nil
+  #+end_src
+
+  (default: ~toc:t~)
+
+** Creating a simple frame
+
+#+begin_src org
+,* Introduction
+
+,** A title
+   #+BEAMER: \framesubtitle{A subtitle}
+
+Some content.
+#+end_src
+
+The *subtitle* does not have an Org syntax because it's specific to the Beamer
+back-end only.
 
 ** Creating a table of contents
 
@@ -195,24 +241,11 @@ By default,
 In many themes, sections (and subsections, when ~H:3~) appear in the sidebar or
 headline.
 
-** Creating a simple frame
-
-#+begin_src org
-,* Introduction
-
-,** A title
-   #+BEAMER: \framesubtitle{A subtitle}
-
-Some content.
-#+end_src
-
-The *subtitle* does not have an Org syntax because it's specific to the Beamer
-back-end only.
-
 ** Create a handout
 
 You can print your presentation in the form of handouts.  When there are
-animations, it will just print the last "slide" of each frame.
+animations, it will remove the pauses (avoid the overlays) and just print the
+last "slide" of each frame.
 
 #+begin_src org
 ,#+LATEX_CLASS_OPTIONS: [handout]
@@ -224,19 +257,19 @@ animations, it will just print the last "slide" of each frame.
 ,#+LaTeX_HEADER: }
 #+end_src
 
-- with *one frame* on a page
+- with *one frame* per page (page size extended to A4)
 
   #+begin_src org
   ,#+LaTeX_HEADER:   \pgfpagesuselayout{resize to}[a4paper,landscape]
   #+end_src
 
-- with *two frames* on a page
+- with *two frames* per page
 
   #+begin_src org
   ,#+LaTeX_HEADER:   \pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
   #+end_src
 
-- with *four frames* on a page
+- with *four frames* per page
 
   #+begin_src org
   ,#+LaTeX_HEADER:   \pgfpagesuselayout{4 on 1}[a4paper,border shrink=5mm,%
@@ -319,13 +352,13 @@ affiliated keywords.
    :ID:       f6d1f139-2460-4844-93f1-c71277c810e0
    :END:
 
-#+begin_src org
+#+begin_src org :eval no
 ,#+BEAMER_THEME: Boadilla
 #+end_src
 
 is equivalent (for Boadilla) to:
 
-#+begin_src org
+#+begin_src org :eval no
 ,#+BEAMER_COLOR_THEME: dolphin
 ,#+BEAMER_FONT_THEME:  default
 ,#+BEAMER_INNER_THEME: [shadow]rounded
@@ -378,6 +411,8 @@ You can also turn it on with:
 in your document.
 
 * Column view
+
+** Column view
 
 For a column view of options and configurations for the individual frames
 
@@ -476,7 +511,7 @@ How many primes are there?
 
 Is every even number the sum of two primes?
 
-*** ~alertblock~ environment                                       :B_alertblock:
+*** ~alertblock~ environment                                     :B_alertblock:
     :PROPERTIES:
     :BEAMER_env: alertblock
     :END:
@@ -1051,36 +1086,31 @@ Two \\ lines.
 
 * Guidelines for creating presentations
 
- > How can I put options that would apply to a frame (e.g.,
- > ~allowframebreaks~)?
-
- #+begin_src org :eval no
- ,#+BI--ND: org-beamer-frame-default-options "allowframebreaks"
- #+end_src
-
- for allowing frame breaks for the whole document,
-
- *** A very long slide
-     :PROPERTIES:
-     :BEAMER_env: [allowframebreaks]
-     :END:
-
- for allowing on a frame by frame basis.
-
 ** Frame structure (Explicit page breaking)
 
 If the text does not fit on a single slide, all you have to do to automatically
-break up the frame into several frames, is set the option ~allowframebreaks~:
+break up the frame into several frames, is set the option ~allowframebreaks~.
 
-#+begin_src org
-,** A long "frame" with breaks
-   :PROPERTIES:
-   :BEAMER_opt: allowframebreaks,label=
-   :END:
-#+end_src
+- For allowing frame breaks on a *frame by frame* basis[fn:: Until the Beamer
+  [[https://bitbucket.org/rivanvx/beamer/issue/265/including-frame-label-option-stops ][issue #265]] is solved, we need to unset the ~framelabel~ as shown above
+  (~label=~).]
 
-Until the Beamer [[https://bitbucket.org/rivanvx/beamer/issue/265/including-frame-label-option-stops ][issue #265]] is solved, we need to unset the framelabel as shown
-above (~label=~).
+  #+begin_src org :eval no
+  ,** A very long "frame" with breaks
+     :PROPERTIES:
+     :BEAMER_opt: allowframebreaks,label=
+     :END:
+  #+end_src
+
+  XXX This property shouldn't be interpreted for the current slide!
+
+- For allowing frame breaks for the *whole* document[fn:: Till Tantau (author of
+  Beamer) was really not keen on the idea of setting the auto-breaking frames
+  option globally.]
+
+  #+begin_src org :eval no
+  ,#+BIND: org-beamer-frame-default-options "allowframebreaks"
+  #+end_src
 
 ** Vertical alignment
 
