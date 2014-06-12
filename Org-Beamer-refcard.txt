@@ -1,7 +1,7 @@
 #+TITLE:     Org Beamer quick reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2014-06-12 Thu 22:24>
+#+Time-stamp: <2014-06-12 Thu 23:05>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -67,7 +67,7 @@ http://www.speakingaboutpresenting.com/delivery/presentation-handouts/
 ** Description
 
 Welcome to *Org Beamer reference card*.  It contains the reference documentation
-that describes how to *write presentations* using:
+that describes how to *write presentations* based on:
 
 - [[http://orgmode.org/][Org mode]] 8 and
 - the [[https://bitbucket.org/rivanvx/beamer/][LaTeX Beamer class]].
@@ -76,10 +76,10 @@ Those *free* tools allow you to easily produce *high quality* *PDF files* which 
 going to be displayed on /every/ computer exactly the way they looked on /your/
 computer.
 
-** Objectives
+** Features
 
-Since they are *like any other Org mode document*, creating presentations with
-Org Beamer is very easy.
+Since they are *like any other Org mode document*, authoring presentations with
+Org Beamer is very easy, thanks to its *straightforward* syntax.
 
 The obvious advantages of this approach are that:
 
@@ -88,8 +88,9 @@ The obvious advantages of this approach are that:
 - *you are more productive* when editing presentations:
   + you can expand and collapse slides,
   + you can switch quickly between slides by using navigation (speed) commands,
-  + you can include code blocks (in R or in many other languages) for
-    illustration, and evaluate them to actually render output.
+  + you can incorporate code blocks (in R or in many other languages) for
+    illustration, and evaluate them to actually render output (including
+    plots).
 
 ** Requirements
    :PROPERTIES:
@@ -117,7 +118,7 @@ The obvious advantages of this approach are that:
                     ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
   #+end_src
 
-* Creating presentations
+* Authoring presentations
 
 ** Creating a title page
    :PROPERTIES:
@@ -183,7 +184,7 @@ The [[id:f6d1f139-2460-4844-93f1-c71277c810e0][inner theme]] dictates how the ti
 ,#+BEAMER_HEADER: \logo{\includegraphics[height=.9cm]{InstLogo}}
 #+END_SRC
 
-** Global structure
+** Structure basics
 
 Org mode presentations contain headings at different levels.
 
@@ -192,47 +193,49 @@ By default,
 - Headings at the *first* outline level will become *titles* of the different
   slides (called *frames* in Beamer).
 
+  #+begin_src org
+  ,* A title
+  #+end_src
+
 - *Deeper* levels will be used as *structural environments*.
 
   #+begin_src org
-  ,* Frame
+  ,* A title
 
   ,** Block
 
   This is a block.
   #+end_src
 
-- The *table of contents* frame is blank.
+- The *table of contents* frame is created but is blank (you'll understand
+  later).
 
-  You can remove it by setting the ~toc~ option from the ~#+OPTIONS:~ keyword to
-  ~nil~:
+  You can remove it by setting the ~toc~ option (default: ~t~) from the ~#+OPTIONS:~
+  keyword to ~nil~:
 
   #+begin_src org
   ,#+OPTIONS: toc:nil
   #+end_src
 
-  (default: ~toc:t~)
-
-** Creating a simple frame (H:2)
+** Creating a simple frame
 
 To create a frame with bullets, you simply use standard Org mode bullets:
 
 #+begin_src org
-,* Introduction
+,* Frame 1
+  #+BEAMER: \framesubtitle{A subtitle}
 
-,** A title
-   #+BEAMER: \framesubtitle{A subtitle}
-
-Some content:
 - Bullet 1
 - Bullet 2
 - Bullet 3
 #+end_src
 
-The *subtitle* does not have an Org syntax because it's specific to the Beamer
-back-end only.
+Content within frames is formatted using standard Org mode syntax.
 
-** COMMENT Slide with code
+The optional *subtitle* does not have an Org syntax because it's specific to the
+Beamer back-end only.
+
+** COMMENT Frame with code
 
 Here is a simple R code block that will display the code and show its output in
 the frame:
@@ -249,7 +252,7 @@ summary(cars)
 | 3rd Qu.:19.0 | 3rd Qu.: 56.00 |
 | Max.   :25.0 | Max.   :120.00 |
 
-** COMMENT Slide with code only
+** COMMENT Frame with code only
 
 To display a code block without evaluating it, you specify the ~:eval no~ option:
 
@@ -257,7 +260,7 @@ To display a code block without evaluating it, you specify the ~:eval no~ option
 summary(cars)
 #+end_src
 
-** COMMENT Slide with output only
+** COMMENT Frame with output only
 
 To display the output of a code block without echoing the underlying code, you
 specify the XXX option:
@@ -274,7 +277,7 @@ summary(cars)
 | 3rd Qu.:19.0 | 3rd Qu.: 56.00 |
 | Max.   :25.0 | Max.   :120.00 |
 
-** COMMENT Slide with plot
+** COMMENT Frame with plot
 
 Code blocks can also be used to include plots within presentations.
 
@@ -288,46 +291,50 @@ plot(cars)
 #+results:
 [[file:Rplot.png]]
 
-** Creating a table of contents
+** Creating a table of contents (H:2)
 
-- If you set the ~H~ option from the ~#+OPTIONS:~ keyword such as:
+If you set the ~H~ option from the ~#+OPTIONS:~ keyword such as:
 
-  #+begin_src org
-  ,#+OPTIONS: H:2
-  #+end_src
+#+begin_src org
+,#+OPTIONS: H:2
+#+end_src
 
-  then:
+then:
 
-  + *First*-level headlines become *sections* listed in the *table of contents* (created
-    by default), and
+- *First*-level headlines become *sections* listed in the table of contents[fn::
+  The items in the TOC are clickable and take you to specific frames in the
+  presentation.], and
 
-  + *Second*-level headlines become the *frames*.
+- *Second*-level headlines become the *frames*.
 
-- If you set the ~H~ option such as:
+** Creating a table of contents (H:3)
 
-  #+begin_src org
-  ,#+OPTIONS: H:3
-  #+end_src
+If you set the ~H~ option such as:
 
-  then:
+#+begin_src org
+,#+OPTIONS: H:3
+#+end_src
 
-  + *First*- and *second*-level headlines become *sections* and *subsections* listed in
-    the *table of contents*, and
+then:
 
-  + *Third*-level headlines become the *frames*.
++ *First*- and *second*-level headlines become *sections* and *subsections* listed in
+  the table of contents, and
+
++ *Third*-level headlines become the *frames*.
 
 In many themes, sections (and subsections, when ~H:3~) appear in the sidebar or
 headline.
 
-The items in the TOC are clickable and take you to specific frames in the
-presentation.
+** Present a bibliography
+
+* Distributing presentations
 
 ** Create a handout
 
 You can distribute your presentation in the form of handouts.
 
-Presentations saved in this manner are entirely animation-free: pauses
-(overlays) are removed and just the last "slide" of each frame is printed.
+Presentations saved in this manner are entirely animation-free: overlays are
+removed and just the last "slide" of each frame is printed.
 
 #+begin_src org
 ,#+LATEX_CLASS_OPTIONS: [handout]
@@ -358,9 +365,9 @@ Presentations saved in this manner are entirely animation-free: pauses
   ,#+LaTeX_HEADER:                              landscape]
   #+end_src
 
-** Draw a border around the frames in the handout
+** Draw a border around the frames
 
-Add a rectangle around each frame:
+Add a rectangle around each frame in the handout:
 
 #+begin_src org
 ,#+LaTeX_HEADER: \setbeamertemplate{background canvas}{
@@ -387,8 +394,6 @@ XXX
 #+END_SRC
 
 ** Print as article
-
-** Present a bibliography
 
 * Keywords specific to the Beamer back-end
 
@@ -616,7 +621,7 @@ How many primes are there?
 
 Is every even number the sum of two primes?
 
-*** ~alertblock~ environment                                     :B_alertblock:
+*** ~alertblock~ environment                                       :B_alertblock:
     :PROPERTIES:
     :BEAMER_env: alertblock
     :END:
