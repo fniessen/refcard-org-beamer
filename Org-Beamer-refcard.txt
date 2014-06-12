@@ -1,7 +1,7 @@
 #+TITLE:     Org Beamer quick reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2014-06-12 Thu 23:05>
+#+Time-stamp: <2014-06-12 Thu 23:42>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -327,13 +327,58 @@ headline.
 
 ** Present a bibliography
 
+* Editing presentations
+
+** Exporting to PDF
+
+Type:
+
+#+begin_src emacs-lisp
+M-x load-library RET ox-beamer RET
+#+end_src
+
+to load the Beamer back-end library, and to obtain *extra commands* in the LaTeX
+export menu:
+
+- ~C-c C-e l B~ ::
+     Export as LaTeX buffer (Beamer).
+
+- ~C-c C-e l b~ ::
+     Export as LaTeX file (Beamer).
+
+- ~C-c C-e l P~ ::
+     *Export as PDF file* (Beamer).
+
+- ~C-c C-e l O~ ::
+     Export as PDF file and open (Beamer).
+
+** Support editing
+
+Type:
+
+#+begin_src emacs-lisp
+M-x org-beamer-mode RET
+#+end_src
+
+to load the minor mode ~org-beamer-mode~ *easing the edition* of the *document
+structure* (through the key binding ~C-c C-b~, which offers fast selection of
+a [[id:77f1b7a3-6e7d-4f2b-bd1f-02e6f02bba2f][Beamer environment]]).
+
+You can also turn it on with:
+
+#+begin_src org
+,#+STARTUP: beamer
+#+end_src
+
+in your document.
+
 * Distributing presentations
 
 ** Create a handout
 
 You can distribute your presentation in the form of handouts.
 
-Presentations saved in this manner are entirely animation-free: overlays are
+Presentations exported in this manner are entirely animation-free: overlays are
 removed and just the last "slide" of each frame is printed.
 
 #+begin_src org
@@ -395,9 +440,9 @@ XXX
 
 ** Print as article
 
-* Keywords specific to the Beamer back-end
+* Customizing presentations
 
-** LaTeX class
+** LaTeX class (XXX not necessary, does work???)
 
 #+begin_src org
 ,#+LATEX_CLASS: beamer
@@ -414,7 +459,8 @@ Common options:
 
 ** LaTeX preamble
 
-Append any line of code in the *LaTeX preamble* with:
+Append any line of code in the *LaTeX preamble* with keywords specific to the
+LaTeX and Beamer back-ends:
 
 #+begin_src org
 ,#+LaTeX_HEADER:       \usepackage{...}
@@ -432,18 +478,36 @@ The Beamer back-end reads both
 - ~#+ATTR_LATEX:~ and
 - ~#+ATTR_BEAMER:~
 
-affiliated keywords.
+*affiliated* keywords.
 
-** Appearance of the presentation
+** Inline LaTeX
+
+You can include raw LaTeX in your Org presentations and it will get kept as
+LaTeX when it's exported.
+
+#+begin_src org
+,#+LaTeX_BEGIN:
+Text can be preformatted (in a fixed-width font).
+,#+LaTeX_END:
+#+end_src
+
+It is especially useful for more *advanced stuff* like images or tables where you
+need more control of the LaTeX options than Org mode actually gives you.
+
+** Using a custom theme
    :PROPERTIES:
    :ID:       f6d1f139-2460-4844-93f1-c71277c810e0
    :END:
+
+You can specify a Beamer theme using the ~#+BEAMER_THEME~ keyword.
+
+For example:
 
 #+begin_src org :eval no
 ,#+BEAMER_THEME: Boadilla
 #+end_src
 
-is equivalent (for Boadilla) to:
+which is equivalent (for Boadilla) to:
 
 #+begin_src org :eval no
 ,#+BEAMER_COLOR_THEME: dolphin
@@ -452,50 +516,12 @@ is equivalent (for Boadilla) to:
 ,#+BEAMER_OUTER_THEME: infolines
 #+end_src
 
-* Usage of library =ox-beamer.el=
+** Changing the frame font
 
-** Beamer back-end (for Org export engine)
+Fonts must be present on the system you're presenting on or it will go back to
+a fallback font.
 
-Type:
-
-#+begin_src emacs-lisp
-M-x load-library RET ox-beamer RET
-#+end_src
-
-to load the Beamer back-end library, and to obtain *extra commands* in the LaTeX
-export menu:
-
-- ~C-c C-e l B~ ::
-     Export as LaTeX buffer (Beamer).
-
-- ~C-c C-e l b~ ::
-     Export as LaTeX file (Beamer).
-
-- ~C-c C-e l P~ ::
-     *Export as PDF file* (Beamer).
-
-- ~C-c C-e l O~ ::
-     Export as PDF file and open (Beamer).
-
-** Structure editing support
-
-Type:
-
-#+begin_src emacs-lisp
-M-x org-beamer-mode RET
-#+end_src
-
-to load the minor mode ~org-beamer-mode~ *easing the edition* of the *document
-structure* (through the key binding ~C-c C-b~, which offers fast selection of
-a [[id:77f1b7a3-6e7d-4f2b-bd1f-02e6f02bba2f][Beamer environment]]).
-
-You can also turn it on with:
-
-#+begin_src org
-,#+STARTUP: beamer
-#+end_src
-
-in your document.
+Font Risque.
 
 * Column view
 
@@ -1340,13 +1366,6 @@ Here an example using ~tikz~:
    \titlepage
 \XXXend{frame}
 #+END_SRC
-
-** Changing the slide font
-
-Fonts must be present on the system you're presenting on or it will go back to
-a fallback font.
-
-Font Risque.
 
 ** More on Org: Exporting a subtree
 
