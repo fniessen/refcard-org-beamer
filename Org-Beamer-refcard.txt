@@ -1,7 +1,7 @@
 #+TITLE:     Org Beamer quick reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2014-06-10 Tue 22:52>
+#+Time-stamp: <2014-06-12 Thu 22:24>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -73,18 +73,28 @@ that describes how to *write presentations* using:
 - the [[https://bitbucket.org/rivanvx/beamer/][LaTeX Beamer class]].
 
 Those *free* tools allow you to easily produce *high quality* *PDF files* which are
-going to look on /every/ computer exactly the way they looked on /your/ computer.
+going to be displayed on /every/ computer exactly the way they looked on /your/
+computer.
 
 ** Objectives
 
-As they are created *like any other Org mode document*, preparing presentations
-with Org Beamer is very different from preparing them with WYSWYG programs such
-as PowerPoint, Impress or Keynote.
+Since they are *like any other Org mode document*, creating presentations with
+Org Beamer is very easy.
 
-The obvious advantage of this approach is that *you don't have to know LaTeX* in
-order to *create Beamer presentations*.
+The obvious advantages of this approach are that:
+
+- *you don't have to know LaTeX* in order to *create Beamer presentations*.
+
+- *you are more productive* when editing presentations:
+  + you can expand and collapse slides,
+  + you can switch quickly between slides by using navigation (speed) commands,
+  + you can include code blocks (in R or in many other languages) for
+    illustration, and evaluate them to actually render output.
 
 ** Requirements
+   :PROPERTIES:
+   :ID:       c4f6745b-2147-4538-bd96-9f8e1e1d4669
+   :END:
 
 - A working LaTeX installation is required for exporting to PDF. If it is not
   yet installed on your system, install [[http://www.tug.org/texlive/][TeX Live]] (for example).
@@ -114,9 +124,8 @@ order to *create Beamer presentations*.
    :BEAMER_opt: allowframebreaks,label=
    :END:
 
-A title page is automatically inserted into the first frame.
-
-By default, it will arrange the following elements on the title page:
+The very first frame in a Beamer presentation is the *title page*.  By default,
+it will automatically be displayed with the following elements:
 
 - the document *title*
 
@@ -129,7 +138,7 @@ By default, it will arrange the following elements on the title page:
 - the *author(s)*'s name
 
   #+begin_src org
-  ,#+AUTHOR: Author
+  ,#+AUTHOR: John Doe
   #+end_src
 
   (Emacs Lisp variable ~user-full-name~, if none specified)
@@ -149,9 +158,9 @@ By default, it will arrange the following elements on the title page:
 The author's email can be included with:
 
 #+begin_src org
-,#+AUTHOR:    \href{mailto:email@example.com}{Author}
-,#+AUTHOR:    \texorpdfstring{Author\newline\url{email@example.com}}{Author} % DOES NOT WORK XXX -> BEAMER_HEADER???
-,#+BEAMER_HEADER: \author{\texorpdfstring{Author\newline\url{email@example.com}}{Author}} % BAD ORDER XXX
+,#+AUTHOR:    \href{mailto:email@example.com}{John Doe}
+,#+AUTHOR:    \texorpdfstring{John Doe\newline\url{email@example.com}}{John Doe} % DOES NOT WORK XXX -> BEAMER_HEADER???
+,#+BEAMER_HEADER: \author{\texorpdfstring{John Doe\newline\url{email@example.com}}{John Doe}} % BAD ORDER XXX
 #+end_src
 
 Other elements:
@@ -181,9 +190,17 @@ Org mode presentations contain headings at different levels.
 By default,
 
 - Headings at the *first* outline level will become *titles* of the different
-  slides (called *frames* in Beamer),
+  slides (called *frames* in Beamer).
 
-- *Deeper* levels will be used as *structural environments*, and
+- *Deeper* levels will be used as *structural environments*.
+
+  #+begin_src org
+  ,* Frame
+
+  ,** Block
+
+  This is a block.
+  #+end_src
 
 - The *table of contents* frame is blank.
 
@@ -196,7 +213,9 @@ By default,
 
   (default: ~toc:t~)
 
-** Creating a simple frame
+** Creating a simple frame (H:2)
+
+To create a frame with bullets, you simply use standard Org mode bullets:
 
 #+begin_src org
 ,* Introduction
@@ -204,11 +223,70 @@ By default,
 ,** A title
    #+BEAMER: \framesubtitle{A subtitle}
 
-Some content.
+Some content:
+- Bullet 1
+- Bullet 2
+- Bullet 3
 #+end_src
 
 The *subtitle* does not have an Org syntax because it's specific to the Beamer
 back-end only.
+
+** COMMENT Slide with code
+
+Here is a simple R code block that will display the code and show its output in
+the frame:
+
+#+begin_src R :eval yes
+summary(cars)
+#+end_src
+
+#+results:
+| Min.   : 4.0 | Min.   :  2.00 |
+| 1st Qu.:12.0 | 1st Qu.: 26.00 |
+| Median :15.0 | Median : 36.00 |
+| Mean   :15.4 | Mean   : 42.98 |
+| 3rd Qu.:19.0 | 3rd Qu.: 56.00 |
+| Max.   :25.0 | Max.   :120.00 |
+
+** COMMENT Slide with code only
+
+To display a code block without evaluating it, you specify the ~:eval no~ option:
+
+#+begin_src R :eval no
+summary(cars)
+#+end_src
+
+** COMMENT Slide with output only
+
+To display the output of a code block without echoing the underlying code, you
+specify the XXX option:
+
+#+begin_src R :eval yes :exports results
+summary(cars)
+#+end_src
+
+#+results:
+| Min.   : 4.0 | Min.   :  2.00 |
+| 1st Qu.:12.0 | 1st Qu.: 26.00 |
+| Median :15.0 | Median : 36.00 |
+| Mean   :15.4 | Mean   : 42.98 |
+| 3rd Qu.:19.0 | 3rd Qu.: 56.00 |
+| Max.   :25.0 | Max.   :120.00 |
+
+** COMMENT Slide with plot
+
+Code blocks can also be used to include plots within presentations.
+
+To display a plot while omitting the code used to generate it, you can include
+a code block like this:
+
+#+begin_src R :eval yes :results graphics :file Rplot.png
+plot(cars)
+#+end_src
+
+#+results:
+[[file:Rplot.png]]
 
 ** Creating a table of contents
 
@@ -241,11 +319,15 @@ back-end only.
 In many themes, sections (and subsections, when ~H:3~) appear in the sidebar or
 headline.
 
+The items in the TOC are clickable and take you to specific frames in the
+presentation.
+
 ** Create a handout
 
-You can print your presentation in the form of handouts.  When there are
-animations, it will remove the pauses (avoid the overlays) and just print the
-last "slide" of each frame.
+You can distribute your presentation in the form of handouts.
+
+Presentations saved in this manner are entirely animation-free: pauses
+(overlays) are removed and just the last "slide" of each frame is printed.
 
 #+begin_src org
 ,#+LATEX_CLASS_OPTIONS: [handout]
@@ -263,13 +345,13 @@ last "slide" of each frame.
   ,#+LaTeX_HEADER:   \pgfpagesuselayout{resize to}[a4paper,landscape]
   #+end_src
 
-- with *two frames* per page
+- with *two frames* per A4 page
 
   #+begin_src org
   ,#+LaTeX_HEADER:   \pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
   #+end_src
 
-- with *four frames* per page
+- with *four frames* per A4 page
 
   #+begin_src org
   ,#+LaTeX_HEADER:   \pgfpagesuselayout{4 on 1}[a4paper,border shrink=5mm,%
@@ -332,11 +414,11 @@ Append any line of code in the *LaTeX preamble* with:
 #+begin_src org
 ,#+LaTeX_HEADER:       \usepackage{...}
 ,#+LaTeX_HEADER_EXTRA: \usepackage{...}
-,#+BEAMER_HEADER:      \institute[short name]{Institute's name}
+,#+BEAMER_HEADER:      \institute[short name]{Institute}
 #+end_src
 
 It will go (in that order) in the ~[EXTRA]~ placeholder of the header associated
-to the ~beamer~ LaTeX class (see ~org-latex-classes~).
+to the ~beamer~ LaTeX class (see [[id:c4f6745b-2147-4538-bd96-9f8e1e1d4669][~org-latex-classes~]]).
 
 ** Affiliated keywords
 
@@ -431,7 +513,10 @@ XXX Put = around BEAMER_env in title...
 
 ** Frames
 
-*** frame
+*** frame                                                             :B_frame:
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
 
 - Headlines become frames when their level is equal to ~org-beamer-frame-level~
   (or ~H~ value in the ~OPTIONS~ line).
@@ -439,6 +524,23 @@ XXX Put = around BEAMER_env in title...
 - Though, if a headline in the current tree has a ~BEAMER_env~ property set to
   either ~frame~ or ~fullframe~, its level overrides the variable, giving you some
   flexibility in deciding *what is* and what isn't *a frame*.
+
+  #+begin_src org
+  ,* Section 1
+
+  ,** Frame
+
+  ,* Section 2
+
+  ,** Subsection 2.1
+
+  ,*** Frame                                                           :B_frame:
+      :PROPERTIES:
+      :BEAMER_env: frame
+      :END:
+
+  This becomes a frame, instead of a block!
+  #+end_src
 
   This works in both "directions": to *add or* to *remove sectioning levels*
   above the current headline (which becomes a frame)!
@@ -448,8 +550,11 @@ XXX Put = around BEAMER_env in title...
     :BEAMER_env: fullframe
     :END:
 
-- A ~fullframe~ is a ~frame~ with an ignored title (~frametitle~ is set to the empty
-  string).
+- A frame automatically display its title unless it is specified as
+  a ~fullframe~.
+
+- ~fullframe~ is the same as the ~frame~ specification, but with an ignored title
+  (~frametitle~ is set to the empty string).
 
 ** Blocks
    :PROPERTIES:
@@ -1053,25 +1158,29 @@ Consecutive ~column~ environments will be put in a ~columns~ environment.
      :BEAMER_col: 0.39
      :END:
 
+First column
+
 Two \\ lines.
+
+The arithmetic mean is equal to the summation of ~n~ numbers divided by ~n~.
 
 **** Second column                                                      :BMCOL:
      :PROPERTIES:
      :BEAMER_col: 0.39
      :END:
+
+Second column
 
 One line (but aligned).
 
+$\frac{1}{n} \sum_{i=1}^{n} x_{i}$
+
 *** Multiple columns
 
-**** First column                                                       :BMCOL:
-     :PROPERTIES:
-     :BEAMER_col: 0.39
-     :END:
+If you want to float an image to the left or right, simply include it within
+a 2-column layout.
 
-Two \\ lines.
-
-**** Second column                                                      :BMCOL:
+**** Image                                                              :BMCOL:
      :PROPERTIES:
      :BEAMER_col: 0.39
      :END:
@@ -1080,7 +1189,21 @@ Two \\ lines.
 [[file:images/square.png]]
 # mygraphic.jpg
 
+**** Text                                                               :BMCOL:
+     :PROPERTIES:
+     :BEAMER_col: 0.39
+     :END:
+
+This text will appear \\ to the right.
+
 ** ~column~
+
+You can change the percent space of each column.
+
+If you want like one column to take 70% and the other to take 30%, you can
+change that as follows:
+
+XXX
 
 ** ~columns~
 
@@ -1212,6 +1335,13 @@ Here an example using ~tikz~:
    \titlepage
 \XXXend{frame}
 #+END_SRC
+
+** Changing the slide font
+
+Fonts must be present on the system you're presenting on or it will go back to
+a fallback font.
+
+Font Risque.
 
 ** More on Org: Exporting a subtree
 
