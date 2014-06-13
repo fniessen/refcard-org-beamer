@@ -1,17 +1,16 @@
 #+TITLE:     Org Beamer quick reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2014-06-12 Thu 23:42>
+#+Time-stamp: <2014-06-13 Fri 23:29>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
 #+OPTIONS:   H:2 num:nil ^:{}
 
-#+PROPERTY: eval no
+#+PROPERTY:  eval no
 # #+SETUPFILE: ~/src/org-style/setup/bigblow-local-abs.setup
 #+SETUPFILE: ~/src/org-style/setup/leuven-local-abs.setup
 
-#+LaTeX_CLASS: beamer
 #+LaTeX_CLASS_OPTIONS: [presentation, t]
 #+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
 #+PROPERTY: BEAMER_col_ALL 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0.0 :ETC
@@ -38,6 +37,8 @@
 
 #+INCLUDE: "~/src/stage-latex-dunkerque-2013/style/listings.org"
 
+#+LaTeX_HEADER: \lstdefinelanguage{R}{}
+
 #+LaTeX_HEADER: \definecolor{mylinkcolor}{HTML}{006DAF}
 #+LaTeX_HEADER: \hypersetup{colorlinks=true, linkcolor=mylinkcolor, urlcolor=mylinkcolor}
 
@@ -61,6 +62,10 @@ Add:
 - references.
 
 http://www.speakingaboutpresenting.com/delivery/presentation-handouts/
+
+** TODO Add subjects
+
+See http://office.microsoft.com/en-us/powerpoint-help/training-courses-for-powerpoint-2013-HA104015465.aspx
 
 * Overview
 
@@ -207,8 +212,8 @@ By default,
   This is a block.
   #+end_src
 
-- The *table of contents* frame is created but is blank (you'll understand
-  later).
+- The *table of contents* frame is created but is blank ([[id:b4252974-1d3d-4652-b42e-e7cd016f45f7][you'll understand
+  later]]).
 
   You can remove it by setting the ~toc~ option (default: ~t~) from the ~#+OPTIONS:~
   keyword to ~nil~:
@@ -235,12 +240,19 @@ Content within frames is formatted using standard Org mode syntax.
 The optional *subtitle* does not have an Org syntax because it's specific to the
 Beamer back-end only.
 
-** COMMENT Frame with code
+** Frame with code
 
-Here is a simple R code block that will display the code and show its output in
-the frame:
+Here is a simple R code block...
 
-#+begin_src R :eval yes
+#+begin_src org
+,#+begin_src R :exports both
+summary(cars)
+,#+end_src
+#+end_src
+
+... that will display the code and show its output in the frame:
+
+#+begin_src R :eval yes :exports both
 summary(cars)
 #+end_src
 
@@ -252,18 +264,34 @@ summary(cars)
 | 3rd Qu.:19.0 | 3rd Qu.: 56.00 |
 | Max.   :25.0 | Max.   :120.00 |
 
-** COMMENT Frame with code only
+** Frame with code only
 
 To display a code block without evaluating it, you specify the ~:eval no~ option:
+
+#+begin_src org
+,#+begin_src R :eval no
+summary(cars)
+,#+end_src
+#+end_src
+
+It only renders the code:
 
 #+begin_src R :eval no
 summary(cars)
 #+end_src
 
-** COMMENT Frame with output only
+** Frame with output only
 
 To display the output of a code block without echoing the underlying code, you
-specify the XXX option:
+specify the ~:exports results~ option:
+
+#+begin_src org
+,#+begin_src R :exports results
+summary(cars)
+,#+end_src
+#+end_src
+
+It only renders the results:
 
 #+begin_src R :eval yes :exports results
 summary(cars)
@@ -277,21 +305,35 @@ summary(cars)
 | 3rd Qu.:19.0 | 3rd Qu.: 56.00 |
 | Max.   :25.0 | Max.   :120.00 |
 
-** COMMENT Frame with plot
+** Frame with plot
 
 Code blocks can also be used to include plots within presentations.
 
 To display a plot while omitting the code used to generate it, you can include
 a code block like this:
 
-#+begin_src R :eval yes :results graphics :file Rplot.png
+#+begin_src org
+,#+begin_src R :exports results :results graphics :file qplot.png
+plot(cars)
+,#+end_src
+#+end_src
+
+#+begin_src R :eval yes :exports results :results graphics :file qplot.png
+#+begin_src R :eval yes :exports results :results graphics :file qplot.png
+#+begin_src R :eval yes :exports results :results graphics :file qplot.png
+## library(ggplot2)
+## qplot(speed, dist, data=cars) + geom_smooth()
 plot(cars)
 #+end_src
 
+#+ATTR_LaTeX: :height 4.5cm
 #+results:
-[[file:Rplot.png]]
+[[file:qplot.png]]
 
 ** Creating a table of contents (H:2)
+   :PROPERTIES:
+   :ID:       b4252974-1d3d-4652-b42e-e7cd016f45f7
+   :END:
 
 If you set the ~H~ option from the ~#+OPTIONS:~ keyword such as:
 
@@ -301,11 +343,11 @@ If you set the ~H~ option from the ~#+OPTIONS:~ keyword such as:
 
 then:
 
-- *First*-level headlines become *sections* listed in the table of contents[fn::
+- *First-level* headlines become *sections* listed in the table of contents[fn::
   The items in the TOC are clickable and take you to specific frames in the
   presentation.], and
 
-- *Second*-level headlines become the *frames*.
+- *Second-level* headlines become the *frames*.
 
 ** Creating a table of contents (H:3)
 
@@ -317,10 +359,10 @@ If you set the ~H~ option such as:
 
 then:
 
-+ *First*- and *second*-level headlines become *sections* and *subsections* listed in
++ *First-* and *second-level* headlines become *sections* and *subsections* listed in
   the table of contents, and
 
-+ *Third*-level headlines become the *frames*.
++ *Third-level* headlines become the *frames*.
 
 In many themes, sections (and subsections, when ~H:3~) appear in the sidebar or
 headline.
@@ -391,7 +433,7 @@ removed and just the last "slide" of each frame is printed.
 ,#+LaTeX_HEADER: }
 #+end_src
 
-- with *one frame* per page (page size extended to A4)
+- with *one frame* per A4 page (extending page size)
 
   #+begin_src org
   ,#+LaTeX_HEADER:   \pgfpagesuselayout{resize to}[a4paper,landscape]
@@ -431,7 +473,9 @@ http://freakazoid.teamblind.de/2011/03/30/latex-presentations-with-notes-on-wind
 
 ** Print handout with speaker notes
 
-XXX
+See http://tex.stackexchange.com/questions/38084/displaying-slides-with-beamer-and-article-class/38146#38146
+
+See Guido Diepen's [[http://www.guidodiepen.nl/2009/07/creating-latex-beamer-handouts-with-notes/][handoutWithNotes.sty]] for PowerPoint like handout.
 
 #+BEGIN_SRC org :eval no
 ,#+LaTeX_HEADER: \usepackage{handoutWithNotes}
@@ -440,12 +484,13 @@ XXX
 
 ** Print as article
 
+Using beamerarticle
+
 * Customizing presentations
 
 ** LaTeX class (XXX not necessary, does work???)
 
 #+begin_src org
-,#+LATEX_CLASS: beamer
 ,#+LATEX_CLASS_OPTIONS:
 #+end_src
 
@@ -481,18 +526,61 @@ The Beamer back-end reads both
 *affiliated* keywords.
 
 ** Inline LaTeX
+   :PROPERTIES:
+   :BEAMER_opt: allowframebreaks,label=
+   :END:
 
 You can include raw LaTeX in your Org presentations and it will get kept as
 LaTeX when it's exported.
 
 #+begin_src org
 ,#+LaTeX_BEGIN:
-Text can be preformatted (in a fixed-width font).
+\begin{minipage}{4cm}
+...
+\end{minipage}
 ,#+LaTeX_END:
 #+end_src
 
+#+begin_src org
+,#+LaTeX: \parbox{4cm}{...}
+#+end_src
+
+#+begin_src org
+,#+Beamer_BEGIN:
+\begin{minipage}{4cm}
+...
+\end{minipage}
+,#+Beamer_END:
+#+end_src
+
+#+Beamer_BEGIN:
+\framebreak
+#+Beamer_END:
+
 It is especially useful for more *advanced stuff* like images or tables where you
 need more control of the LaTeX options than Org mode actually gives you.
+
+#+begin_src org
+,#+LaTeX_BEGIN:
+\begin{tabular}{|l|l|l|}
+  \hline
+  Text1 & Text2 & Text3 \\
+  \hline
+  \multicolumn{3}{|c|}{Merged text here} \\
+  \hline
+\end{tabular}
+,#+LaTeX_END:
+#+end_src
+
+#+LaTeX_BEGIN:
+\begin{tabular}{|l|l|l|}
+  \hline
+  Text1 & Text2 & Text3 \\
+  \hline
+  \multicolumn{3}{|c|}{Merged text here} \\
+  \hline
+\end{tabular}
+#+LaTeX_END:
 
 ** Using a custom theme
    :PROPERTIES:
@@ -522,6 +610,19 @@ Fonts must be present on the system you're presenting on or it will go back to
 a fallback font.
 
 Font Risque.
+
+#+BEGIN_SRC org
+,#+LaTeX_HEADER: \usepackage[frenchstyle]{kpfonts}
+#+END_SRC
+
+** Adding an image on the title slide
+
+Insert an image in the title slide that fills the whole width of the slide but
+limits to half height.
+
+#+BEGIN_SRC org :eval no
+\titlegraphic{\includegraphics[width=\textwidth,height=.5\textheight]{someimage}}
+#+END_SRC
 
 * Column view
 
@@ -647,7 +748,7 @@ How many primes are there?
 
 Is every even number the sum of two primes?
 
-*** ~alertblock~ environment                                       :B_alertblock:
+*** ~alertblock~ environment                                     :B_alertblock:
     :PROPERTIES:
     :BEAMER_env: alertblock
     :END:
