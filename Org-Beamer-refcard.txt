@@ -1,7 +1,7 @@
 #+TITLE:     Org Beamer quick reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2014-06-14 Sat 22:45>
+#+Time-stamp: <2014-06-14 Sat 23:30>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -328,9 +328,11 @@ plot(cars)
 plot(cars)
 #+end_src
 
+#+begin_center
 #+ATTR_LaTeX: :height 4.5cm
 #+results:
 [[file:qplot.png]]
+#+end_center
 
 ** Creating a table of contents
    :PROPERTIES:
@@ -734,96 +736,96 @@ XXX Use ~ or = in title
 Use a different *block type for the current "block" environment* (default:
 ~block~).
 
-*** ~structureenv~ environment
+** ~structureenv~ environment
 
 - For highlighting text.
 - To help the audience see the structure of your presentation.
 
-**** structureenv                                              :B_structureenv:
-     :PROPERTIES:
-     :BEAMER_env: structureenv
-     :END:
+*** structureenv                                               :B_structureenv:
+    :PROPERTIES:
+    :BEAMER_env: structureenv
+    :END:
 
 Paragraph Heading.
 
-**** End of structureenv                                      :B_ignoreheading:
-     :PROPERTIES:
-     :BEAMER_env: ignoreheading
-     :END:
-
-*** ~block~ environment
-
-**** Answered Questions                                               :B_block:
-     :PROPERTIES:
-     :BEAMER_env: block
-     :END:
-
-How many primes are there?
-
-**** Open Questions                                                   :B_block:
-     :PROPERTIES:
-     :BEAMER_env: block
-     :END:
-
-Is every even number the sum of two primes?
-
-**** End of block                                             :B_ignoreheading:
-     :PROPERTIES:
-     :BEAMER_env: ignoreheading
-     :END:
-
-*** ~block~ environment = the default? Yes, but white lines NOT suppressed!
-
-**** Answered Questions
-
-How many primes are there?
-
-**** Open Questions
-
-Is every even number the sum of two primes?
-
-*** ~alertblock~ environment                                     :B_alertblock:
+*** End of structureenv                                       :B_ignoreheading:
     :PROPERTIES:
-    :BEAMER_env: alertblock
+    :BEAMER_env: ignoreheading
     :END:
+
+** ~block~ environment
+
+*** Answered Questions                                                :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+How many primes are there?
+
+*** Open Questions                                                    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+Is every even number the sum of two primes?
+
+*** End of block                                              :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
+
+** ~block~ environment = the default? Yes, but white lines NOT suppressed!
+
+*** Answered Questions
+
+How many primes are there?
+
+*** Open Questions
+
+Is every even number the sum of two primes?
+
+** ~alertblock~ environment                                        :B_alertblock:
+   :PROPERTIES:
+   :BEAMER_env: alertblock
+   :END:
 
 - Inserts a block whose title is highlighted.
 - Behaves like the ~block~ environment otherwise.
 
-**** Wrong theorem
+*** Wrong theorem
 
 /1=2/.
 
-**** End of alertblock                                        :B_ignoreheading:
-     :PROPERTIES:
-     :BEAMER_env: ignoreheading
-     :END:
+*** End of alertblock                                         :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
 
-*** ~exampleblock~ environment
+** ~exampleblock~ environment
 
 - Inserts a block that is supposed to be an example.
 - Behaves like the ~block~ environment otherwise.
 
-**** Example                                                   :B_exampleblock:
-     :PROPERTIES:
-     :BEAMER_env: exampleblock
-     :END:
+*** Example                                                    :B_exampleblock:
+    :PROPERTIES:
+    :BEAMER_env: exampleblock
+    :END:
 
 The set /{1,2,3,5}/ has four elements.
 
-**** End of exampleblock                                      :B_ignoreheading:
-      :PROPERTIES:
-      :BEAMER_env: ignoreheading
-      :END:
+*** End of exampleblock                                       :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
 
-*** ~theorem~ environment
+** ~theorem~ environment
 
 - Inserts a theorem.
 
-**** This title won't be displayed                                  :B_theorem:
-     :PROPERTIES:
-     :BEAMER_env: theorem
-     :END:
+*** This title won't be displayed                                   :B_theorem:
+    :PROPERTIES:
+    :BEAMER_env: theorem
+    :END:
 
 There is no largest prime number.
 
@@ -831,15 +833,15 @@ Org mode + Beamer = productivity^{2}
 
 #+LaTeX: \hfill \(\qed\)
 
-**** End of theorem                                           :B_ignoreheading:
-     :PROPERTIES:
-     :BEAMER_env: ignoreheading
-     :END:
+*** End of theorem                                            :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
 
 If there is nothing after the block, no need to insert a heading for
 demarcating the end.
 
-*** ~theorem~ environment
+** ~theorem~ environment
 
 - Inserts a theorem.
 - Simpler solution
@@ -851,52 +853,52 @@ demarcating the end.
 There is no largest prime number.
 #+end_block
 
-*** ~corollary~ environment
+** ~corollary~ environment
 
-*** ~lemma~ environment
+** ~lemma~ environment
 
-*** ~definition~ environment
+** ~definition~ environment
 
 - Behaves like the ~theorem~ environment, except that the theorem style
   ~definition~ is used.
 - In this style, the body of a ~theorem~ is typeset in an upright font.
 
-**** definition                                                  :B_definition:
-     :PROPERTIES:
-     :BEAMER_env: definition
-     :END:
+*** definition                                                   :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
 
 Contents of definition
 
-**** End of definition                                        :B_ignoreheading:
-     :PROPERTIES:
-     :BEAMER_env: ignoreheading
-     :END:
+*** End of definition                                         :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
 
-*** ~definitions~ environment
+** ~definitions~ environment
 
-*** ~fact~ environment
+** ~fact~ environment
 
-*** ~example~ environment
+** ~example~ environment
 
 - Behaves like the theorem environment, except that the theorem style ~example~
   is used.
 - A side-effect of using this theorem style is that the contents is put in an
   ~exampleblock~ instead of a ~block~.
 
-**** Example                                                        :B_example:
-     :PROPERTIES:
-     :BEAMER_env: example
-     :END:
+*** Example                                                         :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
 
 Contents of example
 
-**** End of example                                           :B_ignoreheading:
-     :PROPERTIES:
-     :BEAMER_env: ignoreheading
-     :END:
+*** End of example                                            :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
 
-*** ~example~ environment
+** ~example~ environment
 
 - Simpler solution:
 
@@ -904,16 +906,16 @@ Contents of example
 Contents of example
 #+end_example
 
-*** ~examples~ environment
+** ~examples~ environment
 
-*** ~proof~ environment
+** ~proof~ environment
 
 - Typesets a proof. FINAL dot added...
 
-**** proof                                                            :B_proof:
-     :PROPERTIES:
-     :BEAMER_env: proof
-     :END:
+*** proof                                                             :B_proof:
+    :PROPERTIES:
+    :BEAMER_env: proof
+    :END:
 
 - <1-| alert@1> Suppose /p/ were the largest prime number.
 - <2-> Let /q/ be the product of the first /p/ numbers.
@@ -921,43 +923,43 @@ Contents of example
 - <1-> But /q + 1/ is greater than /1/, thus divisible by some prime number
   not in the first /p/ numbers.\qedhere
 
-**** End of proof                                             :B_ignoreheading:
-     :PROPERTIES:
-     :BEAMER_env: ignoreheading
-     :END:
+*** End of proof                                              :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
 
-*** ~beamercolorbox~ environment
+** ~beamercolorbox~ environment
 
 - Create colored boxes.
 - The ~beamer color~ is the heading text, for example ~title in head/foot~.
 
-**** beamercolorbox                                          :B_beamercolorbox:
-     :PROPERTIES:
-     :BEAMER_env: beamercolorbox
-     :END:
+*** beamercolorbox                                           :B_beamercolorbox:
+    :PROPERTIES:
+    :BEAMER_env: beamercolorbox
+    :END:
 
 Text
 
-**** End of beamercolorbox                                    :B_ignoreheading:
-     :PROPERTIES:
-     :BEAMER_env: ignoreheading
-     :END:
+*** End of beamercolorbox                                     :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
 
-*** ~verse~ environment
+** ~verse~ environment
 
-**** verse                                                            :B_verse:
-     :PROPERTIES:
-     :BEAMER_env: verse
-     :END:
+*** verse                                                             :B_verse:
+    :PROPERTIES:
+    :BEAMER_env: verse
+    :END:
 
 Contents of verse
 
-**** End of verse                                             :B_ignoreheading:
-     :PROPERTIES:
-     :BEAMER_env: ignoreheading
-     :END:
+*** End of verse                                              :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
 
-*** ~verse~ environment
+** ~verse~ environment
 
 - Simpler solution:
 
@@ -965,41 +967,41 @@ Contents of verse
 Contents of verse
 #+end_verse
 
-*** ~quotation~ environment
+** ~quotation~ environment
 
 - Use ~quote~ or ~quotation~ to typeset quoted text.
 - ~quotation~ has paragraph indentation.
 
-**** quotation                                                    :B_quotation:
-     :PROPERTIES:
-     :BEAMER_env: quotation
-     :END:
+*** quotation                                                     :B_quotation:
+    :PROPERTIES:
+    :BEAMER_env: quotation
+    :END:
 
 Contents of quotation
 
-**** End of quotation                                         :B_ignoreheading:
-     :PROPERTIES:
-     :BEAMER_env: ignoreheading
-     :END:
+*** End of quotation                                          :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
 
-*** ~quote~ environment
+** ~quote~ environment
 
 - Use ~quote~ or ~quotation~ to typeset quoted text.
 - ~quote~ hasn't paragraph indentation.
 
-**** quote                                                            :B_quote:
-     :PROPERTIES:
-     :BEAMER_env: quote
-     :END:
+*** quote                                                             :B_quote:
+    :PROPERTIES:
+    :BEAMER_env: quote
+    :END:
 
 Contents of quote
 
-**** End of quote                                             :B_ignoreheading:
-     :PROPERTIES:
-     :BEAMER_env: ignoreheading
-     :END:
+*** End of quote                                              :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
 
-*** ~quote~ environment
+** ~quote~ environment
 
 - Use ~quote~ or ~quotation~ to typeset quoted text.
 - ~quote~ hasn't paragraph indentation.
@@ -1019,33 +1021,7 @@ XXX
 # From "Loris' Adventures in Orgland"
 # #+LaTeX: \par\end{raddedleft}
 
-*** Verbatim
-
-#+begin_src c
-int main (void)
-{
-  std::vector<bool> is_prime (100, true);
-  for (int i = 2; i < 100; i++)
-    if (is_prime[i])
-      {
-        std::cout << i << " ";
-        for (int j = i; j < 100;
-             is_prime [j] = false, j+=i);
-      }
-  return 0;
-}
-#+end_src
-
-- This code block is properly indented in both Org and in PDF
-
-  #+begin_src java
-  if (test)
-  {
-      doit
-  }
-  #+end_src
-
-*** Add extra environments
+** Add extra environments
 
 For simple environments, use:
 
@@ -1075,9 +1051,9 @@ WDYT?
 - Additional arguments may be written into the environment's heading, and
   inserted into the LaTeX string using %r (raw heading text, no processing).
 
-** Special cases
+* Special cases
 
-*** appendix
+** appendix
 
 You can add an appendix (frames that you do not intend to show during your
 talk, but which might be useful to answer a question) by inserting such a *level
@@ -1095,7 +1071,7 @@ talk, but which might be useful to answer a question) by inserting such a *level
 Ignoring page number in backup slides can be achieved by setting the option
 ~noframenumbering~ on all "backup" slides.
 
-*** COMMENT note
+** COMMENT note
 
 To keep your presentation notes (reminders about what to say), add a heading
 below the frame, and select the ~note~ environment.
@@ -1112,11 +1088,11 @@ below the frame, and select the ~note~ environment.
 - Then this.
 #+end_src
 
-*** noteNH
+** noteNH
 
 Note with its title ignored.
 
-*** againframe
+** againframe
 
 You can "continue" frames that you previously started somewhere (but where
 certain details have been suppressed) at a much later point (for example only
@@ -1141,10 +1117,10 @@ resumed: ~:BEAMER_ref: *My frame title~.
 
 XXX How to label a frame?  Via ~:BEAMER_opt: label=id~ or via other means?
 
-*** ignoreheading                                             :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
+** ignoreheading                                              :B_ignoreheading:
+   :PROPERTIES:
+   :BEAMER_env: ignoreheading
+   :END:
 
 - A heading with an ~ignoreheading~ environment will have only its contents
   inserted in the output.
@@ -1210,11 +1186,13 @@ Dynamic lists are possible on a case by case basis :
 - @@beamer:<2->@@ Item 2
 #+end_src
 
-** The Queen's old armchair                                           :B_block:
-  :PROPERTIES:
-  :BEAMER_env: block
-  :BEAMER_envargs: <1->
-  :END:
+** Overlay specification: BEAMER_act
+
+*** The Queen's old armchair                                          :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :BEAMER_envargs: <1->
+    :END:
 
 - Princess Anne
 - Prince Charles
@@ -1423,7 +1401,7 @@ For single frames, you can use the same option locally:
 You can add that *special property* by editing the ~Opt~ column within the "column
 view" (first press ~C-c C-x C-c~) .
 
-*** Result of an evaluation on two columns
+** Result of an evaluation on two columns
 
 Balancing text in columns.
 
@@ -1447,7 +1425,7 @@ Balancing text in columns.
 
 #+LaTeX: \end{multicols}
 
-*** Big title in the middle
+** Big title in the middle
 
 \begin{center}
   \begin{minipage}[h]{.75\textwidth}
