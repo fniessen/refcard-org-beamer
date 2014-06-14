@@ -1,7 +1,7 @@
 #+TITLE:     Org Beamer quick reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2014-06-13 Fri 23:29>
+#+Time-stamp: <2014-06-14 Sat 22:45>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -37,12 +37,12 @@
 
 #+INCLUDE: "~/src/stage-latex-dunkerque-2013/style/listings.org"
 
-#+LaTeX_HEADER: \lstdefinelanguage{R}{}
+#+LATEX_HEADER: \lstdefinelanguage{R}{}
 
-#+LaTeX_HEADER: \definecolor{mylinkcolor}{HTML}{006DAF}
-#+LaTeX_HEADER: \hypersetup{colorlinks=true, linkcolor=mylinkcolor, urlcolor=mylinkcolor}
+#+LATEX_HEADER: \definecolor{mylinkcolor}{HTML}{006DAF}
+#+LATEX_HEADER: \hypersetup{colorlinks=true, linkcolor=mylinkcolor, urlcolor=mylinkcolor}
 
-#+LaTeX_HEADER: \usepackage{tikz}
+#+LATEX_HEADER: \usepackage{tikz}
 # For every picture that defines or uses external nodes, you'll have to
 # apply the 'remember picture' style. To avoid some typing, we'll apply
 # the style to all pictures.
@@ -102,7 +102,7 @@ The obvious advantages of this approach are that:
    :ID:       c4f6745b-2147-4538-bd96-9f8e1e1d4669
    :END:
 
-- A working LaTeX installation is required for exporting to PDF. If it is not
+- A working LaTeX installation is required for exporting to PDF.  If it is not
   yet installed on your system, install [[http://www.tug.org/texlive/][TeX Live]] (for example).
 
 - You must define a ~beamer~ class in ~org-latex-export-classes~:
@@ -130,8 +130,8 @@ The obvious advantages of this approach are that:
    :BEAMER_opt: allowframebreaks,label=
    :END:
 
-The very first frame in a Beamer presentation is the *title page*.  By default,
-it will automatically be displayed with the following elements:
+The very first slide (called *frame* in a Beamer presentation) is the *title page*.
+By default, it will automatically be displayed with the following elements:
 
 - the document *title*
 
@@ -196,39 +196,35 @@ Org mode presentations contain headings at different levels.
 By default,
 
 - Headings at the *first* outline level will become *titles* of the different
-  slides (called *frames* in Beamer).
-
-  #+begin_src org
-  ,* A title
-  #+end_src
+  frames.
 
 - *Deeper* levels will be used as *structural environments*.
 
-  #+begin_src org
-  ,* A title
-
-  ,** Block
-
-  This is a block.
-  #+end_src
-
-- The *table of contents* frame is created but is blank ([[id:b4252974-1d3d-4652-b42e-e7cd016f45f7][you'll understand
-  later]]).
+- The *table of contents* frame is created but is blank
+  ([[id:b4252974-1d3d-4652-b42e-e7cd016f45f7][you'll understand later]]).
 
   You can remove it by setting the ~toc~ option (default: ~t~) from the ~#+OPTIONS:~
   keyword to ~nil~:
 
-  #+begin_src org
-  ,#+OPTIONS: toc:nil
-  #+end_src
+#+begin_src org
+,#+OPTIONS: toc:nil
+
+,* Frame 1
+
+Some content.
+
+,** Block
+
+This is a block.
+#+end_src
 
 ** Creating a simple frame
 
 To create a frame with bullets, you simply use standard Org mode bullets:
 
 #+begin_src org
-,* Frame 1
-  #+BEAMER: \framesubtitle{A subtitle}
+,* A title
+  #+Beamer: \framesubtitle{A subtitle}
 
 - Bullet 1
 - Bullet 2
@@ -263,6 +259,12 @@ summary(cars)
 | Mean   :15.4 | Mean   : 42.98 |
 | 3rd Qu.:19.0 | 3rd Qu.: 56.00 |
 | Max.   :25.0 | Max.   :120.00 |
+
+XXX Is this needed?
+
+#+BEGIN_SRC org
+,#+LATEX_HEADER: \lstdefinelanguage{R}{}
+#+END_SRC
 
 ** Frame with code only
 
@@ -330,42 +332,46 @@ plot(cars)
 #+results:
 [[file:qplot.png]]
 
-** Creating a table of contents (H:2)
+** Creating a table of contents
    :PROPERTIES:
    :ID:       b4252974-1d3d-4652-b42e-e7cd016f45f7
+   :BEAMER_opt: allowframebreaks,label=
    :END:
 
-If you set the ~H~ option from the ~#+OPTIONS:~ keyword such as:
+If you set the ~H~ option from the ~#+OPTIONS:~ keyword (or the
+~org-beamer-frame-level~ variable) to ~2~:
 
 #+begin_src org
-,#+OPTIONS: H:2
+,#+OPTIONS: H:2 toc:t
 #+end_src
 
 then:
 
-- *First-level* headlines become *sections* listed in the table of contents[fn::
+- *First-level* headings become *sections* listed in the table of contents[fn::
   The items in the TOC are clickable and take you to specific frames in the
   presentation.], and
 
-- *Second-level* headlines become the *frames*.
+- *Second-level* headings become the *frames*.
 
-** Creating a table of contents (H:3)
+XXX Misplaced footnote!
 
-If you set the ~H~ option such as:
+#+Beamer: \framebreak
+
+If you set the ~H~ value to ~3~ in the ~OPTIONS~ line:
 
 #+begin_src org
-,#+OPTIONS: H:3
+,#+OPTIONS: H:3 toc:t
 #+end_src
 
 then:
 
-+ *First-* and *second-level* headlines become *sections* and *subsections* listed in
++ *First-* and *second-level* headings become *sections* and *subsections* listed in
   the table of contents, and
 
-+ *Third-level* headlines become the *frames*.
++ *Third-level* headings become the *frames*.
 
 In many themes, sections (and subsections, when ~H:3~) appear in the sidebar or
-headline.
+heading.
 
 ** Present a bibliography
 
@@ -392,7 +398,7 @@ export menu:
      *Export as PDF file* (Beamer).
 
 - ~C-c C-e l O~ ::
-     Export as PDF file and open (Beamer).
+     Export as PDF file and *open* (Beamer).
 
 ** Support editing
 
@@ -426,30 +432,30 @@ removed and just the last "slide" of each frame is printed.
 #+begin_src org
 ,#+LATEX_CLASS_OPTIONS: [handout]
 
-,#+LaTeX_HEADER: \usepackage{pgfpages}
-,#+LaTeX_HEADER: \mode<handout>
-,#+LaTeX_HEADER: {
-,#+LaTeX_HEADER:   ... see below ...
-,#+LaTeX_HEADER: }
+,#+LATEX_HEADER: \usepackage{pgfpages}
+,#+LATEX_HEADER: \mode<handout>
+,#+LATEX_HEADER: {
+,#+LATEX_HEADER:   ... see below ...
+,#+LATEX_HEADER: }
 #+end_src
 
 - with *one frame* per A4 page (extending page size)
 
   #+begin_src org
-  ,#+LaTeX_HEADER:   \pgfpagesuselayout{resize to}[a4paper,landscape]
+  ,#+LATEX_HEADER:   \pgfpagesuselayout{resize to}[a4paper,landscape]
   #+end_src
 
 - with *two frames* per A4 page
 
   #+begin_src org
-  ,#+LaTeX_HEADER:   \pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+  ,#+LATEX_HEADER:   \pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
   #+end_src
 
 - with *four frames* per A4 page
 
   #+begin_src org
-  ,#+LaTeX_HEADER:   \pgfpagesuselayout{4 on 1}[a4paper,border shrink=5mm,%
-  ,#+LaTeX_HEADER:                              landscape]
+  ,#+LATEX_HEADER:   \pgfpagesuselayout{4 on 1}[a4paper,border shrink=5mm,%
+  ,#+LATEX_HEADER:                              landscape]
   #+end_src
 
 ** Draw a border around the frames
@@ -457,10 +463,10 @@ removed and just the last "slide" of each frame is printed.
 Add a rectangle around each frame in the handout:
 
 #+begin_src org
-,#+LaTeX_HEADER: \setbeamertemplate{background canvas}{
-,#+LaTeX_HEADER:   \tikz \draw (current page.north west) rectangle
-,#+LaTeX_HEADER:               (current page.south east);
-,#+LaTeX_HEADER: }
+,#+LATEX_HEADER: \setbeamertemplate{background canvas}{
+,#+LATEX_HEADER:   \tikz \draw (current page.north west) rectangle
+,#+LATEX_HEADER:               (current page.south east);
+,#+LATEX_HEADER: }
 #+end_src
 
 ** Show speaker notes
@@ -478,8 +484,8 @@ See http://tex.stackexchange.com/questions/38084/displaying-slides-with-beamer-a
 See Guido Diepen's [[http://www.guidodiepen.nl/2009/07/creating-latex-beamer-handouts-with-notes/][handoutWithNotes.sty]] for PowerPoint like handout.
 
 #+BEGIN_SRC org :eval no
-,#+LaTeX_HEADER: \usepackage{handoutWithNotes}
-,#+LaTeX_HEADER: \pgfpagesuselayout{3 on 1 with notes}[a4paper,border shrink=5mm]
+,#+LATEX_HEADER: \usepackage{handoutWithNotes}
+,#+LATEX_HEADER: \pgfpagesuselayout{3 on 1 with notes}[a4paper,border shrink=5mm]
 #+END_SRC
 
 ** Print as article
@@ -508,13 +514,95 @@ Append any line of code in the *LaTeX preamble* with keywords specific to the
 LaTeX and Beamer back-ends:
 
 #+begin_src org
-,#+LaTeX_HEADER:       \usepackage{...}
-,#+LaTeX_HEADER_EXTRA: \usepackage{...}
+,#+LATEX_HEADER:       \usepackage{...}
+,#+LATEX_HEADER_EXTRA: \usepackage{...}
 ,#+BEAMER_HEADER:      \institute[short name]{Institute}
 #+end_src
 
 It will go (in that order) in the ~[EXTRA]~ placeholder of the header associated
 to the ~beamer~ LaTeX class (see [[id:c4f6745b-2147-4538-bd96-9f8e1e1d4669][~org-latex-classes~]]).
+
+** Inline LaTeX
+   :PROPERTIES:
+   :BEAMER_opt: allowframebreaks,label=
+   :END:
+
+You can include raw LaTeX in your Org presentations and it will get kept as
+LaTeX when it's exported.
+
+*** Left                                                                :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.43
+    :END:
+
+#+begin_src org
+,#+begin_LaTeX
+\begin{minipage}{4cm}
+...
+\end{minipage}
+,#+end_LaTeX
+#+end_src
+
+#+begin_src org
+,#+LaTeX: \parbox{4cm}{...}
+#+end_src
+
+Such LaTeX code will only be present in the exports to *LaTeX and Beamer*.
+
+*** Right                                                               :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.43
+    :END:
+
+#+begin_src org
+,#+begin_Beamer
+\begin{minipage}{4cm}
+...
+\end{minipage}
+,#+end_Beamer
+#+end_src
+
+#+begin_src org
+,#+Beamer: \parbox{4cm}{...}
+#+end_src
+
+Such LaTeX code will only be present in the export to *Beamer*.
+
+*** Back to one column                                        :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
+
+#+Beamer: \framebreak
+
+It is especially useful for more *advanced stuff* like images or tables where you
+need more control of the LaTeX options than Org mode actually gives you.
+
+For example, to insert a table with colspan or rowspan support:
+
+#+begin_src org
+,#+begin_LaTeX
+\begin{tabular}{|l|l|l|}
+  \hline
+  Text1 & Text2 & Text3 \\
+  \hline
+  \multicolumn{3}{|c|}{Merged text here} \\
+  \hline
+\end{tabular}
+,#+end_LaTeX
+#+end_src
+
+#+begin_center
+#+begin_LaTeX
+\begin{tabular}{|l|l|l|}
+  \hline
+  Text1 & Text2 & Text3 \\
+  \hline
+  \multicolumn{3}{|c|}{Merged text here} \\
+  \hline
+\end{tabular}
+#+end_LaTeX
+#+end_center
 
 ** Affiliated keywords
 
@@ -525,62 +613,7 @@ The Beamer back-end reads both
 
 *affiliated* keywords.
 
-** Inline LaTeX
-   :PROPERTIES:
-   :BEAMER_opt: allowframebreaks,label=
-   :END:
-
-You can include raw LaTeX in your Org presentations and it will get kept as
-LaTeX when it's exported.
-
-#+begin_src org
-,#+LaTeX_BEGIN:
-\begin{minipage}{4cm}
-...
-\end{minipage}
-,#+LaTeX_END:
-#+end_src
-
-#+begin_src org
-,#+LaTeX: \parbox{4cm}{...}
-#+end_src
-
-#+begin_src org
-,#+Beamer_BEGIN:
-\begin{minipage}{4cm}
-...
-\end{minipage}
-,#+Beamer_END:
-#+end_src
-
-#+Beamer_BEGIN:
-\framebreak
-#+Beamer_END:
-
-It is especially useful for more *advanced stuff* like images or tables where you
-need more control of the LaTeX options than Org mode actually gives you.
-
-#+begin_src org
-,#+LaTeX_BEGIN:
-\begin{tabular}{|l|l|l|}
-  \hline
-  Text1 & Text2 & Text3 \\
-  \hline
-  \multicolumn{3}{|c|}{Merged text here} \\
-  \hline
-\end{tabular}
-,#+LaTeX_END:
-#+end_src
-
-#+LaTeX_BEGIN:
-\begin{tabular}{|l|l|l|}
-  \hline
-  Text1 & Text2 & Text3 \\
-  \hline
-  \multicolumn{3}{|c|}{Merged text here} \\
-  \hline
-\end{tabular}
-#+LaTeX_END:
+XXX Code with figure or table
 
 ** Using a custom theme
    :PROPERTIES:
@@ -612,7 +645,7 @@ a fallback font.
 Font Risque.
 
 #+BEGIN_SRC org
-,#+LaTeX_HEADER: \usepackage[frenchstyle]{kpfonts}
+,#+LATEX_HEADER: \usepackage[frenchstyle]{kpfonts}
 #+END_SRC
 
 ** Adding an image on the title slide
@@ -621,8 +654,10 @@ Insert an image in the title slide that fills the whole width of the slide but
 limits to half height.
 
 #+BEGIN_SRC org :eval no
-\titlegraphic{\includegraphics[width=\textwidth,height=.5\textheight]{someimage}}
+,#+BEAMER_HEADER: \titlegraphic{\includegraphics[width=\textwidth,height=.5\textheight]{someimage}}
 #+END_SRC
+
+#+BEAMER_HEADER: \titlegraphic{\includegraphics[width=\textwidth,height=.5\textheight]{images/someimage}}
 
 * Column view
 
@@ -637,7 +672,7 @@ For a column view of options and configurations for the individual frames
 
 * Environments
 
-** Environment specification (BEAMER_env property)
+** Environment specification: BEAMER_env
 
 XXX Put = around BEAMER_env in title...
 
@@ -650,32 +685,31 @@ XXX Put = around BEAMER_env in title...
     :BEAMER_env: frame
     :END:
 
-- Headlines become frames when their level is equal to ~org-beamer-frame-level~
-  (or ~H~ value in the ~OPTIONS~ line).
+If a heading in the current tree has a ~BEAMER_env~ property set to either ~frame~
+or ~fullframe~, its level overrides the ~H~ value, giving you some flexibility in
+deciding *what is* and what isn't *a frame*.
 
-- Though, if a headline in the current tree has a ~BEAMER_env~ property set to
-  either ~frame~ or ~fullframe~, its level overrides the variable, giving you some
-  flexibility in deciding *what is* and what isn't *a frame*.
+#+begin_src org
+,#+OPTIONS: H:2 toc:t
 
-  #+begin_src org
-  ,* Section 1
+,* Section 1
 
-  ,** Frame
+,** Frame
 
-  ,* Section 2
+,* Section 2
 
-  ,** Subsection 2.1
+,** Subsection 2.1
 
-  ,*** Frame                                                           :B_frame:
-      :PROPERTIES:
-      :BEAMER_env: frame
-      :END:
+,*** Frame                                                           :B_frame:
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
 
-  This becomes a frame, instead of a block!
-  #+end_src
+This becomes a frame, instead of a block!
+#+end_src
 
-  This works in both "directions": to *add or* to *remove sectioning levels*
-  above the current headline (which becomes a frame)!
+This works in both "directions": to *add or* to *remove sectioning levels* above
+the current heading (which becomes a frame)!
 
 *** fullframe                                                     :B_fullframe:
     :PROPERTIES:
@@ -895,7 +929,7 @@ Contents of example
 *** ~beamercolorbox~ environment
 
 - Create colored boxes.
-- The ~beamer color~ is the headline text, for example ~title in head/foot~.
+- The ~beamer color~ is the heading text, for example ~title in head/foot~.
 
 **** beamercolorbox                                          :B_beamercolorbox:
      :PROPERTIES:
@@ -1023,9 +1057,9 @@ For simple environments, use:
 
 I think we should changes some environment placeholders:
 
-  + Introduce %r which would stand for the raw headline (without any
+  + Introduce %r which would stand for the raw heading (without any
     processing)
-  + %H and %U would use the raw headline text instead.
+  + %H and %U would use the raw heading text instead.
 
 The previous definition would become:
 
@@ -1038,8 +1072,8 @@ WDYT?
   environment definition.
   (with an example, but I can't think of one now)
 
-- Additional arguments may be written into the environment's headline, and
-  inserted into the LaTeX string using %r (raw headline text, no processing).
+- Additional arguments may be written into the environment's heading, and
+  inserted into the LaTeX string using %r (raw heading text, no processing).
 
 ** Special cases
 
@@ -1047,7 +1081,7 @@ WDYT?
 
 You can add an appendix (frames that you do not intend to show during your
 talk, but which might be useful to answer a question) by inserting such a *level
-1 headline* after the last regular slide of your actual presentation:
+1 heading* after the last regular slide of your actual presentation:
 
 #+begin_src org
 ,* Appendix material follows                                        :B_appendix:
@@ -1063,11 +1097,11 @@ Ignoring page number in backup slides can be achieved by setting the option
 
 *** COMMENT note
 
-To keep your presentation notes (reminders about what to say), add a headline
+To keep your presentation notes (reminders about what to say), add a heading
 below the frame, and select the ~note~ environment.
 
 #+begin_src org
-,#+LaTeX_HEADER: \setbeameroption{show notes}
+,#+LATEX_HEADER: \setbeameroption{show notes}
 
 ,*** Some note                                                          :B_note:
     :PROPERTIES:
@@ -1112,7 +1146,7 @@ XXX How to label a frame?  Via ~:BEAMER_opt: label=id~ or via other means?
     :BEAMER_env: ignoreheading
     :END:
 
-- A headline with an ~ignoreheading~ environment will have only its contents
+- A heading with an ~ignoreheading~ environment will have only its contents
   inserted in the output.
   + Contents is not inserted in any ~frame~ environment...
 
@@ -1137,15 +1171,15 @@ As for an :overlay specification, I believe it is already supported but
 only for lists (ox-beamer.el:725).  I would love to have that for images
 too!
 
-** Overlay specification (BEAMER_act property)
+** Overlay specification: BEAMER_act
 
 Set *overlay* specifications in current block to *create dynamic effects* (/multiple
 slides/, called /overlays/, for a single frame) = old ~BEAMER_envargs~ property.
 
-Headlines support the ~BEAMER_act~ property:
+Headings support the ~BEAMER_act~ property:
 
 #+begin_src org
-,* Headline
+,* Heading
   :PROPERTIES:
   :BEAMER_act: [+-]
   :END:
@@ -1201,13 +1235,13 @@ Dynamic lists are possible on a case by case basis :
 The following works for me:
 
 #+begin_src org
- #+beamer: \only<1>{
+ #+Beamer: \only<1>{
  [[file:figure1.png]]
- #+beamer: }\only<2>{
+ #+Beamer: }\only<2>{
  [[file:figure2.png]]
- #+beamer: }\only<3->{
+ #+Beamer: }\only<3->{
  [[file:figures3.png]]
- #+beamer: }
+ #+Beamer: }
 #+end_src
 
 There is the ~BEAMER_act~ property that can be used to apply overlay
@@ -1237,7 +1271,7 @@ following/attached will match what you had originally.
 
 * Options
 
-** Option specification (BEAMER_opt property)
+** Option specification: BEAMER_opt
 
 Insert *optional arguments for the current ~frame~ environment* using the
 ~BEAMER_OPT~ property.
@@ -1248,7 +1282,7 @@ I'd still like to see something more like a "for-dummies" explanation of
 passing options and arguments to LaTeX entities. I'm not saying the
 documentation is woefully inadequate (hardly that -- Suvayu's page got me
 rather far, and I got stuck on a couple of details). My experience was: it
-never would have occurred to me on my own to use the headline text for
+never would have occurred to me on my own to use the heading text for
 LaTeX code, and if there was a hint anywhere in the docs to suggest that
 this would be the way to go, I didn't find it. That's a conceptual leap
 that passed me by.
@@ -1264,16 +1298,16 @@ that passed me by.
 
 * Columns
 
-** Column specification (BEAMER_COL property)
+** Column specification: BEAMER_COL
 
 ** Splitting a frame into multiple columns
 
 To get multiple columns in a frame:
 
-1. Press ~C-c C-b |~ (~BMCOL~) on the headlines (inside the frame) which will
+1. Press ~C-c C-b |~ (~BMCOL~) on the headings (inside the frame) which will
    become columns
 
-   The headline of column environments won't be outputted in the PDF file.
+   The heading of column environments won't be outputted in the PDF file.
 
 2. Specify the *column width* as a *percentage* of ~\textwidth~
 
@@ -1393,7 +1427,7 @@ view" (first press ~C-c C-x C-c~) .
 
 Balancing text in columns.
 
-#+LaTeX_HEADER: \usepackage{multicol}
+#+LATEX_HEADER: \usepackage{multicol}
 
 #+LaTeX: \begin{multicols}{2}
 
