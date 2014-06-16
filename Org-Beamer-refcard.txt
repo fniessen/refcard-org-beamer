@@ -1,7 +1,7 @@
 #+TITLE:     Org Beamer quick reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2014-06-15 Sun 23:25>
+#+Time-stamp: <2014-06-16 Mon 23:45>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -422,6 +422,10 @@ You can also turn it on with:
 
 in your document.
 
+** Label!!!
+
+Label to theorem.
+
 * Distributing presentations
 
 ** Create a handout
@@ -661,8 +665,6 @@ limits to half height.
 
 #+BEAMER_HEADER: \titlegraphic{\includegraphics[width=\textwidth,height=.5\textheight]{images/someimage}}
 
-* Column view
-
 ** Column view
 
 For a column view of options and configurations for the individual frames
@@ -676,7 +678,7 @@ For a column view of options and configurations for the individual frames
 
 ** Environment specification: BEAMER_env
 
-XXX Put = around BEAMER_env in title...
+XXX Put = or ~ around BEAMER_env in title...
 
 - This becomes visible through the =B_frame= tag (visual aid only).
 
@@ -718,62 +720,53 @@ the current heading (which becomes a frame)!
     :BEAMER_env: fullframe
     :END:
 
-- A frame automatically display its title unless it is specified as
-  a ~fullframe~.
+If a heading in the current tree has a ~BEAMER_env~ property set to ~fullframe~,
+the frame will *not display its title* (~frametitle~ is being set to the empty
+string).
 
-- ~fullframe~ is the same as the ~frame~ specification, but with an ignored title
-  (~frametitle~ is set to the empty string).
+#+BEGIN_SRC org
+,*** Frame                                                         :B_fullframe:
+    :PROPERTIES:
+    :BEAMER_env: fullframe
+    :END:
 
-** Blocks
+This becomes a frame, with its title ignored!
+#+END_SRC
+
+** ~block~ environment
    :PROPERTIES:
    :ID:       77f1b7a3-6e7d-4f2b-bd1f-02e6f02bba2f
    :END:
 
-*** Environment specification (BEAMER_env property)
+Insert a *default block* (syntax assumes ~H:2~).
 
-XXX Use ~ or = in title
+#+begin_src org
+,*** A block
 
-Use a different *block type for the current "block" environment* (default:
-~block~).
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua.
+#+end_src
 
-** ~block~ environment
+*** A block
 
-*** Answered Questions                                                :B_block:
-    :PROPERTIES:
-    :BEAMER_env: block
-    :END:
-
-How many primes are there?
-
-*** Open Questions                                                    :B_block:
-    :PROPERTIES:
-    :BEAMER_env: block
-    :END:
-
-Is every even number the sum of two primes?
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua.
 
 *** End of block                                              :B_ignoreheading:
     :PROPERTIES:
     :BEAMER_env: ignoreheading
     :END:
 
-** ~block~ environment = the default? Yes, but white lines NOT suppressed!
+Comments:
 
-*** Answered Questions
+- Use the ~BEAMER_env~ *property* to specify a *different block type* for the current
+  "block" environment.
 
-How many primes are there?
+- Use [[id:7bf1634d-2bd6-484b-adae-67a80846cdf4][ignoreheading]] to terminate a block environment
 
-*** Open Questions
+** ~alertblock~ environment
 
-Is every even number the sum of two primes?
-
-** ~alertblock~ environment                                        :B_alertblock:
-   :PROPERTIES:
-   :BEAMER_env: alertblock
-   :END:
-
-- Inserts a block whose title is highlighted.
-- Behaves like the ~block~ environment otherwise.
+Insert a block whose title is *highlighted*.
 
 #+BEGIN_SRC org
 ,*** An alert block                                               :B_alertblock:
@@ -781,12 +774,8 @@ Is every even number the sum of two primes?
     :BEAMER_env: alertblock
     :END:
 
-/1=2/.
-
-,*** End of alert block                                        :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua.
 #+END_SRC
 
 *** An alert block                                               :B_alertblock:
@@ -794,17 +783,12 @@ Is every even number the sum of two primes?
     :BEAMER_env: alertblock
     :END:
 
-/1=2/.
-
-*** End of alert block                                        :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua.
 
 ** ~exampleblock~ environment
 
-- Inserts a block that is supposed to be an example.
-- Behaves like the ~block~ environment otherwise.
+Insert a block that is supposed to be an *example*.
 
 #+BEGIN_SRC org
 ,*** An example block                                           :B_exampleblock:
@@ -812,12 +796,8 @@ Is every even number the sum of two primes?
     :BEAMER_env: exampleblock
     :END:
 
-The set /{1,2,3,5}/ has four elements.
-
-,*** End of example block                                      :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua.
 #+END_SRC
 
 *** An example block                                           :B_exampleblock:
@@ -825,29 +805,35 @@ The set /{1,2,3,5}/ has four elements.
     :BEAMER_env: exampleblock
     :END:
 
-The set /{1,2,3,5}/ has four elements.
-
-*** End of example block                                      :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua.
 
 ** ~beamercolorbox~ environment
 
-- Create colored boxes.
-- The ~beamer color~ is the heading text, for example ~title in head/foot~.
+Create *colored boxes* whose "beamer color" to use (= a *pair of colors*: ~bg~ + ~fg~)
+is defined by the heading text, for example ~title in head/foot~ or ~myblockcolor~.
 
-*** beamercolorbox                                           :B_beamercolorbox:
+#+BEGIN_SRC org
+,#+LaTeX: \setbeamercolor{myblockcolor}{bg=magenta,fg=white}
+
+,*** myblockcolor                                             :B_beamercolorbox:
     :PROPERTIES:
     :BEAMER_env: beamercolorbox
     :END:
 
-Text
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua.
+#+END_SRC
 
-*** End of beamercolorbox                                     :B_ignoreheading:
+#+LaTeX: \setbeamercolor{myblockcolor}{bg=magenta,fg=white}
+
+*** myblockcolor                                             :B_beamercolorbox:
     :PROPERTIES:
-    :BEAMER_env: ignoreheading
+    :BEAMER_env: beamercolorbox
     :END:
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua.
 
 ** ~structureenv~ environment
 
@@ -860,31 +846,10 @@ Text
     :END:
 
 Paragraph Heading.
-
-*** End of structureenv                                       :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua.
 
 * Theorem & Definitions
-
-** ~theorem~ environment
-
-- Inserts a theorem.
-
-*** This title won't be displayed                                   :B_theorem:
-    :PROPERTIES:
-    :BEAMER_env: theorem
-    :END:
-
-Org mode + Beamer = productivity^{2}
-
-*** End of theorem                                            :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
-
-** ~lemma~ environment
 
 ** ~definition~ environment
 
@@ -892,60 +857,92 @@ Org mode + Beamer = productivity^{2}
   ~definition~ is used.
 - In this style, the body of a ~theorem~ is typeset in an upright font.
 
-*** definition                                                   :B_definition:
+#+begin_src org
+,*** Prime number                                                 :B_definition:
     :PROPERTIES:
     :BEAMER_env: definition
     :END:
 
-Contents of definition
+A prime number is a natural number greater than 1 that has no positive divisors
+other than 1 and itself.
+#+end_src
 
-1. Test
-2. Other
-
-*** End of definition                                         :B_ignoreheading:
+*** Prime number                                                 :B_definition:
     :PROPERTIES:
-    :BEAMER_env: ignoreheading
+    :BEAMER_env: definition
     :END:
 
-#+begin_definition
-Contents of definition
+A prime number is a natural number greater than 1 that has no positive divisors
+other than 1 and itself.
 
-1. Test
-2. Other
-#+end_definition
+** ~theorem~ environment
 
-** ~example~ environment
+- Insert a theorem.
+- Italicized body.
 
-- Behaves like the theorem environment, except that the theorem style ~example~
-  is used.
-- A side-effect of using this theorem style is that the contents is put in an
-  ~exampleblock~ instead of a ~block~.
+#+BEGIN_SRC org
+,*** Niessen, 2010                                                   :B_theorem:
+    :PROPERTIES:
+    :BEAMER_env: theorem
+    :END:
 
-#+begin_example
-Contents of example
-#+end_example
+Statement of theorem (proposition): \\
+Org mode + Beamer = productivity^{2}
+#+END_SRC
+
+*** Niessen, 2010                                                   :B_theorem:
+    :PROPERTIES:
+    :BEAMER_env: theorem
+    :END:
+
+Statement of theorem (proposition): \\
+Org mode + Beamer = productivity^{2}
 
 ** ~proof~ environment
 
-- Typesets a proof.
+- Typeset a proof.
 - Period (full-stop) added at the end of the title.
-- Control sequence ~\qed~ (for "tombstone") added at the end of the proof.
+- Control sequence ~\qed~ (/quod erat demonstrandum/, for the traditional
+  "tombstone") added at the end of the proof.
+
+#+BEGIN_SRC org
+,*** Proof                                                             :B_proof:
+    :PROPERTIES:
+    :BEAMER_env: proof
+    :END:
+
+Description of proof.
+#+END_SRC
 
 *** Proof                                                             :B_proof:
     :PROPERTIES:
     :BEAMER_env: proof
     :END:
 
-- <1-| alert@1> Suppose /p/ were the largest prime number.
-- <2-> Let /q/ be the product of the first /p/ numbers.
-- <3-> Then /q + 1/ is not divisible by any of them.
-- <1-> But /q + 1/ is greater than /1/, thus divisible by some prime number
-  not in the first /p/ numbers.
+Description of proof.
 
-*** End of proof                                              :B_ignoreheading:
+** ~example~ environment
+
+- Behave like the ~theorem~ environment, except that the theorem style ~example~ is
+  used.
+- A side-effect of using this theorem style is that the contents is put in an
+  ~exampleblock~ instead of a ~block~.
+
+#+begin_src org
+,*** Number 5                                                        :B_example:
     :PROPERTIES:
-    :BEAMER_env: ignoreheading
+    :BEAMER_env: example
     :END:
+
+5 can only be divided evenly by 1 or 5, so it is a prime number.
+#+end_src
+
+*** Number 5                                                        :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+
+5 can only be divided evenly by 1 or 5, so it is a prime number.
 
 ** Add extra environments
 
@@ -994,10 +991,18 @@ by blank lines): it hasn't paragraph indentation.
 "Don't give up on your dreams, keep on sleeping." --- Albert Einstein
 #+end_quote
 
-XXX
-# #+LaTeX: \begin{raggedleft}
-# From "Loris' Adventures in Orgland"
-# #+LaTeX: \par\end{raddedleft}
+If you want to place the source or the author's name at the right, after the
+quote, you can use these commands:
+
+#+BEGIN_SRC org
+,#+LaTeX: \begin{raggedleft}
+(Albert Einstein)
+,#+LaTeX: \par\end{raggedleft}
+#+END_SRC
+
+#+LaTeX: \begin{raggedleft}
+(Albert Einstein)
+#+LaTeX: \par\end{raggedleft}
 
 ** ~quotation~ environment
 
@@ -1058,6 +1063,8 @@ There is no largest prime number.
   more portable when environments only exist in Beamer (then, they will appear
   as subheadings when exported to other backends)
 
+- Use an empty heading for an empty block title.
+
 #+BEGIN_SRC org
 ,***                                                                 :B_theorem:
     :PROPERTIES:
@@ -1065,15 +1072,14 @@ There is no largest prime number.
     :END:
 
 There is no largest prime number.
-
-,*** End of theorem                                            :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
 #+END_SRC
 
 If there is nothing after the block, no need to insert a heading for
 demarcating the end.
+
+!Exception! The ~example~ environment can't be written in the short notation, as
+that one exists in Org and is translated to a ~verbatim~ LaTeX environment by
+default.
 
 ** Alternative environment syntax (with option)
 
@@ -1093,12 +1099,121 @@ $H$ divides the order of $G$.
 
 Let $G$ be a finite group, and let $H$ be a subgroup of $G$.  Then the order of
 $H$ divides the order of $G$.
+#+END_SRC
 
-,*** End of theorem                                            :B_ignoreheading:
+** Alternative environment syntax (with parameter)
+
+XXX How to pass the parameter?
+
+#+attr_latex: :options {Prime number}
+#+begin_definition
+A prime number is
+#+end_definition
+
+*** Prime number                                                 :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+
+A prime number is
+
+*** End of block                                              :B_ignoreheading:
     :PROPERTIES:
     :BEAMER_env: ignoreheading
     :END:
+
+#+BEGIN_SRC org
+,#+attr_latex: :options {Prime number}
+,#+begin_definition
+A prime number is
+,#+end_definition
 #+END_SRC
+
+#+BEGIN_SRC org
+,*** Prime number                                                 :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+
+A prime number is
+#+END_SRC
+
+* Columns
+
+** Column specification: BEAMER_COL
+
+** Splitting a frame into multiple columns
+
+To get multiple columns in a frame:
+
+1. Press ~C-c C-b |~ (~BMCOL~) on the headings (inside the frame) which will
+   become columns
+
+   The heading of column environments won't be outputted in the PDF file.
+
+2. Specify the *column width* as a *percentage* of ~\textwidth~
+
+   *!CAUTION!*  *No absolute width*, such as 4cm, which wouldn't be correctly
+   translated...
+
+Instead of ~block~, those structural environments will become ~column~ (with the
+width parameter as a factor of ~\textwidth~).
+
+Consecutive ~column~ environments will be put in a ~columns~ environment.
+
+**** First column                                                       :BMCOL:
+     :PROPERTIES:
+     :BEAMER_col: 0.39
+     :END:
+
+First column
+
+Two \\ lines.
+
+The arithmetic mean is equal to the summation of ~n~ numbers divided by ~n~.
+
+**** Second column                                                      :BMCOL:
+     :PROPERTIES:
+     :BEAMER_col: 0.39
+     :END:
+
+Second column
+
+One line (but aligned).
+
+$\frac{1}{n} \sum_{i=1}^{n} x_{i}$
+
+*** Multiple columns
+
+If you want to float an image to the left or right, simply include it within
+a 2-column layout.
+
+**** Image                                                              :BMCOL:
+     :PROPERTIES:
+     :BEAMER_col: 0.39
+     :END:
+
+#+ATTR_LaTeX: :width 3cm
+[[file:images/square.png]]
+# mygraphic.jpg
+
+**** Text                                                               :BMCOL:
+     :PROPERTIES:
+     :BEAMER_col: 0.39
+     :END:
+
+This text will appear \\ to the right.
+
+** ~column~
+
+You can change the percent space of each column.
+
+If you want like one column to take 70% and the other to take 30%, you can
+change that as follows:
+
+XXX
+
+** ~columns~
 
 * Special cases
 
@@ -1120,7 +1235,7 @@ talk, but which might be useful to answer a question) by inserting such a *level
 Ignoring page number in backup slides can be achieved by setting the option
 ~noframenumbering~ on all "backup" slides.
 
-** COMMENT note
+** note
 
 To keep your presentation notes (reminders about what to say), add a heading
 below the frame, and select the ~note~ environment.
@@ -1166,10 +1281,20 @@ resumed: ~:BEAMER_ref: *My frame title~.
 
 XXX How to label a frame?  Via ~:BEAMER_opt: label=id~ or via other means?
 
-** ignoreheading                                              :B_ignoreheading:
+** ignoreheading
    :PROPERTIES:
-   :BEAMER_env: ignoreheading
+   :ID:       7bf1634d-2bd6-484b-adae-67a80846cdf4
    :END:
+
+Need to "close" a block environment, if followed by something else than
+a block.
+
+#+begin_src org
+,*** End of block                                              :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
+#+end_src
 
 - A heading with an ~ignoreheading~ environment will have only its contents
   inserted in the output.
@@ -1180,7 +1305,7 @@ XXX How to label a frame?  Via ~:BEAMER_opt: label=id~ or via other means?
 
 * Overlays [Animations?]
 
-overprint
+** Overprint
 
 > What may not be easy or possible is to use the \only directive, which is
 > what I used in my previous response to you.
@@ -1235,12 +1360,17 @@ Dynamic lists are possible on a case by case basis :
 - @@beamer:<2->@@ Item 2
 #+end_src
 
+- <1-| alert@1> Suppose /p/ were the largest prime number.
+- <2-> Let /q/ be the product of the first /p/ numbers.
+- <3-> Then /q + 1/ is not divisible by any of them.
+- <1-> But /q + 1/ is greater than /1/, thus divisible by some prime number
+  not in the first /p/ numbers.
+
 ** Overlay specification: BEAMER_act
 
-*** The Queen's old armchair                                          :B_block:
+*** The Queen's old armchair
     :PROPERTIES:
-    :BEAMER_env: block
-    :BEAMER_envargs: <1->
+    :BEAMER_act: <1->
     :END:
 
 - Princess Anne
@@ -1323,83 +1453,6 @@ that passed me by.
 
 - You might want to put ~allowframebreaks=0.9~ there
 
-* Columns
-
-** Column specification: BEAMER_COL
-
-** Splitting a frame into multiple columns
-
-To get multiple columns in a frame:
-
-1. Press ~C-c C-b |~ (~BMCOL~) on the headings (inside the frame) which will
-   become columns
-
-   The heading of column environments won't be outputted in the PDF file.
-
-2. Specify the *column width* as a *percentage* of ~\textwidth~
-
-   *!CAUTION!*  *No absolute width*, such as 4cm, which wouldn't be correctly
-   translated...
-
-Instead of ~block~, those structural environments will become ~column~ (with the
-width parameter as a factor of ~\textwidth~).
-
-Consecutive ~column~ environments will be put in a ~columns~ environment.
-
-**** First column                                                       :BMCOL:
-     :PROPERTIES:
-     :BEAMER_col: 0.39
-     :END:
-
-First column
-
-Two \\ lines.
-
-The arithmetic mean is equal to the summation of ~n~ numbers divided by ~n~.
-
-**** Second column                                                      :BMCOL:
-     :PROPERTIES:
-     :BEAMER_col: 0.39
-     :END:
-
-Second column
-
-One line (but aligned).
-
-$\frac{1}{n} \sum_{i=1}^{n} x_{i}$
-
-*** Multiple columns
-
-If you want to float an image to the left or right, simply include it within
-a 2-column layout.
-
-**** Image                                                              :BMCOL:
-     :PROPERTIES:
-     :BEAMER_col: 0.39
-     :END:
-
-#+ATTR_LaTeX: :width 3cm
-[[file:images/square.png]]
-# mygraphic.jpg
-
-**** Text                                                               :BMCOL:
-     :PROPERTIES:
-     :BEAMER_col: 0.39
-     :END:
-
-This text will appear \\ to the right.
-
-** ~column~
-
-You can change the percent space of each column.
-
-If you want like one column to take 70% and the other to take 30%, you can
-change that as follows:
-
-XXX
-
-** ~columns~
-
 * Guidelines for creating presentations
 
 ** Frame structure (Explicit page breaking)
@@ -1458,7 +1511,7 @@ Balancing text in columns.
 
 #+LaTeX: \begin{multicols}{2}
 
-... a fancy verbatim block ...
+# ... a fancy verbatim block ...
 
 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
   tempor incididunt ut labore et dolore magna aliqua.
