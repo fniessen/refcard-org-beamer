@@ -1,7 +1,7 @@
 #+TITLE:     Org Beamer quick reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2014-06-14 Sat 23:30>
+#+Time-stamp: <2014-06-15 Sun 23:25>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -736,23 +736,6 @@ XXX Use ~ or = in title
 Use a different *block type for the current "block" environment* (default:
 ~block~).
 
-** ~structureenv~ environment
-
-- For highlighting text.
-- To help the audience see the structure of your presentation.
-
-*** structureenv                                               :B_structureenv:
-    :PROPERTIES:
-    :BEAMER_env: structureenv
-    :END:
-
-Paragraph Heading.
-
-*** End of structureenv                                       :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
-
 ** ~block~ environment
 
 *** Answered Questions                                                :B_block:
@@ -792,11 +775,28 @@ Is every even number the sum of two primes?
 - Inserts a block whose title is highlighted.
 - Behaves like the ~block~ environment otherwise.
 
-*** Wrong theorem
+#+BEGIN_SRC org
+,*** An alert block                                               :B_alertblock:
+    :PROPERTIES:
+    :BEAMER_env: alertblock
+    :END:
 
 /1=2/.
 
-*** End of alertblock                                         :B_ignoreheading:
+,*** End of alert block                                        :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
+#+END_SRC
+
+*** An alert block                                               :B_alertblock:
+    :PROPERTIES:
+    :BEAMER_env: alertblock
+    :END:
+
+/1=2/.
+
+*** End of alert block                                        :B_ignoreheading:
     :PROPERTIES:
     :BEAMER_env: ignoreheading
     :END:
@@ -806,124 +806,28 @@ Is every even number the sum of two primes?
 - Inserts a block that is supposed to be an example.
 - Behaves like the ~block~ environment otherwise.
 
-*** Example                                                    :B_exampleblock:
+#+BEGIN_SRC org
+,*** An example block                                           :B_exampleblock:
     :PROPERTIES:
     :BEAMER_env: exampleblock
     :END:
 
 The set /{1,2,3,5}/ has four elements.
 
-*** End of exampleblock                                       :B_ignoreheading:
+,*** End of example block                                      :B_ignoreheading:
     :PROPERTIES:
     :BEAMER_env: ignoreheading
     :END:
+#+END_SRC
 
-** ~theorem~ environment
-
-- Inserts a theorem.
-
-*** This title won't be displayed                                   :B_theorem:
+*** An example block                                           :B_exampleblock:
     :PROPERTIES:
-    :BEAMER_env: theorem
+    :BEAMER_env: exampleblock
     :END:
 
-There is no largest prime number.
+The set /{1,2,3,5}/ has four elements.
 
-Org mode + Beamer = productivity^{2}
-
-#+LaTeX: \hfill \(\qed\)
-
-*** End of theorem                                            :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
-
-If there is nothing after the block, no need to insert a heading for
-demarcating the end.
-
-** ~theorem~ environment
-
-- Inserts a theorem.
-- Simpler solution
-  + More readable
-  + Less powerful: you can't nest blocks of the same type with this syntax
-
-#+attr_latex: :options {Theorem}
-#+begin_block
-There is no largest prime number.
-#+end_block
-
-** ~corollary~ environment
-
-** ~lemma~ environment
-
-** ~definition~ environment
-
-- Behaves like the ~theorem~ environment, except that the theorem style
-  ~definition~ is used.
-- In this style, the body of a ~theorem~ is typeset in an upright font.
-
-*** definition                                                   :B_definition:
-    :PROPERTIES:
-    :BEAMER_env: definition
-    :END:
-
-Contents of definition
-
-*** End of definition                                         :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
-
-** ~definitions~ environment
-
-** ~fact~ environment
-
-** ~example~ environment
-
-- Behaves like the theorem environment, except that the theorem style ~example~
-  is used.
-- A side-effect of using this theorem style is that the contents is put in an
-  ~exampleblock~ instead of a ~block~.
-
-*** Example                                                         :B_example:
-    :PROPERTIES:
-    :BEAMER_env: example
-    :END:
-
-Contents of example
-
-*** End of example                                            :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
-
-** ~example~ environment
-
-- Simpler solution:
-
-#+begin_example
-Contents of example
-#+end_example
-
-** ~examples~ environment
-
-** ~proof~ environment
-
-- Typesets a proof. FINAL dot added...
-
-*** proof                                                             :B_proof:
-    :PROPERTIES:
-    :BEAMER_env: proof
-    :END:
-
-- <1-| alert@1> Suppose /p/ were the largest prime number.
-- <2-> Let /q/ be the product of the first /p/ numbers.
-- <3-> Then /q + 1/ is not divisible by any of them.
-- <1-> But /q + 1/ is greater than /1/, thus divisible by some prime number
-  not in the first /p/ numbers.\qedhere
-
-*** End of proof                                              :B_ignoreheading:
+*** End of example block                                      :B_ignoreheading:
     :PROPERTIES:
     :BEAMER_env: ignoreheading
     :END:
@@ -945,81 +849,103 @@ Text
     :BEAMER_env: ignoreheading
     :END:
 
-** ~verse~ environment
+** ~structureenv~ environment
 
-*** verse                                                             :B_verse:
+- For highlighting text.
+- To help the audience see the structure of your presentation.
+
+*** structureenv                                               :B_structureenv:
     :PROPERTIES:
-    :BEAMER_env: verse
+    :BEAMER_env: structureenv
     :END:
 
-Contents of verse
+Paragraph Heading.
 
-*** End of verse                                              :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
-
-** ~verse~ environment
-
-- Simpler solution:
-
-#+begin_verse
-Contents of verse
-#+end_verse
-
-** ~quotation~ environment
-
-- Use ~quote~ or ~quotation~ to typeset quoted text.
-- ~quotation~ has paragraph indentation.
-
-*** quotation                                                     :B_quotation:
-    :PROPERTIES:
-    :BEAMER_env: quotation
-    :END:
-
-Contents of quotation
-
-*** End of quotation                                          :B_ignoreheading:
+*** End of structureenv                                       :B_ignoreheading:
     :PROPERTIES:
     :BEAMER_env: ignoreheading
     :END:
 
-** ~quote~ environment
+* Theorem & Definitions
 
-- Use ~quote~ or ~quotation~ to typeset quoted text.
-- ~quote~ hasn't paragraph indentation.
+** ~theorem~ environment
 
-*** quote                                                             :B_quote:
+- Inserts a theorem.
+
+*** This title won't be displayed                                   :B_theorem:
     :PROPERTIES:
-    :BEAMER_env: quote
+    :BEAMER_env: theorem
     :END:
 
-Contents of quote
+Org mode + Beamer = productivity^{2}
 
-*** End of quote                                              :B_ignoreheading:
+*** End of theorem                                            :B_ignoreheading:
     :PROPERTIES:
     :BEAMER_env: ignoreheading
     :END:
 
-** ~quote~ environment
+** ~lemma~ environment
 
-- Use ~quote~ or ~quotation~ to typeset quoted text.
-- ~quote~ hasn't paragraph indentation.
-- Simpler solution:
+** ~definition~ environment
 
-#+begin_quote
-Contents of quote
-#+end_quote
+- Behaves like the ~theorem~ environment, except that the theorem style
+  ~definition~ is used.
+- In this style, the body of a ~theorem~ is typeset in an upright font.
 
-#+begin_quote
-"Getting ragged-left text in a Beamer presentation exported from Org does not
-seem as easy as I expected."
-#+end_quote
+*** definition                                                   :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
 
-XXX
-# #+LaTeX: \begin{raggedleft}
-# From "Loris' Adventures in Orgland"
-# #+LaTeX: \par\end{raddedleft}
+Contents of definition
+
+1. Test
+2. Other
+
+*** End of definition                                         :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
+
+#+begin_definition
+Contents of definition
+
+1. Test
+2. Other
+#+end_definition
+
+** ~example~ environment
+
+- Behaves like the theorem environment, except that the theorem style ~example~
+  is used.
+- A side-effect of using this theorem style is that the contents is put in an
+  ~exampleblock~ instead of a ~block~.
+
+#+begin_example
+Contents of example
+#+end_example
+
+** ~proof~ environment
+
+- Typesets a proof.
+- Period (full-stop) added at the end of the title.
+- Control sequence ~\qed~ (for "tombstone") added at the end of the proof.
+
+*** Proof                                                             :B_proof:
+    :PROPERTIES:
+    :BEAMER_env: proof
+    :END:
+
+- <1-| alert@1> Suppose /p/ were the largest prime number.
+- <2-> Let /q/ be the product of the first /p/ numbers.
+- <3-> Then /q + 1/ is not divisible by any of them.
+- <1-> But /q + 1/ is greater than /1/, thus divisible by some prime number
+  not in the first /p/ numbers.
+
+*** End of proof                                              :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
 
 ** Add extra environments
 
@@ -1050,6 +976,129 @@ WDYT?
 
 - Additional arguments may be written into the environment's heading, and
   inserted into the LaTeX string using %r (raw heading text, no processing).
+
+* Quoting text
+
+** ~quote~ environment
+
+Use ~quote~ to typeset *short* quoted text (or a series of small quotes, separated
+by blank lines): it hasn't paragraph indentation.
+
+#+BEGIN_SRC org
+,#+begin_quote
+"Don't give up on your dreams, keep on sleeping." --- Albert Einstein
+,#+end_quote
+#+END_SRC
+
+#+begin_quote
+"Don't give up on your dreams, keep on sleeping." --- Albert Einstein
+#+end_quote
+
+XXX
+# #+LaTeX: \begin{raggedleft}
+# From "Loris' Adventures in Orgland"
+# #+LaTeX: \par\end{raddedleft}
+
+** ~quotation~ environment
+
+Use ~quotation~ to typeset longer quoted text (one or more paragraphs) because it
+*indents* the first line of each *paragraph*.
+
+#+BEGIN_SRC org
+,#+begin_quotation
+"Two things are infinite, the universe and human stupidity, and I am not yet
+completely sure about the universe."
+--- Albert Einstein
+,#+end_quotation
+#+END_SRC
+
+#+begin_quotation
+"Two things are infinite, the universe and human stupidity, and I am not yet
+completely sure about the universe."
+--- Albert Einstein
+#+end_quotation
+
+** ~verse~ environment
+
+Use ~verse~ for quotations where *line breaks* are important, such as poetry.
+
+#+BEGIN_SRC org
+,#+begin_verse
+"Sit next to a pretty girl for an hour,
+it seems like a minute.
+Sit on a red-hot stove for a minute,
+it seems like an hour.
+That's relativity!"
+--- Albert Einstein
+,#+end_verse
+#+END_SRC
+
+#+begin_verse
+"Sit next to a pretty girl for an hour,
+it seems like a minute.
+Sit on a red-hot stove for a minute,
+it seems like an hour.
+That's relativity!"
+--- Albert Einstein
+#+end_verse
+
+* Alternative
+
+** Alternative environment syntax (without option)
+
+- More readable, more portable when environments exist (LaTeX + other backends)
+
+#+BEGIN_SRC org
+,#+begin_theorem
+There is no largest prime number.
+,#+end_theorem
+#+END_SRC
+
+- More powerful: you can't nest blocks of the same type with this syntax, and
+  more portable when environments only exist in Beamer (then, they will appear
+  as subheadings when exported to other backends)
+
+#+BEGIN_SRC org
+,***                                                                 :B_theorem:
+    :PROPERTIES:
+    :BEAMER_env: theorem
+    :END:
+
+There is no largest prime number.
+
+,*** End of theorem                                            :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
+#+END_SRC
+
+If there is nothing after the block, no need to insert a heading for
+demarcating the end.
+
+** Alternative environment syntax (with option)
+
+#+BEGIN_SRC org
+,#+attr_latex: :options [Lagrange]
+,#+begin_theorem
+Let $G$ be a finite group, and let $H$ be a subgroup of $G$.  Then the order of
+$H$ divides the order of $G$.
+,#+end_theorem
+#+END_SRC
+
+#+BEGIN_SRC org
+,*** Lagrange                                                        :B_theorem:
+    :PROPERTIES:
+    :BEAMER_env: theorem
+    :END:
+
+Let $G$ be a finite group, and let $H$ be a subgroup of $G$.  Then the order of
+$H$ divides the order of $G$.
+
+,*** End of theorem                                            :B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_env: ignoreheading
+    :END:
+#+END_SRC
 
 * Special cases
 
