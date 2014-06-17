@@ -1,7 +1,7 @@
 #+TITLE:     Org Beamer quick reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2014-06-17 Tue 14:51>
+#+Time-stamp: <2014-06-17 Tue 23:41>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -161,9 +161,7 @@ By default, it will automatically be displayed with the following elements:
 
   (LaTeX macro ~\today~, if none specified)
 
-#+ATTR_BEAMER: \framebreak
-#+ATTR_LaTeX: \framebreak
-\framebreak
+#+beamer: \framebreak
 
 The author's email can be included with:
 
@@ -239,6 +237,31 @@ Content within frames is formatted using standard Org mode syntax.
 
 The optional *subtitle* does not have an Org syntax because it's specific to the
 Beamer back-end only.
+
+** Using graphics
+
+How to center pictures horizontally?
+
+- Figures
+
+  #+ATTR_LaTeX: :width 3cm
+  [[file:images/dot.png]]
+  # \pgfuseimage{myfigure}
+
+  #+ATTR_LaTeX: :width 3cm
+  #+CAPTION: The caption is /always/ placed *below* the figure.
+  [[file:images/square.png]]
+  # myotherfigure
+
+- TikZ
+
+  http://tex.stackexchange.com/questions/64075/beamers-visible-inside-a-tikz-node
+
+  #+begin_latex
+  \begin{tikzpicture}
+    \node[align=center] {I'm {\visible<+->{very}}\\happy.};
+  \end{tikzpicture}
+  #+end_latex
 
 ** Frame with code
 
@@ -361,7 +384,7 @@ then:
 
 XXX Misplaced footnote!
 
-#+Beamer: \framebreak
+#+beamer: \framebreak
 
 If you set the ~H~ value to ~3~ in the ~OPTIONS~ line:
 
@@ -576,14 +599,14 @@ Such LaTeX code will only be present in the exports to *LaTeX and Beamer*.
 ,#+Beamer: \parbox{4cm}{...}
 #+end_src
 
-Such LaTeX code will only be present in the export to *Beamer*.
+Such LaTeX code will *only* be present in the export to *Beamer*.
 
 *** Back to one column                                        :B_ignoreheading:
     :PROPERTIES:
     :BEAMER_env: ignoreheading
     :END:
 
-#+Beamer: \framebreak
+#+beamer: \framebreak
 
 It is especially useful for more *advanced stuff* like images or tables where you
 need more control of the LaTeX options than Org mode actually gives you.
@@ -951,6 +974,29 @@ other than 1 and itself.
 A prime number is a natural number greater than 1 that has no positive divisors
 other than 1 and itself.
 
+** ~example~ environment
+
+- Behave like the ~theorem~ environment, except that the theorem style ~example~ is
+  used.
+- A side-effect of using this theorem style is that the contents is put in an
+  ~exampleblock~ instead of a ~block~.
+
+#+begin_src org
+,*** Number 5                                                        :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+
+5 can only be divided evenly by 1 or 5, so it is a prime number.
+#+end_src
+
+*** Number 5                                                        :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+
+5 can only be divided evenly by 1 or 5, so it is a prime number.
+
 ** ~theorem~ environment
 
 - Insert a theorem.
@@ -996,59 +1042,6 @@ Description of proof.
     :END:
 
 Description of proof.
-
-** ~example~ environment
-
-- Behave like the ~theorem~ environment, except that the theorem style ~example~ is
-  used.
-- A side-effect of using this theorem style is that the contents is put in an
-  ~exampleblock~ instead of a ~block~.
-
-#+begin_src org
-,*** Number 5                                                        :B_example:
-    :PROPERTIES:
-    :BEAMER_env: example
-    :END:
-
-5 can only be divided evenly by 1 or 5, so it is a prime number.
-#+end_src
-
-*** Number 5                                                        :B_example:
-    :PROPERTIES:
-    :BEAMER_env: example
-    :END:
-
-5 can only be divided evenly by 1 or 5, so it is a prime number.
-
-** Add extra environments
-
-For simple environments, use:
-
-# #+attr_latex: :options {3}
-# #+begin_myenvironment
-# Test of a new
-# environment
-# #+end_myenvironment
-
-I think we should changes some environment placeholders:
-
-  + Introduce %r which would stand for the raw heading (without any
-    processing)
-  + %H and %U would use the raw heading text instead.
-
-The previous definition would become:
-
-  # '("textpos1" "w" "\\begin{textblock}%r \\visible %a {" "} \\end{textblock}")
-
-WDYT?
-
-- Environment options may be given using the BEAMER_opt property. They will
-  be enclosed in square brackets and inserted where %o appears in the
-  environment definition.
-  (with an example, but I can't think of one now)
-
-- Additional arguments may be written into the environment's heading, and
-  inserted into the LaTeX string using %r (raw heading text, no processing).
 
 * Quoting text
 
@@ -1214,6 +1207,39 @@ A prime number is
 A prime number is
 #+END_SRC
 
+** Add extra environments
+
+For simple environments, use:
+
+# #+attr_latex: :options {3}
+# #+begin_myenvironment
+# Test of a new
+# environment
+# #+end_myenvironment
+
+I think we should changes some environment placeholders:
+
+  + Introduce %r which would stand for the raw heading (without any
+    processing)
+  + %H and %U would use the raw heading text instead.
+
+The previous definition would become:
+
+  # '("textpos1" "w" "\\begin{textblock}%r \\visible %a {" "} \\end{textblock}")
+
+WDYT?
+
+It never would have occurred to me on my own to use the heading text for LaTeX
+code. That's a conceptual leap that passed me by.
+
+- Environment options may be given using the BEAMER_opt property. They will
+  be enclosed in square brackets and inserted where %o appears in the
+  environment definition.
+  (with an example, but I can't think of one now)
+
+- Additional arguments may be written into the environment's heading, and
+  inserted into the LaTeX string using %r (raw heading text, no processing).
+
 * Columns
 
 ** Column specification: BEAMER_COL
@@ -1290,6 +1316,30 @@ change that as follows:
 XXX
 
 ** ~columns~
+
+** Result of an evaluation on two columns
+
+Balancing text in columns.
+
+#+LATEX_HEADER: \usepackage{multicol}
+
+#+LaTeX: \begin{multicols}{2}
+
+# ... a fancy verbatim block ...
+
+- Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  tempor incididunt ut labore et dolore magna aliqua.
+
+- Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+  aliquip ex ea commodo consequat.
+
+- Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+  eu fugiat nulla pariatur.
+
+- Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+  deserunt mollit anim id est laborum.
+
+#+LaTeX: \end{multicols}
 
 * Special cases
 
@@ -1379,54 +1429,47 @@ a block.
 - This special value is useful to have data between frames, or to properly
   *close a ~column~ environment*.
 
-* Overlays [Animations?]
-
-** Overprint
-
-> What may not be easy or possible is to use the \only directive, which is
-> what I used in my previous response to you.
-
-You can always use the only environment.
-<https://github.com/suvayu/.emacs.d/blob/master/org-mode-config.el#L215>
-
-That said, I think overlays with only is not as smooth as with simple
-overlay specifications to regular environments or macros like
-~\includegraphics~, ~\item~, etc.
-
-As for an :overlay specification, I believe it is already supported but
-only for lists (ox-beamer.el:725).  I would love to have that for images
-too!
+* Animations
 
 ** Overlay specification: BEAMER_act
 
-Set *overlay* specifications in current block to *create dynamic effects* (/multiple
-slides/, called /overlays/, for a single frame) = old ~BEAMER_envargs~ property.
+Set *overlay* / action specifications in current frame or block to *create dynamic
+effects* (/multiple slides/, called /overlays/, for a single frame) = old
+~BEAMER_envargs~ property.
+
+Overlay specifications are given inside angular brackets.
+
+XXX <> seem to be added when they aren't present. Copied as is if present.
 
 Headings support the ~BEAMER_act~ property:
 
 #+begin_src org
-,* Heading
-  :PROPERTIES:
-  :BEAMER_act: [+-]
-  :END:
+,** Heading
+   :PROPERTIES:
+   :BEAMER_act: [<+->]
+   :END:
 
-  # Diff with [<+->]?
-
-  - Item
-  - Item
+- Item
+- Item
 #+end_src
 
 It is translated as:
 
 - an overlay/action specification, or
-- a default overlay specification when enclosed within square brackets.
+- a *default* overlay specification when enclosed within square brackets.
 
-XXX <> seem to be added when they aren't present. Copied as is if present.
+It has an effect on all *enumeration commands* and all *block environments* inside
+the frame: they will be *uncovered piece-wise* with an incremental specification
+like ~<+->~.
 
-Dynamic lists are possible on a case by case basis :
+- ~<+>~ Means that this material should appear on the next slide.
+- ~<+->~ means that this appears on the next slide, and all subsequent slides.
+
+*Dynamic lists* are possible on a case by case basis with the ~:overlay~
+specification:
 
 #+begin_src org
-,#+ATTR_BEAMER: :overlay +-
+,#+ATTR_BEAMER: :overlay <+->
 - Item 1
 - Item 2
 #+end_src
@@ -1441,6 +1484,18 @@ Dynamic lists are possible on a case by case basis :
 - <3-> Then /q + 1/ is not divisible by any of them.
 - <1-> But /q + 1/ is greater than /1/, thus divisible by some prime number
   not in the first /p/ numbers.
+
+** Overprint
+
+> What may not be easy or possible is to use the \only directive, which is
+> what I used in my previous response to you.
+
+You can always use the only environment.
+<https://github.com/suvayu/.emacs.d/blob/master/org-mode-config.el#L215>
+
+That said, I think overlays with only is not as smooth as with simple
+overlay specifications to regular environments or macros like
+~\includegraphics~, ~\item~, etc.
 
 ** Overlay specification: BEAMER_act
 
@@ -1473,7 +1528,7 @@ The following works for me:
  #+Beamer: }\only<2>{
  [[file:figure2.png]]
  #+Beamer: }\only<3->{
- [[file:figures3.png]]
+ [[file:figure3.png]]
  #+Beamer: }
 #+end_src
 
@@ -1499,30 +1554,130 @@ following/attached will match what you had originally.
     :PROPERTIES:
     :beamer_act: <3->
     :END:
- [[file:equation1.png]]
+    [[file:equation1.png]]
 #+end_src
 
 * Options
 
 ** Option specification: BEAMER_opt
 
-Insert *optional arguments for the current ~frame~ environment* using the
+Insert *optional arguments for the current ~frame~ or ~block~ environment* using the
 ~BEAMER_OPT~ property.
 
-XXX or block?  See http://orgmode.org/manual/Beamer-export.html.
+The options will *automatically* be *enclosed within square brackets*. Don't
+enclose them yourself!
 
-it never would have occurred to me on my own to use the heading text for LaTeX
-code, and if there was a hint anywhere in the docs to suggest that this would
-be the way to go, I didn't find it. That's a conceptual leap that passed me by.
+You can add that *special property* by editing the ~Opt~ column within the "column
+view":
 
-- This is for frames, and for environments within a frame
+1. Press ~C-c C-x C-c~
+2. Go to the ~Opt~ column
+3. Press ~e~ to edit its contents
+4. Quit XXX
 
-- It specifies options for the current frame or block, and will automatically
-  be enclosed within square brackets.
+~fragile~ option is added automatically
 
-- ~fragile~ option is added automatically
+** Vertical alignment
+   :PROPERTIES:
+   :BEAMER_opt: c
+   :END:
+
+You can specify /top/ *vertical alignment* globally by the ~t~ class option:
+
+#+begin_src org
+,#+LaTeX_CLASS_OPTIONS: [t]
+#+end_src
+
+For single frames, you can use the same option locally:
+
+#+begin_src org
+,** Vertically top-aligned
+   :PROPERTIES:
+   :BEAMER_opt: t
+   :END:
+
+Some content.
+#+end_src
+
+** Explicit page breaking
+
+If the text does not fit on a single slide, all you have to do to automatically
+break up the frame into several frames, is set the option ~allowframebreaks~.
+
+- To allow frame breaks on a *frame by frame* basis[fn:: Until the Beamer [[https://bitbucket.org/rivanvx/beamer/issue/265/including-frame-label-option-stops ][issue
+  #265]] is solved, we need to unset the ~framelabel~ as shown above (~label=~) when
+  we use that option.]:
+
+  #+begin_src org :eval no
+  ,** A very long "frame" with breaks
+     :PROPERTIES:
+     :BEAMER_opt: allowframebreaks,label=
+     :END:
+  #+end_src
+
+  XXX This property shouldn't be interpreted for the current slide!
 
 - You might want to put ~allowframebreaks=0.9~ there
+
+#+beamer: \framebreak
+
+- To add an explicit page break:
+
+  #+begin_src org
+  ,#+beamer: \framebreak
+  #+end_src
+
+- To allow frame breaks for the *whole* document[fn:: Till Tantau (author of
+  Beamer) was really not keen on the idea of setting the auto-breaking frames
+  option globally.]:
+
+  #+begin_src org :eval no
+  ,#+BIND: org-beamer-frame-default-options "allowframebreaks"
+  #+end_src
+
+** Frame without surroundings
+   :PROPERTIES:
+   :BEAMER_opt: plain
+   :END:
+
+~plain~ causes the headlines, footlines, and sidebars to be suppressed. This is
+useful for creating single frames with different head- and footlines or for
+creating frames showing big pictures that completely fill the frame.
+
+#+begin_src org
+,**                                          :some_tag_so_that_heading_is_empty:
+   :PROPERTIES:
+   :BEAMER_opt: plain
+   :END:
+
+,#+begin_beamer
+\begin{centering}
+\includegraphics[height=\textheight]{somebigimagefile}
+\par\end{centering}
+,#+end_beamer
+#+end_src
+
+**                                          :some_tag_so_that_heading_is_empty:
+   :PROPERTIES:
+   :BEAMER_opt: plain
+   :END:
+
+#+begin_beamer
+\begin{centering}
+\includegraphics[height=\textheight]{Carsten}
+\par\end{centering}
+#+end_beamer
+
+** Big title in the middle
+
+#+begin_beamer
+\begin{center}
+  \begin{minipage}[h]{.75\textwidth}
+    \centering
+    {\Huge This is my BIG title!}
+  \end{minipage}
+\end{center}
+#+end_beamer
 
 * Guidelines for creating presentations
 
@@ -1539,112 +1694,6 @@ https://www.sharelatex.com/blog/2013/08/16/beamer-series-pt3.html#.U586LCjrzYQ
 
 \hyperlink{sec-2}{\beamerreturnbutton{pictures page}}
 #+END_SRC
-
-** Frame structure (Explicit page breaking)
-
-If the text does not fit on a single slide, all you have to do to automatically
-break up the frame into several frames, is set the option ~allowframebreaks~.
-
-- For allowing frame breaks on a *frame by frame* basis[fn:: Until the Beamer
-  [[https://bitbucket.org/rivanvx/beamer/issue/265/including-frame-label-option-stops ][issue #265]] is solved, we need to unset the ~framelabel~ as shown above
-  (~label=~).]
-
-  #+begin_src org :eval no
-  ,** A very long "frame" with breaks
-     :PROPERTIES:
-     :BEAMER_opt: allowframebreaks,label=
-     :END:
-  #+end_src
-
-  XXX This property shouldn't be interpreted for the current slide!
-
-- For allowing frame breaks for the *whole* document[fn:: Till Tantau (author of
-  Beamer) was really not keen on the idea of setting the auto-breaking frames
-  option globally.]
-
-  #+begin_src org :eval no
-  ,#+BIND: org-beamer-frame-default-options "allowframebreaks"
-  #+end_src
-
-** Vertical alignment
-
-You can specify /top/ *vertical alignment* globally by the ~t~ class option:
-
-#+begin_src org
-,#+LaTeX_CLASS_OPTIONS: [t]
-#+end_src
-
-For single frames, you can use the same option locally:
-
-#+begin_src org
-,* Vertically top-aligned
-  :PROPERTIES:
-  :BEAMER_opt: t
-  :END:
-
-...
-#+end_src
-
-You can add that *special property* by editing the ~Opt~ column within the "column
-view" (first press ~C-c C-x C-c~) .
-
-** Result of an evaluation on two columns
-
-Balancing text in columns.
-
-#+LATEX_HEADER: \usepackage{multicol}
-
-#+LaTeX: \begin{multicols}{2}
-
-# ... a fancy verbatim block ...
-
-- Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-  tempor incididunt ut labore et dolore magna aliqua.
-
-- Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-  aliquip ex ea commodo consequat.
-
-- Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-  eu fugiat nulla pariatur.
-
-- Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-  deserunt mollit anim id est laborum.
-
-#+LaTeX: \end{multicols}
-
-** Big title in the middle
-
-\begin{center}
-  \begin{minipage}[h]{.75\textwidth}
-    \centering
-    {\Large This is my BIG title!}
-  \end{minipage}
-\end{center}
-
-** Using graphics
-
-How to center pictures horizontally?
-
-- Figures
-
-  #+ATTR_LaTeX: :width 3cm
-  [[file:images/dot.png]]
-  # \pgfuseimage{myfigure}
-
-  #+ATTR_LaTeX: :width 3cm
-  #+CAPTION: The caption is /always/ placed *below* the figure.
-  [[file:images/square.png]]
-  # myotherfigure
-
-- TikZ
-
-  http://tex.stackexchange.com/questions/64075/beamers-visible-inside-a-tikz-node
-
-  #+begin_latex
-  \begin{tikzpicture}
-    \node[align=center] {I'm {\visible<+->{very}}\\happy.};
-  \end{tikzpicture}
-  #+end_latex
 
 ** Absolute positioning
 
