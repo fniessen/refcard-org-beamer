@@ -1,7 +1,7 @@
 #+TITLE:     Org Beamer quick reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2014-06-16 Mon 23:45>
+#+Time-stamp: <2014-06-17 Tue 14:51>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -66,6 +66,10 @@ http://www.speakingaboutpresenting.com/delivery/presentation-handouts/
 ** TODO Add subjects
 
 See http://office.microsoft.com/en-us/powerpoint-help/training-courses-for-powerpoint-2013-HA104015465.aspx
+
+** TODO Improve contents
+
+See all parts on https://www.sharelatex.com/blog/2013/08/20/beamer-series-pt4.html#.U59n0yjrzYQ
 
 * Overview
 
@@ -139,7 +143,7 @@ By default, it will automatically be displayed with the following elements:
   ,#+TITLE: Document title
   #+end_src
 
-  (file name, if none specified)
+  (file name, if none specified -- could be removed in the future)
 
 - the *author(s)*'s name
 
@@ -835,6 +839,78 @@ tempor incididunt ut labore et dolore magna aliqua.
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
 
+** ~beamercolorbox~ environment
+
+#+LaTeX: \setbeamercolor{myblockcolor}{bg=magenta,fg=white}
+
+#+begin_src org
+,*** myblockcolor                                             :B_beamercolorbox:
+    :PROPERTIES:
+    :BEAMER_env: beamercolorbox
+    :BEAMER_opt: wd=6cm
+    :END:
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua.
+#+end_src
+
+*** myblockcolor                                             :B_beamercolorbox:
+    :PROPERTIES:
+    :BEAMER_env: beamercolorbox
+    :BEAMER_opt: wd=6cm
+    :END:
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua.
+
+** ~beamercolorbox~ environment
+
+#+LaTeX: \setbeamercolor{myblockcolor}{bg=magenta,fg=white}
+
+#+begin_src org
+,*** myblockcolor                                             :B_beamercolorbox:
+    :PROPERTIES:
+    :BEAMER_env: beamercolorbox
+    :BEAMER_opt: shadow=false,rounded=true
+    :END:
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua.
+#+end_src
+
+*** myblockcolor                                             :B_beamercolorbox:
+    :PROPERTIES:
+    :BEAMER_env: beamercolorbox
+    :BEAMER_opt: shadow=false,rounded=true
+    :END:
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua.
+
+** ~beamercolorbox~ environment
+
+#+LaTeX: \setbeamercolor{myblockcolor}{bg=magenta,fg=white}
+
+#+begin_src org
+,*** myblockcolor                                             :B_beamercolorbox:
+    :PROPERTIES:
+    :BEAMER_env: beamercolorbox
+    :BEAMER_opt: shadow=true,rounded=true
+    :END:
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua.
+#+end_src
+
+*** myblockcolor                                             :B_beamercolorbox:
+    :PROPERTIES:
+    :BEAMER_env: beamercolorbox
+    :BEAMER_opt: shadow=true,rounded=true
+    :END:
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua.
+
 ** ~structureenv~ environment
 
 - For highlighting text.
@@ -1063,7 +1139,7 @@ There is no largest prime number.
   more portable when environments only exist in Beamer (then, they will appear
   as subheadings when exported to other backends)
 
-- Use an empty heading for an empty block title.
+- Use an *empty heading* for an *empty block title*.
 
 #+BEGIN_SRC org
 ,***                                                                 :B_theorem:
@@ -1435,14 +1511,9 @@ Insert *optional arguments for the current ~frame~ environment* using the
 
 XXX or block?  See http://orgmode.org/manual/Beamer-export.html.
 
-I'd still like to see something more like a "for-dummies" explanation of
-passing options and arguments to LaTeX entities. I'm not saying the
-documentation is woefully inadequate (hardly that -- Suvayu's page got me
-rather far, and I got stuck on a couple of details). My experience was: it
-never would have occurred to me on my own to use the heading text for
-LaTeX code, and if there was a hint anywhere in the docs to suggest that
-this would be the way to go, I didn't find it. That's a conceptual leap
-that passed me by.
+it never would have occurred to me on my own to use the heading text for LaTeX
+code, and if there was a hint anywhere in the docs to suggest that this would
+be the way to go, I didn't find it. That's a conceptual leap that passed me by.
 
 - This is for frames, and for environments within a frame
 
@@ -1454,6 +1525,20 @@ that passed me by.
 - You might want to put ~allowframebreaks=0.9~ there
 
 * Guidelines for creating presentations
+
+** Including Hyperlinks and Buttons
+
+https://www.sharelatex.com/blog/2013/08/16/beamer-series-pt3.html#.U586LCjrzYQ
+
+#+BEGIN_SRC org
+\hyperlink{sec-2}{\beamerbutton{"Authoring presentations" chapter}}
+
+\hyperlink{sec-2}{\beamergotobutton{columns page}}
+
+\hyperlink{sec-2}{\beamerskipbutton{pictures page}}
+
+\hyperlink{sec-2}{\beamerreturnbutton{pictures page}}
+#+END_SRC
 
 ** Frame structure (Explicit page breaking)
 
@@ -1540,26 +1625,26 @@ Balancing text in columns.
 
 How to center pictures horizontally?
 
-*** Figures
+- Figures
 
-#+ATTR_LaTeX: :width 3cm
-[[file:images/dot.png]]
-# \pgfuseimage{myfigure}
+  #+ATTR_LaTeX: :width 3cm
+  [[file:images/dot.png]]
+  # \pgfuseimage{myfigure}
 
-#+ATTR_LaTeX: :width 3cm
-#+CAPTION: The caption is /always/ placed *below* the figure.
-[[file:images/square.png]]
-# myotherfigure
+  #+ATTR_LaTeX: :width 3cm
+  #+CAPTION: The caption is /always/ placed *below* the figure.
+  [[file:images/square.png]]
+  # myotherfigure
 
-*** TikZ
+- TikZ
 
-http://tex.stackexchange.com/questions/64075/beamers-visible-inside-a-tikz-node
+  http://tex.stackexchange.com/questions/64075/beamers-visible-inside-a-tikz-node
 
-#+begin_latex
-\begin{tikzpicture}
-  \node[align=center] {I'm {\visible<+->{very}}\\happy.};
-\end{tikzpicture}
-#+end_latex
+  #+begin_latex
+  \begin{tikzpicture}
+    \node[align=center] {I'm {\visible<+->{very}}\\happy.};
+  \end{tikzpicture}
+  #+end_latex
 
 ** Absolute positioning
 
@@ -1581,6 +1666,10 @@ Here an example using ~tikz~:
    \titlepage
 \XXXend{frame}
 #+END_SRC
+
+** Multimedia
+
+# #+LaTeX: \movie[externalviewer]{\beamergotobutton{Start movie}}{cc.mp4}
 
 ** More on Org: Exporting a subtree
 
