@@ -1,7 +1,7 @@
 #+TITLE:     Org Beamer quick reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2014-06-17 Tue 23:41>
+#+Time-stamp: <2014-06-22 Sun 10:37>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -1317,6 +1317,10 @@ XXX
 
 ** ~columns~
 
+** How to specify the best width?
+
+Visualise the width by transforming the columns into blocks...
+
 ** Result of an evaluation on two columns
 
 Balancing text in columns.
@@ -1477,6 +1481,21 @@ specification:
 #+begin_src org
 - @@beamer:<1->@@ Item 1
 - @@beamer:<2->@@ Item 2
+#+end_src
+
+can be shortened to:
+
+#+begin_src org
+- @@b:<1->@@ Item 1
+- @@b:<2->@@ Item 2
+#+end_src
+
+with:
+
+#+begin_src emacs-lisp
+;; export snippet translations
+(add-to-list 'org-export-snippet-translation-alist
+             '("b" . "beamer"))
 #+end_src
 
 - <1-| alert@1> Suppose /p/ were the largest prime number.
