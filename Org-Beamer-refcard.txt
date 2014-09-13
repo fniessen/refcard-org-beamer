@@ -1,7 +1,7 @@
 #+TITLE:     Org Beamer quick reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2014-06-22 Sun 10:37>
+#+Time-stamp: <2014-09-13 Sat 14:14>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -14,6 +14,8 @@
 #+LaTeX_CLASS_OPTIONS: [presentation, t]
 #+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
 #+PROPERTY: BEAMER_col_ALL 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0.0 :ETC
+
+#+LaTeX_HEADER: \setbeamertemplate{navigation symbols}{}
 
 #+BEAMER_THEME: Boadilla
 # #+BEAMER_THEME: AnnArbor
@@ -48,7 +50,7 @@
 # the style to all pictures.
 #+LaTeX: \tikzstyle{every picture}+=[remember picture]
 
-* Tasks                                                              :noexport:
+* Tasks                                                               :noexport:
 
 ** TODO Beamerarticle
 
@@ -161,6 +163,12 @@ By default, it will automatically be displayed with the following elements:
 
   (LaTeX macro ~\today~, if none specified)
 
+The insertion of ~\author~ can be turned off with:
+
+#+begin_src org
+,#+OPTIONS: author:nil
+#+end_src
+
 #+beamer: \framebreak
 
 The author's email can be included with:
@@ -262,6 +270,10 @@ How to center pictures horizontally?
     \node[align=center] {I'm {\visible<+->{very}}\\happy.};
   \end{tikzpicture}
   #+end_latex
+
+** TODO Using graphics and text
+
+Look at ~wrapfig~ or ~parinc~
 
 ** Frame with code
 
@@ -563,7 +575,7 @@ to the ~beamer~ LaTeX class (see [[id:c4f6745b-2147-4538-bd96-9f8e1e1d4669][~org
 You can include raw LaTeX in your Org presentations and it will get kept as
 LaTeX when it's exported.
 
-*** Left                                                                :BMCOL:
+*** Left                                                                 :BMCOL:
     :PROPERTIES:
     :BEAMER_col: 0.43
     :END:
@@ -582,7 +594,7 @@ LaTeX when it's exported.
 
 Such LaTeX code will only be present in the exports to *LaTeX and Beamer*.
 
-*** Right                                                               :BMCOL:
+*** Right                                                                :BMCOL:
     :PROPERTIES:
     :BEAMER_col: 0.43
     :END:
@@ -601,7 +613,7 @@ Such LaTeX code will only be present in the exports to *LaTeX and Beamer*.
 
 Such LaTeX code will *only* be present in the export to *Beamer*.
 
-*** Back to one column                                        :B_ignoreheading:
+*** Back to one column                                         :B_ignoreheading:
     :PROPERTIES:
     :BEAMER_env: ignoreheading
     :END:
@@ -711,7 +723,7 @@ XXX Put = or ~ around BEAMER_env in title...
 
 ** Frames
 
-*** frame                                                             :B_frame:
+*** frame                                                              :B_frame:
     :PROPERTIES:
     :BEAMER_env: frame
     :END:
@@ -742,7 +754,7 @@ This becomes a frame, instead of a block!
 This works in both "directions": to *add or* to *remove sectioning levels* above
 the current heading (which becomes a frame)!
 
-*** fullframe                                                     :B_fullframe:
+*** fullframe                                                      :B_fullframe:
     :PROPERTIES:
     :BEAMER_env: fullframe
     :END:
@@ -779,7 +791,7 @@ tempor incididunt ut labore et dolore magna aliqua.
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
 
-*** End of block                                              :B_ignoreheading:
+*** End of block                                               :B_ignoreheading:
     :PROPERTIES:
     :BEAMER_env: ignoreheading
     :END:
@@ -805,7 +817,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
 #+END_SRC
 
-*** An alert block                                               :B_alertblock:
+*** An alert block                                                :B_alertblock:
     :PROPERTIES:
     :BEAMER_env: alertblock
     :END:
@@ -827,7 +839,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
 #+END_SRC
 
-*** An example block                                           :B_exampleblock:
+*** An example block                                            :B_exampleblock:
     :PROPERTIES:
     :BEAMER_env: exampleblock
     :END:
@@ -854,7 +866,7 @@ tempor incididunt ut labore et dolore magna aliqua.
 
 #+LaTeX: \setbeamercolor{myblockcolor}{bg=magenta,fg=white}
 
-*** myblockcolor                                             :B_beamercolorbox:
+*** myblockcolor                                              :B_beamercolorbox:
     :PROPERTIES:
     :BEAMER_env: beamercolorbox
     :END:
@@ -877,7 +889,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
 #+end_src
 
-*** myblockcolor                                             :B_beamercolorbox:
+*** myblockcolor                                              :B_beamercolorbox:
     :PROPERTIES:
     :BEAMER_env: beamercolorbox
     :BEAMER_opt: wd=6cm
@@ -901,7 +913,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
 #+end_src
 
-*** myblockcolor                                             :B_beamercolorbox:
+*** myblockcolor                                              :B_beamercolorbox:
     :PROPERTIES:
     :BEAMER_env: beamercolorbox
     :BEAMER_opt: shadow=false,rounded=true
@@ -925,7 +937,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
 #+end_src
 
-*** myblockcolor                                             :B_beamercolorbox:
+*** myblockcolor                                              :B_beamercolorbox:
     :PROPERTIES:
     :BEAMER_env: beamercolorbox
     :BEAMER_opt: shadow=true,rounded=true
@@ -939,7 +951,7 @@ tempor incididunt ut labore et dolore magna aliqua.
 - For highlighting text.
 - To help the audience see the structure of your presentation.
 
-*** structureenv                                               :B_structureenv:
+*** structureenv                                                :B_structureenv:
     :PROPERTIES:
     :BEAMER_env: structureenv
     :END:
@@ -966,7 +978,7 @@ A prime number is a natural number greater than 1 that has no positive divisors
 other than 1 and itself.
 #+end_src
 
-*** Prime number                                                 :B_definition:
+*** Prime number                                                  :B_definition:
     :PROPERTIES:
     :BEAMER_env: definition
     :END:
@@ -990,7 +1002,7 @@ other than 1 and itself.
 5 can only be divided evenly by 1 or 5, so it is a prime number.
 #+end_src
 
-*** Number 5                                                        :B_example:
+*** Number 5                                                         :B_example:
     :PROPERTIES:
     :BEAMER_env: example
     :END:
@@ -1012,7 +1024,7 @@ Statement of theorem (proposition): \\
 Org mode + Beamer = productivity^{2}
 #+END_SRC
 
-*** Niessen, 2010                                                   :B_theorem:
+*** Niessen, 2010                                                    :B_theorem:
     :PROPERTIES:
     :BEAMER_env: theorem
     :END:
@@ -1036,7 +1048,7 @@ Org mode + Beamer = productivity^{2}
 Description of proof.
 #+END_SRC
 
-*** Proof                                                             :B_proof:
+*** Proof                                                              :B_proof:
     :PROPERTIES:
     :BEAMER_env: proof
     :END:
@@ -1179,14 +1191,14 @@ XXX How to pass the parameter?
 A prime number is
 #+end_definition
 
-*** Prime number                                                 :B_definition:
+*** Prime number                                                  :B_definition:
     :PROPERTIES:
     :BEAMER_env: definition
     :END:
 
 A prime number is
 
-*** End of block                                              :B_ignoreheading:
+*** End of block                                               :B_ignoreheading:
     :PROPERTIES:
     :BEAMER_env: ignoreheading
     :END:
@@ -1263,7 +1275,7 @@ width parameter as a factor of ~\textwidth~).
 
 Consecutive ~column~ environments will be put in a ~columns~ environment.
 
-**** First column                                                       :BMCOL:
+**** First column                                                        :BMCOL:
      :PROPERTIES:
      :BEAMER_col: 0.39
      :END:
@@ -1274,7 +1286,7 @@ Two \\ lines.
 
 The arithmetic mean is equal to the summation of ~n~ numbers divided by ~n~.
 
-**** Second column                                                      :BMCOL:
+**** Second column                                                       :BMCOL:
      :PROPERTIES:
      :BEAMER_col: 0.39
      :END:
@@ -1290,7 +1302,7 @@ $\frac{1}{n} \sum_{i=1}^{n} x_{i}$
 If you want to float an image to the left or right, simply include it within
 a 2-column layout.
 
-**** Image                                                              :BMCOL:
+**** Image                                                               :BMCOL:
      :PROPERTIES:
      :BEAMER_col: 0.39
      :END:
@@ -1299,7 +1311,7 @@ a 2-column layout.
 [[file:images/square.png]]
 # mygraphic.jpg
 
-**** Text                                                               :BMCOL:
+**** Text                                                                :BMCOL:
      :PROPERTIES:
      :BEAMER_col: 0.39
      :END:
@@ -1676,7 +1688,7 @@ creating frames showing big pictures that completely fill the frame.
 ,#+end_beamer
 #+end_src
 
-**                                          :some_tag_so_that_heading_is_empty:
+**                                           :some_tag_so_that_heading_is_empty:
    :PROPERTIES:
    :BEAMER_opt: plain
    :END:
@@ -1788,7 +1800,7 @@ Skip proof
 \end{thebibliography}
 #+end_latex
 
-* Appendix NAME XXX                                                :B_appendix:
+* Appendix NAME XXX                                                 :B_appendix:
   :PROPERTIES:
   :BEAMER_env: appendix
   :END:
