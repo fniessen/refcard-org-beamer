@@ -1,7 +1,6 @@
 #+TITLE:     Org Beamer quick reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2014-09-13 Sat 14:14>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
