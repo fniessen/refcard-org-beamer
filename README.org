@@ -692,6 +692,28 @@ Font Risque.
 ,#+LATEX_HEADER: \usepackage[frenchstyle]{kpfonts}
 #+END_SRC
 
+** Changing font size for example environment
+
+Something along these lines will work:
+
+#+latex: {\footnotesize
+
+  org stuff here
+
+#+latex: }
+
+Choose the font size you want.
+
+You can also /shrink/ individual frames in Beamer by adding a BEAMER option
+property to the frame's headline:
+
+#+begin_src org :eval no
+,* The frame title
+  :PROPERTIES:
+  :BEAMER_opt: shrink=10
+  :END:
+#+end_src
+
 ** Adding an image on the title slide
 
 Insert an image in the title slide that fills the whole width of the slide but
