@@ -374,6 +374,20 @@ type="text/javascript">
               <li><a href="#unnumbered-131">Abbreviations</a></li>
             </ul>
           </li>
+
+          <li>
+            <a href="#unnumbered-132">Contributing</a>
+
+            <ul>
+              <li><a href="#unnumbered-133">Issues</a></li>
+
+              <li><a href="#unnumbered-134">Patches</a></li>
+
+              <li><a href="#unnumbered-135">Donations</a></li>
+            </ul>
+          </li>
+
+          <li><a href="#unnumbered-136">License</a></li>
         </ul>
       </div>
     </div>
@@ -384,7 +398,14 @@ type="text/javascript">
       <div class="outline-text-2" id="text-unnumbered-7"></div>
 
       <div id="outline-container-unnumbered-8" class="outline-3">
-        <h3 id="unnumbered-8">Description</h3>
+        <h3 id="unnumbered-8">Description <a href=
+        "http://opensource.org/licenses/GPL-3.0"><object type="image/svg+xml"
+        data="http://img.shields.io/:license-gpl-blue.svg">
+          Sorry, your browser does not support SVG.
+        </object></a> <a href=
+        "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=VCVAS6KPDQ4JC&amp;lc=BE&amp;item_number=refcard-org-beamer&amp;currency_code=EUR&amp;bn=PP-DonationsBF:btn_donate_LG.gif:NonHosted">
+        <img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"
+        alt="btn_donate_LG.gif" /></a></h3>
 
         <div class="outline-text-3" id="text-unnumbered-8">
           <p>Welcome to <b>Org Beamer reference card</b>. It contains the
@@ -1400,12 +1421,21 @@ M-x org-beamer-mode RET
         <div class="outline-text-3" id="text-unnumbered-43">
           <p>Something along these lines will work:</p>
 
-          <p>org stuff here</p>
+          <div class="org-src-container">
+            <pre class="src src-org">
+<span class="org-org-meta-line">#+LaTeX:</span> <span class=
+"org-org-block">{\footnotesize</span>
+... Org stuff here ...
+<span class="org-org-meta-line">#+LaTeX:</span> <span class=
+"org-org-block">}</span>
+</pre>
+          </div>
 
           <p>Choose the font size you want.</p>
 
           <p>You can also <i>shrink</i> individual frames in Beamer by adding a
-          BEAMER option property to the frame’s headline:</p>
+          BEAMER option property to the frame’s headline. You can also specify
+          a percentage, as in <code>shrink=10</code>:</p>
 
           <div class="org-src-container">
             <pre class="src src-org">
@@ -3128,6 +3158,70 @@ Some content.
 
       <div id="outline-container-unnumbered-131" class="outline-3">
         <h3 id="unnumbered-131">Abbreviations</h3>
+      </div>
+    </div>
+
+    <div id="outline-container-unnumbered-132" class="outline-2">
+      <h2 id="unnumbered-132">Contributing</h2>
+
+      <div class="outline-text-2" id="text-unnumbered-132"></div>
+
+      <div id="outline-container-unnumbered-133" class="outline-3">
+        <h3 id="unnumbered-133">Issues</h3>
+
+        <div class="outline-text-3" id="text-unnumbered-133">
+          <p>Report issues and suggest features and improvements on the
+          <a href="https://github.com/fniessen/refcard-org-beamer/issues/new">GitHub
+          issue tracker</a>.</p>
+        </div>
+      </div>
+
+      <div id="outline-container-unnumbered-134" class="outline-3">
+        <h3 id="unnumbered-134">Patches</h3>
+
+        <div class="outline-text-3" id="text-unnumbered-134">
+          <p>I love contributions! Patches under any form are always
+          welcome!</p>
+        </div>
+      </div>
+
+      <div id="outline-container-unnumbered-135" class="outline-3">
+        <h3 id="unnumbered-135">Donations</h3>
+
+        <div class="outline-text-3" id="text-unnumbered-135">
+          <p>If you like the refcard-org-beamer project, you can show your
+          appreciation and support future development by making a <a href=
+          "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=VCVAS6KPDQ4JC&amp;lc=BE&amp;item_number=refcard-org-beamer&amp;currency_code=EUR&amp;bn=PP-DonationsBF:btn_donate_LG.gif:NonHosted">
+          donation</a> through PayPal.</p>
+
+          <p>Regardless of the donations, refcard-org-beamer will always be
+          free both as in beer and as in speech.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="outline-container-unnumbered-136" class="outline-2">
+      <h2 id="unnumbered-136">License</h2>
+
+      <div class="outline-text-2" id="text-unnumbered-136">
+        <p>Copyright (C) 2013-2014 Free Software Foundation, Inc.</p>
+
+        <p>Author: Fabrice Niessen<br />
+        Keywords: reference card org-beamer</p>
+
+        <p>This program is free software; you can redistribute it and/or modify
+        it under the terms of the GNU General Public License as published by
+        the Free Software Foundation, either version 3 of the License, or (at
+        your option) any later version.</p>
+
+        <p>This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details.</p>
+
+        <p>You should have received a copy of the GNU General Public License
+        along with this program. If not, see <a href=
+        "http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
       </div>
     </div>
 

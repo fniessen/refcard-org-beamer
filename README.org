@@ -184,19 +184,19 @@ Other elements:
 - a *title graphic*
 can be included with the following commands:
 
-#+BEGIN_SRC org :eval no
+#+begin_src org :eval no
 ,#+BEAMER_HEADER: \subtitle{Document subtitle}
 ,#+BEAMER_HEADER: \institute[INST]{Institute\\\url{http://www.institute.edu}}
 ,#+BEAMER_HEADER: \titlegraphic{\includegraphics[height=1.5cm]{InstLogo}}
-#+END_SRC
+#+end_src
 
 XXX Why do I have to use :eval no (in Org blocks)?
 
 The [[id:f6d1f139-2460-4844-93f1-c71277c810e0][inner theme]] dictates how the title page is rendered.
 
-#+BEGIN_SRC org :eval no
+#+begin_src org :eval no
 ,#+BEAMER_HEADER: \logo{\includegraphics[height=.9cm]{InstLogo}}
-#+END_SRC
+#+end_src
 
 ** Structure basics
 
@@ -300,9 +300,9 @@ summary(cars)
 
 XXX Is this needed?
 
-#+BEGIN_SRC org
+#+begin_src org
 ,#+LATEX_HEADER: \lstdefinelanguage{R}{}
-#+END_SRC
+#+end_src
 
 ** Frame with code only
 
@@ -527,10 +527,10 @@ See http://tex.stackexchange.com/questions/38084/displaying-slides-with-beamer-a
 
 See Guido Diepen's [[http://www.guidodiepen.nl/2009/07/creating-latex-beamer-handouts-with-notes/][handoutWithNotes.sty]] for PowerPoint like handout.
 
-#+BEGIN_SRC org :eval no
+#+begin_src org :eval no
 ,#+LATEX_HEADER: \usepackage{handoutWithNotes}
 ,#+LATEX_HEADER: \pgfpagesuselayout{3 on 1 with notes}[a4paper,border shrink=5mm]
-#+END_SRC
+#+end_src
 
 ** Print as article
 
@@ -688,24 +688,25 @@ a fallback font.
 
 Font Risque.
 
-#+BEGIN_SRC org
+#+begin_src org
 ,#+LATEX_HEADER: \usepackage[frenchstyle]{kpfonts}
-#+END_SRC
+#+end_src
 
 ** Changing font size for example environment
 
 Something along these lines will work:
 
-#+latex: {\footnotesize
-
-  org stuff here
-
-#+latex: }
+#+begin_src org
+,#+LaTeX: {\footnotesize
+... Org stuff here ...
+,#+LaTeX: }
+#+end_src
 
 Choose the font size you want.
 
 You can also /shrink/ individual frames in Beamer by adding a BEAMER option
-property to the frame's headline:
+property to the frame's headline.  You can also specify a percentage, as in
+~shrink=10~:
 
 #+begin_src org :eval no
 ,* The frame title
@@ -714,14 +715,21 @@ property to the frame's headline:
   :END:
 #+end_src
 
+# You can also use LaTeX ~resizebox~ to shrink table fonts:
+
+# #+LaTeX: \resizebox{\textwidth}{!}{
+# | 124.195 | 310.528 |
+# | 120.848 | 122.702 |
+# #+LaTeX: }
+
 ** Adding an image on the title slide
 
 Insert an image in the title slide that fills the whole width of the slide but
 limits to half height.
 
-#+BEGIN_SRC org :eval no
+#+begin_src org :eval no
 ,#+BEAMER_HEADER: \titlegraphic{\includegraphics[width=\textwidth,height=.5\textheight]{someimage}}
-#+END_SRC
+#+end_src
 
 #+BEAMER_HEADER: \titlegraphic{\includegraphics[width=\textwidth,height=.5\textheight]{images/someimage}}
 
@@ -784,14 +792,14 @@ If a heading in the current tree has a ~BEAMER_env~ property set to ~fullframe~,
 the frame will *not display its title* (~frametitle~ is being set to the empty
 string).
 
-#+BEGIN_SRC org
+#+begin_src org
 ,*** Frame                                                         :B_fullframe:
     :PROPERTIES:
     :BEAMER_env: fullframe
     :END:
 
 This becomes a frame, with its title ignored!
-#+END_SRC
+#+end_src
 
 ** ~block~ environment
    :PROPERTIES:
@@ -828,7 +836,7 @@ Comments:
 
 Insert a block whose title is *highlighted*.
 
-#+BEGIN_SRC org
+#+begin_src org
 ,*** An alert block                                               :B_alertblock:
     :PROPERTIES:
     :BEAMER_env: alertblock
@@ -836,7 +844,7 @@ Insert a block whose title is *highlighted*.
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
-#+END_SRC
+#+end_src
 
 *** An alert block                                                :B_alertblock:
     :PROPERTIES:
@@ -850,7 +858,7 @@ tempor incididunt ut labore et dolore magna aliqua.
 
 Insert a block that is supposed to be an *example*.
 
-#+BEGIN_SRC org
+#+begin_src org
 ,*** An example block                                           :B_exampleblock:
     :PROPERTIES:
     :BEAMER_env: exampleblock
@@ -858,7 +866,7 @@ Insert a block that is supposed to be an *example*.
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
-#+END_SRC
+#+end_src
 
 *** An example block                                            :B_exampleblock:
     :PROPERTIES:
@@ -873,7 +881,7 @@ tempor incididunt ut labore et dolore magna aliqua.
 Create *colored boxes* whose "beamer color" to use (= a *pair of colors*: ~bg~ + ~fg~)
 is defined by the heading text, for example ~title in head/foot~ or ~myblockcolor~.
 
-#+BEGIN_SRC org
+#+begin_src org
 ,#+LaTeX: \setbeamercolor{myblockcolor}{bg=magenta,fg=white}
 
 ,*** myblockcolor                                             :B_beamercolorbox:
@@ -883,7 +891,7 @@ is defined by the heading text, for example ~title in head/foot~ or ~myblockcolo
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
-#+END_SRC
+#+end_src
 
 #+LaTeX: \setbeamercolor{myblockcolor}{bg=magenta,fg=white}
 
@@ -1035,7 +1043,7 @@ other than 1 and itself.
 - Insert a theorem.
 - Italicized body.
 
-#+BEGIN_SRC org
+#+begin_src org
 ,*** Niessen, 2010                                                   :B_theorem:
     :PROPERTIES:
     :BEAMER_env: theorem
@@ -1043,7 +1051,7 @@ other than 1 and itself.
 
 Statement of theorem (proposition): \\
 Org mode + Beamer = productivity^{2}
-#+END_SRC
+#+end_src
 
 *** Niessen, 2010                                                    :B_theorem:
     :PROPERTIES:
@@ -1060,14 +1068,14 @@ Org mode + Beamer = productivity^{2}
 - Control sequence ~\qed~ (/quod erat demonstrandum/, for the traditional
   "tombstone") added at the end of the proof.
 
-#+BEGIN_SRC org
+#+begin_src org
 ,*** Proof                                                             :B_proof:
     :PROPERTIES:
     :BEAMER_env: proof
     :END:
 
 Description of proof.
-#+END_SRC
+#+end_src
 
 *** Proof                                                              :B_proof:
     :PROPERTIES:
@@ -1083,11 +1091,11 @@ Description of proof.
 Use ~quote~ to typeset *short* quoted text (or a series of small quotes, separated
 by blank lines): it hasn't paragraph indentation.
 
-#+BEGIN_SRC org
+#+begin_src org
 ,#+begin_quote
 "Don't give up on your dreams, keep on sleeping." --- Albert Einstein
 ,#+end_quote
-#+END_SRC
+#+end_src
 
 #+begin_quote
 "Don't give up on your dreams, keep on sleeping." --- Albert Einstein
@@ -1096,11 +1104,11 @@ by blank lines): it hasn't paragraph indentation.
 If you want to place the source or the author's name at the right, after the
 quote, you can use these commands:
 
-#+BEGIN_SRC org
+#+begin_src org
 ,#+LaTeX: \begin{raggedleft}
 (Albert Einstein)
 ,#+LaTeX: \par\end{raggedleft}
-#+END_SRC
+#+end_src
 
 #+LaTeX: \begin{raggedleft}
 (Albert Einstein)
@@ -1111,13 +1119,13 @@ quote, you can use these commands:
 Use ~quotation~ to typeset longer quoted text (one or more paragraphs) because it
 *indents* the first line of each *paragraph*.
 
-#+BEGIN_SRC org
+#+begin_src org
 ,#+begin_quotation
 "Two things are infinite, the universe and human stupidity, and I am not yet
 completely sure about the universe."
 --- Albert Einstein
 ,#+end_quotation
-#+END_SRC
+#+end_src
 
 #+begin_quotation
 "Two things are infinite, the universe and human stupidity, and I am not yet
@@ -1129,7 +1137,7 @@ completely sure about the universe."
 
 Use ~verse~ for quotations where *line breaks* are important, such as poetry.
 
-#+BEGIN_SRC org
+#+begin_src org
 ,#+begin_verse
 "Sit next to a pretty girl for an hour,
 it seems like a minute.
@@ -1138,7 +1146,7 @@ it seems like an hour.
 That's relativity!"
 --- Albert Einstein
 ,#+end_verse
-#+END_SRC
+#+end_src
 
 #+begin_verse
 "Sit next to a pretty girl for an hour,
@@ -1155,11 +1163,11 @@ That's relativity!"
 
 - More readable, more portable when environments exist (LaTeX + other backends)
 
-#+BEGIN_SRC org
+#+begin_src org
 ,#+begin_theorem
 There is no largest prime number.
 ,#+end_theorem
-#+END_SRC
+#+end_src
 
 - More powerful: you can't nest blocks of the same type with this syntax, and
   more portable when environments only exist in Beamer (then, they will appear
@@ -1167,14 +1175,14 @@ There is no largest prime number.
 
 - Use an *empty heading* for an *empty block title*.
 
-#+BEGIN_SRC org
+#+begin_src org
 ,***                                                                 :B_theorem:
     :PROPERTIES:
     :BEAMER_env: theorem
     :END:
 
 There is no largest prime number.
-#+END_SRC
+#+end_src
 
 If there is nothing after the block, no need to insert a heading for
 demarcating the end.
@@ -1185,15 +1193,15 @@ default.
 
 ** Alternative environment syntax (with option)
 
-#+BEGIN_SRC org
+#+begin_src org
 ,#+attr_latex: :options [Lagrange]
 ,#+begin_theorem
 Let $G$ be a finite group, and let $H$ be a subgroup of $G$.  Then the order of
 $H$ divides the order of $G$.
 ,#+end_theorem
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC org
+#+begin_src org
 ,*** Lagrange                                                        :B_theorem:
     :PROPERTIES:
     :BEAMER_env: theorem
@@ -1201,7 +1209,7 @@ $H$ divides the order of $G$.
 
 Let $G$ be a finite group, and let $H$ be a subgroup of $G$.  Then the order of
 $H$ divides the order of $G$.
-#+END_SRC
+#+end_src
 
 ** Alternative environment syntax (with parameter)
 
@@ -1224,21 +1232,21 @@ A prime number is
     :BEAMER_env: ignoreheading
     :END:
 
-#+BEGIN_SRC org
+#+begin_src org
 ,#+attr_latex: :options {Prime number}
 ,#+begin_definition
 A prime number is
 ,#+end_definition
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC org
+#+begin_src org
 ,*** Prime number                                                 :B_definition:
     :PROPERTIES:
     :BEAMER_env: definition
     :END:
 
 A prime number is
-#+END_SRC
+#+end_src
 
 ** Add extra environments
 
@@ -1737,7 +1745,7 @@ creating frames showing big pictures that completely fill the frame.
 
 https://www.sharelatex.com/blog/2013/08/16/beamer-series-pt3.html#.U586LCjrzYQ
 
-#+BEGIN_SRC org
+#+begin_src org
 \hyperlink{sec-2}{\beamerbutton{"Authoring presentations" chapter}}
 
 \hyperlink{sec-2}{\beamergotobutton{columns page}}
@@ -1745,7 +1753,7 @@ https://www.sharelatex.com/blog/2013/08/16/beamer-series-pt3.html#.U586LCjrzYQ
 \hyperlink{sec-2}{\beamerskipbutton{pictures page}}
 
 \hyperlink{sec-2}{\beamerreturnbutton{pictures page}}
-#+END_SRC
+#+end_src
 
 ** Absolute positioning
 
@@ -1757,7 +1765,7 @@ beamer userguide as the way to go for absolute positioning.
 
 Here an example using ~tikz~:
 
-#+BEGIN_SRC latex
+#+begin_src latex
 \XXXbegin{frame}
    \tikz [remember picture,overlay]
     \node at
@@ -1766,7 +1774,7 @@ Here an example using ~tikz~:
         {\includegraphics[width=\textwidth,height=.5\textheight]{someimage}};
    \titlepage
 \XXXend{frame}
-#+END_SRC
+#+end_src
 
 ** Multimedia
 
