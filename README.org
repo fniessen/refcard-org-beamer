@@ -72,6 +72,12 @@ See http://office.microsoft.com/en-us/powerpoint-help/training-courses-for-power
 
 See all parts on https://www.sharelatex.com/blog/2013/08/20/beamer-series-pt4.html#.U59n0yjrzYQ
 
+** TODO Add better contents
+
+See
+http://www.r-project.org/nosvn/conferences/useR-2011/TalkSlides/Contributed/16Aug_1115_FocusI_4-ReportingWorkflows_3-Leha.pdf
+for a very good example.
+
 * Overview
 
 ** Description [[http://opensource.org/licenses/GPL-3.0][http://img.shields.io/:license-gpl-blue.svg]] [[https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VCVAS6KPDQ4JC&lc=BE&item_number=refcard%2dorg%2dbeamer&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted][https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif]]
@@ -1786,6 +1792,10 @@ Here an example using ~tikz~:
 
 Skip proof
 
+# See
+# http://www.r-project.org/nosvn/conferences/useR-2011/TalkSlides/Contributed/16Aug_1115_FocusI_4-ReportingWorkflows_3-Leha.pdf,
+# page 15
+
 [[Proof details]]
 
 * Summary
@@ -1864,7 +1874,7 @@ beer and as in speech.
 
 * License
 
-Copyright (C) 2013-2014 Free Software Foundation, Inc.
+Copyright (C) 2013-2015 Free Software Foundation, Inc.
 
 Author: Fabrice Niessen \\
 Keywords: reference card org-beamer
