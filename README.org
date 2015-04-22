@@ -7,8 +7,7 @@
 #+OPTIONS:   H:2 num:nil ^:{}
 
 #+PROPERTY:  eval no
-# #+SETUPFILE: ~/src/org-style/setup/bigblow-local-abs.setup
-#+SETUPFILE: ~/src/org-style/setup/leuven-local-abs.setup
+#+SETUPFILE: ~/src/org-html-themes/setup/theme-readtheorg.setup
 
 #+LaTeX_CLASS_OPTIONS: [presentation, t]
 #+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
@@ -195,6 +194,11 @@ can be included with the following commands:
 ,#+BEAMER_HEADER: \institute[INST]{Institute\\\url{http://www.institute.edu}}
 ,#+BEAMER_HEADER: \titlegraphic{\includegraphics[height=1.5cm]{InstLogo}}
 #+end_src
+
+#+begin_note
+On [2015-03-21 Sat], Rasmus sent a patch to add the ~#+SUBTITLE~ keyword to
+~ox-beamer~.
+#+end_note
 
 XXX Why do I have to use :eval no (in Org blocks)?
 
@@ -556,7 +560,11 @@ Common options:
 - draft: no graphics, footlines,...
 - handout: no overlays
 
-,#+LaTeX_CLASS_options: [bigger,allowframebreaks]
+: ,#+LaTeX_CLASS_options: [bigger,allowframebreaks]
+
+Beamer now supports the 16:9 aspect ratio with the ~aspectratio~ option:
+
+: ,#+LaTeX_CLASS_options: [aspectratio=169]
 
 ** LaTeX preamble
 
@@ -689,8 +697,8 @@ which is equivalent (for Boadilla) to:
 
 ** Changing the frame font
 
-Fonts must be present on the system you're presenting on or it will go back to
-a fallback font.
+Fonts must be present on the system you're presenting on -- or it will go back
+to a fallback font.
 
 Font Risque.
 
@@ -1302,8 +1310,9 @@ To get multiple columns in a frame:
 
 2. Specify the *column width* as a *percentage* of ~\textwidth~
 
-   *!CAUTION!*  *No absolute width*, such as 4cm, which wouldn't be correctly
-   translated...
+   #+begin_warning
+   *No absolute width*, such as 4cm, which wouldn't be correctly translated...
+   #+end_warning
 
 Instead of ~block~, those structural environments will become ~column~ (with the
 width parameter as a factor of ~\textwidth~).
@@ -1551,6 +1560,14 @@ with:
 - <1-> But /q + 1/ is greater than /1/, thus divisible by some prime number
   not in the first /p/ numbers.
 
+Overlay specification for bold markup in the label of a description list:
+
+- Test ::
+     of a *@@beamer:<2->@@useful* feature!
+
+- *@@beamer:<2->@@Test 2* ::
+     of the same feature
+
 ** Overprint
 
 > What may not be easy or possible is to use the \only directive, which is
@@ -1745,7 +1762,7 @@ creating frames showing big pictures that completely fill the frame.
 \end{center}
 #+end_beamer
 
-* Guidelines for creating presentations
+* COMMENT Guidelines for creating presentations
 
 ** Including Hyperlinks and Buttons
 
