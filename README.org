@@ -195,10 +195,10 @@ can be included with the following commands:
 ,#+BEAMER_HEADER: \titlegraphic{\includegraphics[height=1.5cm]{InstLogo}}
 #+end_src
 
-#+begin_note
-On [2015-03-21 Sat], Rasmus sent a patch to add the ~#+SUBTITLE~ keyword to
-~ox-beamer~.
-#+end_note
+# #+begin_note
+# On [2015-03-21 Sat], Rasmus sent a patch to add the ~#+SUBTITLE~ keyword to
+# ~ox-beamer~.
+# #+end_note
 
 XXX Why do I have to use :eval no (in Org blocks)?
 
@@ -220,7 +220,7 @@ By default,
 - *Deeper* levels will be used as *structural environments*.
 
 - The *table of contents* frame is created but is blank
-  ([[id:b4252974-1d3d-4652-b42e-e7cd016f45f7][you'll understand later]]).
+  ([[id:b4252974-1d3d-4652-b42e-e7cd016f45f7][you'll understand why later]]).
 
   You can remove it by setting the ~toc~ option (default: ~t~) from the ~#+OPTIONS:~
   keyword to ~nil~:
@@ -544,7 +544,7 @@ See Guido Diepen's [[http://www.guidodiepen.nl/2009/07/creating-latex-beamer-han
 
 ** Print as article
 
-Using beamerarticle
+Using ~beamerarticle~.
 
 * Customizing presentations
 
@@ -556,15 +556,19 @@ Using beamerarticle
 
 Common options:
 
-- 8pt, 9pt, 10pt, *11pt*, 12pt, 14pt, 17pt, 20pt
-- draft: no graphics, footlines,...
-- handout: no overlays
+- ~8pt~, ~9pt~, ~10pt~, ~11pt~ (default), ~12pt~, ~14pt~, ~17pt~, ~20pt~
+- ~draft~: no graphics, footlines,...
+- ~handout~: no overlays
 
-: ,#+LaTeX_CLASS_options: [bigger,allowframebreaks]
+#+begin_src org
+,#+LaTeX_CLASS_options: [bigger,allowframebreaks]
+#+end_src
 
 Beamer now supports the 16:9 aspect ratio with the ~aspectratio~ option:
 
-: ,#+LaTeX_CLASS_options: [aspectratio=169]
+#+begin_src org
+,#+LaTeX_CLASS_options: [aspectratio=169]
+#+end_src
 
 ** LaTeX preamble
 
@@ -686,7 +690,7 @@ For example:
 ,#+BEAMER_THEME: Boadilla
 #+end_src
 
-which is equivalent (for Boadilla) to:
+which is equivalent (for ~Boadilla~) to:
 
 #+begin_src org :eval no
 ,#+BEAMER_COLOR_THEME: dolphin
