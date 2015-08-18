@@ -1,4 +1,4 @@
-#+TITLE:     Org Beamer quick reference card
+#+TITLE:     Org Beamer reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
 #+DESCRIPTION:
@@ -6,7 +6,7 @@
 #+LANGUAGE:  en
 #+OPTIONS:   H:2 num:nil ^:{}
 
-#+PROPERTY:  eval no
+#+PROPERTY:  header-args :eval no
 #+SETUPFILE: ~/src/org-html-themes/setup/theme-readtheorg.setup
 
 #+LaTeX_CLASS_OPTIONS: [presentation, t]
@@ -48,7 +48,13 @@
 # the style to all pictures.
 #+LaTeX: \tikzstyle{every picture}+=[remember picture]
 
+#+EXCLUDE_TAGS: noexport
+
 * Tasks                                                               :noexport:
+
+** TODO See "Producing slide shows with Pandoc"
+
+http://pandoc.org/README.html#producing-slide-shows-with-pandoc
 
 ** TODO Beamerarticle
 
@@ -79,7 +85,17 @@ for a very good example.
 
 * Overview
 
-** Description [[http://opensource.org/licenses/GPL-3.0][http://img.shields.io/:license-gpl-blue.svg]] [[https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VCVAS6KPDQ4JC&lc=BE&item_number=refcard%2dorg%2dbeamer&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted][https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif]]
+#+begin_html
+<a href="http://opensource.org/licenses/GPL-3.0">
+  <img src="http://img.shields.io/:license-gpl-blue.svg" alt=":license-gpl-blue.svg" />
+</a>
+
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VCVAS6KPDQ4JC&lc=BE&item_number=refcard%2dorg%2dbeamer&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted">
+  <img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" alt="btn_donate_LG.gif" />
+</a>
+#+end_html
+
+** Description
 
 Welcome to *Org Beamer reference card*.  It contains the reference documentation
 that describes how to *write presentations* based on:
@@ -1191,7 +1207,7 @@ There is no largest prime number.
   more portable when environments only exist in Beamer (then, they will appear
   as subheadings when exported to other backends)
 
-- Use an *empty heading* for an *empty block title*.
+- Use an *empty heading* (or ~\phantom{dummy}~) for an *empty block title*.
 
 #+begin_src org
 ,***                                                                 :B_theorem:
@@ -1218,6 +1234,8 @@ Let $G$ be a finite group, and let $H$ be a subgroup of $G$.  Then the order of
 $H$ divides the order of $G$.
 ,#+end_theorem
 #+end_src
+
+*Is the syntax with [...] or with {...}?*
 
 #+begin_src org
 ,*** Lagrange                                                        :B_theorem:
@@ -1315,7 +1333,7 @@ To get multiple columns in a frame:
 2. Specify the *column width* as a *percentage* of ~\textwidth~
 
    #+begin_warning
-   *No absolute width*, such as 4cm, which wouldn't be correctly translated...
+   *No absolute width* (such as ~4cm~), which wouldn't be correctly translated...
    #+end_warning
 
 Instead of ~block~, those structural environments will become ~column~ (with the
@@ -1375,7 +1393,25 @@ change that as follows:
 
 XXX
 
-** ~columns~
+** ~columns~                                                         :B_columns:
+   :PROPERTIES:
+   :BEAMER_env: columns
+   :BEAMER_opt: [c]
+   :END:
+
+*** Column 1                                                             :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.3
+    :END:
+
+Colonne 1.
+
+*** Column 2                                                             :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.7
+    :END:
+
+Colonne 2.
 
 ** How to specify the best width?
 
@@ -1427,7 +1463,7 @@ Ignoring page number in backup slides can be achieved by setting the option
 
 ** note
 
-To keep your presentation notes (reminders about what to say), add a heading
+To keep your *presentation notes* (reminders about what to say), add a heading
 below the frame, and select the ~note~ environment.
 
 #+begin_src org
@@ -1437,6 +1473,8 @@ below the frame, and select the ~note~ environment.
     :PROPERTIES:
     :BEAMER_env: note
     :END:
+
+This is a note.
 
 - Stress this first.
 - Then this.
@@ -1662,7 +1700,7 @@ view":
 3. Press ~e~ to edit its contents
 4. Quit XXX
 
-~fragile~ option is added automatically
+~fragile~ option is added automatically.
 
 ** Vertical alignment
    :PROPERTIES:
@@ -1888,7 +1926,7 @@ I love contributions!  Patches under any form are always welcome!
 ** Donations
 
 If you like the refcard-org-beamer project, you can show your appreciation and
-support future development by making a [[https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VCVAS6KPDQ4JC&lc=BE&item_number=refcard%2dorg%2dbeamer&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted][donation]] through PayPal.
+help support future development by making a [[https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VCVAS6KPDQ4JC&lc=BE&item_number=refcard%2dorg%2dbeamer&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted][donation]] through PayPal.
 
 Regardless of the donations, refcard-org-beamer will always be free both as in
 beer and as in speech.
