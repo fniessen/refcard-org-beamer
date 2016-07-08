@@ -7,7 +7,7 @@
 #+OPTIONS:   H:2 num:nil ^:{}
 
 #+PROPERTY:  header-args :eval no
-#+SETUPFILE: ~/src/org-html-themes/setup/theme-readtheorg.setup
+#+SETUPFILE: ~/.dotfiles/org/theme-readtheorg.setup
 
 #+LaTeX_CLASS_OPTIONS: [presentation, t]
 #+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
@@ -35,7 +35,7 @@
 #+BEAMER_HEADER: \usepackage{lxfonts}
 #+BEAMER_HEADER: \usefonttheme{professionalfonts}
 
-#+INCLUDE: "~/src/stage-latex-dunkerque-2013/style/listings.org"
+#+INCLUDE: "./listings.org"
 
 #+LATEX_HEADER: \lstdefinelanguage{R}{}
 
@@ -51,6 +51,10 @@
 #+EXCLUDE_TAGS: noexport
 
 * Tasks                                                               :noexport:
+
+** TODO Install (and use) Metropolis Beamer theme
+
+https://github.com/matze/mtheme/
 
 ** TODO See "Producing slide shows with Pandoc"
 
@@ -82,6 +86,48 @@ See all parts on https://www.sharelatex.com/blog/2013/08/20/beamer-series-pt4.ht
 See
 http://www.r-project.org/nosvn/conferences/useR-2011/TalkSlides/Contributed/16Aug_1115_FocusI_4-ReportingWorkflows_3-Leha.pdf
 for a very good example.
+
+** TODO Re: beamer_env tag issue with empty headlines (from Rafael)
+   [2015-08-21 Fri 18:43]
+
+#+begin_verse
+>> I mean that I would like to have a new variable, say,
+>> 'org-no-headlines-between-colons', that when set to t, would cause org
+>> to treat any part of a heading between colons as a tag.
+>
+> My question was: what for? Do you have a (simple) use-case?
+
+Just like the OP said: When exporting to beamer, there are some headings
+that do not merit a named heading. Like columns. Or for example, in my
+case, I have theorems without a name. Say:
+
+,****                                                                 :B_theorem:
+    :PROPERTIES:
+    :BEAMER_env: theorem
+    :END:
+    Let \(X\) be a \(T_{1}\) space. Then \(X\) is regular if an only
+    if given a point \(x\in X\) and a neighborhood \(U\) of \(x\)
+    there is a neighborhood \(V\) of \(x\) such that
+    \(\overline{V}\subseteq U\).
+
+Or sometimes, in definitions, I could include a named heading, but it
+looks redundant to me, as the defined term is already emphasized.
+
+,**** Normal space                                                 :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+    Let \(X\) be a \(T_{1}\) space. We say that \(X\) is *normal* if for
+    any \(F\subseteq X\) and \(G\subseteq X\) disjoint closed sets,
+    there are disjoint open sets \(U,V\) such that
+    \(F\subseteq U\) and \(G\subseteq V\).
+
+I do not think I will ever need two colons in a heading. Hence I think
+the option to interpret anything between colons in a heading as a tag
+would be useful.
+#+end_verse
+
+From [[http://mid.gmane.org/87wpwozj6d.fsf%2540gmail.com][Email from Rafael: Re: beamer_env tag issue with]]
 
 * Overview
 
@@ -465,6 +511,10 @@ export menu:
 
 - ~C-c C-e l O~ ::
      Export as PDF file and *open* (Beamer).
+
+#+begin_note
+You do not need to set ~LaTeX_CLASS~ to ~beamer~.
+#+end_note
 
 ** Support editing
 
@@ -864,7 +914,7 @@ Comments:
 - Use the ~BEAMER_env~ *property* to specify a *different block type* for the current
   "block" environment.
 
-- Use [[id:7bf1634d-2bd6-484b-adae-67a80846cdf4][ignoreheading]] to terminate a block environment
+- Use [[id:7bf1634d-2bd6-484b-adae-67a80846cdf4][ignoreheading]] to *terminate a block environment*
 
 ** ~alertblock~ environment
 
@@ -1464,7 +1514,7 @@ Ignoring page number in backup slides can be achieved by setting the option
 ** note
 
 To keep your *presentation notes* (reminders about what to say), add a heading
-below the frame, and select the ~note~ environment.
+below the frame, and select the ~note~ environment with ~C-c C-b~.
 
 #+begin_src org
 ,#+LATEX_HEADER: \setbeameroption{show notes}
@@ -1514,7 +1564,7 @@ XXX How to label a frame?  Via ~:BEAMER_opt: label=id~ or via other means?
    :ID:       7bf1634d-2bd6-484b-adae-67a80846cdf4
    :END:
 
-Need to "close" a block environment, if followed by something else than
+Need to *"close" a block environment*, if followed by something else than
 a block.
 
 #+begin_src org
@@ -1933,7 +1983,7 @@ beer and as in speech.
 
 * License
 
-Copyright (C) 2013-2015 Free Software Foundation, Inc.
+Copyright (C) 2013-2016 Free Software Foundation, Inc.
 
 Author: Fabrice Niessen \\
 Keywords: reference card org-beamer
@@ -1949,3 +1999,8 @@ A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with
 this program. If not, see http://www.gnu.org/licenses/.
+
+# This is for the sake of Emacs.
+# Local Variables:
+# org-latex-listings: t
+# End:
