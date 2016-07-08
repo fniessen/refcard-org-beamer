@@ -1,0 +1,109 @@
+#+LaTeX_HEADER: % typeset source code listings
+#+LaTeX_HEADER: \usepackage{listings}
+#+LaTeX_HEADER:
+#+LaTeX_HEADER: \usepackage{xcolor}
+#+LaTeX_HEADER: \definecolor{mc@lstidentifier}{HTML}{000000} % black
+#+LaTeX_HEADER: \definecolor{mc@lstcomment}{HTML}{008200} % green
+#+LaTeX_HEADER: \definecolor{mc@lststring}{HTML}{FF5500} % orange
+#+LaTeX_HEADER: \definecolor{mc@lstkeyword}{HTML}{0000FF} % blue
+#+LaTeX_HEADER: \definecolor{mc@lstbackground}{HTML}{FFFFCC} % light yellow
+#+LaTeX_HEADER: \definecolor{mc@lstframe}{HTML}{FFEE88} % dark yellow
+#+LaTeX_HEADER:
+#+LaTeX_HEADER: \lstdefinelanguage{org}{%
+#+LaTeX_HEADER:   morekeywords={:results, :session, :var, :noweb, :exports},
+#+LaTeX_HEADER:   sensitive=false,
+#+LaTeX_HEADER:   morestring=[b]",
+#+LaTeX_HEADER:   morecomment=[l]{\#},
+#+LaTeX_HEADER: }
+#+LaTeX_HEADER:
+#+LaTeX_HEADER: \lstset{%
+#+LaTeX_HEADER:   lineskip=-0.1em,
+#+LaTeX_HEADER:   %
+#+LaTeX_HEADER:   basicstyle=\ttfamily\scriptsize, % font that is used for the code
+#+LaTeX_HEADER:   identifierstyle=\color{mc@lstidentifier},
+#+LaTeX_HEADER:   commentstyle=\color{mc@lstcomment}\itshape,
+#+LaTeX_HEADER:   stringstyle=\color{mc@lststring},
+#+LaTeX_HEADER:   keywordstyle=\color{mc@lstkeyword},
+#+LaTeX_HEADER:   %
+#+LaTeX_HEADER:   extendedchars=true,
+#+LaTeX_HEADER:   inputencoding=utf8,
+#+LaTeX_HEADER:   upquote, %
+#+LaTeX_HEADER:   tabsize=4, % set default tabsize to 4 spaces
+#+LaTeX_HEADER:   showtabs=false, % show tabs within strings adding particular underscores
+#+LaTeX_HEADER:   %  tab=$\to$,
+#+LaTeX_HEADER:   showspaces=false, % show spaces adding particular underscores
+#+LaTeX_HEADER:   showstringspaces=false, % underline spaces within strings
+#+LaTeX_HEADER:   %
+#+LaTeX_HEADER:   numbers=left, % where to put the line numbers
+#+LaTeX_HEADER:   stepnumber=0, % step between two line numbers
+#+LaTeX_HEADER:   numberstyle=\tiny, % line number font size
+#+LaTeX_HEADER:   %
+#+LaTeX_HEADER:   captionpos=b, % set the caption position to `bottom'
+#+LaTeX_HEADER:   %
+#+LaTeX_HEADER:   xleftmargin=0.4em, % text to the right
+#+LaTeX_HEADER:   xrightmargin=0.4em, % text to the left
+#+LaTeX_HEADER:   breaklines=false, % don't break long lines of code
+#+LaTeX_HEADER:   %
+#+LaTeX_HEADER:   frame=single, % add a frame around the code
+#+LaTeX_HEADER:   framexleftmargin=0pt, % frame back to the left
+#+LaTeX_HEADER:   framexrightmargin=0pt, % frame back to the right
+#+LaTeX_HEADER:   backgroundcolor=\color{mc@lstbackground}, % set the background color
+#+LaTeX_HEADER:   rulecolor=\color{mc@lstframe}, % frame color
+#+LaTeX_HEADER:   %
+#+LaTeX_HEADER:   columns=flexible, % try not to ruin the spacing intended by the font designer
+#+LaTeX_HEADER:   keepspaces=true, % don't drop spaces to fix column alignment
+#+LaTeX_HEADER:   %
+#+LaTeX_HEADER:   % mathescape, % allow escaping to (La)TeX mode within $..$
+#+LaTeX_HEADER:   escapechar=², % allow escaping to (La)TeX mode within ²..²
+#+LaTeX_HEADER:   % The backquote was NOT judicious: in some code (comments), I wrap vars
+#+LaTeX_HEADER:   % between such a backquote (`var')
+#+LaTeX_HEADER:   %
+#+LaTeX_HEADER:   % conversion of UTF-8 chars to latin1
+#+LaTeX_HEADER:   literate=
+#+LaTeX_HEADER:   {á}{{\'a}}1
+#+LaTeX_HEADER:   {à}{{\`a}}1
+#+LaTeX_HEADER:   {â}{{\^a}}1
+#+LaTeX_HEADER:   {ä}{{\"a}}1
+#+LaTeX_HEADER:   {ç}{{\c{c}}}1
+#+LaTeX_HEADER:   {é}{{\color{black}\'e}}1
+#+LaTeX_HEADER:   {è}{{\`e}}1
+#+LaTeX_HEADER:   {ê}{{\^e}}1
+#+LaTeX_HEADER:   {ë}{{\"e}}1
+#+LaTeX_HEADER:   {í}{{\'i}}1
+#+LaTeX_HEADER:   {ì}{{\`i}}1
+#+LaTeX_HEADER:   {î}{{\^i}}1
+#+LaTeX_HEADER:   {ï}{{\"i}}1
+#+LaTeX_HEADER:   {ó}{{\'o}}1
+#+LaTeX_HEADER:   {ò}{{\`o}}1
+#+LaTeX_HEADER:   {ô}{{\^o}}1
+#+LaTeX_HEADER:   {ö}{{\"o}}1
+#+LaTeX_HEADER:   {ú}{{\'u}}1
+#+LaTeX_HEADER:   {ù}{{\`u}}1
+#+LaTeX_HEADER:   {û}{{\^u}}1
+#+LaTeX_HEADER:   {ü}{{\"u}}1
+#+LaTeX_HEADER:   {Á}{{\'A}}1
+#+LaTeX_HEADER:   {À}{{\`A}}1
+#+LaTeX_HEADER:   {Â}{{\^A}}1
+#+LaTeX_HEADER:   {Ä}{{\"A}}1
+#+LaTeX_HEADER:   {Ç}{{\c{C}}}1
+#+LaTeX_HEADER:   {É}{{\'E}}1
+#+LaTeX_HEADER:   {È}{{\`E}}1
+#+LaTeX_HEADER:   {Ê}{{\^E}}1
+#+LaTeX_HEADER:   {Ë}{{\"E}}1
+#+LaTeX_HEADER:   {Í}{{\'I}}1
+#+LaTeX_HEADER:   {Ì}{{\`I}}1
+#+LaTeX_HEADER:   {Î}{{\^I}}1
+#+LaTeX_HEADER:   {Ï}{{\"I}}1
+#+LaTeX_HEADER:   {Ó}{{\'O}}1
+#+LaTeX_HEADER:   {Ò}{{\`O}}1
+#+LaTeX_HEADER:   {Ô}{{\^O}}1
+#+LaTeX_HEADER:   {Ö}{{\"O}}1
+#+LaTeX_HEADER:   {Ú}{{\'U}}1
+#+LaTeX_HEADER:   {Ù}{{\`U}}1
+#+LaTeX_HEADER:   {Û}{{\^U}}1
+#+LaTeX_HEADER:   {Ü}{{\"U}}1
+#+LaTeX_HEADER: }
+#+LaTeX_HEADER:
+#+LaTeX_HEADER: \definecolor{TeXbackgroundcolor}{HTML}{F1F9EF}
+#+LaTeX_HEADER: \definecolor{TeXrulecolor}{HTML}{D4E8E3}
+#+LaTeX_HEADER: \lstdefinestyle{TeX}{backgroundcolor=\color{TeXbackgroundcolor},rulecolor=\color{TeXrulecolor}}
