@@ -129,6 +129,10 @@ would be useful.
 
 From [[http://mid.gmane.org/87wpwozj6d.fsf%2540gmail.com][Email from Rafael: Re: beamer_env tag issue with]]
 
+** SDAY Look at Git prezzi
+
+https://www.youtube.com/watch?v=KDUtjZHIx44&feature=youtu.be
+
 * Overview
 
 #+begin_html
@@ -193,6 +197,12 @@ The obvious advantages of this approach are that:
                     ("\\section{%s}" . "\\section*{%s}")
                     ("\\subsection{%s}" . "\\subsection*{%s}")
                     ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
+  #+end_src
+
+- For nice code blocks, use Listings instead of Verbatim:
+
+  #+begin_src emacs-lisp
+  (setq org-latex-listings t)
   #+end_src
 
 * Authoring presentations
@@ -1443,7 +1453,7 @@ change that as follows:
 
 XXX
 
-** ~columns~                                                         :B_columns:
+** ~columns~                                                           :B_columns:
    :PROPERTIES:
    :BEAMER_env: columns
    :BEAMER_opt: [c]
