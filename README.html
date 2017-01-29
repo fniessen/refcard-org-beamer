@@ -3,22 +3,29 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Org Beamer reference card</title>
-<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Fabrice Niessen" />
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Fabrice Niessen" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
   .todo   { font-family: monospace; color: red; }
-  .done   { color: green; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
   .tag    { background-color: #eee; font-family: monospace;
             padding: 2px; font-size: 80%; font-weight: normal; }
   .timestamp { color: #bebebe; }
   .timestamp-kwd { color: #5f9ea0; }
-  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
   .underline { text-decoration: underline; }
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
@@ -45,27 +52,110 @@
     border: 1px solid black;
   }
   pre.src:hover:before { display: inline;}
-  pre.src-sh:before    { content: 'sh'; }
-  pre.src-bash:before  { content: 'sh'; }
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
   pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-R:before     { content: 'R'; }
-  pre.src-perl:before  { content: 'Perl'; }
-  pre.src-java:before  { content: 'Java'; }
-  pre.src-sql:before   { content: 'SQL'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
 
   table { border-collapse:collapse; }
   caption.t-above { caption-side: top; }
   caption.t-bottom { caption-side: bottom; }
   td, th { vertical-align:top;  }
-  th.right  { text-align: center;  }
-  th.left   { text-align: center;   }
-  th.center { text-align: center; }
-  td.right  { text-align: right;  }
-  td.left   { text-align: left;   }
-  td.center { text-align: center; }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
   dt { font-weight: bold; }
-  .footpara:nth-child(2) { display: inline; }
-  .footpara { display: block; }
+  .footpara { display: inline; }
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
@@ -85,6 +175,7 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
@@ -93,48 +184,28 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
 <script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="content">
@@ -143,182 +214,188 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">Overview</a>
+<li><a href="#orgabca9ab">Overview</a>
 <ul>
-<li><a href="#sec-1-1">Description</a></li>
-<li><a href="#sec-1-2">Features</a></li>
-<li><a href="#sec-1-3">Requirements</a></li>
+<li><a href="#orgbc88b20">Description</a></li>
+<li><a href="#orga401797">Features</a></li>
+<li><a href="#orga2354ec">Requirements</a></li>
 </ul>
 </li>
-<li><a href="#sec-2">Authoring presentations</a>
+<li><a href="#org83cfbc5">Authoring presentations</a>
 <ul>
-<li><a href="#sec-2-1">Creating a title page</a></li>
-<li><a href="#sec-2-2">Structure basics</a></li>
-<li><a href="#sec-2-3">Creating a simple frame</a></li>
-<li><a href="#sec-2-4">Using graphics</a></li>
-<li><a href="#sec-2-5"><span class="todo TODO">TODO</span> Using graphics and text</a></li>
-<li><a href="#sec-2-6">Frame with code</a></li>
-<li><a href="#sec-2-7">Frame with code only</a></li>
-<li><a href="#sec-2-8">Frame with output only</a></li>
-<li><a href="#sec-2-9">Frame with plot</a></li>
-<li><a href="#sec-2-10">Creating a table of contents</a></li>
-<li><a href="#sec-2-11">Present a bibliography</a></li>
+<li><a href="#org62e605e">Creating a title page</a></li>
+<li><a href="#orgb509cb7">Structure basics</a></li>
+<li><a href="#orga879ce6">Creating a simple frame</a></li>
+<li><a href="#org39e360a">Using graphics</a></li>
+<li><a href="#org536f37b"><span class="todo TODO">TODO</span> Using graphics and text</a></li>
+<li><a href="#orgafb9e83">Frame with code</a></li>
+<li><a href="#org565e2fe">Frame with code only</a></li>
+<li><a href="#org53da002">Frame with output only</a></li>
+<li><a href="#orgd9d9bb6">Frame with plot</a></li>
+<li><a href="#orgca2c7e2">Creating a table of contents</a></li>
+<li><a href="#orge29c37e">Present a bibliography</a></li>
 </ul>
 </li>
-<li><a href="#sec-3">Editing presentations</a>
+<li><a href="#org2b4a64f">Editing presentations</a>
 <ul>
-<li><a href="#sec-3-1">Exporting to PDF</a></li>
-<li><a href="#sec-3-2">Support editing</a></li>
-<li><a href="#sec-3-3">Label!!!</a></li>
+<li><a href="#orgc8f6d38">Exporting to PDF</a></li>
+<li><a href="#org6ad2997">Support editing</a></li>
+<li><a href="#orgcf47444">Label!!!</a></li>
 </ul>
 </li>
-<li><a href="#sec-4">Distributing presentations</a>
+<li><a href="#orgbbfdef2">Distributing presentations</a>
 <ul>
-<li><a href="#sec-4-1">Create a handout</a></li>
-<li><a href="#sec-4-2">Draw a border around the frames</a></li>
-<li><a href="#sec-4-3">Show speaker notes</a></li>
-<li><a href="#sec-4-4">Print handout with speaker notes</a></li>
-<li><a href="#sec-4-5">Print as article</a></li>
+<li><a href="#org5178744">Create a handout</a></li>
+<li><a href="#org1f9517f">Draw a border around the frames</a></li>
+<li><a href="#org110e3a0">Show speaker notes</a></li>
+<li><a href="#org631bb1b">Print handout with speaker notes</a></li>
+<li><a href="#org3fcb828">Print as article</a></li>
 </ul>
 </li>
-<li><a href="#sec-5">Customizing presentations</a>
+<li><a href="#org829ba6f">Customizing presentations</a>
 <ul>
-<li><a href="#sec-5-1">LaTeX class (XXX not necessary, does work???)</a></li>
-<li><a href="#sec-5-2">LaTeX preamble</a></li>
-<li><a href="#sec-5-3">Inline LaTeX</a></li>
-<li><a href="#sec-5-4">Affiliated keywords</a></li>
-<li><a href="#sec-5-5">Using a custom theme</a></li>
-<li><a href="#sec-5-6">Changing the frame font</a></li>
-<li><a href="#sec-5-7">Changing font size for example environment</a></li>
-<li><a href="#sec-5-8">Adding an image on the title slide</a></li>
-<li><a href="#sec-5-9">Column view</a></li>
+<li><a href="#org8604f8b">LaTeX class (XXX not necessary, does work???)</a></li>
+<li><a href="#org4a9303d">LaTeX preamble</a></li>
+<li><a href="#org3fb1196">Inline LaTeX</a></li>
+<li><a href="#org6c7e48f">Affiliated keywords</a></li>
+<li><a href="#org6aa6e14">Using a custom theme</a></li>
+<li><a href="#org89ae03d">Changing the frame font</a></li>
+<li><a href="#org87d21ca">Changing font size for example environment</a></li>
+<li><a href="#org30403e7">Adding an image on the title slide</a></li>
+<li><a href="#orgf803013">Column view</a></li>
 </ul>
 </li>
-<li><a href="#sec-6">Environments</a>
+<li><a href="#orgfd43b14">Environments</a>
 <ul>
-<li><a href="#sec-6-1">Environment specification: BEAMER_env</a></li>
-<li><a href="#sec-6-2">Frames</a></li>
-<li><a href="#sec-6-3"><code>block</code> environment</a></li>
-<li><a href="#sec-6-4"><code>alertblock</code> environment</a></li>
-<li><a href="#sec-6-5"><code>exampleblock</code> environment</a></li>
-<li><a href="#sec-6-6"><code>beamercolorbox</code> environment</a></li>
-<li><a href="#sec-6-7"><code>beamercolorbox</code> environment</a></li>
-<li><a href="#sec-6-8"><code>beamercolorbox</code> environment</a></li>
-<li><a href="#sec-6-9"><code>beamercolorbox</code> environment</a></li>
-<li><a href="#sec-6-10"><code>structureenv</code> environment</a></li>
+<li><a href="#org0a492fd">Environment specification: BEAMER_env</a></li>
+<li><a href="#orgdab805a">Frames</a></li>
+<li><a href="#orgfbf9557"><code>block</code> environment</a></li>
+<li><a href="#orge563124"><code>alertblock</code> environment</a></li>
+<li><a href="#orgb9831f1"><code>exampleblock</code> environment</a></li>
+<li><a href="#org95dbc1f"><code>beamercolorbox</code> environment</a></li>
+<li><a href="#org27e1fb2"><code>beamercolorbox</code> environment</a></li>
+<li><a href="#orga22a87b"><code>beamercolorbox</code> environment</a></li>
+<li><a href="#org689a25c"><code>beamercolorbox</code> environment</a></li>
+<li><a href="#org8194234"><code>structureenv</code> environment</a></li>
 </ul>
 </li>
-<li><a href="#sec-7">Theorem &amp; Definitions</a>
+<li><a href="#org6e509e0">Theorem &amp; Definitions</a>
 <ul>
-<li><a href="#sec-7-1"><code>definition</code> environment</a></li>
-<li><a href="#sec-7-2"><code>example</code> environment</a></li>
-<li><a href="#sec-7-3"><code>theorem</code> environment</a></li>
-<li><a href="#sec-7-4"><code>proof</code> environment</a></li>
+<li><a href="#org1dc64f6"><code>definition</code> environment</a></li>
+<li><a href="#org36fba79"><code>example</code> environment</a></li>
+<li><a href="#orga480fa4"><code>theorem</code> environment</a></li>
+<li><a href="#orgd9cca26"><code>proof</code> environment</a></li>
 </ul>
 </li>
-<li><a href="#sec-8">Quoting text</a>
+<li><a href="#org68fc84f">Quoting text</a>
 <ul>
-<li><a href="#sec-8-1"><code>quote</code> environment</a></li>
-<li><a href="#sec-8-2"><code>quotation</code> environment</a></li>
-<li><a href="#sec-8-3"><code>verse</code> environment</a></li>
+<li><a href="#org9770d9b"><code>quote</code> environment</a></li>
+<li><a href="#org6093933"><code>quotation</code> environment</a></li>
+<li><a href="#org12e772d"><code>verse</code> environment</a></li>
 </ul>
 </li>
-<li><a href="#sec-9">Alternative</a>
+<li><a href="#org1fdd716">Alternative</a>
 <ul>
-<li><a href="#sec-9-1">Alternative environment syntax (without option)</a></li>
-<li><a href="#sec-9-2">Alternative environment syntax (with option)</a></li>
-<li><a href="#sec-9-3">Alternative environment syntax (with parameter)</a></li>
-<li><a href="#sec-9-4">Add extra environments</a></li>
+<li><a href="#org13099ee">Alternative environment syntax (without option)</a></li>
+<li><a href="#org2dc7570">Alternative environment syntax (with option)</a></li>
+<li><a href="#orge2891d5">Alternative environment syntax (with parameter)</a></li>
+<li><a href="#org8b572c4">Add extra environments</a></li>
 </ul>
 </li>
-<li><a href="#sec-10">Columns</a>
+<li><a href="#orgf2a4a02">Columns</a>
 <ul>
-<li><a href="#sec-10-1">Column specification: BEAMER_COL</a></li>
-<li><a href="#sec-10-2">Splitting a frame into multiple columns</a></li>
-<li><a href="#sec-10-3"><code>column</code></a></li>
-<li><a href="#sec-10-4"><code>columns</code>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_columns">B_columns</span></span></a></li>
-<li><a href="#sec-10-5">How to specify the best width?</a></li>
-<li><a href="#sec-10-6">Result of an evaluation on two columns</a></li>
+<li><a href="#orgf2091a2">Column specification: BEAMER_COL</a></li>
+<li><a href="#org4cd52d8">Splitting a frame into multiple columns</a></li>
+<li><a href="#orgce68014"><code>column</code></a></li>
+<li><a href="#org1aa189e"><code>columns</code>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_columns">B_columns</span></span></a></li>
+<li><a href="#org5ff2af2">How to specify the best width?</a></li>
+<li><a href="#org6987987">Result of an evaluation on two columns</a></li>
 </ul>
 </li>
-<li><a href="#sec-11">Special cases</a>
+<li><a href="#org67d30aa">Special cases</a>
 <ul>
-<li><a href="#sec-11-1">appendix</a></li>
-<li><a href="#sec-11-2">note</a></li>
-<li><a href="#sec-11-3">noteNH</a></li>
-<li><a href="#sec-11-4">againframe</a></li>
-<li><a href="#sec-11-5">ignoreheading</a></li>
+<li><a href="#orgca4b136">appendix</a></li>
+<li><a href="#org7ba849d">note</a></li>
+<li><a href="#org59fa734">noteNH</a></li>
+<li><a href="#orga60d84d">againframe</a></li>
+<li><a href="#org14de8f4">ignoreheading</a></li>
 </ul>
 </li>
-<li><a href="#sec-12">Animations</a>
+<li><a href="#org95ecab5">Animations</a>
 <ul>
-<li><a href="#sec-12-1">Overlay specification: BEAMER_act</a></li>
-<li><a href="#sec-12-2">Overprint</a></li>
-<li><a href="#sec-12-3">Overlay specification: BEAMER_act</a></li>
-<li><a href="#sec-12-4">Question on ML</a></li>
+<li><a href="#org6013be6">Overlay specification: BEAMER_act</a></li>
+<li><a href="#org4c7050f">Overprint</a></li>
+<li><a href="#org186831f">Overlay specification: BEAMER_act</a></li>
+<li><a href="#org334a92d">Question on ML</a></li>
 </ul>
 </li>
-<li><a href="#sec-13">Options</a>
+<li><a href="#org1a378a3">Options</a>
 <ul>
-<li><a href="#sec-13-1">Option specification: BEAMER_opt</a></li>
-<li><a href="#sec-13-2">Vertical alignment</a></li>
-<li><a href="#sec-13-3">Explicit page breaking</a></li>
-<li><a href="#sec-13-4">Frame without surroundings</a></li>
-<li><a href="#sec-13-5">&#xa0;&#xa0;&#xa0;<span class="tag"><span class="some_tag_so_that_heading_is_empty">some_tag_so_that_heading_is_empty</span></span></a></li>
-<li><a href="#sec-13-6">Big title in the middle</a></li>
+<li><a href="#org5b50328">Option specification: BEAMER_opt</a></li>
+<li><a href="#org0315874">Vertical alignment</a></li>
+<li><a href="#org5d8bdad">Explicit page breaking</a></li>
+<li><a href="#org75d6b74">Frame without surroundings</a></li>
+<li><a href="#orgeb6de72">:some_tag_so_that_heading_is_empty:</a></li>
+<li><a href="#orgb86529d">Big title in the middle</a></li>
 </ul>
 </li>
-<li><a href="#sec-14">Power</a></li>
-<li><a href="#sec-15">Summary</a>
+<li><a href="#org4d6ee92">Power</a></li>
+<li><a href="#org98281a2">Summary</a>
 <ul>
-<li><a href="#sec-15-1">Summary</a></li>
-<li><a href="#sec-15-2">For further reading</a></li>
+<li><a href="#org6e3d7f0">Summary</a></li>
+<li><a href="#org94f0a72">For further reading</a></li>
 </ul>
 </li>
-<li><a href="#sec-16">Appendix NAME XXX&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_appendix">B_appendix</span></span></a>
+<li><a href="#orgeba630b">Appendix NAME XXX&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_appendix">B_appendix</span></span></a>
 <ul>
-<li><a href="#sec-16-1">Proof details</a></li>
-<li><a href="#sec-16-2">More details</a></li>
-<li><a href="#sec-16-3">Abbreviations</a></li>
+<li><a href="#org5fc1192">Proof details</a></li>
+<li><a href="#orgbec2b6e">More details</a></li>
+<li><a href="#orgb75b703">Abbreviations</a></li>
 </ul>
 </li>
-<li><a href="#sec-17">Contributing</a>
+<li><a href="#org145274a">Contributing</a>
 <ul>
-<li><a href="#sec-17-1">Issues</a></li>
-<li><a href="#sec-17-2">Patches</a></li>
-<li><a href="#sec-17-3">Donations</a></li>
+<li><a href="#orgdd923a2">Issues</a></li>
+<li><a href="#org60f0f26">Patches</a></li>
+<li><a href="#org5debba6">Donations</a></li>
 </ul>
 </li>
-<li><a href="#sec-18">License</a></li>
+<li><a href="#org28004be">License</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">Overview</h2>
-<div class="outline-text-2" id="text-1">
-<a href="http://opensource.org/licenses/GPL-3.0">
-  <img src="http://img.shields.io/:license-gpl-blue.svg" alt=":license-gpl-blue.svg" />
-</a>
+<div id="outline-container-orgabca9ab" class="outline-2">
+<h2 id="orgabca9ab">Overview</h2>
+<div class="outline-text-2" id="text-orgabca9ab">
+<div class="html">
+<p>
+&lt;a href=&ldquo;<a href="http://opensource.org/licenses/GPL-3.0">http://opensource.org/licenses/GPL-3.0</a>&rdquo;&gt;
+  &lt;img src=&ldquo;<object type="image/svg+xml" data="http://img.shields.io/:license-gpl-blue.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>&rdquo; alt=&ldquo;:license-gpl-blue.svg&rdquo; /&gt;
+&lt;/a&gt;
+</p>
 
-<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VCVAS6KPDQ4JC&lc=BE&item_number=refcard%2dorg%2dbeamer&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted">
-  <img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" alt="btn_donate_LG.gif" />
-</a>
+<p>
+&lt;a href=&ldquo;<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=VCVAS6KPDQ4JC&amp;lc=BE&amp;item_number=refcard-org-beamer&amp;currency_code=EUR&amp;bn=PP-DonationsBF:btn_donate_LG.gif:NonHosted">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=VCVAS6KPDQ4JC&amp;lc=BE&amp;item_number=refcard-org-beamer&amp;currency_code=EUR&amp;bn=PP-DonationsBF:btn_donate_LG.gif:NonHosted</a>&rdquo;&gt;
+  &lt;img src=&ldquo;<img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" alt="btn_donate_LG.gif" />&rdquo; alt=&ldquo;btn_donate_LG.gif&rdquo; /&gt;
+&lt;/a&gt;
+</p>
+
+</div>
 </div>
 
-<div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1">Description</h3>
-<div class="outline-text-3" id="text-1-1">
+<div id="outline-container-orgbc88b20" class="outline-3">
+<h3 id="orgbc88b20">Description</h3>
+<div class="outline-text-3" id="text-orgbc88b20">
 <p>
 Welcome to <b>Org Beamer reference card</b>.  It contains the reference documentation
 that describes how to <b>write presentations</b> based on:
 </p>
 
 <ul class="org-ul">
-<li><a href="http://orgmode.org/">Org mode</a> 8 and
-</li>
-<li>the <a href="https://bitbucket.org/rivanvx/beamer/">LaTeX Beamer class</a>.
-</li>
+<li><a href="http://orgmode.org/">Org mode</a> 8 and</li>
+<li>the <a href="https://bitbucket.org/rivanvx/beamer/">LaTeX Beamer class</a>.</li>
 </ul>
 
 <p>
@@ -329,9 +406,9 @@ computer.
 </div>
 </div>
 
-<div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2">Features</h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-orga401797" class="outline-3">
+<h3 id="orga401797">Features</h3>
+<div class="outline-text-3" id="text-orga401797">
 <p>
 Since they are <b>like any other Org mode document</b>, authoring presentations with
 Org Beamer is very easy, thanks to its <b>straightforward</b> syntax.
@@ -342,119 +419,111 @@ The obvious advantages of this approach are that:
 </p>
 
 <ul class="org-ul">
-<li><b>you don&rsquo;t have to know LaTeX</b> in order to <b>create Beamer presentations</b>.
-</li>
+<li><b>you don&rsquo;t have to know LaTeX</b> in order to <b>create Beamer presentations</b>.</li>
 
 <li><b>you are more productive</b> when editing presentations:
 <ul class="org-ul">
-<li>you can expand and collapse slides,
-</li>
-<li>you can switch quickly between slides by using navigation (speed) commands,
-</li>
+<li>you can expand and collapse slides,</li>
+<li>you can switch quickly between slides by using navigation (speed) commands,</li>
 <li>you can incorporate code blocks (in R or in many other languages) for
 illustration, and evaluate them to actually render output (including
-plots).
-</li>
-</ul>
-</li>
+plots).</li>
+</ul></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-sec-1-3" class="outline-3">
-<h3 id="sec-1-3"><a id="ID-c4f6745b-2147-4538-bd96-9f8e1e1d4669" name="ID-c4f6745b-2147-4538-bd96-9f8e1e1d4669"></a>Requirements</h3>
-<div class="outline-text-3" id="text-1-3">
-
+<div id="outline-container-orga2354ec" class="outline-3">
+<h3 id="orga2354ec"><a id="ID-c4f6745b-2147-4538-bd96-9f8e1e1d4669"></a>Requirements</h3>
+<div class="outline-text-3" id="text-orga2354ec">
 <ul class="org-ul">
 <li>A working LaTeX installation is required for exporting to PDF.  If it is not
-yet installed on your system, install <a href="http://www.tug.org/texlive/">TeX Live</a> (for example).
-</li>
+yet installed on your system, install <a href="http://www.tug.org/texlive/">TeX Live</a> (for example).</li>
 
-<li>You must define a <code>beamer</code> class in <code>org-latex-export-classes</code>:
-
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(eval-after-load <span class="org-string">"ox-latex"</span>
-
-  <span class="org-comment-delimiter">;; </span><span class="org-comment">update the list of LaTeX classes and associated header (encoding, etc.)</span>
-  <span class="org-comment-delimiter">;; </span><span class="org-comment">and structure</span>
-  '(add-to-list 'org-latex-classes
-                `(<span class="org-string">"beamer"</span>
-                  ,(concat <span class="org-string">"\\documentclass[presentation]{beamer}\n"</span>
-                           <span class="org-string">"[DEFAULT-PACKAGES]"</span>
-                           <span class="org-string">"[PACKAGES]"</span>
-                           <span class="org-string">"[EXTRA]\n"</span>)
-                  (<span class="org-string">"\\section{%s}"</span> . <span class="org-string">"\\section*{%s}"</span>)
-                  (<span class="org-string">"\\subsection{%s}"</span> . <span class="org-string">"\\subsection*{%s}"</span>)
-                  (<span class="org-string">"\\subsubsection{%s}"</span> . <span class="org-string">"\\subsubsection*{%s}"</span>))))
-</pre>
-</div>
-</li>
-
-<li>For nice code blocks, use Listings instead of Verbatim:
+<li><p>
+You must define a <code>beamer</code> class in <code>org-latex-export-classes</code>:
+</p>
 
 <div class="org-src-container">
+<pre class="src src-emacs-lisp">  (eval-after-load <span class="org-string">"ox-latex"</span>
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">setq</span> org-latex-listings t)
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">update the list of LaTeX classes and associated header (encoding, etc.)</span>
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">and structure</span>
+    '(add-to-list 'org-latex-classes
+                  `(<span class="org-string">"beamer"</span>
+                    ,(concat <span class="org-string">"\\documentclass[presentation]{beamer}\n"</span>
+                             <span class="org-string">"[DEFAULT-PACKAGES]"</span>
+                             <span class="org-string">"[PACKAGES]"</span>
+                             <span class="org-string">"[EXTRA]\n"</span>)
+                    (<span class="org-string">"\\section{%s}"</span> . <span class="org-string">"\\section*{%s}"</span>)
+                    (<span class="org-string">"\\subsection{%s}"</span> . <span class="org-string">"\\subsection*{%s}"</span>)
+                    (<span class="org-string">"\\subsubsection{%s}"</span> . <span class="org-string">"\\subsubsection*{%s}"</span>))))
 </pre>
-</div>
-</li>
+</div></li>
+
+<li><p>
+For nice code blocks, use Listings instead of Verbatim:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">  (<span class="org-keyword">setq</span> org-latex-listings t)
+</pre>
+</div></li>
 </ul>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">Authoring presentations</h2>
-<div class="outline-text-2" id="text-2">
-</div><div id="outline-container-sec-2-1" class="outline-3">
-<h3 id="sec-2-1">Creating a title page</h3>
-<div class="outline-text-3" id="text-2-1">
-
+<div id="outline-container-org83cfbc5" class="outline-2">
+<h2 id="org83cfbc5">Authoring presentations</h2>
+<div class="outline-text-2" id="text-org83cfbc5">
+</div><div id="outline-container-org62e605e" class="outline-3">
+<h3 id="org62e605e">Creating a title page</h3>
+<div class="outline-text-3" id="text-org62e605e">
 <p>
 The very first slide (called <b>frame</b> in a Beamer presentation) is the <b>title page</b>.
 By default, it will automatically be displayed with the following elements:
 </p>
 
 <ul class="org-ul">
-<li>the document <b>title</b>
+<li><p>
+the document <b>title</b>
+</p>
 
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-document-info-keyword">#+TITLE:</span> <span class="org-org-document-title">Document title</span>
+<pre class="src src-org"><span class="org-org-document-info-keyword">  #+TITLE:</span> <span class="org-org-document-title">Document title</span>
 </pre>
 </div>
 
 <p>
 (file name, if none specified &#x2013; could be removed in the future)
-</p>
-</li>
+</p></li>
 
-<li>the <b>author(s)</b>&rsquo;s name
+<li><p>
+the <b>author(s)</b>&rsquo;s name
+</p>
 
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-document-info-keyword">#+AUTHOR:</span> <span class="org-org-document-info">John Doe</span>
+<pre class="src src-org"><span class="org-org-document-info-keyword">  #+AUTHOR:</span> <span class="org-org-document-info">John Doe</span>
 </pre>
 </div>
 
 <p>
 (Emacs Lisp variable <code>user-full-name</code>, if none specified)
-</p>
-</li>
+</p></li>
 
-<li>a <b>date</b>
+<li><p>
+a <b>date</b>
+</p>
 
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-document-info-keyword">#+DATE:</span> <span class="org-org-document-info">2017-01-01</span>
+<pre class="src src-org"><span class="org-org-document-info-keyword">  #+DATE:</span> <span class="org-org-document-info">2017-01-01</span>
 </pre>
 </div>
 
 <p>
 (LaTeX macro <code>\today</code>, if none specified)
-</p>
-</li>
+</p></li>
 </ul>
 
 <p>
@@ -462,7 +531,6 @@ The insertion of <code>\author</code> can be turned off with:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+OPTIONS: author:nil</span>
 </pre>
 </div>
@@ -472,10 +540,9 @@ The author&rsquo;s email can be included with:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-document-info-keyword">#+AUTHOR:</span>    <span class="org-org-document-info">\href{<a href="mailto:email@example.com}{John">mailto:email@example.com}{John</a> Doe}</span>
-<span class="org-org-document-info-keyword">#+AUTHOR:</span>    <span class="org-org-document-info">\texorpdfstring{John Doe\newline\url{email@example.com}}{John Doe} % DOES NOT WORK </span><span class="org-org-document-info"><span class="org-leuven-highlight-todo-items">XXX</span></span><span class="org-org-document-info"> -&gt; BEAMER_HEADER???</span>
-<span class="org-org-meta-line">#+BEAMER_HEADER: \author{\texorpdfstring{John Doe\newline\url{email@example.com}}{John Doe}} % BAD ORDER </span><span class="org-org-meta-line"><span class="org-leuven-highlight-todo-items">XXX</span></span>
+<span class="org-org-document-info-keyword">#+AUTHOR:</span>    <span class="org-org-document-info">\texorpdfstring{John Doe\newline\url{email@example.com}}{John Doe} % DOES NOT WORK XXX -&gt; BEAMER_HEADER???</span>
+<span class="org-org-meta-line">#+BEAMER_HEADER: \author{\texorpdfstring{John Doe\newline\url{email@example.com}}{John Doe}} % BAD ORDER XXX</span>
 </pre>
 </div>
 
@@ -483,19 +550,15 @@ The author&rsquo;s email can be included with:
 Other elements:
 </p>
 <ul class="org-ul">
-<li>the document <b>subtitle</b>,
-</li>
-<li>their affiliation (<b>institute</b>), and
-</li>
-<li>a <b>title graphic</b>
-</li>
+<li>the document <b>subtitle</b>,</li>
+<li>their affiliation (<b>institute</b>), and</li>
+<li>a <b>title graphic</b></li>
 </ul>
 <p>
 can be included with the following commands:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+BEAMER_HEADER: \subtitle{Document subtitle}</span>
 <span class="org-org-meta-line">#+BEAMER_HEADER: \institute[INST]{Institute\\\url{<a href="http://www.institute.edu">http://www.institute.edu</a>}}</span>
 <span class="org-org-meta-line">#+BEAMER_HEADER: \titlegraphic{\includegraphics[height=1.5cm]{InstLogo}}</span>
@@ -507,20 +570,19 @@ XXX Why do I have to use :eval no (in Org blocks)?
 </p>
 
 <p>
-The <a href="#sec-5-5">inner theme</a> dictates how the title page is rendered.
+The <a href="#org6aa6e14">inner theme</a> dictates how the title page is rendered.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+BEAMER_HEADER: \logo{\includegraphics[height=.9cm]{InstLogo}}</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-2-2" class="outline-3">
-<h3 id="sec-2-2">Structure basics</h3>
-<div class="outline-text-3" id="text-2-2">
+<div id="outline-container-orgb509cb7" class="outline-3">
+<h3 id="orgb509cb7">Structure basics</h3>
+<div class="outline-text-3" id="text-orgb509cb7">
 <p>
 Org mode presentations contain headings at different levels.
 </p>
@@ -531,24 +593,22 @@ By default,
 
 <ul class="org-ul">
 <li>Headings at the <b>first</b> outline level will become <b>titles</b> of the different
-frames.
-</li>
+frames.</li>
 
-<li><b>Deeper</b> levels will be used as <b>structural environments</b>.
-</li>
+<li><b>Deeper</b> levels will be used as <b>structural environments</b>.</li>
 
-<li>The <b>table of contents</b> frame is created but is blank
-(<a href="#sec-2-10">you&rsquo;ll understand why later</a>).
+<li><p>
+The <b>table of contents</b> frame is created but is blank
+(<a href="#orgca2c7e2">you&rsquo;ll understand why later</a>).
+</p>
 
 <p>
 You can remove it by setting the <code>toc</code> option (default: <code>t</code>) from the <code>#+OPTIONS:</code>
 keyword to <code>nil</code>:
-</p>
-</li>
+</p></li>
 </ul>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+OPTIONS: toc:nil</span>
 
 <span class="org-org-level-1">* Frame 1</span>
@@ -563,17 +623,16 @@ This is a block.
 </div>
 </div>
 
-<div id="outline-container-sec-2-3" class="outline-3">
-<h3 id="sec-2-3">Creating a simple frame</h3>
-<div class="outline-text-3" id="text-2-3">
+<div id="outline-container-orga879ce6" class="outline-3">
+<h3 id="orga879ce6">Creating a simple frame</h3>
+<div class="outline-text-3" id="text-orga879ce6">
 <p>
 To create a frame with bullets, you simply use standard Org mode bullets:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-level-1">* A title</span>
-  #+Beamer: <span class="org-org-latex-and-related">\framesubtitle{</span>A subtitle}
+<span class="org-org-meta-line">  #+Beamer: \framesubtitle{A subtitle}</span>
 
 - Bullet 1
 - Bullet 2
@@ -592,15 +651,17 @@ Beamer back-end only.
 </div>
 </div>
 
-<div id="outline-container-sec-2-4" class="outline-3">
-<h3 id="sec-2-4">Using graphics</h3>
-<div class="outline-text-3" id="text-2-4">
+<div id="outline-container-org39e360a" class="outline-3">
+<h3 id="org39e360a">Using graphics</h3>
+<div class="outline-text-3" id="text-org39e360a">
 <p>
 How to center pictures horizontally?
 </p>
 
 <ul class="org-ul">
-<li>Figures
+<li><p>
+Figures
+</p>
 
 
 <div class="figure">
@@ -608,44 +669,51 @@ How to center pictures horizontally?
 </p>
 </div>
 
+
 <div class="figure">
 <p><img src="images/square.png" alt="square.png" />
 </p>
-<p><span class="figure-number">Figure 2:</span> The caption is <i>always</i> placed <b>below</b> the figure.</p>
-</div>
-</li>
+<p><span class="figure-number">Figure 2: </span>The caption is <i>always</i> placed <b>below</b> the figure.</p>
+</div></li>
 
-<li>TikZ
+<li><p>
+TikZ
+</p>
 
 <p>
 <a href="http://tex.stackexchange.com/questions/64075/beamers-visible-inside-a-tikz-node">http://tex.stackexchange.com/questions/64075/beamers-visible-inside-a-tikz-node</a>
 </p>
-</li>
+
+<div class="latex">
+\begin{tikzpicture}
+  \node[align=center] {I'm {\visible<+->{very}}\\happy.};
+\end{tikzpicture}
+
+</div></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-sec-2-5" class="outline-3">
-<h3 id="sec-2-5"><span class="todo TODO">TODO</span> Using graphics and text</h3>
-<div class="outline-text-3" id="text-2-5">
+<div id="outline-container-org536f37b" class="outline-3">
+<h3 id="org536f37b"><span class="todo TODO">TODO</span> Using graphics and text</h3>
+<div class="outline-text-3" id="text-org536f37b">
 <p>
 Look at <code>wrapfig</code> or <code>parinc</code>
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-2-6" class="outline-3">
-<h3 id="sec-2-6">Frame with code</h3>
-<div class="outline-text-3" id="text-2-6">
+<div id="outline-container-orgafb9e83" class="outline-3">
+<h3 id="orgafb9e83">Frame with code</h3>
+<div class="outline-text-3" id="text-orgafb9e83">
 <p>
 Here is a simple R code block&#x2026;
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-block-begin-line">#+begin_src R :exports both</span>
-<span class="org-ess-function-call"><span class="org-org-block-background">summary</span></span><span class="org-builtin"><span class="org-org-block-background">(</span></span><span class="org-org-block-background">cars</span><span class="org-builtin"><span class="org-org-block-background">)</span></span><span class="org-org-block-background">
-</span><span class="org-org-block-end-line">#+end_src</span>
+<span class="org-org-block"><span class="org-ess-function-call">summary</span></span><span class="org-org-block"><span class="org-builtin">(</span></span><span class="org-org-block">cars</span><span class="org-org-block"><span class="org-builtin">)</span></span>
+<span class="org-org-block-end-line">#+end_src</span>
 </pre>
 </div>
 
@@ -654,7 +722,6 @@ Here is a simple R code block&#x2026;
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-R"><span class="org-ess-function-call">summary</span><span class="org-builtin">(</span>cars<span class="org-builtin">)</span>
 </pre>
 </div>
@@ -664,25 +731,23 @@ XXX Is this needed?
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+LATEX_HEADER: \lstdefinelanguage{R}{}</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-2-7" class="outline-3">
-<h3 id="sec-2-7">Frame with code only</h3>
-<div class="outline-text-3" id="text-2-7">
+<div id="outline-container-org565e2fe" class="outline-3">
+<h3 id="org565e2fe">Frame with code only</h3>
+<div class="outline-text-3" id="text-org565e2fe">
 <p>
 To display a code block without evaluating it, you specify the <code>:eval no</code> option:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-block-begin-line">#+begin_src R :eval no</span>
-<span class="org-ess-function-call"><span class="org-org-block-background">summary</span></span><span class="org-builtin"><span class="org-org-block-background">(</span></span><span class="org-org-block-background">cars</span><span class="org-builtin"><span class="org-org-block-background">)</span></span><span class="org-org-block-background">
-</span><span class="org-org-block-end-line">#+end_src</span>
+<span class="org-org-block"><span class="org-ess-function-call">summary</span></span><span class="org-org-block"><span class="org-builtin">(</span></span><span class="org-org-block">cars</span><span class="org-org-block"><span class="org-builtin">)</span></span>
+<span class="org-org-block-end-line">#+end_src</span>
 </pre>
 </div>
 
@@ -691,26 +756,24 @@ It only renders the code:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-R"><span class="org-ess-function-call">summary</span><span class="org-builtin">(</span>cars<span class="org-builtin">)</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-2-8" class="outline-3">
-<h3 id="sec-2-8">Frame with output only</h3>
-<div class="outline-text-3" id="text-2-8">
+<div id="outline-container-org53da002" class="outline-3">
+<h3 id="org53da002">Frame with output only</h3>
+<div class="outline-text-3" id="text-org53da002">
 <p>
 To display the output of a code block without echoing the underlying code, you
 specify the <code>:exports results</code> option:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-block-begin-line">#+begin_src R :exports results</span>
-<span class="org-ess-function-call"><span class="org-org-block-background">summary</span></span><span class="org-builtin"><span class="org-org-block-background">(</span></span><span class="org-org-block-background">cars</span><span class="org-builtin"><span class="org-org-block-background">)</span></span><span class="org-org-block-background">
-</span><span class="org-org-block-end-line">#+end_src</span>
+<span class="org-org-block"><span class="org-ess-function-call">summary</span></span><span class="org-org-block"><span class="org-builtin">(</span></span><span class="org-org-block">cars</span><span class="org-org-block"><span class="org-builtin">)</span></span>
+<span class="org-org-block-end-line">#+end_src</span>
 </pre>
 </div>
 
@@ -720,9 +783,9 @@ It only renders the results:
 </div>
 </div>
 
-<div id="outline-container-sec-2-9" class="outline-3">
-<h3 id="sec-2-9">Frame with plot</h3>
-<div class="outline-text-3" id="text-2-9">
+<div id="outline-container-orgd9d9bb6" class="outline-3">
+<h3 id="orgd9d9bb6">Frame with plot</h3>
+<div class="outline-text-3" id="text-orgd9d9bb6">
 <p>
 Code blocks can also be used to include plots within presentations.
 </p>
@@ -733,14 +796,19 @@ a code block like this:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-block-begin-line">#+begin_src R :exports results :results graphics :file qplot.png</span>
-<span class="org-ess-function-call"><span class="org-org-block-background">plot</span></span><span class="org-builtin"><span class="org-org-block-background">(</span></span><span class="org-org-block-background">cars</span><span class="org-builtin"><span class="org-org-block-background">)</span></span><span class="org-org-block-background">
-</span><span class="org-org-block-end-line">#+end_src</span>
+<span class="org-org-block"><span class="org-ess-function-call">plot</span></span><span class="org-org-block"><span class="org-builtin">(</span></span><span class="org-org-block">cars</span><span class="org-org-block"><span class="org-builtin">)</span></span>
+<span class="org-org-block-end-line">#+end_src</span>
 </pre>
 </div>
 
-<div class="center">
+
+<div class="figure">
+<p><img src="qplot.png" alt="qplot.png" />
+</p>
+</div>
+
+<div class="org-center">
 
 <div class="figure">
 <p><img src="qplot.png" alt="qplot.png" />
@@ -750,17 +818,15 @@ a code block like this:
 </div>
 </div>
 
-<div id="outline-container-sec-2-10" class="outline-3">
-<h3 id="sec-2-10"><a id="ID-b4252974-1d3d-4652-b42e-e7cd016f45f7" name="ID-b4252974-1d3d-4652-b42e-e7cd016f45f7"></a>Creating a table of contents</h3>
-<div class="outline-text-3" id="text-2-10">
-
+<div id="outline-container-orgca2c7e2" class="outline-3">
+<h3 id="orgca2c7e2"><a id="ID-b4252974-1d3d-4652-b42e-e7cd016f45f7"></a>Creating a table of contents</h3>
+<div class="outline-text-3" id="text-orgca2c7e2">
 <p>
 If you set the <code>H</code> option from the <code>#+OPTIONS:</code> keyword (or the
 <code>org-beamer-frame-level</code> variable) to <code>2</code>:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+OPTIONS: H:2 toc:t</span>
 </pre>
 </div>
@@ -770,11 +836,9 @@ then:
 </p>
 
 <ul class="org-ul">
-<li><b>First-level</b> headings become <b>sections</b> listed in the table of contents<sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup>, and
-</li>
+<li><b>First-level</b> headings become <b>sections</b> listed in the table of contents<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>, and</li>
 
-<li><b>Second-level</b> headings become the <b>frames</b>.
-</li>
+<li><b>Second-level</b> headings become the <b>frames</b>.</li>
 </ul>
 
 <p>
@@ -786,7 +850,6 @@ If you set the <code>H</code> value to <code>3</code> in the <code>OPTIONS</code
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+OPTIONS: H:3 toc:t</span>
 </pre>
 </div>
@@ -797,11 +860,9 @@ then:
 
 <ul class="org-ul">
 <li><b>First-</b> and <b>second-level</b> headings become <b>sections</b> and <b>subsections</b> listed in
-the table of contents, and
-</li>
+the table of contents, and</li>
 
-<li><b>Third-level</b> headings become the <b>frames</b>.
-</li>
+<li><b>Third-level</b> headings become the <b>frames</b>.</li>
 </ul>
 
 <p>
@@ -811,23 +872,22 @@ heading.
 </div>
 </div>
 
-<div id="outline-container-sec-2-11" class="outline-3">
-<h3 id="sec-2-11">Present a bibliography</h3>
+<div id="outline-container-orge29c37e" class="outline-3">
+<h3 id="orge29c37e">Present a bibliography</h3>
 </div>
 </div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3">Editing presentations</h2>
-<div class="outline-text-2" id="text-3">
-</div><div id="outline-container-sec-3-1" class="outline-3">
-<h3 id="sec-3-1">Exporting to PDF</h3>
-<div class="outline-text-3" id="text-3-1">
+<div id="outline-container-org2b4a64f" class="outline-2">
+<h2 id="org2b4a64f">Editing presentations</h2>
+<div class="outline-text-2" id="text-org2b4a64f">
+</div><div id="outline-container-orgc8f6d38" class="outline-3">
+<h3 id="orgc8f6d38">Exporting to PDF</h3>
+<div class="outline-text-3" id="text-orgc8f6d38">
 <p>
 Type:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-emacs-lisp">M-x load-library RET ox-beamer RET
 </pre>
 </div>
@@ -838,17 +898,13 @@ export menu:
 </p>
 
 <dl class="org-dl">
-<dt> <code>C-c C-e l B</code> </dt><dd>     Export as LaTeX buffer (Beamer).
-</dd>
+<dt><code>C-c C-e l B</code></dt><dd>Export as LaTeX buffer (Beamer).</dd>
 
-<dt> <code>C-c C-e l b</code> </dt><dd>     Export as LaTeX file (Beamer).
-</dd>
+<dt><code>C-c C-e l b</code></dt><dd>Export as LaTeX file (Beamer).</dd>
 
-<dt> <code>C-c C-e l P</code> </dt><dd>     <b>Export as PDF file</b> (Beamer).
-</dd>
+<dt><code>C-c C-e l P</code></dt><dd><b>Export as PDF file</b> (Beamer).</dd>
 
-<dt> <code>C-c C-e l O</code> </dt><dd>     Export as PDF file and <b>open</b> (Beamer).
-</dd>
+<dt><code>C-c C-e l O</code></dt><dd>Export as PDF file and <b>open</b> (Beamer).</dd>
 </dl>
 
 <div class="note">
@@ -860,15 +916,14 @@ You do not need to set <code>LaTeX_CLASS</code> to <code>beamer</code>.
 </div>
 </div>
 
-<div id="outline-container-sec-3-2" class="outline-3">
-<h3 id="sec-3-2">Support editing</h3>
-<div class="outline-text-3" id="text-3-2">
+<div id="outline-container-org6ad2997" class="outline-3">
+<h3 id="org6ad2997">Support editing</h3>
+<div class="outline-text-3" id="text-org6ad2997">
 <p>
 Type:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-emacs-lisp">M-x org-beamer-mode RET
 </pre>
 </div>
@@ -876,7 +931,7 @@ Type:
 <p>
 to load the minor mode <code>org-beamer-mode</code> <b>easing the edition</b> of the <b>document
 structure</b> (through the key binding <code>C-c C-b</code>, which offers fast selection of
-a <a href="#sec-6-3">Beamer environment</a>).
+a <a href="#orgfbf9557">Beamer environment</a>).
 </p>
 
 <p>
@@ -884,7 +939,6 @@ You can also turn it on with:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+STARTUP: beamer</span>
 </pre>
 </div>
@@ -895,9 +949,9 @@ in your document.
 </div>
 </div>
 
-<div id="outline-container-sec-3-3" class="outline-3">
-<h3 id="sec-3-3">Label!!!</h3>
-<div class="outline-text-3" id="text-3-3">
+<div id="outline-container-orgcf47444" class="outline-3">
+<h3 id="orgcf47444">Label!!!</h3>
+<div class="outline-text-3" id="text-orgcf47444">
 <p>
 Label to theorem.
 </p>
@@ -905,12 +959,12 @@ Label to theorem.
 </div>
 </div>
 
-<div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4">Distributing presentations</h2>
-<div class="outline-text-2" id="text-4">
-</div><div id="outline-container-sec-4-1" class="outline-3">
-<h3 id="sec-4-1">Create a handout</h3>
-<div class="outline-text-3" id="text-4-1">
+<div id="outline-container-orgbbfdef2" class="outline-2">
+<h2 id="orgbbfdef2">Distributing presentations</h2>
+<div class="outline-text-2" id="text-orgbbfdef2">
+</div><div id="outline-container-org5178744" class="outline-3">
+<h3 id="org5178744">Create a handout</h3>
+<div class="outline-text-3" id="text-org5178744">
 <p>
 You can distribute your presentation in the form of handouts.
 </p>
@@ -921,7 +975,6 @@ removed and just the last &ldquo;slide&rdquo; of each frame is printed.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+LATEX_CLASS_OPTIONS: [handout]</span>
 
 <span class="org-org-meta-line">#+LATEX_HEADER: \usepackage{pgfpages}</span>
@@ -933,46 +986,45 @@ removed and just the last &ldquo;slide&rdquo; of each frame is printed.
 </div>
 
 <ul class="org-ul">
-<li>with <b>one frame</b> per A4 page (extending page size)
+<li><p>
+with <b>one frame</b> per A4 page (extending page size)
+</p>
 
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-meta-line">#+LATEX_HEADER:   \pgfpagesuselayout{resize to}[a4paper,landscape]</span>
+<pre class="src src-org"><span class="org-org-meta-line">  #+LATEX_HEADER:   \pgfpagesuselayout{resize to}[a4paper,landscape]</span>
 </pre>
-</div>
-</li>
+</div></li>
 
-<li>with <b>two frames</b> per A4 page
+<li><p>
+with <b>two frames</b> per A4 page
+</p>
 
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-meta-line">#+LATEX_HEADER:   \pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]</span>
+<pre class="src src-org"><span class="org-org-meta-line">  #+LATEX_HEADER:   \pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]</span>
 </pre>
-</div>
-</li>
+</div></li>
 
-<li>with <b>four frames</b> per A4 page
+<li><p>
+with <b>four frames</b> per A4 page
+</p>
 
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-meta-line">#+LATEX_HEADER:   \pgfpagesuselayout{4 on 1}[a4paper,border shrink=5mm,%</span>
-<span class="org-org-meta-line">#+LATEX_HEADER:                              landscape]</span>
+<pre class="src src-org"><span class="org-org-meta-line">  #+LATEX_HEADER:   \pgfpagesuselayout{4 on 1}[a4paper,border shrink=5mm,%</span>
+<span class="org-org-meta-line">  #+LATEX_HEADER:                              landscape]</span>
 </pre>
-</div>
-</li>
+</div></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-sec-4-2" class="outline-3">
-<h3 id="sec-4-2">Draw a border around the frames</h3>
-<div class="outline-text-3" id="text-4-2">
+<div id="outline-container-org1f9517f" class="outline-3">
+<h3 id="org1f9517f">Draw a border around the frames</h3>
+<div class="outline-text-3" id="text-org1f9517f">
 <p>
 Add a rectangle around each frame in the handout:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+LATEX_HEADER: \setbeamertemplate{background canvas}{</span>
 <span class="org-org-meta-line">#+LATEX_HEADER:   \tikz \draw (current page.north west) rectangle</span>
 <span class="org-org-meta-line">#+LATEX_HEADER:               (current page.south east);</span>
@@ -982,9 +1034,9 @@ Add a rectangle around each frame in the handout:
 </div>
 </div>
 
-<div id="outline-container-sec-4-3" class="outline-3">
-<h3 id="sec-4-3">Show speaker notes</h3>
-<div class="outline-text-3" id="text-4-3">
+<div id="outline-container-org110e3a0" class="outline-3">
+<h3 id="org110e3a0">Show speaker notes</h3>
+<div class="outline-text-3" id="text-org110e3a0">
 <p>
 Show reminders about what to say during each part of your presentation.
 </p>
@@ -999,9 +1051,9 @@ Your laptop monitor and your projector should have the same resolution.
 </div>
 </div>
 
-<div id="outline-container-sec-4-4" class="outline-3">
-<h3 id="sec-4-4">Print handout with speaker notes</h3>
-<div class="outline-text-3" id="text-4-4">
+<div id="outline-container-org631bb1b" class="outline-3">
+<h3 id="org631bb1b">Print handout with speaker notes</h3>
+<div class="outline-text-3" id="text-org631bb1b">
 <p>
 See <a href="http://tex.stackexchange.com/questions/38084/displaying-slides-with-beamer-and-article-class/38146#38146">http://tex.stackexchange.com/questions/38084/displaying-slides-with-beamer-and-article-class/38146#38146</a>
 </p>
@@ -1011,7 +1063,6 @@ See Guido Diepen&rsquo;s <a href="http://www.guidodiepen.nl/2009/07/creating-lat
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+LATEX_HEADER: \usepackage{handoutWithNotes}</span>
 <span class="org-org-meta-line">#+LATEX_HEADER: \pgfpagesuselayout{3 on 1 with notes}[a4paper,border shrink=5mm]</span>
 </pre>
@@ -1019,9 +1070,9 @@ See Guido Diepen&rsquo;s <a href="http://www.guidodiepen.nl/2009/07/creating-lat
 </div>
 </div>
 
-<div id="outline-container-sec-4-5" class="outline-3">
-<h3 id="sec-4-5">Print as article</h3>
-<div class="outline-text-3" id="text-4-5">
+<div id="outline-container-org3fcb828" class="outline-3">
+<h3 id="org3fcb828">Print as article</h3>
+<div class="outline-text-3" id="text-org3fcb828">
 <p>
 Using <code>beamerarticle</code>.
 </p>
@@ -1029,14 +1080,13 @@ Using <code>beamerarticle</code>.
 </div>
 </div>
 
-<div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5">Customizing presentations</h2>
-<div class="outline-text-2" id="text-5">
-</div><div id="outline-container-sec-5-1" class="outline-3">
-<h3 id="sec-5-1">LaTeX class (XXX not necessary, does work???)</h3>
-<div class="outline-text-3" id="text-5-1">
+<div id="outline-container-org829ba6f" class="outline-2">
+<h2 id="org829ba6f">Customizing presentations</h2>
+<div class="outline-text-2" id="text-org829ba6f">
+</div><div id="outline-container-org8604f8b" class="outline-3">
+<h3 id="org8604f8b">LaTeX class (XXX not necessary, does work???)</h3>
+<div class="outline-text-3" id="text-org8604f8b">
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+LATEX_CLASS_OPTIONS:</span>
 </pre>
 </div>
@@ -1046,16 +1096,12 @@ Common options:
 </p>
 
 <ul class="org-ul">
-<li><code>8pt</code>, <code>9pt</code>, <code>10pt</code>, <code>11pt</code> (default), <code>12pt</code>, <code>14pt</code>, <code>17pt</code>, <code>20pt</code>
-</li>
-<li><code>draft</code>: no graphics, footlines,&#x2026;
-</li>
-<li><code>handout</code>: no overlays
-</li>
+<li><code>8pt</code>, <code>9pt</code>, <code>10pt</code>, <code>11pt</code> (default), <code>12pt</code>, <code>14pt</code>, <code>17pt</code>, <code>20pt</code></li>
+<li><code>draft</code>: no graphics, footlines,&#x2026;</li>
+<li><code>handout</code>: no overlays</li>
 </ul>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+LaTeX_CLASS_options: [bigger,allowframebreaks]</span>
 </pre>
 </div>
@@ -1065,23 +1111,21 @@ Beamer now supports the 16:9 aspect ratio with the <code>aspectratio</code> opti
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+LaTeX_CLASS_options: [aspectratio=169]</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-5-2" class="outline-3">
-<h3 id="sec-5-2">LaTeX preamble</h3>
-<div class="outline-text-3" id="text-5-2">
+<div id="outline-container-org4a9303d" class="outline-3">
+<h3 id="org4a9303d">LaTeX preamble</h3>
+<div class="outline-text-3" id="text-org4a9303d">
 <p>
 Append any line of code in the <b>LaTeX preamble</b> with keywords specific to the
 LaTeX and Beamer back-ends:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+LATEX_HEADER:       \usepackage{...}</span>
 <span class="org-org-meta-line">#+LATEX_HEADER_EXTRA: \usepackage{...}</span>
 <span class="org-org-meta-line">#+BEAMER_HEADER:      \institute[short name]{Institute}</span>
@@ -1090,49 +1134,42 @@ LaTeX and Beamer back-ends:
 
 <p>
 It will go (in that order) in the <code>[EXTRA]</code> placeholder of the header associated
-to the <code>beamer</code> LaTeX class (see <a href="#sec-1-3"><code>org-latex-classes</code></a>).
+to the <code>beamer</code> LaTeX class (see <a href="#orga2354ec"><code>org-latex-classes</code></a>).
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-5-3" class="outline-3">
-<h3 id="sec-5-3">Inline LaTeX</h3>
-<div class="outline-text-3" id="text-5-3">
-
+<div id="outline-container-org3fb1196" class="outline-3">
+<h3 id="org3fb1196">Inline LaTeX</h3>
+<div class="outline-text-3" id="text-org3fb1196">
 <p>
 You can include raw LaTeX in your Org presentations and it will get kept as
 LaTeX when it&rsquo;s exported.
 </p>
 </div>
 
-<ul class="org-ul"><li><a id="sec-5-3-1" name="sec-5-3-1"></a>Left&#xa0;&#xa0;&#xa0;<span class="tag"><span class="BMCOL">BMCOL</span></span><br  /><div class="outline-text-4" id="text-5-3-1">
-
+<ul class="org-ul"><li><a id="orgd21d207"></a>Left&#xa0;&#xa0;&#xa0;<span class="tag"><span class="BMCOL">BMCOL</span></span><br /><div class="outline-text-4" id="text-orgd21d207">
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-block-begin-line">#+begin_LaTeX</span>
-<span class="org-org-block">\begin{minipage}{4cm}</span>
-<span class="org-org-block">...</span>
-<span class="org-org-block">\end{minipage}</span>
+<span class="org-org-latex-and-related">\begin{minipage}{4cm}</span>
+<span class="org-org-latex-and-related">...</span>
+<span class="org-org-latex-and-related">\end{minipage}</span>
 <span class="org-org-block-end-line">#+end_LaTeX</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-meta-line">#+LaTeX:</span> <span class="org-org-block">\parbox{4cm}{...}</span>
+<pre class="src src-org"><span class="org-org-meta-line">#+LaTeX: \parbox{4cm}{...}</span>
 </pre>
 </div>
 
 <p>
 Such LaTeX code will only be present in the exports to <b>LaTeX and Beamer</b>.
 </p>
-</div>
-</li>
+</div></li>
 
-<li><a id="sec-5-3-2" name="sec-5-3-2"></a>Right&#xa0;&#xa0;&#xa0;<span class="tag"><span class="BMCOL">BMCOL</span></span><br  /><div class="outline-text-4" id="text-5-3-2">
-
+<li><a id="org9b01077"></a>Right&#xa0;&#xa0;&#xa0;<span class="tag"><span class="BMCOL">BMCOL</span></span><br /><div class="outline-text-4" id="text-org9b01077">
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-block-begin-line">#+begin_Beamer</span>
 <span class="org-org-latex-and-related">\begin{minipage}{4cm}</span>
 <span class="org-org-latex-and-related">...</span>
@@ -1142,7 +1179,6 @@ Such LaTeX code will only be present in the exports to <b>LaTeX and Beamer</b>.
 </div>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+Beamer: \parbox{4cm}{...}</span>
 </pre>
 </div>
@@ -1150,11 +1186,9 @@ Such LaTeX code will only be present in the exports to <b>LaTeX and Beamer</b>.
 <p>
 Such LaTeX code will <b>only</b> be present in the export to <b>Beamer</b>.
 </p>
-</div>
-</li>
+</div></li>
 
-<li><a id="sec-5-3-3" name="sec-5-3-3"></a>Back to one column&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_ignoreheading">B_ignoreheading</span></span><br  /><div class="outline-text-4" id="text-5-3-3">
-
+<li><a id="orgbc2f19b"></a>Back to one column&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_ignoreheading">B_ignoreheading</span></span><br /><div class="outline-text-4" id="text-orgbc2f19b">
 <p>
 It is especially useful for more <b>advanced stuff</b> like images or tables where you
 need more control of the LaTeX options than Org mode actually gives you.
@@ -1165,37 +1199,43 @@ For example, to insert a table with colspan or rowspan support:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-block-begin-line">#+begin_LaTeX</span>
-<span class="org-org-block">\begin{tabular}{|l|l|l|}</span>
-<span class="org-org-block">  \hline</span>
-<span class="org-org-block">  Text1 &amp; Text2 &amp; Text3 \\</span>
-<span class="org-org-block">  \hline</span>
-<span class="org-org-block">  \multicolumn{3}{|c|}{Merged text here} \\</span>
-<span class="org-org-block">  \hline</span>
-<span class="org-org-block">\end{tabular}</span>
+<span class="org-org-latex-and-related">\begin{tabular}{|l|l|l|}</span>
+<span class="org-org-latex-and-related">  \hline</span>
+<span class="org-org-latex-and-related">  Text1 &amp; Text2 &amp; Text3 \\</span>
+<span class="org-org-latex-and-related">  \hline</span>
+<span class="org-org-latex-and-related">  \multicolumn{3}{|c|}{Merged text here} \\</span>
+<span class="org-org-latex-and-related">  \hline</span>
+<span class="org-org-latex-and-related">\end{tabular}</span>
 <span class="org-org-block-end-line">#+end_LaTeX</span>
 </pre>
 </div>
 
-<div class="center">
+<div class="org-center">
+<div class="LaTeX">
+\begin{tabular}{|l|l|l|}
+  \hline
+  Text1 & Text2 & Text3 \\
+  \hline
+  \multicolumn{3}{|c|}{Merged text here} \\
+  \hline
+\end{tabular}
+
 </div>
 </div>
-</li></ul>
+</div></li></ul>
 </div>
 
-<div id="outline-container-sec-5-4" class="outline-3">
-<h3 id="sec-5-4">Affiliated keywords</h3>
-<div class="outline-text-3" id="text-5-4">
+<div id="outline-container-org6c7e48f" class="outline-3">
+<h3 id="org6c7e48f">Affiliated keywords</h3>
+<div class="outline-text-3" id="text-org6c7e48f">
 <p>
 The Beamer back-end reads both
 </p>
 
 <ul class="org-ul">
-<li><code>#+ATTR_LATEX:</code> and
-</li>
-<li><code>#+ATTR_BEAMER:</code>
-</li>
+<li><code>#+ATTR_LATEX:</code> and</li>
+<li><code>#+ATTR_BEAMER:</code></li>
 </ul>
 
 <p>
@@ -1208,10 +1248,9 @@ XXX Code with figure or table
 </div>
 </div>
 
-<div id="outline-container-sec-5-5" class="outline-3">
-<h3 id="sec-5-5"><a id="ID-f6d1f139-2460-4844-93f1-c71277c810e0" name="ID-f6d1f139-2460-4844-93f1-c71277c810e0"></a>Using a custom theme</h3>
-<div class="outline-text-3" id="text-5-5">
-
+<div id="outline-container-org6aa6e14" class="outline-3">
+<h3 id="org6aa6e14"><a id="ID-f6d1f139-2460-4844-93f1-c71277c810e0"></a>Using a custom theme</h3>
+<div class="outline-text-3" id="text-org6aa6e14">
 <p>
 You can specify a Beamer theme using the <code>#+BEAMER_THEME</code> keyword.
 </p>
@@ -1221,7 +1260,6 @@ For example:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+BEAMER_THEME: Boadilla</span>
 </pre>
 </div>
@@ -1231,7 +1269,6 @@ which is equivalent (for <code>Boadilla</code>) to:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+BEAMER_COLOR_THEME: dolphin</span>
 <span class="org-org-meta-line">#+BEAMER_FONT_THEME:  default</span>
 <span class="org-org-meta-line">#+BEAMER_INNER_THEME: [shadow]rounded</span>
@@ -1241,9 +1278,9 @@ which is equivalent (for <code>Boadilla</code>) to:
 </div>
 </div>
 
-<div id="outline-container-sec-5-6" class="outline-3">
-<h3 id="sec-5-6">Changing the frame font</h3>
-<div class="outline-text-3" id="text-5-6">
+<div id="outline-container-org89ae03d" class="outline-3">
+<h3 id="org89ae03d">Changing the frame font</h3>
+<div class="outline-text-3" id="text-org89ae03d">
 <p>
 Fonts must be present on the system you&rsquo;re presenting on &#x2013; or it will go back
 to a fallback font.
@@ -1254,25 +1291,23 @@ Font Risque.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+LATEX_HEADER: \usepackage[frenchstyle]{kpfonts}</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-5-7" class="outline-3">
-<h3 id="sec-5-7">Changing font size for example environment</h3>
-<div class="outline-text-3" id="text-5-7">
+<div id="outline-container-org87d21ca" class="outline-3">
+<h3 id="org87d21ca">Changing font size for example environment</h3>
+<div class="outline-text-3" id="text-org87d21ca">
 <p>
 Something along these lines will work:
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-meta-line">#+LaTeX:</span> <span class="org-org-block">{\footnotesize</span>
+<pre class="src src-org"><span class="org-org-meta-line">#+LaTeX: {\footnotesize</span>
 ... Org stuff here ...
-<span class="org-org-meta-line">#+LaTeX:</span> <span class="org-org-block">}</span>
+<span class="org-org-meta-line">#+LaTeX: }</span>
 </pre>
 </div>
 
@@ -1287,7 +1322,6 @@ property to the frame&rsquo;s headline.  You can also specify a percentage, as i
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-level-1">* The frame title</span>
 <span class="org-org-special-keyword">  :PROPERTIES:</span>
   <span class="org-org-special-keyword">:BEAMER_opt:</span> <span class="org-org-property-value">shrink=10</span>
@@ -1297,31 +1331,29 @@ property to the frame&rsquo;s headline.  You can also specify a percentage, as i
 </div>
 </div>
 
-<div id="outline-container-sec-5-8" class="outline-3">
-<h3 id="sec-5-8">Adding an image on the title slide</h3>
-<div class="outline-text-3" id="text-5-8">
+<div id="outline-container-org30403e7" class="outline-3">
+<h3 id="org30403e7">Adding an image on the title slide</h3>
+<div class="outline-text-3" id="text-org30403e7">
 <p>
 Insert an image in the title slide that fills the whole width of the slide but
 limits to half height.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+BEAMER_HEADER: \titlegraphic{\includegraphics[width=\textwidth,height=.5\textheight]{someimage}}</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-5-9" class="outline-3">
-<h3 id="sec-5-9">Column view</h3>
-<div class="outline-text-3" id="text-5-9">
+<div id="outline-container-orgf803013" class="outline-3">
+<h3 id="orgf803013">Column view</h3>
+<div class="outline-text-3" id="text-orgf803013">
 <p>
 For a column view of options and configurations for the individual frames
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)</span>
 <span class="org-org-meta-line">#+COLUMNS: %20ITEM %13BEAMER_env(Env) %6BEAMER_envargs(Args) %4BEAMER_col(Col) %7BEAMER_extra(Extra)</span>
 </pre>
@@ -1330,28 +1362,26 @@ For a column view of options and configurations for the individual frames
 </div>
 </div>
 
-<div id="outline-container-sec-6" class="outline-2">
-<h2 id="sec-6">Environments</h2>
-<div class="outline-text-2" id="text-6">
-</div><div id="outline-container-sec-6-1" class="outline-3">
-<h3 id="sec-6-1">Environment specification: BEAMER_env</h3>
-<div class="outline-text-3" id="text-6-1">
+<div id="outline-container-orgfd43b14" class="outline-2">
+<h2 id="orgfd43b14">Environments</h2>
+<div class="outline-text-2" id="text-orgfd43b14">
+</div><div id="outline-container-org0a492fd" class="outline-3">
+<h3 id="org0a492fd">Environment specification: BEAMER_env</h3>
+<div class="outline-text-3" id="text-org0a492fd">
 <p>
 XXX Put = or ~ around BEAMER_env in title&#x2026;
 </p>
 
 <ul class="org-ul">
-<li>This becomes visible through the <code>B_frame</code> tag (visual aid only).
-</li>
+<li>This becomes visible through the <code>B_frame</code> tag (visual aid only).</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-sec-6-2" class="outline-3">
-<h3 id="sec-6-2">Frames</h3>
-<div class="outline-text-3" id="text-6-2">
-</div><ul class="org-ul"><li><a id="sec-6-2-1" name="sec-6-2-1"></a>frame&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_frame">B_frame</span></span><br  /><div class="outline-text-4" id="text-6-2-1">
-
+<div id="outline-container-orgdab805a" class="outline-3">
+<h3 id="orgdab805a">Frames</h3>
+<div class="outline-text-3" id="text-orgdab805a">
+</div><ul class="org-ul"><li><a id="org74dc829"></a>frame&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_frame">B_frame</span></span><br /><div class="outline-text-4" id="text-org74dc829">
 <p>
 If a heading in the current tree has a <code>BEAMER_env</code> property set to either <code>frame</code>
 or <code>fullframe</code>, its level overrides the <code>H</code> value, giving you some flexibility in
@@ -1359,7 +1389,6 @@ deciding <b>what is</b> and what isn&rsquo;t <b>a frame</b>.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+OPTIONS: H:2 toc:t</span>
 
 <span class="org-org-level-1">* Section 1</span>
@@ -1370,7 +1399,7 @@ deciding <b>what is</b> and what isn&rsquo;t <b>a frame</b>.
 
 <span class="org-org-level-2">** Subsection 2.1</span>
 
-<span class="org-org-level-3">*** Frame                                                           </span><span class="org-org-level-3"><span class="org-org-tag">:</span></span><span class="org-org-level-3"><span class="org-org-tag"><span class="org-org-beamer-tag">B_frame</span></span></span><span class="org-org-level-3"><span class="org-org-tag">:</span></span>
+<span class="org-org-level-3">*** Frame                                                           </span><span class="org-org-level-3"><span class="org-org-tag">:B_frame:</span></span>
 <span class="org-org-special-keyword">    :PROPERTIES:</span>
     <span class="org-org-special-keyword">:BEAMER_env:</span> <span class="org-org-property-value">frame</span>
 <span class="org-org-special-keyword">    :END:</span>
@@ -1383,11 +1412,9 @@ This becomes a frame, instead of a block!
 This works in both &ldquo;directions&rdquo;: to <b>add or</b> to <b>remove sectioning levels</b> above
 the current heading (which becomes a frame)!
 </p>
-</div>
-</li>
+</div></li>
 
-<li><a id="sec-6-2-2" name="sec-6-2-2"></a>fullframe&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_fullframe">B_fullframe</span></span><br  /><div class="outline-text-4" id="text-6-2-2">
-
+<li><a id="orga0d29ba"></a>fullframe&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_fullframe">B_fullframe</span></span><br /><div class="outline-text-4" id="text-orga0d29ba">
 <p>
 If a heading in the current tree has a <code>BEAMER_env</code> property set to <code>fullframe</code>,
 the frame will <b>not display its title</b> (<code>frametitle</code> is being set to the empty
@@ -1395,8 +1422,7 @@ string).
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-level-3">*** Frame                                                         </span><span class="org-org-level-3"><span class="org-org-tag">:</span></span><span class="org-org-level-3"><span class="org-org-tag"><span class="org-org-beamer-tag">B_fullframe</span></span></span><span class="org-org-level-3"><span class="org-org-tag">:</span></span>
+<pre class="src src-org"><span class="org-org-level-3">*** Frame                                                         </span><span class="org-org-level-3"><span class="org-org-tag">:B_fullframe:</span></span>
 <span class="org-org-special-keyword">    :PROPERTIES:</span>
     <span class="org-org-special-keyword">:BEAMER_env:</span> <span class="org-org-property-value">fullframe</span>
 <span class="org-org-special-keyword">    :END:</span>
@@ -1404,20 +1430,17 @@ string).
 This becomes a frame, with its title ignored!
 </pre>
 </div>
-</div>
-</li></ul>
+</div></li></ul>
 </div>
 
-<div id="outline-container-sec-6-3" class="outline-3">
-<h3 id="sec-6-3"><a id="ID-77f1b7a3-6e7d-4f2b-bd1f-02e6f02bba2f" name="ID-77f1b7a3-6e7d-4f2b-bd1f-02e6f02bba2f"></a><code>block</code> environment</h3>
-<div class="outline-text-3" id="text-6-3">
-
+<div id="outline-container-orgfbf9557" class="outline-3">
+<h3 id="orgfbf9557"><a id="ID-77f1b7a3-6e7d-4f2b-bd1f-02e6f02bba2f"></a><code>block</code> environment</h3>
+<div class="outline-text-3" id="text-orgfbf9557">
 <p>
 Insert a <b>default block</b> (syntax assumes <code>H:2</code>).
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-level-3">*** A block</span>
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -1426,42 +1449,36 @@ tempor incididunt ut labore et dolore magna aliqua.
 </div>
 </div>
 
-<ul class="org-ul"><li><a id="sec-6-3-1" name="sec-6-3-1"></a>A block<br  /><div class="outline-text-4" id="text-6-3-1">
+<ul class="org-ul"><li><a id="org570a5cd"></a>A block<br /><div class="outline-text-4" id="text-org570a5cd">
 <p>
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
 </p>
-</div>
-</li>
+</div></li>
 
-<li><a id="sec-6-3-2" name="sec-6-3-2"></a>End of block&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_ignoreheading">B_ignoreheading</span></span><br  /><div class="outline-text-4" id="text-6-3-2">
-
+<li><a id="orgfd1a501"></a>End of block&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_ignoreheading">B_ignoreheading</span></span><br /><div class="outline-text-4" id="text-orgfd1a501">
 <p>
 Comments:
 </p>
 
 <ul class="org-ul">
 <li>Use the <code>BEAMER_env</code> <b>property</b> to specify a <b>different block type</b> for the current
-&ldquo;block&rdquo; environment.
-</li>
+&ldquo;block&rdquo; environment.</li>
 
-<li>Use <a href="#sec-11-5">ignoreheading</a> to <b>terminate a block environment</b>
-</li>
+<li>Use <a href="#org14de8f4">ignoreheading</a> to <b>terminate a block environment</b></li>
 </ul>
-</div>
-</li></ul>
+</div></li></ul>
 </div>
 
-<div id="outline-container-sec-6-4" class="outline-3">
-<h3 id="sec-6-4"><code>alertblock</code> environment</h3>
-<div class="outline-text-3" id="text-6-4">
+<div id="outline-container-orge563124" class="outline-3">
+<h3 id="orge563124"><code>alertblock</code> environment</h3>
+<div class="outline-text-3" id="text-orge563124">
 <p>
 Insert a block whose title is <b>highlighted</b>.
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-level-3">*** An alert block                                               </span><span class="org-org-level-3"><span class="org-org-tag">:</span></span><span class="org-org-level-3"><span class="org-org-tag"><span class="org-org-beamer-tag">B_alertblock</span></span></span><span class="org-org-level-3"><span class="org-org-tag">:</span></span>
+<pre class="src src-org"><span class="org-org-level-3">*** An alert block                                               </span><span class="org-org-level-3"><span class="org-org-tag">:B_alertblock:</span></span>
 <span class="org-org-special-keyword">    :PROPERTIES:</span>
     <span class="org-org-special-keyword">:BEAMER_env:</span> <span class="org-org-property-value">alertblock</span>
 <span class="org-org-special-keyword">    :END:</span>
@@ -1472,26 +1489,23 @@ tempor incididunt ut labore et dolore magna aliqua.
 </div>
 </div>
 
-<ul class="org-ul"><li><a id="sec-6-4-1" name="sec-6-4-1"></a>An alert block&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_alertblock">B_alertblock</span></span><br  /><div class="outline-text-4" id="text-6-4-1">
-
+<ul class="org-ul"><li><a id="orgfbd18d9"></a>An alert block&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_alertblock">B_alertblock</span></span><br /><div class="outline-text-4" id="text-orgfbd18d9">
 <p>
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
 </p>
-</div>
-</li></ul>
+</div></li></ul>
 </div>
 
-<div id="outline-container-sec-6-5" class="outline-3">
-<h3 id="sec-6-5"><code>exampleblock</code> environment</h3>
-<div class="outline-text-3" id="text-6-5">
+<div id="outline-container-orgb9831f1" class="outline-3">
+<h3 id="orgb9831f1"><code>exampleblock</code> environment</h3>
+<div class="outline-text-3" id="text-orgb9831f1">
 <p>
 Insert a block that is supposed to be an <b>example</b>.
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-level-3">*** An example block                                           </span><span class="org-org-level-3"><span class="org-org-tag">:</span></span><span class="org-org-level-3"><span class="org-org-tag"><span class="org-org-beamer-tag">B_exampleblock</span></span></span><span class="org-org-level-3"><span class="org-org-tag">:</span></span>
+<pre class="src src-org"><span class="org-org-level-3">*** An example block                                           </span><span class="org-org-level-3"><span class="org-org-tag">:B_exampleblock:</span></span>
 <span class="org-org-special-keyword">    :PROPERTIES:</span>
     <span class="org-org-special-keyword">:BEAMER_env:</span> <span class="org-org-property-value">exampleblock</span>
 <span class="org-org-special-keyword">    :END:</span>
@@ -1502,29 +1516,26 @@ tempor incididunt ut labore et dolore magna aliqua.
 </div>
 </div>
 
-<ul class="org-ul"><li><a id="sec-6-5-1" name="sec-6-5-1"></a>An example block&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_exampleblock">B_exampleblock</span></span><br  /><div class="outline-text-4" id="text-6-5-1">
-
+<ul class="org-ul"><li><a id="orgedc7d45"></a>An example block&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_exampleblock">B_exampleblock</span></span><br /><div class="outline-text-4" id="text-orgedc7d45">
 <p>
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
 </p>
-</div>
-</li></ul>
+</div></li></ul>
 </div>
 
-<div id="outline-container-sec-6-6" class="outline-3">
-<h3 id="sec-6-6"><code>beamercolorbox</code> environment</h3>
-<div class="outline-text-3" id="text-6-6">
+<div id="outline-container-org95dbc1f" class="outline-3">
+<h3 id="org95dbc1f"><code>beamercolorbox</code> environment</h3>
+<div class="outline-text-3" id="text-org95dbc1f">
 <p>
 Create <b>colored boxes</b> whose &ldquo;beamer color&rdquo; to use (= a <b>pair of colors</b>: <code>bg</code> + <code>fg</code>)
 is defined by the heading text, for example <code>title in head/foot</code> or <code>myblockcolor</code>.
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-meta-line">#+LaTeX:</span> <span class="org-org-block">\setbeamercolor{myblockcolor}{bg=magenta,fg=white}</span>
+<pre class="src src-org"><span class="org-org-meta-line">#+LaTeX: \setbeamercolor{myblockcolor}{bg=magenta,fg=white}</span>
 
-<span class="org-org-level-3">*** myblockcolor                                             </span><span class="org-org-level-3"><span class="org-org-tag">:</span></span><span class="org-org-level-3"><span class="org-org-tag"><span class="org-org-beamer-tag">B_beamercolorbox</span></span></span><span class="org-org-level-3"><span class="org-org-tag">:</span></span>
+<span class="org-org-level-3">*** myblockcolor                                             </span><span class="org-org-level-3"><span class="org-org-tag">:B_beamercolorbox:</span></span>
 <span class="org-org-special-keyword">    :PROPERTIES:</span>
     <span class="org-org-special-keyword">:BEAMER_env:</span> <span class="org-org-property-value">beamercolorbox</span>
 <span class="org-org-special-keyword">    :END:</span>
@@ -1535,22 +1546,19 @@ tempor incididunt ut labore et dolore magna aliqua.
 </div>
 </div>
 
-<ul class="org-ul"><li><a id="sec-6-6-1" name="sec-6-6-1"></a>myblockcolor&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_beamercolorbox">B_beamercolorbox</span></span><br  /><div class="outline-text-4" id="text-6-6-1">
-
+<ul class="org-ul"><li><a id="org8f7f6fc"></a>myblockcolor&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_beamercolorbox">B_beamercolorbox</span></span><br /><div class="outline-text-4" id="text-org8f7f6fc">
 <p>
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
 </p>
-</div>
-</li></ul>
+</div></li></ul>
 </div>
 
-<div id="outline-container-sec-6-7" class="outline-3">
-<h3 id="sec-6-7"><code>beamercolorbox</code> environment</h3>
-<div class="outline-text-3" id="text-6-7">
+<div id="outline-container-org27e1fb2" class="outline-3">
+<h3 id="org27e1fb2"><code>beamercolorbox</code> environment</h3>
+<div class="outline-text-3" id="text-org27e1fb2">
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-level-3">*** myblockcolor                                             </span><span class="org-org-level-3"><span class="org-org-tag">:</span></span><span class="org-org-level-3"><span class="org-org-tag"><span class="org-org-beamer-tag">B_beamercolorbox</span></span></span><span class="org-org-level-3"><span class="org-org-tag">:</span></span>
+<pre class="src src-org"><span class="org-org-level-3">*** myblockcolor                                             </span><span class="org-org-level-3"><span class="org-org-tag">:B_beamercolorbox:</span></span>
 <span class="org-org-special-keyword">    :PROPERTIES:</span>
     <span class="org-org-special-keyword">:BEAMER_env:</span> <span class="org-org-property-value">beamercolorbox</span>
     <span class="org-org-special-keyword">:BEAMER_opt:</span> <span class="org-org-property-value">wd=6cm</span>
@@ -1562,22 +1570,19 @@ tempor incididunt ut labore et dolore magna aliqua.
 </div>
 </div>
 
-<ul class="org-ul"><li><a id="sec-6-7-1" name="sec-6-7-1"></a>myblockcolor&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_beamercolorbox">B_beamercolorbox</span></span><br  /><div class="outline-text-4" id="text-6-7-1">
-
+<ul class="org-ul"><li><a id="orgeaaea4d"></a>myblockcolor&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_beamercolorbox">B_beamercolorbox</span></span><br /><div class="outline-text-4" id="text-orgeaaea4d">
 <p>
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
 </p>
-</div>
-</li></ul>
+</div></li></ul>
 </div>
 
-<div id="outline-container-sec-6-8" class="outline-3">
-<h3 id="sec-6-8"><code>beamercolorbox</code> environment</h3>
-<div class="outline-text-3" id="text-6-8">
+<div id="outline-container-orga22a87b" class="outline-3">
+<h3 id="orga22a87b"><code>beamercolorbox</code> environment</h3>
+<div class="outline-text-3" id="text-orga22a87b">
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-level-3">*** myblockcolor                                             </span><span class="org-org-level-3"><span class="org-org-tag">:</span></span><span class="org-org-level-3"><span class="org-org-tag"><span class="org-org-beamer-tag">B_beamercolorbox</span></span></span><span class="org-org-level-3"><span class="org-org-tag">:</span></span>
+<pre class="src src-org"><span class="org-org-level-3">*** myblockcolor                                             </span><span class="org-org-level-3"><span class="org-org-tag">:B_beamercolorbox:</span></span>
 <span class="org-org-special-keyword">    :PROPERTIES:</span>
     <span class="org-org-special-keyword">:BEAMER_env:</span> <span class="org-org-property-value">beamercolorbox</span>
     <span class="org-org-special-keyword">:BEAMER_opt:</span> <span class="org-org-property-value">shadow=false,rounded=true</span>
@@ -1589,22 +1594,19 @@ tempor incididunt ut labore et dolore magna aliqua.
 </div>
 </div>
 
-<ul class="org-ul"><li><a id="sec-6-8-1" name="sec-6-8-1"></a>myblockcolor&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_beamercolorbox">B_beamercolorbox</span></span><br  /><div class="outline-text-4" id="text-6-8-1">
-
+<ul class="org-ul"><li><a id="orgc635139"></a>myblockcolor&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_beamercolorbox">B_beamercolorbox</span></span><br /><div class="outline-text-4" id="text-orgc635139">
 <p>
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
 </p>
-</div>
-</li></ul>
+</div></li></ul>
 </div>
 
-<div id="outline-container-sec-6-9" class="outline-3">
-<h3 id="sec-6-9"><code>beamercolorbox</code> environment</h3>
-<div class="outline-text-3" id="text-6-9">
+<div id="outline-container-org689a25c" class="outline-3">
+<h3 id="org689a25c"><code>beamercolorbox</code> environment</h3>
+<div class="outline-text-3" id="text-org689a25c">
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-level-3">*** myblockcolor                                             </span><span class="org-org-level-3"><span class="org-org-tag">:</span></span><span class="org-org-level-3"><span class="org-org-tag"><span class="org-org-beamer-tag">B_beamercolorbox</span></span></span><span class="org-org-level-3"><span class="org-org-tag">:</span></span>
+<pre class="src src-org"><span class="org-org-level-3">*** myblockcolor                                             </span><span class="org-org-level-3"><span class="org-org-tag">:B_beamercolorbox:</span></span>
 <span class="org-org-special-keyword">    :PROPERTIES:</span>
     <span class="org-org-special-keyword">:BEAMER_env:</span> <span class="org-org-property-value">beamercolorbox</span>
     <span class="org-org-special-keyword">:BEAMER_opt:</span> <span class="org-org-property-value">shadow=true,rounded=true</span>
@@ -1616,56 +1618,47 @@ tempor incididunt ut labore et dolore magna aliqua.
 </div>
 </div>
 
-<ul class="org-ul"><li><a id="sec-6-9-1" name="sec-6-9-1"></a>myblockcolor&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_beamercolorbox">B_beamercolorbox</span></span><br  /><div class="outline-text-4" id="text-6-9-1">
-
+<ul class="org-ul"><li><a id="orge0c2228"></a>myblockcolor&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_beamercolorbox">B_beamercolorbox</span></span><br /><div class="outline-text-4" id="text-orge0c2228">
 <p>
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
 </p>
-</div>
-</li></ul>
+</div></li></ul>
 </div>
 
-<div id="outline-container-sec-6-10" class="outline-3">
-<h3 id="sec-6-10"><code>structureenv</code> environment</h3>
-<div class="outline-text-3" id="text-6-10">
+<div id="outline-container-org8194234" class="outline-3">
+<h3 id="org8194234"><code>structureenv</code> environment</h3>
+<div class="outline-text-3" id="text-org8194234">
 <ul class="org-ul">
-<li>For highlighting text.
-</li>
-<li>To help the audience see the structure of your presentation.
-</li>
+<li>For highlighting text.</li>
+<li>To help the audience see the structure of your presentation.</li>
 </ul>
 </div>
 
-<ul class="org-ul"><li><a id="sec-6-10-1" name="sec-6-10-1"></a>structureenv&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_structureenv">B_structureenv</span></span><br  /><div class="outline-text-4" id="text-6-10-1">
-
+<ul class="org-ul"><li><a id="org83776ce"></a>structureenv&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_structureenv">B_structureenv</span></span><br /><div class="outline-text-4" id="text-org83776ce">
 <p>
 Paragraph Heading.
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
 </p>
-</div>
-</li></ul>
+</div></li></ul>
 </div>
 </div>
 
-<div id="outline-container-sec-7" class="outline-2">
-<h2 id="sec-7">Theorem &amp; Definitions</h2>
-<div class="outline-text-2" id="text-7">
-</div><div id="outline-container-sec-7-1" class="outline-3">
-<h3 id="sec-7-1"><code>definition</code> environment</h3>
-<div class="outline-text-3" id="text-7-1">
+<div id="outline-container-org6e509e0" class="outline-2">
+<h2 id="org6e509e0">Theorem &amp; Definitions</h2>
+<div class="outline-text-2" id="text-org6e509e0">
+</div><div id="outline-container-org1dc64f6" class="outline-3">
+<h3 id="org1dc64f6"><code>definition</code> environment</h3>
+<div class="outline-text-3" id="text-org1dc64f6">
 <ul class="org-ul">
 <li>Behaves like the <code>theorem</code> environment, except that the theorem style
-<code>definition</code> is used.
-</li>
-<li>In this style, the body of a <code>theorem</code> is typeset in an upright font.
-</li>
+<code>definition</code> is used.</li>
+<li>In this style, the body of a <code>theorem</code> is typeset in an upright font.</li>
 </ul>
 
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-level-3">*** Prime number                                                 </span><span class="org-org-level-3"><span class="org-org-tag">:</span></span><span class="org-org-level-3"><span class="org-org-tag"><span class="org-org-beamer-tag">B_definition</span></span></span><span class="org-org-level-3"><span class="org-org-tag">:</span></span>
+<pre class="src src-org"><span class="org-org-level-3">*** Prime number                                                 </span><span class="org-org-level-3"><span class="org-org-tag">:B_definition:</span></span>
 <span class="org-org-special-keyword">    :PROPERTIES:</span>
     <span class="org-org-special-keyword">:BEAMER_env:</span> <span class="org-org-property-value">definition</span>
 <span class="org-org-special-keyword">    :END:</span>
@@ -1676,31 +1669,26 @@ other than 1 and itself.
 </div>
 </div>
 
-<ul class="org-ul"><li><a id="sec-7-1-1" name="sec-7-1-1"></a>Prime number&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_definition">B_definition</span></span><br  /><div class="outline-text-4" id="text-7-1-1">
-
+<ul class="org-ul"><li><a id="orga2189b1"></a>Prime number&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_definition">B_definition</span></span><br /><div class="outline-text-4" id="text-orga2189b1">
 <p>
 A prime number is a natural number greater than 1 that has no positive divisors
 other than 1 and itself.
 </p>
-</div>
-</li></ul>
+</div></li></ul>
 </div>
 
-<div id="outline-container-sec-7-2" class="outline-3">
-<h3 id="sec-7-2"><code>example</code> environment</h3>
-<div class="outline-text-3" id="text-7-2">
+<div id="outline-container-org36fba79" class="outline-3">
+<h3 id="org36fba79"><code>example</code> environment</h3>
+<div class="outline-text-3" id="text-org36fba79">
 <ul class="org-ul">
 <li>Behave like the <code>theorem</code> environment, except that the theorem style <code>example</code> is
-used.
-</li>
+used.</li>
 <li>A side-effect of using this theorem style is that the contents is put in an
-<code>exampleblock</code> instead of a <code>block</code>.
-</li>
+<code>exampleblock</code> instead of a <code>block</code>.</li>
 </ul>
 
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-level-3">*** Number 5                                                        </span><span class="org-org-level-3"><span class="org-org-tag">:</span></span><span class="org-org-level-3"><span class="org-org-tag"><span class="org-org-beamer-tag">B_example</span></span></span><span class="org-org-level-3"><span class="org-org-tag">:</span></span>
+<pre class="src src-org"><span class="org-org-level-3">*** Number 5                                                        </span><span class="org-org-level-3"><span class="org-org-tag">:B_example:</span></span>
 <span class="org-org-special-keyword">    :PROPERTIES:</span>
     <span class="org-org-special-keyword">:BEAMER_env:</span> <span class="org-org-property-value">example</span>
 <span class="org-org-special-keyword">    :END:</span>
@@ -1710,28 +1698,23 @@ used.
 </div>
 </div>
 
-<ul class="org-ul"><li><a id="sec-7-2-1" name="sec-7-2-1"></a>Number 5&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_example">B_example</span></span><br  /><div class="outline-text-4" id="text-7-2-1">
-
+<ul class="org-ul"><li><a id="org675b169"></a>Number 5&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_example">B_example</span></span><br /><div class="outline-text-4" id="text-org675b169">
 <p>
 5 can only be divided evenly by 1 or 5, so it is a prime number.
 </p>
-</div>
-</li></ul>
+</div></li></ul>
 </div>
 
-<div id="outline-container-sec-7-3" class="outline-3">
-<h3 id="sec-7-3"><code>theorem</code> environment</h3>
-<div class="outline-text-3" id="text-7-3">
+<div id="outline-container-orga480fa4" class="outline-3">
+<h3 id="orga480fa4"><code>theorem</code> environment</h3>
+<div class="outline-text-3" id="text-orga480fa4">
 <ul class="org-ul">
-<li>Insert a theorem.
-</li>
-<li>Italicized body.
-</li>
+<li>Insert a theorem.</li>
+<li>Italicized body.</li>
 </ul>
 
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-level-3">*** Niessen, 2010                                                   </span><span class="org-org-level-3"><span class="org-org-tag">:</span></span><span class="org-org-level-3"><span class="org-org-tag"><span class="org-org-beamer-tag">B_theorem</span></span></span><span class="org-org-level-3"><span class="org-org-tag">:</span></span>
+<pre class="src src-org"><span class="org-org-level-3">*** Niessen, 2010                                                   </span><span class="org-org-level-3"><span class="org-org-tag">:B_theorem:</span></span>
 <span class="org-org-special-keyword">    :PROPERTIES:</span>
     <span class="org-org-special-keyword">:BEAMER_env:</span> <span class="org-org-property-value">theorem</span>
 <span class="org-org-special-keyword">    :END:</span>
@@ -1742,32 +1725,26 @@ Org mode + Beamer = productivity<span class="org-org-latex-and-related">2</span>
 </div>
 </div>
 
-<ul class="org-ul"><li><a id="sec-7-3-1" name="sec-7-3-1"></a>Niessen, 2010&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_theorem">B_theorem</span></span><br  /><div class="outline-text-4" id="text-7-3-1">
-
+<ul class="org-ul"><li><a id="org63643ea"></a>Niessen, 2010&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_theorem">B_theorem</span></span><br /><div class="outline-text-4" id="text-org63643ea">
 <p>
-Statement of theorem (proposition): <br  />
+Statement of theorem (proposition): <br />
 Org mode + Beamer = productivity<sup>2</sup>
 </p>
-</div>
-</li></ul>
+</div></li></ul>
 </div>
 
-<div id="outline-container-sec-7-4" class="outline-3">
-<h3 id="sec-7-4"><code>proof</code> environment</h3>
-<div class="outline-text-3" id="text-7-4">
+<div id="outline-container-orgd9cca26" class="outline-3">
+<h3 id="orgd9cca26"><code>proof</code> environment</h3>
+<div class="outline-text-3" id="text-orgd9cca26">
 <ul class="org-ul">
-<li>Typeset a proof.
-</li>
-<li>Period (full-stop) added at the end of the title.
-</li>
+<li>Typeset a proof.</li>
+<li>Period (full-stop) added at the end of the title.</li>
 <li>Control sequence <code>\qed</code> (<i>quod erat demonstrandum</i>, for the traditional
-&ldquo;tombstone&rdquo;) added at the end of the proof.
-</li>
+&ldquo;tombstone&rdquo;) added at the end of the proof.</li>
 </ul>
 
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-level-3">*** Proof                                                             </span><span class="org-org-level-3"><span class="org-org-tag">:</span></span><span class="org-org-level-3"><span class="org-org-tag"><span class="org-org-beamer-tag">B_proof</span></span></span><span class="org-org-level-3"><span class="org-org-tag">:</span></span>
+<pre class="src src-org"><span class="org-org-level-3">*** Proof                                                             </span><span class="org-org-level-3"><span class="org-org-tag">:B_proof:</span></span>
 <span class="org-org-special-keyword">    :PROPERTIES:</span>
     <span class="org-org-special-keyword">:BEAMER_env:</span> <span class="org-org-property-value">proof</span>
 <span class="org-org-special-keyword">    :END:</span>
@@ -1777,29 +1754,26 @@ Description of proof.
 </div>
 </div>
 
-<ul class="org-ul"><li><a id="sec-7-4-1" name="sec-7-4-1"></a>Proof&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_proof">B_proof</span></span><br  /><div class="outline-text-4" id="text-7-4-1">
-
+<ul class="org-ul"><li><a id="org39d12d9"></a>Proof&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_proof">B_proof</span></span><br /><div class="outline-text-4" id="text-org39d12d9">
 <p>
 Description of proof.
 </p>
-</div>
-</li></ul>
+</div></li></ul>
 </div>
 </div>
 
-<div id="outline-container-sec-8" class="outline-2">
-<h2 id="sec-8">Quoting text</h2>
-<div class="outline-text-2" id="text-8">
-</div><div id="outline-container-sec-8-1" class="outline-3">
-<h3 id="sec-8-1"><code>quote</code> environment</h3>
-<div class="outline-text-3" id="text-8-1">
+<div id="outline-container-org68fc84f" class="outline-2">
+<h2 id="org68fc84f">Quoting text</h2>
+<div class="outline-text-2" id="text-org68fc84f">
+</div><div id="outline-container-org9770d9b" class="outline-3">
+<h3 id="org9770d9b"><code>quote</code> environment</h3>
+<div class="outline-text-3" id="text-org9770d9b">
 <p>
 Use <code>quote</code> to typeset <b>short</b> quoted text (or a series of small quotes, separated
 by blank lines): it hasn&rsquo;t paragraph indentation.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-block-begin-line">#+begin_quote</span>
 <span class="org-org-quote">"Don't give up on your dreams, keep on sleeping." --- Albert Einstein</span>
 <span class="org-org-block-end-line">#+end_quote</span>
@@ -1818,10 +1792,9 @@ quote, you can use these commands:
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-meta-line">#+LaTeX:</span> <span class="org-org-block">\begin{raggedleft}</span>
+<pre class="src src-org"><span class="org-org-meta-line">#+LaTeX: \begin{raggedleft}</span>
 (Albert Einstein)
-<span class="org-org-meta-line">#+LaTeX:</span> <span class="org-org-block">\par\end{raggedleft}</span>
+<span class="org-org-meta-line">#+LaTeX: \par\end{raggedleft}</span>
 </pre>
 </div>
 
@@ -1831,16 +1804,15 @@ quote, you can use these commands:
 </div>
 </div>
 
-<div id="outline-container-sec-8-2" class="outline-3">
-<h3 id="sec-8-2"><code>quotation</code> environment</h3>
-<div class="outline-text-3" id="text-8-2">
+<div id="outline-container-org6093933" class="outline-3">
+<h3 id="org6093933"><code>quotation</code> environment</h3>
+<div class="outline-text-3" id="text-org6093933">
 <p>
 Use <code>quotation</code> to typeset longer quoted text (one or more paragraphs) because it
 <b>indents</b> the first line of each <b>paragraph</b>.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-block-begin-line">#+begin_quotation</span>
 "Two things are infinite, the universe and human stupidity, and I am not yet
 completely sure about the universe."
@@ -1860,15 +1832,14 @@ completely sure about the universe.&rdquo;
 </div>
 </div>
 
-<div id="outline-container-sec-8-3" class="outline-3">
-<h3 id="sec-8-3"><code>verse</code> environment</h3>
-<div class="outline-text-3" id="text-8-3">
+<div id="outline-container-org12e772d" class="outline-3">
+<h3 id="org12e772d"><code>verse</code> environment</h3>
+<div class="outline-text-3" id="text-org12e772d">
 <p>
 Use <code>verse</code> for quotations where <b>line breaks</b> are important, such as poetry.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-block-begin-line">#+begin_verse</span>
 <span class="org-org-verse">"Sit next to a pretty girl for an hour,</span>
 <span class="org-org-verse">it seems like a minute.</span>
@@ -1881,30 +1852,28 @@ Use <code>verse</code> for quotations where <b>line breaks</b> are important, su
 </div>
 
 <p class="verse">
-&ldquo;Sit next to a pretty girl for an hour,<br  />
-it seems like a minute.<br  />
-Sit on a red-hot stove for a minute,<br  />
-it seems like an hour.<br  />
-That&rsquo;s relativity!&rdquo;<br  />
-&#x2014; Albert Einstein<br  />
+&ldquo;Sit next to a pretty girl for an hour,
+it seems like a minute.
+Sit on a red-hot stove for a minute,
+it seems like an hour.
+That&rsquo;s relativity!&rdquo;
+&#x2014; Albert Einstein
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-9" class="outline-2">
-<h2 id="sec-9">Alternative</h2>
-<div class="outline-text-2" id="text-9">
-</div><div id="outline-container-sec-9-1" class="outline-3">
-<h3 id="sec-9-1">Alternative environment syntax (without option)</h3>
-<div class="outline-text-3" id="text-9-1">
+<div id="outline-container-org1fdd716" class="outline-2">
+<h2 id="org1fdd716">Alternative</h2>
+<div class="outline-text-2" id="text-org1fdd716">
+</div><div id="outline-container-org13099ee" class="outline-3">
+<h3 id="org13099ee">Alternative environment syntax (without option)</h3>
+<div class="outline-text-3" id="text-org13099ee">
 <ul class="org-ul">
-<li>More readable, more portable when environments exist (LaTeX + other backends)
-</li>
+<li>More readable, more portable when environments exist (LaTeX + other backends)</li>
 </ul>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-block-begin-line">#+begin_theorem</span>
 There is no largest prime number.
 <span class="org-org-block-end-line">#+end_theorem</span>
@@ -1914,16 +1883,13 @@ There is no largest prime number.
 <ul class="org-ul">
 <li>More powerful: you can&rsquo;t nest blocks of the same type with this syntax, and
 more portable when environments only exist in Beamer (then, they will appear
-as subheadings when exported to other backends)
-</li>
+as subheadings when exported to other backends)</li>
 
-<li>Use an <b>empty heading</b> (or <code>\phantom{dummy}</code>) for an <b>empty block title</b>.
-</li>
+<li>Use an <b>empty heading</b> (or <code>\phantom{dummy}</code>) for an <b>empty block title</b>.</li>
 </ul>
 
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-level-3">***                                                                 </span><span class="org-org-level-3"><span class="org-org-tag">:</span></span><span class="org-org-level-3"><span class="org-org-tag"><span class="org-org-beamer-tag">B_theorem</span></span></span><span class="org-org-level-3"><span class="org-org-tag">:</span></span>
+<pre class="src src-org"><span class="org-org-level-3">***                                                                 </span><span class="org-org-level-3"><span class="org-org-tag">:B_theorem:</span></span>
 <span class="org-org-special-keyword">    :PROPERTIES:</span>
     <span class="org-org-special-keyword">:BEAMER_env:</span> <span class="org-org-property-value">theorem</span>
 <span class="org-org-special-keyword">    :END:</span>
@@ -1945,11 +1911,10 @@ default.
 </div>
 </div>
 
-<div id="outline-container-sec-9-2" class="outline-3">
-<h3 id="sec-9-2">Alternative environment syntax (with option)</h3>
-<div class="outline-text-3" id="text-9-2">
+<div id="outline-container-org2dc7570" class="outline-3">
+<h3 id="org2dc7570">Alternative environment syntax (with option)</h3>
+<div class="outline-text-3" id="text-org2dc7570">
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+attr_latex: :options [Lagrange]</span>
 <span class="org-org-block-begin-line">#+begin_theorem</span>
 Let<span class="org-org-latex-and-related"> $G$ </span>be a finite group, and let<span class="org-org-latex-and-related"> $H$ </span>be a subgroup of<span class="org-org-latex-and-related"> $G$.</span>  Then the order of
@@ -1963,8 +1928,7 @@ Let<span class="org-org-latex-and-related"> $G$ </span>be a finite group, and le
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-level-3">*** Lagrange                                                        </span><span class="org-org-level-3"><span class="org-org-tag">:</span></span><span class="org-org-level-3"><span class="org-org-tag"><span class="org-org-beamer-tag">B_theorem</span></span></span><span class="org-org-level-3"><span class="org-org-tag">:</span></span>
+<pre class="src src-org"><span class="org-org-level-3">*** Lagrange                                                        </span><span class="org-org-level-3"><span class="org-org-tag">:B_theorem:</span></span>
 <span class="org-org-special-keyword">    :PROPERTIES:</span>
     <span class="org-org-special-keyword">:BEAMER_env:</span> <span class="org-org-property-value">theorem</span>
 <span class="org-org-special-keyword">    :END:</span>
@@ -1976,9 +1940,9 @@ Let<span class="org-org-latex-and-related"> $G$ </span>be a finite group, and le
 </div>
 </div>
 
-<div id="outline-container-sec-9-3" class="outline-3">
-<h3 id="sec-9-3">Alternative environment syntax (with parameter)</h3>
-<div class="outline-text-3" id="text-9-3">
+<div id="outline-container-orge2891d5" class="outline-3">
+<h3 id="orge2891d5">Alternative environment syntax (with parameter)</h3>
+<div class="outline-text-3" id="text-orge2891d5">
 <p>
 XXX How to pass the parameter?
 </p>
@@ -1991,18 +1955,14 @@ A prime number is
 </div>
 </div>
 
-<ul class="org-ul"><li><a id="sec-9-3-1" name="sec-9-3-1"></a>Prime number&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_definition">B_definition</span></span><br  /><div class="outline-text-4" id="text-9-3-1">
-
+<ul class="org-ul"><li><a id="orgdbadbfc"></a>Prime number&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_definition">B_definition</span></span><br /><div class="outline-text-4" id="text-orgdbadbfc">
 <p>
 A prime number is
 </p>
-</div>
-</li>
+</div></li>
 
-<li><a id="sec-9-3-2" name="sec-9-3-2"></a>End of block&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_ignoreheading">B_ignoreheading</span></span><br  /><div class="outline-text-4" id="text-9-3-2">
-
+<li><a id="orgec61561"></a>End of block&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_ignoreheading">B_ignoreheading</span></span><br /><div class="outline-text-4" id="text-orgec61561">
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+attr_latex: :options {Prime number}</span>
 <span class="org-org-block-begin-line">#+begin_definition</span>
 A prime number is
@@ -2011,8 +1971,7 @@ A prime number is
 </div>
 
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-level-3">*** Prime number                                                 </span><span class="org-org-level-3"><span class="org-org-tag">:</span></span><span class="org-org-level-3"><span class="org-org-tag"><span class="org-org-beamer-tag">B_definition</span></span></span><span class="org-org-level-3"><span class="org-org-tag">:</span></span>
+<pre class="src src-org"><span class="org-org-level-3">*** Prime number                                                 </span><span class="org-org-level-3"><span class="org-org-tag">:B_definition:</span></span>
 <span class="org-org-special-keyword">    :PROPERTIES:</span>
     <span class="org-org-special-keyword">:BEAMER_env:</span> <span class="org-org-property-value">definition</span>
 <span class="org-org-special-keyword">    :END:</span>
@@ -2020,13 +1979,12 @@ A prime number is
 A prime number is
 </pre>
 </div>
-</div>
-</li></ul>
+</div></li></ul>
 </div>
 
-<div id="outline-container-sec-9-4" class="outline-3">
-<h3 id="sec-9-4">Add extra environments</h3>
-<div class="outline-text-3" id="text-9-4">
+<div id="outline-container-org8b572c4" class="outline-3">
+<h3 id="org8b572c4">Add extra environments</h3>
+<div class="outline-text-3" id="text-org8b572c4">
 <p>
 For simple environments, use:
 </p>
@@ -2037,10 +1995,8 @@ I think we should changes some environment placeholders:
 
 <ul class="org-ul">
 <li>Introduce %r which would stand for the raw heading (without any
-processing)
-</li>
-<li>%H and %U would use the raw heading text instead.
-</li>
+processing)</li>
+<li>%H and %U would use the raw heading text instead.</li>
 </ul>
 
 <p>
@@ -2060,49 +2016,49 @@ code. That&rsquo;s a conceptual leap that passed me by.
 <li>Environment options may be given using the BEAMER_opt property. They will
 be enclosed in square brackets and inserted where %o appears in the
 environment definition.
-(with an example, but I can&rsquo;t think of one now)
-</li>
+(with an example, but I can&rsquo;t think of one now)</li>
 
 <li>Additional arguments may be written into the environment&rsquo;s heading, and
-inserted into the LaTeX string using %r (raw heading text, no processing).
-</li>
+inserted into the LaTeX string using %r (raw heading text, no processing).</li>
 </ul>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-10" class="outline-2">
-<h2 id="sec-10">Columns</h2>
-<div class="outline-text-2" id="text-10">
-</div><div id="outline-container-sec-10-1" class="outline-3">
-<h3 id="sec-10-1">Column specification: BEAMER_COL</h3>
+<div id="outline-container-orgf2a4a02" class="outline-2">
+<h2 id="orgf2a4a02">Columns</h2>
+<div class="outline-text-2" id="text-orgf2a4a02">
+</div><div id="outline-container-orgf2091a2" class="outline-3">
+<h3 id="orgf2091a2">Column specification: BEAMER_COL</h3>
 </div>
 
-<div id="outline-container-sec-10-2" class="outline-3">
-<h3 id="sec-10-2">Splitting a frame into multiple columns</h3>
-<div class="outline-text-3" id="text-10-2">
+<div id="outline-container-org4cd52d8" class="outline-3">
+<h3 id="org4cd52d8">Splitting a frame into multiple columns</h3>
+<div class="outline-text-3" id="text-org4cd52d8">
 <p>
 To get multiple columns in a frame:
 </p>
 
 <ol class="org-ol">
-<li>Press <code>C-c C-b |</code> (<code>BMCOL</code>) on the headings (inside the frame) which will
+<li><p>
+Press <code>C-c C-b |</code> (<code>BMCOL</code>) on the headings (inside the frame) which will
 become columns
+</p>
 
 <p>
 The heading of column environments won&rsquo;t be outputted in the PDF file.
-</p>
-</li>
+</p></li>
 
-<li>Specify the <b>column width</b> as a <b>percentage</b> of <code>\textwidth</code>
+<li><p>
+Specify the <b>column width</b> as a <b>percentage</b> of <code>\textwidth</code>
+</p>
 
 <div class="warning">
 <p>
 <b>No absolute width</b> (such as <code>4cm</code>), which wouldn&rsquo;t be correctly translated&#x2026;
 </p>
 
-</div>
-</li>
+</div></li>
 </ol>
 
 <p>
@@ -2115,8 +2071,7 @@ Consecutive <code>column</code> environments will be put in a <code>columns</cod
 </p>
 </div>
 
-<ul class="org-ul"><li><a id="sec-10-2-0-1" name="sec-10-2-0-1"></a>First column&#xa0;&#xa0;&#xa0;<span class="tag"><span class="BMCOL">BMCOL</span></span><br  /><div class="outline-text-5" id="text-10-2-0-1">
-
+<ul class="org-ul"><li><a id="org2edced4"></a>First column&#xa0;&#xa0;&#xa0;<span class="tag"><span class="BMCOL">BMCOL</span></span><br /><div class="outline-text-5" id="text-org2edced4">
 <p>
 First column
 </p>
@@ -2128,11 +2083,9 @@ Two \\ lines.
 <p>
 The arithmetic mean is equal to the summation of <code>n</code> numbers divided by <code>n</code>.
 </p>
-</div>
-</li>
+</div></li>
 
-<li><a id="sec-10-2-0-2" name="sec-10-2-0-2"></a>Second column&#xa0;&#xa0;&#xa0;<span class="tag"><span class="BMCOL">BMCOL</span></span><br  /><div class="outline-text-5" id="text-10-2-0-2">
-
+<li><a id="org645e538"></a>Second column&#xa0;&#xa0;&#xa0;<span class="tag"><span class="BMCOL">BMCOL</span></span><br /><div class="outline-text-5" id="text-org645e538">
 <p>
 Second column
 </p>
@@ -2144,39 +2097,33 @@ One line (but aligned).
 <p>
 \(\frac{1}{n} \sum_{i=1}^{n} x_{i}\)
 </p>
-</div>
-</li>
+</div></li>
 
-<li><a id="sec-10-2-1" name="sec-10-2-1"></a>Multiple columns<br  /><div class="outline-text-4" id="text-10-2-1">
+<li><a id="orgbb49435"></a>Multiple columns<br /><div class="outline-text-4" id="text-orgbb49435">
 <p>
 If you want to float an image to the left or right, simply include it within
 a 2-column layout.
 </p>
 </div>
 
-<ul class="org-ul"><li><a id="sec-10-2-1-1" name="sec-10-2-1-1"></a>Image&#xa0;&#xa0;&#xa0;<span class="tag"><span class="BMCOL">BMCOL</span></span><br  /><div class="outline-text-5" id="text-10-2-1-1">
-
+<ul class="org-ul"><li><a id="orgb561c8c"></a>Image&#xa0;&#xa0;&#xa0;<span class="tag"><span class="BMCOL">BMCOL</span></span><br /><div class="outline-text-5" id="text-orgb561c8c">
 
 <div class="figure">
 <p><img src="images/square.png" alt="square.png" />
 </p>
 </div>
-</div>
-</li>
+</div></li>
 
-<li><a id="sec-10-2-1-2" name="sec-10-2-1-2"></a>Text&#xa0;&#xa0;&#xa0;<span class="tag"><span class="BMCOL">BMCOL</span></span><br  /><div class="outline-text-5" id="text-10-2-1-2">
-
+<li><a id="orgfbf96e7"></a>Text&#xa0;&#xa0;&#xa0;<span class="tag"><span class="BMCOL">BMCOL</span></span><br /><div class="outline-text-5" id="text-orgfbf96e7">
 <p>
 This text will appear \\ to the right.
 </p>
-</div>
-</li></ul>
-</li></ul>
+</div></li></ul></li></ul>
 </div>
 
-<div id="outline-container-sec-10-3" class="outline-3">
-<h3 id="sec-10-3"><code>column</code></h3>
-<div class="outline-text-3" id="text-10-3">
+<div id="outline-container-orgce68014" class="outline-3">
+<h3 id="orgce68014"><code>column</code></h3>
+<div class="outline-text-3" id="text-orgce68014">
 <p>
 You can change the percent space of each column.
 </p>
@@ -2192,71 +2139,63 @@ XXX
 </div>
 </div>
 
-<div id="outline-container-sec-10-4" class="outline-3">
-<h3 id="sec-10-4"><code>columns</code>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_columns">B_columns</span></span></h3>
-<div class="outline-text-3" id="text-10-4">
+<div id="outline-container-org1aa189e" class="outline-3">
+<h3 id="org1aa189e"><code>columns</code>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_columns">B_columns</span></span></h3>
+<div class="outline-text-3" id="text-org1aa189e">
 </div>
 
-<ul class="org-ul"><li><a id="sec-10-4-1" name="sec-10-4-1"></a>Column 1&#xa0;&#xa0;&#xa0;<span class="tag"><span class="BMCOL">BMCOL</span></span><br  /><div class="outline-text-4" id="text-10-4-1">
-
+<ul class="org-ul"><li><a id="org596b38b"></a>Column 1&#xa0;&#xa0;&#xa0;<span class="tag"><span class="BMCOL">BMCOL</span></span><br /><div class="outline-text-4" id="text-org596b38b">
 <p>
 Colonne 1.
 </p>
-</div>
-</li>
+</div></li>
 
-<li><a id="sec-10-4-2" name="sec-10-4-2"></a>Column 2&#xa0;&#xa0;&#xa0;<span class="tag"><span class="BMCOL">BMCOL</span></span><br  /><div class="outline-text-4" id="text-10-4-2">
-
+<li><a id="org0b387b3"></a>Column 2&#xa0;&#xa0;&#xa0;<span class="tag"><span class="BMCOL">BMCOL</span></span><br /><div class="outline-text-4" id="text-org0b387b3">
 <p>
 Colonne 2.
 </p>
-</div>
-</li></ul>
+</div></li></ul>
 </div>
 
-<div id="outline-container-sec-10-5" class="outline-3">
-<h3 id="sec-10-5">How to specify the best width?</h3>
-<div class="outline-text-3" id="text-10-5">
+<div id="outline-container-org5ff2af2" class="outline-3">
+<h3 id="org5ff2af2">How to specify the best width?</h3>
+<div class="outline-text-3" id="text-org5ff2af2">
 <p>
 Visualise the width by transforming the columns into blocks&#x2026;
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-10-6" class="outline-3">
-<h3 id="sec-10-6">Result of an evaluation on two columns</h3>
-<div class="outline-text-3" id="text-10-6">
+<div id="outline-container-org6987987" class="outline-3">
+<h3 id="org6987987">Result of an evaluation on two columns</h3>
+<div class="outline-text-3" id="text-org6987987">
 <p>
 Balancing text in columns.
 </p>
 
 <ul class="org-ul">
 <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua.
-</li>
+tempor incididunt ut labore et dolore magna aliqua.</li>
 
 <li>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-aliquip ex ea commodo consequat.
-</li>
+aliquip ex ea commodo consequat.</li>
 
 <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-eu fugiat nulla pariatur.
-</li>
+eu fugiat nulla pariatur.</li>
 
 <li>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-deserunt mollit anim id est laborum.
-</li>
+deserunt mollit anim id est laborum.</li>
 </ul>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-11" class="outline-2">
-<h2 id="sec-11">Special cases</h2>
-<div class="outline-text-2" id="text-11">
-</div><div id="outline-container-sec-11-1" class="outline-3">
-<h3 id="sec-11-1">appendix</h3>
-<div class="outline-text-3" id="text-11-1">
+<div id="outline-container-org67d30aa" class="outline-2">
+<h2 id="org67d30aa">Special cases</h2>
+<div class="outline-text-2" id="text-org67d30aa">
+</div><div id="outline-container-orgca4b136" class="outline-3">
+<h3 id="orgca4b136">appendix</h3>
+<div class="outline-text-3" id="text-orgca4b136">
 <p>
 You can add an appendix (frames that you do not intend to show during your
 talk, but which might be useful to answer a question) by inserting such a <b>level
@@ -2264,8 +2203,7 @@ talk, but which might be useful to answer a question) by inserting such a <b>lev
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-level-1">* Appendix material follows                                        </span><span class="org-org-level-1"><span class="org-org-tag">:</span></span><span class="org-org-level-1"><span class="org-org-tag"><span class="org-org-beamer-tag">B_appendix</span></span></span><span class="org-org-level-1"><span class="org-org-tag">:</span></span>
+<pre class="src src-org"><span class="org-org-level-1">* Appendix material follows                                        </span><span class="org-org-level-1"><span class="org-org-tag">:B_appendix:</span></span>
 <span class="org-org-special-keyword">  :PROPERTIES:</span>
   <span class="org-org-special-keyword">:BEAMER_env:</span> <span class="org-org-property-value">appendix</span>
 <span class="org-org-special-keyword">  :END:</span>
@@ -2281,19 +2219,18 @@ Ignoring page number in backup slides can be achieved by setting the option
 </div>
 </div>
 
-<div id="outline-container-sec-11-2" class="outline-3">
-<h3 id="sec-11-2">note</h3>
-<div class="outline-text-3" id="text-11-2">
+<div id="outline-container-org7ba849d" class="outline-3">
+<h3 id="org7ba849d">note</h3>
+<div class="outline-text-3" id="text-org7ba849d">
 <p>
 To keep your <b>presentation notes</b> (reminders about what to say), add a heading
 below the frame, and select the <code>note</code> environment with <code>C-c C-b</code>.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+LATEX_HEADER: \setbeameroption{show notes}</span>
 
-<span class="org-org-level-3">*** Some note                                                          </span><span class="org-org-level-3"><span class="org-org-tag">:</span></span><span class="org-org-level-3"><span class="org-org-tag"><span class="org-org-beamer-tag">B_note</span></span></span><span class="org-org-level-3"><span class="org-org-tag">:</span></span>
+<span class="org-org-level-3">*** Some note                                                          </span><span class="org-org-level-3"><span class="org-org-tag">:B_note:</span></span>
 <span class="org-org-special-keyword">    :PROPERTIES:</span>
     <span class="org-org-special-keyword">:BEAMER_env:</span> <span class="org-org-property-value">note</span>
 <span class="org-org-special-keyword">    :END:</span>
@@ -2307,18 +2244,18 @@ This is a note.
 </div>
 </div>
 
-<div id="outline-container-sec-11-3" class="outline-3">
-<h3 id="sec-11-3">noteNH</h3>
-<div class="outline-text-3" id="text-11-3">
+<div id="outline-container-org59fa734" class="outline-3">
+<h3 id="org59fa734">noteNH</h3>
+<div class="outline-text-3" id="text-org59fa734">
 <p>
 Note with its title ignored.
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-11-4" class="outline-3">
-<h3 id="sec-11-4">againframe</h3>
-<div class="outline-text-3" id="text-11-4">
+<div id="outline-container-orga60d84d" class="outline-3">
+<h3 id="orga60d84d">againframe</h3>
+<div class="outline-text-3" id="text-orga60d84d">
 <p>
 You can &ldquo;continue&rdquo; frames that you previously started somewhere (but where
 certain details have been suppressed) at a much later point (for example only
@@ -2331,12 +2268,10 @@ Beamer always asks for:
 </p>
 
 <ul class="org-ul">
-<li><code>BEAMER_ref</code> property to <b>refer</b>, using link syntax, to (the label of) the <b>frame
-being resumed</b>, and
-</li>
+<li><code>BEAMER_ref</code> property to <b>refer</b>, using link syntax, to (the label of) the
+<b>frame being resumed</b>, and</li>
 
-<li><code>BEAMER_act</code> property to set the <b>overlay specification</b>.
-</li>
+<li><code>BEAMER_act</code> property to set the <b>overlay specification</b>.</li>
 </ul>
 
 <p>
@@ -2354,18 +2289,16 @@ XXX How to label a frame?  Via <code>:BEAMER_opt: label=id</code> or via other m
 </div>
 </div>
 
-<div id="outline-container-sec-11-5" class="outline-3">
-<h3 id="sec-11-5"><a id="ID-7bf1634d-2bd6-484b-adae-67a80846cdf4" name="ID-7bf1634d-2bd6-484b-adae-67a80846cdf4"></a>ignoreheading</h3>
-<div class="outline-text-3" id="text-11-5">
-
+<div id="outline-container-org14de8f4" class="outline-3">
+<h3 id="org14de8f4"><a id="ID-7bf1634d-2bd6-484b-adae-67a80846cdf4"></a>ignoreheading</h3>
+<div class="outline-text-3" id="text-org14de8f4">
 <p>
 Need to <b>&ldquo;close&rdquo; a block environment</b>, if followed by something else than
 a block.
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-level-3">*** End of block                                              </span><span class="org-org-level-3"><span class="org-org-tag">:</span></span><span class="org-org-level-3"><span class="org-org-tag"><span class="org-org-beamer-tag">B_ignoreheading</span></span></span><span class="org-org-level-3"><span class="org-org-tag">:</span></span>
+<pre class="src src-org"><span class="org-org-level-3">*** End of block                                              </span><span class="org-org-level-3"><span class="org-org-tag">:B_ignoreheading:</span></span>
 <span class="org-org-special-keyword">    :PROPERTIES:</span>
     <span class="org-org-special-keyword">:BEAMER_env:</span> <span class="org-org-property-value">ignoreheading</span>
 <span class="org-org-special-keyword">    :END:</span>
@@ -2376,25 +2309,22 @@ a block.
 <li>A heading with an <code>ignoreheading</code> environment will have only its contents
 inserted in the output.
 <ul class="org-ul">
-<li>Contents is not inserted in any <code>frame</code> environment&#x2026;
-</li>
-</ul>
-</li>
+<li>Contents is not inserted in any <code>frame</code> environment&#x2026;</li>
+</ul></li>
 
 <li>This special value is useful to have data between frames, or to properly
-<b>close a <code>column</code> environment</b>.
-</li>
+<b>close a <code>column</code> environment</b>.</li>
 </ul>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-12" class="outline-2">
-<h2 id="sec-12">Animations</h2>
-<div class="outline-text-2" id="text-12">
-</div><div id="outline-container-sec-12-1" class="outline-3">
-<h3 id="sec-12-1">Overlay specification: BEAMER_act</h3>
-<div class="outline-text-3" id="text-12-1">
+<div id="outline-container-org95ecab5" class="outline-2">
+<h2 id="org95ecab5">Animations</h2>
+<div class="outline-text-2" id="text-org95ecab5">
+</div><div id="outline-container-org6013be6" class="outline-3">
+<h3 id="org6013be6">Overlay specification: BEAMER_act</h3>
+<div class="outline-text-3" id="text-org6013be6">
 <p>
 Set <b>overlay</b> / action specifications in current frame or block to <b>create dynamic
 effects</b> (<i>multiple slides</i>, called <i>overlays</i>, for a single frame) = old
@@ -2414,7 +2344,6 @@ Headings support the <code>BEAMER_act</code> property:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-level-2">** Heading</span>
 <span class="org-org-special-keyword">   :PROPERTIES:</span>
    <span class="org-org-special-keyword">:BEAMER_act:</span> <span class="org-org-property-value">[&lt;+-&gt;]</span>
@@ -2430,10 +2359,8 @@ It is translated as:
 </p>
 
 <ul class="org-ul">
-<li>an overlay/action specification, or
-</li>
-<li>a <b>default</b> overlay specification when enclosed within square brackets.
-</li>
+<li>an overlay/action specification, or</li>
+<li>a <b>default</b> overlay specification when enclosed within square brackets.</li>
 </ul>
 
 <p>
@@ -2443,10 +2370,8 @@ like <code>&lt;+-&gt;</code>.
 </p>
 
 <ul class="org-ul">
-<li><code>&lt;+&gt;</code> Means that this material should appear on the next slide.
-</li>
-<li><code>&lt;+-&gt;</code> means that this appears on the next slide, and all subsequent slides.
-</li>
+<li><code>&lt;+&gt;</code> Means that this material should appear on the next slide.</li>
+<li><code>&lt;+-&gt;</code> means that this appears on the next slide, and all subsequent slides.</li>
 </ul>
 
 <p>
@@ -2455,7 +2380,6 @@ specification:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+ATTR_BEAMER: :overlay &lt;+-&gt;</span>
 - Item 1
 - Item 2
@@ -2463,7 +2387,6 @@ specification:
 </div>
 
 <div class="org-src-container">
-
 <pre class="src src-org">- @@beamer:&lt;1-&gt;@@ Item 1
 - @@beamer:&lt;2-&gt;@@ Item 2
 </pre>
@@ -2474,7 +2397,6 @@ can be shortened to:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org">- @@b:&lt;1-&gt;@@ Item 1
 - @@b:&lt;2-&gt;@@ Item 2
 </pre>
@@ -2485,7 +2407,6 @@ with:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">export snippet translations</span>
 (add-to-list 'org-export-snippet-translation-alist
              '(<span class="org-string">"b"</span> . <span class="org-string">"beamer"</span>))
@@ -2493,15 +2414,11 @@ with:
 </div>
 
 <ul class="org-ul">
-<li>&lt;1-| alert@1&gt; Suppose <i>p</i> were the largest prime number.
-</li>
-<li>&lt;2-&gt; Let <i>q</i> be the product of the first <i>p</i> numbers.
-</li>
-<li>&lt;3-&gt; Then <i>q + 1</i> is not divisible by any of them.
-</li>
+<li>&lt;1-| alert@1&gt; Suppose <i>p</i> were the largest prime number.</li>
+<li>&lt;2-&gt; Let <i>q</i> be the product of the first <i>p</i> numbers.</li>
+<li>&lt;3-&gt; Then <i>q + 1</i> is not divisible by any of them.</li>
 <li>&lt;1-&gt; But <i>q + 1</i> is greater than <i>1</i>, thus divisible by some prime number
-not in the first <i>p</i> numbers.
-</li>
+not in the first <i>p</i> numbers.</li>
 </ul>
 
 <p>
@@ -2509,18 +2426,16 @@ Overlay specification for bold markup in the label of a description list:
 </p>
 
 <dl class="org-dl">
-<dt> Test </dt><dd>     of a <b>useful</b> feature!
-</dd>
+<dt>Test</dt><dd>of a <b>useful</b> feature!</dd>
 
-<dt> <b>Test 2</b> </dt><dd>     of the same feature
-</dd>
+<dt><b>Test 2</b></dt><dd>of the same feature</dd>
 </dl>
 </div>
 </div>
 
-<div id="outline-container-sec-12-2" class="outline-3">
-<h3 id="sec-12-2">Overprint</h3>
-<div class="outline-text-3" id="text-12-2">
+<div id="outline-container-org4c7050f" class="outline-3">
+<h3 id="org4c7050f">Overprint</h3>
+<div class="outline-text-3" id="text-org4c7050f">
 <p>
 &gt; What may not be easy or possible is to use the \only directive, which is
 &gt; what I used in my previous response to you.
@@ -2539,39 +2454,33 @@ overlay specifications to regular environments or macros like
 </div>
 </div>
 
-<div id="outline-container-sec-12-3" class="outline-3">
-<h3 id="sec-12-3">Overlay specification: BEAMER_act</h3>
-<div class="outline-text-3" id="text-12-3">
-</div><ul class="org-ul"><li><a id="sec-12-3-1" name="sec-12-3-1"></a>The Queen&rsquo;s old armchair<br  /><div class="outline-text-4" id="text-12-3-1">
-
+<div id="outline-container-org186831f" class="outline-3">
+<h3 id="org186831f">Overlay specification: BEAMER_act</h3>
+<div class="outline-text-3" id="text-org186831f">
+</div><ul class="org-ul"><li><a id="org52ed383"></a>The Queen&rsquo;s old armchair<br /><div class="outline-text-4" id="text-org52ed383">
 <ul class="org-ul">
-<li>Princess Anne
-</li>
-<li>Prince Charles
-</li>
-<li>corgis
-</li>
+<li>Princess Anne</li>
+<li>Prince Charles</li>
+<li>corgis</li>
 </ul>
-</div>
-</li></ul>
+</div></li></ul>
 </div>
 
-<div id="outline-container-sec-12-4" class="outline-3">
-<h3 id="sec-12-4">Question on ML</h3>
-<div class="outline-text-3" id="text-12-4">
+<div id="outline-container-org334a92d" class="outline-3">
+<h3 id="org334a92d">Question on ML</h3>
+<div class="outline-text-3" id="text-org334a92d">
 <p>
 The following works for me:
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-org"> #+Beamer: <span class="org-org-latex-and-related">\only&lt;</span>1&gt;{
+<pre class="src src-org"><span class="org-org-meta-line"> #+Beamer: \only&lt;1&gt;{</span>
  <span class="org-org-link"><a href="file:figure1.png">file:figure1.png</a></span>
- #+Beamer: }<span class="org-org-latex-and-related">\only&lt;</span>2&gt;{
+<span class="org-org-meta-line"> #+Beamer: }\only&lt;2&gt;{</span>
  <span class="org-org-link"><a href="file:figure2.png">file:figure2.png</a></span>
- #+Beamer: }<span class="org-org-latex-and-related">\only&lt;</span>3-&gt;{
+<span class="org-org-meta-line"> #+Beamer: }\only&lt;3-&gt;{</span>
  <span class="org-org-link"><a href="file:figure3.png">file:figure3.png</a></span>
- #+Beamer: }
+<span class="org-org-meta-line"> #+Beamer: }</span>
 </pre>
 </div>
 
@@ -2583,8 +2492,7 @@ following/attached will match what you had originally.
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-org"> #+options: H:1
+<pre class="src src-org"><span class="org-org-meta-line"> #+options: H:1</span>
  * The slide
  ** figure 1
 <span class="org-org-special-keyword">    :PROPERTIES:</span>
@@ -2607,12 +2515,12 @@ following/attached will match what you had originally.
 </div>
 </div>
 
-<div id="outline-container-sec-13" class="outline-2">
-<h2 id="sec-13">Options</h2>
-<div class="outline-text-2" id="text-13">
-</div><div id="outline-container-sec-13-1" class="outline-3">
-<h3 id="sec-13-1">Option specification: BEAMER_opt</h3>
-<div class="outline-text-3" id="text-13-1">
+<div id="outline-container-org1a378a3" class="outline-2">
+<h2 id="org1a378a3">Options</h2>
+<div class="outline-text-2" id="text-org1a378a3">
+</div><div id="outline-container-org5b50328" class="outline-3">
+<h3 id="org5b50328">Option specification: BEAMER_opt</h3>
+<div class="outline-text-3" id="text-org5b50328">
 <p>
 Insert <b>optional arguments for the current <code>frame</code> or <code>block</code> environment</b> using the
 <code>BEAMER_OPT</code> property.
@@ -2629,14 +2537,10 @@ view&rdquo;:
 </p>
 
 <ol class="org-ol">
-<li>Press <code>C-c C-x C-c</code>
-</li>
-<li>Go to the <code>Opt</code> column
-</li>
-<li>Press <code>e</code> to edit its contents
-</li>
-<li>Quit XXX
-</li>
+<li>Press <code>C-c C-x C-c</code></li>
+<li>Go to the <code>Opt</code> column</li>
+<li>Press <code>e</code> to edit its contents</li>
+<li>Quit XXX</li>
 </ol>
 
 <p>
@@ -2645,16 +2549,14 @@ view&rdquo;:
 </div>
 </div>
 
-<div id="outline-container-sec-13-2" class="outline-3">
-<h3 id="sec-13-2">Vertical alignment</h3>
-<div class="outline-text-3" id="text-13-2">
-
+<div id="outline-container-org0315874" class="outline-3">
+<h3 id="org0315874">Vertical alignment</h3>
+<div class="outline-text-3" id="text-org0315874">
 <p>
 You can specify <i>top</i> <b>vertical alignment</b> globally by the <code>t</code> class option:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-meta-line">#+LaTeX_CLASS_OPTIONS: [t]</span>
 </pre>
 </div>
@@ -2664,7 +2566,6 @@ For single frames, you can use the same option locally:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-level-2">** Vertically top-aligned</span>
 <span class="org-org-special-keyword">   :PROPERTIES:</span>
    <span class="org-org-special-keyword">:BEAMER_opt:</span> <span class="org-org-property-value">t</span>
@@ -2676,61 +2577,59 @@ Some content.
 </div>
 </div>
 
-<div id="outline-container-sec-13-3" class="outline-3">
-<h3 id="sec-13-3">Explicit page breaking</h3>
-<div class="outline-text-3" id="text-13-3">
+<div id="outline-container-org5d8bdad" class="outline-3">
+<h3 id="org5d8bdad">Explicit page breaking</h3>
+<div class="outline-text-3" id="text-org5d8bdad">
 <p>
 If the text does not fit on a single slide, all you have to do to automatically
 break up the frame into several frames, is set the option <code>allowframebreaks</code>.
 </p>
 
 <ul class="org-ul">
-<li>To allow frame breaks on a <b>frame by frame</b> basis<sup><a id="fnr.2" name="fnr.2" class="footref" href="#fn.2">2</a></sup>:
+<li><p>
+To allow frame breaks on a <b>frame by frame</b> basis<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>:
+</p>
 
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-level-2">** A very long "frame" with breaks</span>
-<span class="org-org-special-keyword">   :PROPERTIES:</span>
-   <span class="org-org-special-keyword">:BEAMER_opt:</span> <span class="org-org-property-value">allowframebreaks,label=</span>
-<span class="org-org-special-keyword">   :END:</span>
+<pre class="src src-org">  ** A very long "frame" with breaks
+<span class="org-org-special-keyword">     :PROPERTIES:</span>
+     <span class="org-org-special-keyword">:BEAMER_opt:</span> <span class="org-org-property-value">allowframebreaks,label=</span>
+<span class="org-org-special-keyword">     :END:</span>
 </pre>
 </div>
 
 <p>
 XXX This property shouldn&rsquo;t be interpreted for the current slide!
-</p>
-</li>
+</p></li>
 
-<li>You might want to put <code>allowframebreaks=0.9</code> there
-</li>
+<li>You might want to put <code>allowframebreaks=0.9</code> there</li>
 </ul>
 
 <ul class="org-ul">
-<li>To add an explicit page break:
+<li><p>
+To add an explicit page break:
+</p>
 
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-meta-line">#+beamer: \framebreak</span>
+<pre class="src src-org"><span class="org-org-meta-line">  #+beamer: \framebreak</span>
 </pre>
-</div>
-</li>
+</div></li>
 
-<li>To allow frame breaks for the <b>whole</b> document<sup><a id="fnr.3" name="fnr.3" class="footref" href="#fn.3">3</a></sup>:
+<li><p>
+To allow frame breaks for the <b>whole</b> document<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>:
+</p>
 
 <div class="org-src-container">
-
-<pre class="src src-org"><span class="org-org-meta-line">#+BIND: org-beamer-frame-default-options "allowframebreaks"</span>
+<pre class="src src-org"><span class="org-org-meta-line">  #+BIND: org-beamer-frame-default-options "allowframebreaks"</span>
 </pre>
-</div>
-</li>
+</div></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-sec-13-4" class="outline-3">
-<h3 id="sec-13-4">Frame without surroundings</h3>
-<div class="outline-text-3" id="text-13-4">
-
+<div id="outline-container-org75d6b74" class="outline-3">
+<h3 id="org75d6b74">Frame without surroundings</h3>
+<div class="outline-text-3" id="text-org75d6b74">
 <p>
 <code>plain</code> causes the headlines, footlines, and sidebars to be suppressed. This is
 useful for creating single frames with different head- and footlines or for
@@ -2738,7 +2637,6 @@ creating frames showing big pictures that completely fill the frame.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-org"><span class="org-org-level-2">**                                          </span><span class="org-org-level-2"><span class="org-org-tag">:some_tag_so_that_heading_is_empty:</span></span>
 <span class="org-org-special-keyword">   :PROPERTIES:</span>
    <span class="org-org-special-keyword">:BEAMER_opt:</span> <span class="org-org-property-value">plain</span>
@@ -2754,102 +2652,150 @@ creating frames showing big pictures that completely fill the frame.
 </div>
 </div>
 
-<div id="outline-container-sec-13-5" class="outline-3">
-<h3 id="sec-13-5">&#xa0;&#xa0;&#xa0;<span class="tag"><span class="some_tag_so_that_heading_is_empty">some_tag_so_that_heading_is_empty</span></span></h3>
-<div class="outline-text-3" id="text-13-5">
+<div id="outline-container-orgeb6de72" class="outline-3">
+<h3 id="orgeb6de72">:some_tag_so_that_heading_is_empty:</h3>
+<div class="outline-text-3" id="text-orgeb6de72">
+<div class="beamer">
+\begin{centering}
+\includegraphics[height=\textheight]{Carsten}
+\par\end{centering}
 
-</div>
-</div>
-
-<div id="outline-container-sec-13-6" class="outline-3">
-<h3 id="sec-13-6">Big title in the middle</h3>
-<div class="outline-text-3" id="text-13-6">
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-14" class="outline-2">
-<h2 id="sec-14">Power</h2>
-<div class="outline-text-2" id="text-14">
+<div id="outline-container-orgb86529d" class="outline-3">
+<h3 id="orgb86529d">Big title in the middle</h3>
+<div class="outline-text-3" id="text-orgb86529d">
+<div class="beamer">
+\begin{center}
+  \begin{minipage}[h]{.75\textwidth}
+    \centering
+    {\Huge This is my BIG title!}
+  \end{minipage}
+\end{center}
+
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4d6ee92" class="outline-2">
+<h2 id="org4d6ee92">Power</h2>
+<div class="outline-text-2" id="text-org4d6ee92">
 <p>
 Skip proof
 </p>
 
 <p>
-<a href="#sec-16-1">Proof details</a>
+<a href="#org5fc1192">Proof details</a>
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-15" class="outline-2">
-<h2 id="sec-15">Summary</h2>
-<div class="outline-text-2" id="text-15">
-</div><div id="outline-container-sec-15-1" class="outline-3">
-<h3 id="sec-15-1">Summary</h3>
+<div id="outline-container-org98281a2" class="outline-2">
+<h2 id="org98281a2">Summary</h2>
+<div class="outline-text-2" id="text-org98281a2">
+</div><div id="outline-container-org6e3d7f0" class="outline-3">
+<h3 id="org6e3d7f0">Summary</h3>
 </div>
 
-<div id="outline-container-sec-15-2" class="outline-3">
-<h3 id="sec-15-2">For further reading</h3>
-<div class="outline-text-3" id="text-15-2">
+<div id="outline-container-org94f0a72" class="outline-3">
+<h3 id="org94f0a72">For further reading</h3>
+<div class="outline-text-3" id="text-org94f0a72">
+<div class="latex">
+\begin{thebibliography}{10}
+
+  \beamertemplatebookbibitems
+  \bibitem{sal:b:formal-languages}
+    A.~Salomaa.
+    \newblock {\em Formal Languages}.
+    \newblock Academic Press, 1973.
+    \pause
+
+  \beamertemplatearticlebibitems
+  \bibitem{dij:j:smoothsort}
+    E.~Dijkstra.
+    \newblock Smoothsort, an alternative for sorting in situ.
+    \newblock {\em Science of Computer Programming}, 1(3):223--233,
+    1982.
+    \pause
+
+  \bibitem{FeldmanO1973}
+    E.~Feldman and J.~Owings, Jr.
+    \newblock A class of universal linear bounded automata.
+    \newblock {\em Information Sciences}, 6:187--190, 1973.
+    \pause
+
+  \bibitem{JancarMPV1995}
+    P.~Jan{\v c}ar, F.~Mr{\'a}z, M.~Pl{\'a}tek, and J.~Vogel.
+    \newblock Restarting automata.
+    \newblock {\em FCT Conference 1995}, LNCS 985, pages
+    282--292. 1995.
+
+\end{thebibliography}
+
+</div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-16" class="outline-2">
-<h2 id="sec-16">Appendix NAME XXX&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_appendix">B_appendix</span></span></h2>
-<div class="outline-text-2" id="text-16">
+<div id="outline-container-orgeba630b" class="outline-2">
+<h2 id="orgeba630b">Appendix NAME XXX&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_appendix">B_appendix</span></span></h2>
+<div class="outline-text-2" id="text-orgeba630b">
 </div>
 
-<div id="outline-container-sec-16-1" class="outline-3">
-<h3 id="sec-16-1">Proof details</h3>
-<div class="outline-text-3" id="text-16-1">
+<div id="outline-container-org5fc1192" class="outline-3">
+<h3 id="org5fc1192">Proof details</h3>
+<div class="outline-text-3" id="text-org5fc1192">
 <p>
 Text omitted in main talk.
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-16-2" class="outline-3">
-<h3 id="sec-16-2">More details</h3>
-<div class="outline-text-3" id="text-16-2">
+<div id="outline-container-orgbec2b6e" class="outline-3">
+<h3 id="orgbec2b6e">More details</h3>
+<div class="outline-text-3" id="text-orgbec2b6e">
 <p>
 Even more additional material.
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-16-3" class="outline-3">
-<h3 id="sec-16-3">Abbreviations</h3>
+<div id="outline-container-orgb75b703" class="outline-3">
+<h3 id="orgb75b703">Abbreviations</h3>
 </div>
 </div>
 
-<div id="outline-container-sec-17" class="outline-2">
-<h2 id="sec-17">Contributing</h2>
-<div class="outline-text-2" id="text-17">
-</div><div id="outline-container-sec-17-1" class="outline-3">
-<h3 id="sec-17-1">Issues</h3>
-<div class="outline-text-3" id="text-17-1">
+<div id="outline-container-org145274a" class="outline-2">
+<h2 id="org145274a">Contributing</h2>
+<div class="outline-text-2" id="text-org145274a">
+</div><div id="outline-container-orgdd923a2" class="outline-3">
+<h3 id="orgdd923a2">Issues</h3>
+<div class="outline-text-3" id="text-orgdd923a2">
 <p>
 Report issues and suggest features and improvements on the <a href="https://github.com/fniessen/refcard-org-beamer/issues/new">GitHub issue tracker</a>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-17-2" class="outline-3">
-<h3 id="sec-17-2">Patches</h3>
-<div class="outline-text-3" id="text-17-2">
+<div id="outline-container-org60f0f26" class="outline-3">
+<h3 id="org60f0f26">Patches</h3>
+<div class="outline-text-3" id="text-org60f0f26">
 <p>
 I love contributions!  Patches under any form are always welcome!
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-17-3" class="outline-3">
-<h3 id="sec-17-3">Donations</h3>
-<div class="outline-text-3" id="text-17-3">
+<div id="outline-container-org5debba6" class="outline-3">
+<h3 id="org5debba6">Donations</h3>
+<div class="outline-text-3" id="text-org5debba6">
 <p>
-If you like the refcard-org-beamer project, you can show your appreciation and
-help support future development by making a <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VCVAS6KPDQ4JC&lc=BE&item_number=refcard-org-beamer&currency_code=EUR&bn=PP-DonationsBF:btn_donate_LG.gif:NonHosted">donation</a> through PayPal.
+If you use the refcard-org-beamer project and feel it is making your life better
+and easier, you can show your appreciation and help support future development
+by making a <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=VCVAS6KPDQ4JC&amp;lc=BE&amp;item_number=refcard-org-beamer&amp;currency_code=EUR&amp;bn=PP-DonationsBF:btn_donate_LG.gif:NonHosted">donation</a> through PayPal.  Thank you!
 </p>
 
 <p>
@@ -2860,15 +2806,15 @@ beer and as in speech.
 </div>
 </div>
 
-<div id="outline-container-sec-18" class="outline-2">
-<h2 id="sec-18">License</h2>
-<div class="outline-text-2" id="text-18">
+<div id="outline-container-org28004be" class="outline-2">
+<h2 id="org28004be">License</h2>
+<div class="outline-text-2" id="text-org28004be">
 <p>
 Copyright (C) 2013-2017 Free Software Foundation, Inc.
 </p>
 
 <p>
-Author: Fabrice Niessen <br  />
+Author: Fabrice Niessen <br />
 Keywords: reference card org-beamer
 </p>
 
@@ -2895,23 +2841,22 @@ this file. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p>The items in the TOC are clickable and take you to specific frames in the
-  presentation.</p></div>
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara">The items in the TOC are clickable and take you to specific frames in the
+presentation.</div></div>
 
-<div class="footdef"><sup><a id="fn.2" name="fn.2" class="footnum" href="#fnr.2">2</a></sup> <p>Until the Beamer <a href="https://bitbucket.org/rivanvx/beamer/issue/265/including-frame-label-option-stops%20">issue
-  #265</a> is solved, we need to unset the <code>framelabel</code> as shown above (<code>label=</code>) when
-  we use that option.</p></div>
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara">Until the Beamer <a href="https://bitbucket.org/rivanvx/beamer/issue/265/including-frame-label-option-stops%20">issue
+#265</a> is solved, we need to unset the <code>framelabel</code> as shown above (<code>label=</code>) when
+we use that option.</div></div>
 
-<div class="footdef"><sup><a id="fn.3" name="fn.3" class="footnum" href="#fnr.3">3</a></sup> <p>Till Tantau (author of
-  Beamer) was really not keen on the idea of setting the auto-breaking frames
-  option globally.</p></div>
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara">Till Tantau (author of
+Beamer) was really not keen on the idea of setting the auto-breaking frames
+option globally.</div></div>
 
 
 </div>
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Fabrice Niessen</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -1933,8 +1933,9 @@ I love contributions!  Patches under any form are always welcome!
 
 ** Donations
 
-If you like the refcard-org-beamer project, you can show your appreciation and
-help support future development by making a [[https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VCVAS6KPDQ4JC&lc=BE&item_number=refcard%2dorg%2dbeamer&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted][donation]] through PayPal.
+If you use the refcard-org-beamer project and feel it is making your life better
+and easier, you can show your appreciation and help support future development
+by making a [[https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VCVAS6KPDQ4JC&lc=BE&item_number=refcard%2dorg%2dbeamer&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted][donation]] through PayPal.  Thank you!
 
 Regardless of the donations, refcard-org-beamer will always be free both as in
 beer and as in speech.
