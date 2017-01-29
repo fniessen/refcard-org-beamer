@@ -50,89 +50,6 @@
 
 #+EXCLUDE_TAGS: noexport
 
-* Tasks                                                               :noexport:
-
-** TODO Install (and use) Metropolis Beamer theme
-
-https://github.com/matze/mtheme/
-
-** TODO See "Producing slide shows with Pandoc"
-
-http://pandoc.org/README.html#producing-slide-shows-with-pandoc
-
-** TODO Beamerarticle
-
-** TODO Citations
-
-** TODO Improve handouts
-
-Add:
-- additional text (speaker notes) for visual slides,
-- more information and
-- references.
-
-http://www.speakingaboutpresenting.com/delivery/presentation-handouts/
-
-** TODO Add subjects
-
-See http://office.microsoft.com/en-us/powerpoint-help/training-courses-for-powerpoint-2013-HA104015465.aspx
-
-** TODO Improve contents
-
-See all parts on https://www.sharelatex.com/blog/2013/08/20/beamer-series-pt4.html#.U59n0yjrzYQ
-
-** TODO Add better contents
-
-See
-http://www.r-project.org/nosvn/conferences/useR-2011/TalkSlides/Contributed/16Aug_1115_FocusI_4-ReportingWorkflows_3-Leha.pdf
-for a very good example.
-
-** TODO Re: beamer_env tag issue with empty headlines (from Rafael)
-   [2015-08-21 Fri 18:43]
-
-#+begin_verse
->> I mean that I would like to have a new variable, say,
->> 'org-no-headlines-between-colons', that when set to t, would cause org
->> to treat any part of a heading between colons as a tag.
->
-> My question was: what for? Do you have a (simple) use-case?
-
-Just like the OP said: When exporting to beamer, there are some headings
-that do not merit a named heading. Like columns. Or for example, in my
-case, I have theorems without a name. Say:
-
-,****                                                                 :B_theorem:
-    :PROPERTIES:
-    :BEAMER_env: theorem
-    :END:
-    Let \(X\) be a \(T_{1}\) space. Then \(X\) is regular if an only
-    if given a point \(x\in X\) and a neighborhood \(U\) of \(x\)
-    there is a neighborhood \(V\) of \(x\) such that
-    \(\overline{V}\subseteq U\).
-
-Or sometimes, in definitions, I could include a named heading, but it
-looks redundant to me, as the defined term is already emphasized.
-
-,**** Normal space                                                 :B_definition:
-    :PROPERTIES:
-    :BEAMER_env: definition
-    :END:
-    Let \(X\) be a \(T_{1}\) space. We say that \(X\) is *normal* if for
-    any \(F\subseteq X\) and \(G\subseteq X\) disjoint closed sets,
-    there are disjoint open sets \(U,V\) such that
-    \(F\subseteq U\) and \(G\subseteq V\).
-
-I do not think I will ever need two colons in a heading. Hence I think
-the option to interpret anything between colons in a heading as a tag
-would be useful.
-#+end_verse
-
-From [[http://mid.gmane.org/87wpwozj6d.fsf%2540gmail.com][Email from Rafael: Re: beamer_env tag issue with]]
-
-** SDAY Look at Git prezzi
-
-https://www.youtube.com/watch?v=KDUtjZHIx44&feature=youtu.be
-
 * Overview
 
 #+begin_html
@@ -234,7 +151,7 @@ By default, it will automatically be displayed with the following elements:
 - a *date*
 
   #+begin_src org
-  ,#+DATE: 2014-06-11
+  ,#+DATE: 2017-01-01
   #+end_src
 
   (LaTeX macro ~\today~, if none specified)
@@ -1553,8 +1470,8 @@ in the appendix) to show additional slides there.
 For convenience (since those are mandatory), when asking for an ~againframe~, Org
 Beamer always asks for:
 
-- ~BEAMER_ref~ property to *refer*, using link syntax, to (the label of) the *frame
-  being resumed*, and
+- ~BEAMER_ref~ property to *refer*, using link syntax, to (the label of) the
+  *frame being resumed*, and
 
 - ~BEAMER_act~ property to set the *overlay specification*.
 
@@ -1866,6 +1783,37 @@ creating frames showing big pictures that completely fill the frame.
 
 * COMMENT Guidelines for creating presentations
 
+** Including Hyperlinks
+
+#+begin_src org
+,#+TITLE: LaTeX export minimal test
+
+,* Intro
+:PROPERTIES:
+:CUSTOM_ID: introduction
+:END:
+
+This is the first slide.
+
+,* Summary
+
+As we saw on slide [[#introduction]], ...
+#+end_src
+
+or
+
+#+begin_src org
+,#+TITLE: LaTeX export minimal test
+
+,* <<introduction>> Intro
+
+This is the first slide.
+
+,* Summary
+
+As we saw on slide [[introduction]], ...
+#+end_src
+
 ** Including Hyperlinks and Buttons
 
 https://www.sharelatex.com/blog/2013/08/16/beamer-series-pt3.html#.U586LCjrzYQ
@@ -1993,24 +1941,25 @@ beer and as in speech.
 
 * License
 
-Copyright (C) 2013-2016 Free Software Foundation, Inc.
+Copyright (C) 2013-2017 Free Software Foundation, Inc.
 
 Author: Fabrice Niessen \\
 Keywords: reference card org-beamer
 
-This program is free software; you can redistribute it and/or modify it under
+This file is free software; you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
 Foundation, either version 3 of the License, or (at your option) any later
 version.
 
-This program is distributed in the hope that it will be useful, but WITHOUT ANY
+This file is distributed in the hope that it will be useful, but WITHOUT ANY
 WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with
-this program. If not, see http://www.gnu.org/licenses/.
+this file. If not, see http://www.gnu.org/licenses/.
 
 # This is for the sake of Emacs.
 # Local Variables:
 # org-latex-listings: t
+# eval: (org-shifttab 2)
 # End:

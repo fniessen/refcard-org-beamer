@@ -374,19 +374,28 @@ yet installed on your system, install <a href="http://www.tug.org/texlive/">TeX 
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(eval-after-load <span class="org-string">"ox-latex"</span>
-
-  <span class="org-comment-delimiter">;; </span><span class="org-comment">update the list of LaTeX classes and associated header (encoding, etc.)</span>
-  <span class="org-comment-delimiter">;; </span><span class="org-comment">and structure</span>
-  '(add-to-list 'org-latex-classes
-                `(<span class="org-string">"beamer"</span>
-                  ,(concat <span class="org-string">"\\documentclass[presentation]{beamer}\n"</span>
-                           <span class="org-string">"[DEFAULT-PACKAGES]"</span>
-                           <span class="org-string">"[PACKAGES]"</span>
-                           <span class="org-string">"[EXTRA]\n"</span>)
-                  (<span class="org-string">"\\section{%s}"</span> . <span class="org-string">"\\section*{%s}"</span>)
-                  (<span class="org-string">"\\subsection{%s}"</span> . <span class="org-string">"\\subsection*{%s}"</span>)
-                  (<span class="org-string">"\\subsubsection{%s}"</span> . <span class="org-string">"\\subsubsection*{%s}"</span>))))
+<pre class="src src-emacs-lisp">(eval-after-load <span class="org-string">"ox-latex"</span>
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">update the list of LaTeX classes and associated header (encoding, etc.)</span>
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">and structure</span>
+  '(add-to-list 'org-latex-classes
+                `(<span class="org-string">"beamer"</span>
+                  ,(concat <span class="org-string">"\\documentclass[presentation]{beamer}\n"</span>
+                           <span class="org-string">"[DEFAULT-PACKAGES]"</span>
+                           <span class="org-string">"[PACKAGES]"</span>
+                           <span class="org-string">"[EXTRA]\n"</span>)
+                  (<span class="org-string">"\\section{%s}"</span> . <span class="org-string">"\\section*{%s}"</span>)
+                  (<span class="org-string">"\\subsection{%s}"</span> . <span class="org-string">"\\subsection*{%s}"</span>)
+                  (<span class="org-string">"\\subsubsection{%s}"</span> . <span class="org-string">"\\subsubsection*{%s}"</span>))))
+</pre>
+</div>
+</li>
+
+<li>For nice code blocks, use Listings instead of Verbatim:
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span class="org-keyword">setq</span> org-latex-listings t)
 </pre>
 </div>
 </li>
@@ -438,7 +447,7 @@ By default, it will automatically be displayed with the following elements:
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span class="org-org-document-info-keyword">#+DATE:</span> <span class="org-org-document-info">2014-06-11</span>
+<pre class="src src-org"><span class="org-org-document-info-keyword">#+DATE:</span> <span class="org-org-document-info">2017-01-01</span>
 </pre>
 </div>
 
@@ -465,8 +474,8 @@ The author&rsquo;s email can be included with:
 <div class="org-src-container">
 
 <pre class="src src-org"><span class="org-org-document-info-keyword">#+AUTHOR:</span>    <span class="org-org-document-info">\href{<a href="mailto:email@example.com}{John">mailto:email@example.com}{John</a> Doe}</span>
-<span class="org-org-document-info-keyword">#+AUTHOR:</span>    <span class="org-org-document-info">\texorpdfstring{John Doe\newline\url{email@example.com}}{John Doe} % DOES NOT WORK </span><span class="org-org-document-info"><span class="org-leuven-highlight">XXX</span></span><span class="org-org-document-info"> -&gt; BEAMER_HEADER???</span>
-<span class="org-org-meta-line">#+BEAMER_HEADER: \author{\texorpdfstring{John Doe\newline\url{email@example.com}}{John Doe}} % BAD ORDER </span><span class="org-org-meta-line"><span class="org-leuven-highlight">XXX</span></span>
+<span class="org-org-document-info-keyword">#+AUTHOR:</span>    <span class="org-org-document-info">\texorpdfstring{John Doe\newline\url{email@example.com}}{John Doe} % DOES NOT WORK </span><span class="org-org-document-info"><span class="org-leuven-highlight-todo-items">XXX</span></span><span class="org-org-document-info"> -&gt; BEAMER_HEADER???</span>
+<span class="org-org-meta-line">#+BEAMER_HEADER: \author{\texorpdfstring{John Doe\newline\url{email@example.com}}{John Doe}} % BAD ORDER </span><span class="org-org-meta-line"><span class="org-leuven-highlight-todo-items">XXX</span></span>
 </pre>
 </div>
 
@@ -650,47 +659,6 @@ Here is a simple R code block&#x2026;
 </pre>
 </div>
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="left" />
-
-<col  class="left" />
-</colgroup>
-<tbody>
-<tr>
-<td class="left">Min.   : 4.0</td>
-<td class="left">Min.   :  2.00</td>
-</tr>
-
-<tr>
-<td class="left">1st Qu.:12.0</td>
-<td class="left">1st Qu.: 26.00</td>
-</tr>
-
-<tr>
-<td class="left">Median :15.0</td>
-<td class="left">Median : 36.00</td>
-</tr>
-
-<tr>
-<td class="left">Mean   :15.4</td>
-<td class="left">Mean   : 42.98</td>
-</tr>
-
-<tr>
-<td class="left">3rd Qu.:19.0</td>
-<td class="left">3rd Qu.: 56.00</td>
-</tr>
-
-<tr>
-<td class="left">Max.   :25.0</td>
-<td class="left">Max.   :120.00</td>
-</tr>
-</tbody>
-</table>
-
 <p>
 XXX Is this needed?
 </p>
@@ -749,47 +717,6 @@ specify the <code>:exports results</code> option:
 <p>
 It only renders the results:
 </p>
-
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="left" />
-
-<col  class="left" />
-</colgroup>
-<tbody>
-<tr>
-<td class="left">Min.   : 4.0</td>
-<td class="left">Min.   :  2.00</td>
-</tr>
-
-<tr>
-<td class="left">1st Qu.:12.0</td>
-<td class="left">1st Qu.: 26.00</td>
-</tr>
-
-<tr>
-<td class="left">Median :15.0</td>
-<td class="left">Median : 36.00</td>
-</tr>
-
-<tr>
-<td class="left">Mean   :15.4</td>
-<td class="left">Mean   : 42.98</td>
-</tr>
-
-<tr>
-<td class="left">3rd Qu.:19.0</td>
-<td class="left">3rd Qu.: 56.00</td>
-</tr>
-
-<tr>
-<td class="left">Max.   :25.0</td>
-<td class="left">Max.   :120.00</td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
 
@@ -901,7 +828,7 @@ Type:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">M-x load-library RET ox-beamer RET
+<pre class="src src-emacs-lisp">M-x load-library RET ox-beamer RET
 </pre>
 </div>
 
@@ -942,7 +869,7 @@ Type:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">M-x org-beamer-mode RET
+<pre class="src src-emacs-lisp">M-x org-beamer-mode RET
 </pre>
 </div>
 
@@ -2559,9 +2486,9 @@ with:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">export snippet translations</span>
-(add-to-list 'org-export-snippet-translation-alist
-             '(<span class="org-string">"b"</span> . <span class="org-string">"beamer"</span>))
+<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">export snippet translations</span>
+(add-to-list 'org-export-snippet-translation-alist
+             '(<span class="org-string">"b"</span> . <span class="org-string">"beamer"</span>))
 </pre>
 </div>
 
@@ -2937,7 +2864,7 @@ beer and as in speech.
 <h2 id="sec-18">License</h2>
 <div class="outline-text-2" id="text-18">
 <p>
-Copyright (C) 2013-2016 Free Software Foundation, Inc.
+Copyright (C) 2013-2017 Free Software Foundation, Inc.
 </p>
 
 <p>
@@ -2946,21 +2873,21 @@ Keywords: reference card org-beamer
 </p>
 
 <p>
-This program is free software; you can redistribute it and/or modify it under
+This file is free software; you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
 Foundation, either version 3 of the License, or (at your option) any later
 version.
 </p>
 
 <p>
-This program is distributed in the hope that it will be useful, but WITHOUT ANY
+This file is distributed in the hope that it will be useful, but WITHOUT ANY
 WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 </p>
 
 <p>
 You should have received a copy of the GNU General Public License along with
-this program. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.
+this file. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.
 </p>
 </div>
 </div>
@@ -2984,7 +2911,7 @@ this program. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Fabrice Niessen</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

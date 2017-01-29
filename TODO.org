@@ -1,0 +1,216 @@
+#+TITLE:     Org Beamer Reference Card NEW
+#+AUTHOR:    Fabrice Niessen
+#+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
+#+Time-stamp: <2017-01-29 Sun 17:53>
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS:   H:2 num:nil toc:nil
+
+#+SETUPFILE: ~/src/org-style/bigblow-local-abs.setup
+
+#+PROPERTY:  header-args :eval no
+
+* Tasks
+
+** TODO Install (and use) Metropolis Beamer theme (requires XeLaTeX)
+
+https://github.com/matze/mtheme/
+
+** TODO See "Producing slide shows with Pandoc"
+
+http://pandoc.org/README.html#producing-slide-shows-with-pandoc
+
+** TODO Beamerarticle
+
+** TODO Citations
+
+** TODO Improve handouts
+
+Add:
+- additional text (speaker notes) for visual slides,
+- more information and
+- references.
+
+http://www.speakingaboutpresenting.com/delivery/presentation-handouts/
+
+** TODO Add subjects
+
+See http://office.microsoft.com/en-us/powerpoint-help/training-courses-for-powerpoint-2013-HA104015465.aspx
+
+** TODO Improve contents
+
+See all parts on https://www.sharelatex.com/blog/2013/08/20/beamer-series-pt4.html#.U59n0yjrzYQ
+
+** TODO Add better contents
+
+See
+http://www.r-project.org/nosvn/conferences/useR-2011/TalkSlides/Contributed/16Aug_1115_FocusI_4-ReportingWorkflows_3-Leha.pdf
+for a very good example.
+
+** TODO Re: beamer_env tag issue with empty headlines (from Rafael)
+   [2015-08-21 Fri 18:43]
+
+#+begin_verse
+>> I mean that I would like to have a new variable, say,
+>> 'org-no-headlines-between-colons', that when set to t, would cause org
+>> to treat any part of a heading between colons as a tag.
+>
+> My question was: what for? Do you have a (simple) use-case?
+
+Just like the OP said: When exporting to beamer, there are some headings
+that do not merit a named heading. Like columns. Or for example, in my
+case, I have theorems without a name. Say:
+
+,****                                                                 :B_theorem:
+    :PROPERTIES:
+    :BEAMER_env: theorem
+    :END:
+    Let \(X\) be a \(T_{1}\) space. Then \(X\) is regular if an only
+    if given a point \(x\in X\) and a neighborhood \(U\) of \(x\)
+    there is a neighborhood \(V\) of \(x\) such that
+    \(\overline{V}\subseteq U\).
+
+Or sometimes, in definitions, I could include a named heading, but it
+looks redundant to me, as the defined term is already emphasized.
+
+,**** Normal space                                                 :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+    Let \(X\) be a \(T_{1}\) space. We say that \(X\) is *normal* if for
+    any \(F\subseteq X\) and \(G\subseteq X\) disjoint closed sets,
+    there are disjoint open sets \(U,V\) such that
+    \(F\subseteq U\) and \(G\subseteq V\).
+
+I do not think I will ever need two colons in a heading. Hence I think
+the option to interpret anything between colons in a heading as a tag
+would be useful.
+#+end_verse
+
+From [[http://mid.gmane.org/87wpwozj6d.fsf%2540gmail.com][Email from Rafael: Re: beamer_env tag issue with]]
+
+** TODO Solution for changing background images with Beamer export
+   [2015-05-19 Tue 20:05]
+
+#+begin_verse
+I make a lot of presentations using Org Mode exporting to Beamer. One
+issue that came up is using transparent background images, or rather,
+changing background images during the presentation.
+
+That is, you want to do something like this:
+
+(background image image1.jpg)
+slide1
+slide2
+(background image image2.jpg)
+slide3
+slide4
+
+etc.
+
+The obvious way to do this was as follows:
+
+  #+LaTeX_CLASS: beamer
+  #+LaTeX_CLASS_OPTIONS: [presentation,14pt]
+  #+BEAMER_THEME: Pittsburgh
+  #+BEAMER_COLOR_THEME: orchid
+  #+BEAMER_FONT_THEME: serif [stillsansserifsmall,stillsansseriflarge,structure]
+  #+BEAMER_HEADER: \setbeamercolor{background canvas}{bg=}
+  #+BEAMER_HEADER: \setbeamertemplate{navigation symbols}{}
+  #+BEAMER_HEADER: \logo{\includegraphics{gng-logo.png}}
+  #+BEAMER_HEADER: \usebackgroundtemplate{\includegraphics[width=\paperwidth]{images/image1.jpg}}%
+  #+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_envargs(Env Args) %4BEAMER_col(Col) %8BEAMER_extra(Extra)
+  #+PROPERTY: BEAMER_col_ALL 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 :ETC
+  #+OPTIONS: toc:nil h:1            <<<<<------Note frames at level 1
+
+  ** Song1
+  %%%% stuff %%%%
+
+  %%%% Trying to change background here %%%%
+  #+BEAMER: \usebackgroundtemplate{\includegraphics[width=\paperwidth]{images/image2.jpg}}%
+  ** Song2
+  %%% etc. %%%
+
+  With this approach the export won't work correctly (and it's
+  completely understandable why not --- you only know where the old
+  frame ends when you see the beginning of the new frame). Looking at
+  the generated Latex, I see
+
+  \usebackgroundtemplate{\includegraphics[width=\paperwidth]{images/image2.jpg}}%
+  \end{frame}
+  \begin{frame}[label=sec-5]{Song2}
+
+  which basically does nothing as far as the background goes. I was hoping for:
+
+  \end{frame}
+  \usebackgroundtemplate{\includegraphics[width=\paperwidth]{images/image2.jpg}}%
+  \begin{frame}[label=sec-5]{Song2}
+
+  In my research on this I saw that a number of people had this problem
+  and nobody seemed to know what to do.
+
+  Turns out there's a simple workaround. Just put the frames one level
+  deeper and do something like the following:
+
+  %%%% set background in prologue using beamer command as above %%%%
+  %%%% set frames at level 2 %%%%
+  #+OPTIONS: ... :h 2
+
+  ** Song1 (This is a dummy heading at least for my purposes)
+
+  *** Song 1 slide 1
+  %%% stuff %%%
+  *** Song 1 slide 2
+  %%% etc. %%%
+
+  ** Song2 (Dummy heading)
+  #+BEAMER: \usebackgroundtemplate{\includegraphics[width=\paperwidth]{images/image2.jpg}}%
+  *** Song 2 slide 1
+  %%% stuff %%%
+  *** Song 2 slide 2
+  %%% etc. %%%
+
+  ** Song3 (Dummy heading)
+  #+BEAMER: \usebackgroundtemplate{\includegraphics[width=\paperwidth]{images/image3.jpg}}%
+  *** Song 3 slide 1
+  %%% stuff %%%
+  *** Song 3 slide 2
+  %%% etc. %%%
+
+While this will affect the outlining and so on, it may nevertheless be
+useful in many cases.
+
+I hope this is useful to someone.
+#+end_verse
+
+From [[http://mid.gmane.org/201505191805.t4JI59E6009969%40sunbot.homedns.org][Email from fred@sunbot.homedns.org: Solution for changing backgrou]]
+
+** TODO Organiser la référence card
+
+Voir, exemple, http://mcclinews.free.fr/latex/introbeamer/index.html. En plus,
+de l'excellent contenu...
+
+http://www.mathematik.uni-leipzig.de/~hellmund/LaTeX/beamer2.pdf
+
+** TODO Check interesting doc http://orgmode.org/manual/Beamer-export.html
+
+** TODO Find a solution for subtitles
+
+https://lists.gnu.org/archive/html/emacs-orgmode/2012-07/msg00691.html
+
+** TODO List all environments
+
+See http://www.let.rug.nl/alfa/tex/tetex30/latex/beamer/examples/beamerexample1.tex
+plus all environments defined in Beamer theme Org
+plus all environments defined in org-beamer-mode
+plus https://bitbucket.org/rivanvx/beamer/src/876db01f1cba91f62254805d059f210548c87ab1/emacs/beamer.el?at=default
+
+** TODO Add links to galleries
+
+http://mcclinews.free.fr/latex/beamergalerie/completsgalerie.html
+http://www.hartwork.org/beamer-theme-matrix/
+
+** SDAY Look at Git prezzi
+
+https://www.youtube.com/watch?v=KDUtjZHIx44&feature=youtu.be
