@@ -52,7 +52,7 @@
 
 * Overview
 
-#+begin_html
+#+begin_export html
 <a href="http://opensource.org/licenses/GPL-3.0">
   <img src="http://img.shields.io/:license-gpl-blue.svg" alt=":license-gpl-blue.svg" />
 </a>
@@ -60,14 +60,14 @@
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VCVAS6KPDQ4JC&lc=BE&item_number=refcard%2dorg%2dbeamer&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted">
   <img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" alt="btn_donate_LG.gif" />
 </a>
-#+end_html
+#+end_export
 
 ** Description
 
 Welcome to *Org Beamer reference card*.  It contains the reference documentation
 that describes how to *write presentations* based on:
 
-- [[http://orgmode.org/][Org mode]] 8 and
+- [[http://orgmode.org/][Org mode]] 9 and
 - the [[https://bitbucket.org/rivanvx/beamer/][LaTeX Beamer class]].
 
 Those *free* tools allow you to easily produce *high quality* *PDF files* which are
@@ -91,9 +91,9 @@ The obvious advantages of this approach are that:
     plots).
 
 ** Requirements
-   :PROPERTIES:
-   :ID:       c4f6745b-2147-4538-bd96-9f8e1e1d4669
-   :END:
+:PROPERTIES:
+:ID:       c4f6745b-2147-4538-bd96-9f8e1e1d4669
+:END:
 
 - A working LaTeX installation is required for exporting to PDF.  If it is not
   yet installed on your system, install [[http://www.tug.org/texlive/][TeX Live]] (for example).
@@ -125,9 +125,9 @@ The obvious advantages of this approach are that:
 * Authoring presentations
 
 ** Creating a title page
-   :PROPERTIES:
-   :BEAMER_opt: allowframebreaks,label=
-   :END:
+:PROPERTIES:
+:BEAMER_opt: allowframebreaks,label=
+:END:
 
 The very first slide (called *frame* in a Beamer presentation) is the *title page*.
 By default, it will automatically be displayed with the following elements:
@@ -197,6 +197,22 @@ The [[id:f6d1f139-2460-4844-93f1-c71277c810e0][inner theme]] dictates how the ti
 ,#+BEAMER_HEADER: \logo{\includegraphics[height=.9cm]{InstLogo}}
 #+end_src
 
+** Adding an image on the title slide
+
+Insert an image in the title slide that fills the whole width of the slide but
+limits to half height.
+
+#+begin_src org :eval no
+,#+BEAMER_HEADER:
+  \titlegraphic{
+    \includegraphics[width=\textwidth,height=.5\textheight]{someimage}
+  }
+#+end_src
+
+(on one line.)
+
+#+BEAMER_HEADER: \titlegraphic{\includegraphics[width=\textwidth,height=.5\textheight]{images/someimage}}
+
 ** Structure basics
 
 Org mode presentations contain headings at different levels.
@@ -263,11 +279,11 @@ How to center pictures horizontally?
 
   http://tex.stackexchange.com/questions/64075/beamers-visible-inside-a-tikz-node
 
-  #+begin_latex
+  #+begin_export latex
   \begin{tikzpicture}
     \node[align=center] {I'm {\visible<+->{very}}\\happy.};
   \end{tikzpicture}
-  #+end_latex
+  #+end_export
 
 ** TODO Using graphics and text
 
@@ -372,10 +388,10 @@ plot(cars)
 #+end_center
 
 ** Creating a table of contents
-   :PROPERTIES:
-   :ID:       b4252974-1d3d-4652-b42e-e7cd016f45f7
-   :BEAMER_opt: allowframebreaks,label=
-   :END:
+:PROPERTIES:
+:ID:       b4252974-1d3d-4652-b42e-e7cd016f45f7
+:BEAMER_opt: allowframebreaks,label=
+:END:
 
 If you set the ~H~ option from the ~#+OPTIONS:~ keyword (or the
 ~org-beamer-frame-level~ variable) to ~2~:
@@ -441,6 +457,10 @@ export menu:
 
 #+begin_note
 You do not need to set ~LaTeX_CLASS~ to ~beamer~.
+#+end_note
+
+#+begin_note
+YYou do not need to set ~LaTeX_CLASS~ to ~beamer~.
 #+end_note
 
 ** Support editing
@@ -578,24 +598,24 @@ It will go (in that order) in the ~[EXTRA]~ placeholder of the header associated
 to the ~beamer~ LaTeX class (see [[id:c4f6745b-2147-4538-bd96-9f8e1e1d4669][~org-latex-classes~]]).
 
 ** Inline LaTeX
-   :PROPERTIES:
-   :BEAMER_opt: allowframebreaks,label=
-   :END:
+:PROPERTIES:
+:BEAMER_opt: allowframebreaks,label=
+:END:
 
 You can include raw LaTeX in your Org presentations and it will get kept as
 LaTeX when it's exported.
 
 *** Left                                                                 :BMCOL:
-    :PROPERTIES:
-    :BEAMER_col: 0.43
-    :END:
+:PROPERTIES:
+:BEAMER_col: 0.43
+:END:
 
 #+begin_src org
-,#+begin_LaTeX
+,#+begin_export LaTeX
 \begin{minipage}{4cm}
 ...
 \end{minipage}
-,#+end_LaTeX
+,#+end_export
 #+end_src
 
 #+begin_src org
@@ -605,16 +625,16 @@ LaTeX when it's exported.
 Such LaTeX code will only be present in the exports to *LaTeX and Beamer*.
 
 *** Right                                                                :BMCOL:
-    :PROPERTIES:
-    :BEAMER_col: 0.43
-    :END:
+:PROPERTIES:
+:BEAMER_col: 0.43
+:END:
 
 #+begin_src org
-,#+begin_Beamer
+,#+begin_export Beamer
 \begin{minipage}{4cm}
 ...
 \end{minipage}
-,#+end_Beamer
+,#+end_export
 #+end_src
 
 #+begin_src org
@@ -624,9 +644,9 @@ Such LaTeX code will only be present in the exports to *LaTeX and Beamer*.
 Such LaTeX code will *only* be present in the export to *Beamer*.
 
 *** Back to one column                                         :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
+:PROPERTIES:
+:BEAMER_env: ignoreheading
+:END:
 
 #+beamer: \framebreak
 
@@ -636,7 +656,7 @@ need more control of the LaTeX options than Org mode actually gives you.
 For example, to insert a table with colspan or rowspan support:
 
 #+begin_src org
-,#+begin_LaTeX
+,#+begin_export LaTeX
 \begin{tabular}{|l|l|l|}
   \hline
   Text1 & Text2 & Text3 \\
@@ -644,11 +664,11 @@ For example, to insert a table with colspan or rowspan support:
   \multicolumn{3}{|c|}{Merged text here} \\
   \hline
 \end{tabular}
-,#+end_LaTeX
+,#+end_export
 #+end_src
 
 #+begin_center
-#+begin_LaTeX
+#+begin_export LaTeX
 \begin{tabular}{|l|l|l|}
   \hline
   Text1 & Text2 & Text3 \\
@@ -656,7 +676,7 @@ For example, to insert a table with colspan or rowspan support:
   \multicolumn{3}{|c|}{Merged text here} \\
   \hline
 \end{tabular}
-#+end_LaTeX
+#+end_export
 #+end_center
 
 ** Affiliated keywords
@@ -671,9 +691,9 @@ The Beamer back-end reads both
 XXX Code with figure or table
 
 ** Using a custom theme
-   :PROPERTIES:
-   :ID:       f6d1f139-2460-4844-93f1-c71277c810e0
-   :END:
+:PROPERTIES:
+:ID:       f6d1f139-2460-4844-93f1-c71277c810e0
+:END:
 
 You can specify a Beamer theme using the ~#+BEAMER_THEME~ keyword.
 
@@ -721,9 +741,9 @@ property to the frame's headline.  You can also specify a percentage, as in
 
 #+begin_src org :eval no
 ,* The frame title
-  :PROPERTIES:
-  :BEAMER_opt: shrink=10
-  :END:
+:PROPERTIES:
+:BEAMER_opt: shrink=10
+:END:
 #+end_src
 
 # You can also use LaTeX ~resizebox~ to shrink table fonts:
@@ -732,17 +752,6 @@ property to the frame's headline.  You can also specify a percentage, as in
 # | 124.195 | 310.528 |
 # | 120.848 | 122.702 |
 # #+LaTeX: }
-
-** Adding an image on the title slide
-
-Insert an image in the title slide that fills the whole width of the slide but
-limits to half height.
-
-#+begin_src org :eval no
-,#+BEAMER_HEADER: \titlegraphic{\includegraphics[width=\textwidth,height=.5\textheight]{someimage}}
-#+end_src
-
-#+BEAMER_HEADER: \titlegraphic{\includegraphics[width=\textwidth,height=.5\textheight]{images/someimage}}
 
 ** Column view
 
@@ -764,9 +773,9 @@ XXX Put = or ~ around BEAMER_env in title...
 ** Frames
 
 *** frame                                                              :B_frame:
-    :PROPERTIES:
-    :BEAMER_env: frame
-    :END:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 
 If a heading in the current tree has a ~BEAMER_env~ property set to either ~frame~
 or ~fullframe~, its level overrides the ~H~ value, giving you some flexibility in
@@ -784,9 +793,9 @@ deciding *what is* and what isn't *a frame*.
 ,** Subsection 2.1
 
 ,*** Frame                                                           :B_frame:
-    :PROPERTIES:
-    :BEAMER_env: frame
-    :END:
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 
 This becomes a frame, instead of a block!
 #+end_src
@@ -795,9 +804,9 @@ This works in both "directions": to *add or* to *remove sectioning levels* above
 the current heading (which becomes a frame)!
 
 *** fullframe                                                      :B_fullframe:
-    :PROPERTIES:
-    :BEAMER_env: fullframe
-    :END:
+:PROPERTIES:
+:BEAMER_env: fullframe
+:END:
 
 If a heading in the current tree has a ~BEAMER_env~ property set to ~fullframe~,
 the frame will *not display its title* (~frametitle~ is being set to the empty
@@ -805,17 +814,17 @@ string).
 
 #+begin_src org
 ,*** Frame                                                         :B_fullframe:
-    :PROPERTIES:
-    :BEAMER_env: fullframe
-    :END:
+:PROPERTIES:
+:BEAMER_env: fullframe
+:END:
 
 This becomes a frame, with its title ignored!
 #+end_src
 
 ** ~block~ environment
-   :PROPERTIES:
-   :ID:       77f1b7a3-6e7d-4f2b-bd1f-02e6f02bba2f
-   :END:
+:PROPERTIES:
+:ID:       77f1b7a3-6e7d-4f2b-bd1f-02e6f02bba2f
+:END:
 
 Insert a *default block* (syntax assumes ~H:2~).
 
@@ -832,9 +841,9 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
 
 *** End of block                                               :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
+:PROPERTIES:
+:BEAMER_env: ignoreheading
+:END:
 
 Comments:
 
@@ -849,18 +858,18 @@ Insert a block whose title is *highlighted*.
 
 #+begin_src org
 ,*** An alert block                                               :B_alertblock:
-    :PROPERTIES:
-    :BEAMER_env: alertblock
-    :END:
+:PROPERTIES:
+:BEAMER_env: alertblock
+:END:
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
 #+end_src
 
 *** An alert block                                                :B_alertblock:
-    :PROPERTIES:
-    :BEAMER_env: alertblock
-    :END:
+:PROPERTIES:
+:BEAMER_env: alertblock
+:END:
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
@@ -871,18 +880,18 @@ Insert a block that is supposed to be an *example*.
 
 #+begin_src org
 ,*** An example block                                           :B_exampleblock:
-    :PROPERTIES:
-    :BEAMER_env: exampleblock
-    :END:
+:PROPERTIES:
+:BEAMER_env: exampleblock
+:END:
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
 #+end_src
 
 *** An example block                                            :B_exampleblock:
-    :PROPERTIES:
-    :BEAMER_env: exampleblock
-    :END:
+:PROPERTIES:
+:BEAMER_env: exampleblock
+:END:
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
@@ -896,9 +905,9 @@ is defined by the heading text, for example ~title in head/foot~ or ~myblockcolo
 ,#+LaTeX: \setbeamercolor{myblockcolor}{bg=magenta,fg=white}
 
 ,*** myblockcolor                                             :B_beamercolorbox:
-    :PROPERTIES:
-    :BEAMER_env: beamercolorbox
-    :END:
+:PROPERTIES:
+:BEAMER_env: beamercolorbox
+:END:
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
@@ -907,9 +916,9 @@ tempor incididunt ut labore et dolore magna aliqua.
 #+LaTeX: \setbeamercolor{myblockcolor}{bg=magenta,fg=white}
 
 *** myblockcolor                                              :B_beamercolorbox:
-    :PROPERTIES:
-    :BEAMER_env: beamercolorbox
-    :END:
+:PROPERTIES:
+:BEAMER_env: beamercolorbox
+:END:
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
@@ -920,20 +929,20 @@ tempor incididunt ut labore et dolore magna aliqua.
 
 #+begin_src org
 ,*** myblockcolor                                             :B_beamercolorbox:
-    :PROPERTIES:
-    :BEAMER_env: beamercolorbox
-    :BEAMER_opt: wd=6cm
-    :END:
+:PROPERTIES:
+:BEAMER_env: beamercolorbox
+:BEAMER_opt: wd=6cm
+:END:
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
 #+end_src
 
 *** myblockcolor                                              :B_beamercolorbox:
-    :PROPERTIES:
-    :BEAMER_env: beamercolorbox
-    :BEAMER_opt: wd=6cm
-    :END:
+:PROPERTIES:
+:BEAMER_env: beamercolorbox
+:BEAMER_opt: wd=6cm
+:END:
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
@@ -944,20 +953,20 @@ tempor incididunt ut labore et dolore magna aliqua.
 
 #+begin_src org
 ,*** myblockcolor                                             :B_beamercolorbox:
-    :PROPERTIES:
-    :BEAMER_env: beamercolorbox
-    :BEAMER_opt: shadow=false,rounded=true
-    :END:
+:PROPERTIES:
+:BEAMER_env: beamercolorbox
+:BEAMER_opt: shadow=false,rounded=true
+:END:
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
 #+end_src
 
 *** myblockcolor                                              :B_beamercolorbox:
-    :PROPERTIES:
-    :BEAMER_env: beamercolorbox
-    :BEAMER_opt: shadow=false,rounded=true
-    :END:
+:PROPERTIES:
+:BEAMER_env: beamercolorbox
+:BEAMER_opt: shadow=false,rounded=true
+:END:
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
@@ -968,20 +977,20 @@ tempor incididunt ut labore et dolore magna aliqua.
 
 #+begin_src org
 ,*** myblockcolor                                             :B_beamercolorbox:
-    :PROPERTIES:
-    :BEAMER_env: beamercolorbox
-    :BEAMER_opt: shadow=true,rounded=true
-    :END:
+:PROPERTIES:
+:BEAMER_env: beamercolorbox
+:BEAMER_opt: shadow=true,rounded=true
+:END:
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
 #+end_src
 
 *** myblockcolor                                              :B_beamercolorbox:
-    :PROPERTIES:
-    :BEAMER_env: beamercolorbox
-    :BEAMER_opt: shadow=true,rounded=true
-    :END:
+:PROPERTIES:
+:BEAMER_env: beamercolorbox
+:BEAMER_opt: shadow=true,rounded=true
+:END:
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
@@ -992,9 +1001,9 @@ tempor incididunt ut labore et dolore magna aliqua.
 - To help the audience see the structure of your presentation.
 
 *** structureenv                                                :B_structureenv:
-    :PROPERTIES:
-    :BEAMER_env: structureenv
-    :END:
+:PROPERTIES:
+:BEAMER_env: structureenv
+:END:
 
 Paragraph Heading.
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -1010,18 +1019,18 @@ tempor incididunt ut labore et dolore magna aliqua.
 
 #+begin_src org
 ,*** Prime number                                                 :B_definition:
-    :PROPERTIES:
-    :BEAMER_env: definition
-    :END:
+:PROPERTIES:
+:BEAMER_env: definition
+:END:
 
 A prime number is a natural number greater than 1 that has no positive divisors
 other than 1 and itself.
 #+end_src
 
 *** Prime number                                                  :B_definition:
-    :PROPERTIES:
-    :BEAMER_env: definition
-    :END:
+:PROPERTIES:
+:BEAMER_env: definition
+:END:
 
 A prime number is a natural number greater than 1 that has no positive divisors
 other than 1 and itself.
@@ -1035,17 +1044,17 @@ other than 1 and itself.
 
 #+begin_src org
 ,*** Number 5                                                        :B_example:
-    :PROPERTIES:
-    :BEAMER_env: example
-    :END:
+:PROPERTIES:
+:BEAMER_env: example
+:END:
 
 5 can only be divided evenly by 1 or 5, so it is a prime number.
 #+end_src
 
 *** Number 5                                                         :B_example:
-    :PROPERTIES:
-    :BEAMER_env: example
-    :END:
+:PROPERTIES:
+:BEAMER_env: example
+:END:
 
 5 can only be divided evenly by 1 or 5, so it is a prime number.
 
@@ -1056,18 +1065,18 @@ other than 1 and itself.
 
 #+begin_src org
 ,*** Niessen, 2010                                                   :B_theorem:
-    :PROPERTIES:
-    :BEAMER_env: theorem
-    :END:
+:PROPERTIES:
+:BEAMER_env: theorem
+:END:
 
 Statement of theorem (proposition): \\
 Org mode + Beamer = productivity^{2}
 #+end_src
 
 *** Niessen, 2010                                                    :B_theorem:
-    :PROPERTIES:
-    :BEAMER_env: theorem
-    :END:
+:PROPERTIES:
+:BEAMER_env: theorem
+:END:
 
 Statement of theorem (proposition): \\
 Org mode + Beamer = productivity^{2}
@@ -1081,17 +1090,17 @@ Org mode + Beamer = productivity^{2}
 
 #+begin_src org
 ,*** Proof                                                             :B_proof:
-    :PROPERTIES:
-    :BEAMER_env: proof
-    :END:
+:PROPERTIES:
+:BEAMER_env: proof
+:END:
 
 Description of proof.
 #+end_src
 
 *** Proof                                                              :B_proof:
-    :PROPERTIES:
-    :BEAMER_env: proof
-    :END:
+:PROPERTIES:
+:BEAMER_env: proof
+:END:
 
 Description of proof.
 
@@ -1184,13 +1193,14 @@ There is no largest prime number.
   more portable when environments only exist in Beamer (then, they will appear
   as subheadings when exported to other backends)
 
-- Use an *empty heading* (or ~\phantom{dummy}~) for an *empty block title*.
+- Use an *empty heading* /with a non-breaking space/ (or ~\phantom{dummy}~) for an
+  *empty block title*.
 
 #+begin_src org
 ,***                                                                 :B_theorem:
-    :PROPERTIES:
-    :BEAMER_env: theorem
-    :END:
+:PROPERTIES:
+:BEAMER_env: theorem
+:END:
 
 There is no largest prime number.
 #+end_src
@@ -1212,54 +1222,54 @@ $H$ divides the order of $G$.
 ,#+end_theorem
 #+end_src
 
-*Is the syntax with [...] or with {...}?*
-
 #+begin_src org
 ,*** Lagrange                                                        :B_theorem:
-    :PROPERTIES:
-    :BEAMER_env: theorem
-    :END:
+:PROPERTIES:
+:BEAMER_env: theorem
+:END:
 
 Let $G$ be a finite group, and let $H$ be a subgroup of $G$.  Then the order of
 $H$ divides the order of $G$.
+
+,*** End of block                                               :B_ignoreheading:
+:PROPERTIES:
+:BEAMER_env: ignoreheading
+:END:
 #+end_src
 
-** Alternative environment syntax (with parameter)
+#+attr_latex: :options [Lagrange]
+#+begin_theorem
+Let $G$ be a finite group, and let $H$ be a subgroup of $G$.  Then the order of
+$H$ divides the order of $G$.
+#+end_theorem
 
-XXX How to pass the parameter?
-
-#+attr_latex: :options {Prime number}
-#+begin_definition
-A prime number is
-#+end_definition
-
-*** Prime number                                                  :B_definition:
-    :PROPERTIES:
-    :BEAMER_env: definition
-    :END:
-
-A prime number is
-
-*** End of block                                               :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
+** Alternative environment syntax (with option)
 
 #+begin_src org
-,#+attr_latex: :options {Prime number}
+,#+attr_latex: :options [Prime number]
 ,#+begin_definition
-A prime number is
+A prime number is...
 ,#+end_definition
 #+end_src
 
 #+begin_src org
 ,*** Prime number                                                 :B_definition:
-    :PROPERTIES:
-    :BEAMER_env: definition
-    :END:
+:PROPERTIES:
+:BEAMER_env: definition
+:END:
 
-A prime number is
+A prime number is...
+
+,*** End of block                                               :B_ignoreheading:
+:PROPERTIES:
+:BEAMER_env: ignoreheading
+:END:
 #+end_src
+
+#+attr_latex: :options [Prime number]
+#+begin_definition
+A prime number is...
+#+end_definition
 
 ** Add extra environments
 
@@ -1303,11 +1313,11 @@ code. That's a conceptual leap that passed me by.
 To get multiple columns in a frame:
 
 1. Press ~C-c C-b |~ (~BMCOL~) on the headings (inside the frame) which will
-   become columns
+   become columns.
 
    The heading of column environments won't be outputted in the PDF file.
 
-2. Specify the *column width* as a *percentage* of ~\textwidth~
+2. Specify the *column width* as a *percentage* of ~\textwidth~.
 
    #+begin_warning
    *No absolute width* (such as ~4cm~), which wouldn't be correctly translated...
@@ -1318,10 +1328,10 @@ width parameter as a factor of ~\textwidth~).
 
 Consecutive ~column~ environments will be put in a ~columns~ environment.
 
-**** First column                                                        :BMCOL:
-     :PROPERTIES:
-     :BEAMER_col: 0.39
-     :END:
+*** First column                                                         :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.39
+:END:
 
 First column
 
@@ -1329,10 +1339,10 @@ Two \\ lines.
 
 The arithmetic mean is equal to the summation of ~n~ numbers divided by ~n~.
 
-**** Second column                                                       :BMCOL:
-     :PROPERTIES:
-     :BEAMER_col: 0.39
-     :END:
+*** Second column                                                        :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.39
+:END:
 
 Second column
 
@@ -1340,24 +1350,24 @@ One line (but aligned).
 
 $\frac{1}{n} \sum_{i=1}^{n} x_{i}$
 
-*** Multiple columns
+** Splitting a frame into multiple columns
 
 If you want to float an image to the left or right, simply include it within
 a 2-column layout.
 
-**** Image                                                               :BMCOL:
-     :PROPERTIES:
-     :BEAMER_col: 0.39
-     :END:
+*** Image                                                                :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.39
+:END:
 
 #+ATTR_LaTeX: :width 3cm
 [[file:images/square.png]]
 # mygraphic.jpg
 
-**** Text                                                                :BMCOL:
-     :PROPERTIES:
-     :BEAMER_col: 0.39
-     :END:
+*** Text                                                                 :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.39
+:END:
 
 This text will appear \\ to the right.
 
@@ -1371,22 +1381,22 @@ change that as follows:
 XXX
 
 ** ~columns~                                                           :B_columns:
-   :PROPERTIES:
-   :BEAMER_env: columns
-   :BEAMER_opt: [c]
-   :END:
+:PROPERTIES:
+:BEAMER_env: columns
+:BEAMER_opt: [c]
+:END:
 
 *** Column 1                                                             :BMCOL:
-    :PROPERTIES:
-    :BEAMER_col: 0.3
-    :END:
+:PROPERTIES:
+:BEAMER_col: 0.3
+:END:
 
 Colonne 1.
 
 *** Column 2                                                             :BMCOL:
-    :PROPERTIES:
-    :BEAMER_col: 0.7
-    :END:
+:PROPERTIES:
+:BEAMER_col: 0.7
+:END:
 
 Colonne 2.
 
@@ -1428,9 +1438,9 @@ talk, but which might be useful to answer a question) by inserting such a *level
 
 #+begin_src org
 ,* Appendix material follows                                        :B_appendix:
-  :PROPERTIES:
-  :BEAMER_env: appendix
-  :END:
+:PROPERTIES:
+:BEAMER_env: appendix
+:END:
 
 # Backup slides
 #+end_src
@@ -1447,9 +1457,9 @@ below the frame, and select the ~note~ environment with ~C-c C-b~.
 ,#+LATEX_HEADER: \setbeameroption{show notes}
 
 ,*** Some note                                                          :B_note:
-    :PROPERTIES:
-    :BEAMER_env: note
-    :END:
+:PROPERTIES:
+:BEAMER_env: note
+:END:
 
 This is a note.
 
@@ -1487,18 +1497,18 @@ resumed: ~:BEAMER_ref: *My frame title~.
 XXX How to label a frame?  Via ~:BEAMER_opt: label=id~ or via other means?
 
 ** ignoreheading
-   :PROPERTIES:
-   :ID:       7bf1634d-2bd6-484b-adae-67a80846cdf4
-   :END:
+:PROPERTIES:
+:ID:       7bf1634d-2bd6-484b-adae-67a80846cdf4
+:END:
 
 Need to *"close" a block environment*, if followed by something else than
 a block.
 
 #+begin_src org
 ,*** End of block                                              :B_ignoreheading:
-    :PROPERTIES:
-    :BEAMER_env: ignoreheading
-    :END:
+:PROPERTIES:
+:BEAMER_env: ignoreheading
+:END:
 #+end_src
 
 - A heading with an ~ignoreheading~ environment will have only its contents
@@ -1524,9 +1534,9 @@ Headings support the ~BEAMER_act~ property:
 
 #+begin_src org
 ,** Heading
-   :PROPERTIES:
-   :BEAMER_act: [<+->]
-   :END:
+:PROPERTIES:
+:BEAMER_act: [<+->]
+:END:
 
 - Item
 - Item
@@ -1589,8 +1599,7 @@ Overlay specification for bold markup in the label of a description list:
 
 ** Overprint
 
-> What may not be easy or possible is to use the \only directive, which is
-> what I used in my previous response to you.
+> What may not be easy or possible is to use the \only directive.
 
 You can always use the only environment.
 <https://github.com/suvayu/.emacs.d/blob/master/org-mode-config.el#L215>
@@ -1602,9 +1611,9 @@ overlay specifications to regular environments or macros like
 ** Overlay specification: BEAMER_act
 
 *** The Queen's old armchair
-    :PROPERTIES:
-    :BEAMER_act: <1->
-    :END:
+:PROPERTIES:
+:BEAMER_act: <1->
+:END:
 
 - Princess Anne
 - Prince Charles
@@ -1643,19 +1652,19 @@ following/attached will match what you had originally.
  #+options: H:1
  * The slide
  ** figure 1
-    :PROPERTIES:
-    :beamer_act: <1>
-    :END:
+:PROPERTIES:
+:beamer_act: <1>
+:END:
     [[file:chromosome.png]]
  ** figure 2
-    :PROPERTIES:
-    :beamer_act: <2>
-    :END:
+:PROPERTIES:
+:beamer_act: <2>
+:END:
     [[file:diagram.png]]
  ** figure 3
-    :PROPERTIES:
-    :beamer_act: <3->
-    :END:
+:PROPERTIES:
+:beamer_act: <3->
+:END:
     [[file:equation1.png]]
 #+end_src
 
@@ -1672,17 +1681,17 @@ enclose them yourself!
 You can add that *special property* by editing the ~Opt~ column within the "column
 view":
 
-1. Press ~C-c C-x C-c~
+1. Turn on column view by pressing ~C-c C-x C-c~ (~M-x org-columns~)
 2. Go to the ~Opt~ column
-3. Press ~e~ to edit its contents
-4. Quit XXX
+3. Press ~e~ to edit its contents, and add your value
+4. Exit the column editing by pressing ~q~
 
 ~fragile~ option is added automatically.
 
 ** Vertical alignment
-   :PROPERTIES:
-   :BEAMER_opt: c
-   :END:
+:PROPERTIES:
+:BEAMER_opt: c
+:END:
 
 You can specify /top/ *vertical alignment* globally by the ~t~ class option:
 
@@ -1694,9 +1703,9 @@ For single frames, you can use the same option locally:
 
 #+begin_src org
 ,** Vertically top-aligned
-   :PROPERTIES:
-   :BEAMER_opt: t
-   :END:
+:PROPERTIES:
+:BEAMER_opt: t
+:END:
 
 Some content.
 #+end_src
@@ -1712,9 +1721,9 @@ break up the frame into several frames, is set the option ~allowframebreaks~.
 
   #+begin_src org :eval no
   ,** A very long "frame" with breaks
-     :PROPERTIES:
-     :BEAMER_opt: allowframebreaks,label=
-     :END:
+  :PROPERTIES:
+  :BEAMER_opt: allowframebreaks,label=
+  :END:
   #+end_src
 
   XXX This property shouldn't be interpreted for the current slide!
@@ -1729,57 +1738,70 @@ break up the frame into several frames, is set the option ~allowframebreaks~.
   ,#+beamer: \framebreak
   #+end_src
 
-- To allow frame breaks for the *whole* document[fn:: Till Tantau (author of
-  Beamer) was really not keen on the idea of setting the auto-breaking frames
-  option globally.]:
+- To allow frame breaks for *all frames* of the *whole* document[fn:: Till Tantau
+  (author of Beamer) was really not keen on the idea of setting the
+  auto-breaking frames option globally.]:
 
   #+begin_src org :eval no
   ,#+BIND: org-beamer-frame-default-options "allowframebreaks"
   #+end_src
 
-** Frame without surroundings
-   :PROPERTIES:
-   :BEAMER_opt: plain
-   :END:
+# ** Frame without surroundings
+#    :PROPERTIES:
+#    :BEAMER_opt: plain
+#    :END:
+#
+# ~plain~ causes the headlines, footlines, and sidebars to be suppressed. This is
+# useful for creating single frames with different head- and footlines or for
+# creating frames showing big pictures that completely fill the frame.
+#
+# #+begin_src org
+# ,**  
+#    :PROPERTIES:
+#    :BEAMER_opt: plain
+#    :END:
+#
+# ,#+begin_export beamer
+# \begin{centering}
+# \includegraphics[height=\textheight]{somebigimagefile}
+# \par\end{centering}
+# ,#+end_export
+# #+end_src
+#
+# (Non-breaking space inserted so that headline is not empty.)
 
-~plain~ causes the headlines, footlines, and sidebars to be suppressed. This is
-useful for creating single frames with different head- and footlines or for
-creating frames showing big pictures that completely fill the frame.
+# **                                           :some_tag_so_that_heading_is_empty:
+#    :PROPERTIES:
+#    :BEAMER_opt: plain
+#    :END:
+#
+# #+begin_export beamer
+# \begin{centering}
+# \includegraphics[height=\textheight]{images/Carsten}
+# \par\end{centering}
+# #+end_export
 
-#+begin_src org
-,**                                          :some_tag_so_that_heading_is_empty:
-   :PROPERTIES:
-   :BEAMER_opt: plain
-   :END:
-
-,#+begin_beamer
-\begin{centering}
-\includegraphics[height=\textheight]{somebigimagefile}
-\par\end{centering}
-,#+end_beamer
-#+end_src
-
-**                                           :some_tag_so_that_heading_is_empty:
-   :PROPERTIES:
-   :BEAMER_opt: plain
-   :END:
-
-#+begin_beamer
-\begin{centering}
-\includegraphics[height=\textheight]{Carsten}
-\par\end{centering}
-#+end_beamer
+# **  
+#    :PROPERTIES:
+#    :BEAMER_opt: plain
+#    :END:
+#
+# #+begin_export beamer
+# \begin{centering}
+# \includegraphics[height=\textheight]{images/Carsten}
+# \par\end{centering}
+# #+end_export
 
 ** Big title in the middle
 
-#+begin_beamer
+#+begin_export beamer
 \begin{center}
   \begin{minipage}[h]{.75\textwidth}
     \centering
     {\Huge This is my BIG title!}
   \end{minipage}
 \end{center}
-#+end_beamer
+#+end_export
 
 * COMMENT Guidelines for creating presentations
 
@@ -1873,7 +1895,7 @@ Skip proof
 
 # Mettre ox-beamer, beamer.pdf, org manual, etc. comme références
 
-#+begin_latex
+#+begin_export latex
 \begin{thebibliography}{10}
 
   \beamertemplatebookbibitems
@@ -1904,12 +1926,12 @@ Skip proof
     282--292. 1995.
 
 \end{thebibliography}
-#+end_latex
+#+end_export
 
 * Appendix NAME XXX                                                 :B_appendix:
-  :PROPERTIES:
-  :BEAMER_env: appendix
-  :END:
+:PROPERTIES:
+:BEAMER_env: appendix
+:END:
 
 ** Proof details
 
