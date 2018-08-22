@@ -285,6 +285,41 @@ How to center pictures horizontally?
   \end{tikzpicture}
   #+end_export
 
+** A Little Diagram
+
+#+BEGIN_SRC latex :file diagram.pdf :packages '(("" "tikz")) :border 1em :eval yes
+\usetikzlibrary{shapes,arrows}
+\begin{tikzpicture}[->, auto, node distance=3cm]
+  \node [draw] (A) {A};
+  \node [ellipse, draw, right of=A] (B) {B};
+  \path (A) edge node {message} (B);
+\end{tikzpicture}
+#+END_SRC
+
+The problem was three-fold:
+
+- My `org-latex-pdf-process` was a call to latexmk that did /not/ set
+`-outdir`. This was fine for exporting a document as LaTeX as all the work
+happened in the one directory, but evaluating a LaTeX src block involves
+a temporary directory.
+
+- The value substituted for the `%o` placeholder in `org-latex-pdf-process`
+included a trailing slash which prevented it from working due to a double slash
+appearing in constructed paths (looking at my notes, I seem to have removed this
+parameter because of this problem). I now set `-outdir` to the output of
+a sub-shell that pipes `%o` through sed to remove the trailing slash.
+
+- I still encountered an error when evaluating the src block even though the PDF
+was being produced. The error was during cleanup of temporary files,
+specifically a .log file. The failure to delete a nonexistent file was stopping
+the Org machinery that would next insert the result in my document. I addressed
+this by changing the second parameter of the call to `directory-files` in the
+`org-latex-compile` function from `nil` to `t` so that it would return absolute
+paths.
+
+Since making those three changes, I am able to evaluate LaTeX src blocks and
+have the resulting figures appear in my Org document.
+
 ** TODO Using graphics and text
 
 Look at ~wrapfig~ or ~parinc~
@@ -1380,7 +1415,7 @@ change that as follows:
 
 XXX
 
-** ~columns~                                                           :B_columns:
+** ~columns~                                                         :B_columns:
 :PROPERTIES:
 :BEAMER_env: columns
 :BEAMER_opt: [c]
