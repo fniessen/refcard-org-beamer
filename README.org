@@ -7,7 +7,7 @@
 #+OPTIONS:   H:2 num:nil ^:{}
 
 #+PROPERTY:  header-args :eval no
-#+SETUPFILE: ~/.dotfiles/org/theme-readtheorg.setup
+# #+SETUPFILE: ~/.dotfiles/org/theme-readtheorg.setup
 
 #+LaTeX_CLASS_OPTIONS: [presentation, t]
 #+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
