@@ -1,13 +1,10 @@
 #+TITLE:     Org Beamer Reference Card NEW
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+Time-stamp: <2017-01-29 Sun 17:53>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
 #+OPTIONS:   H:2 num:nil toc:nil
-
-#+SETUPFILE: ~/src/org-style/bigblow-local-abs.setup
 
 #+PROPERTY:  header-args :eval no
 
