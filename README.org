@@ -1216,13 +1216,17 @@ That's relativity!"
 
 ** Alternative environment syntax (without option)
 
-- More readable, more portable when environments exist (LaTeX + other backends)
+- More readable, more portable, more natural mapping when environments exist
+  (LaTeX + other backends): you can use special Org blocks.  For example:
 
 #+begin_src org
 ,#+begin_theorem
 There is no largest prime number.
 ,#+end_theorem
 #+end_src
+
+  You could use subsections for columns or nested structure and blocks for
+  simple "boxes" in your frame.
 
 - More powerful: you can't nest blocks of the same type with this syntax, and
   more portable when environments only exist in Beamer (then, they will appear
@@ -1415,7 +1419,7 @@ change that as follows:
 
 XXX
 
-** ~columns~                                                         :B_columns:
+** ~columns~                                                           :B_columns:
 :PROPERTIES:
 :BEAMER_env: columns
 :BEAMER_opt: [c]
