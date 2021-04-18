@@ -1419,7 +1419,7 @@ change that as follows:
 
 XXX
 
-** ~columns~                                                           :B_columns:
+** ~columns~                                                         :B_columns:
 :PROPERTIES:
 :BEAMER_env: columns
 :BEAMER_opt: [c]
@@ -1726,6 +1726,19 @@ view":
 4. Exit the column editing by pressing ~q~
 
 ~fragile~ option is added automatically.
+
+** Get the slide number
+
+With:
+
+#+begin_src org
+:PROPERTIES:
+:BEAMER_opt: label=name
+:END:
+#+end_src
+
+You can set the label of a frame and then use ~\ref{name}~ to get the *slide
+number*.
 
 ** Vertical alignment
 :PROPERTIES:
