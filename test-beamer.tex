@@ -1,0 +1,31 @@
+% \documentclass[handout]{beamer}
+\documentclass{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[frenchb]{babel}
+
+\mode<beamer>{\usetheme[hideothersubsections,right,whidth=15mm]
+    {Berkeley}}
+  \mode<handout>{
+    \useinnertheme{rectangles}
+  }
+
+\begin{document}
+\begin{frame}%<handout:0>
+\frametitle{première partie: (6h)}
+\tableofcontents
+\end{frame}
+
+\section{section 1}
+\subsection{sous-section 1}
+\begin{frame} blabla \end{frame}
+\subsection{sous-section 2 avec un titre très long, volontairement
+    trop long pour sa ligne}
+\begin{frame} blabla \end{frame}
+\subsection{sous-section 2 avec un titre très long, volontairement
+    trop long pour sa ligne}
+\begin{frame} blabla \end{frame}
+\section{section 2}
+\begin{frame} blabla \end{frame}
+
+\end{document}

@@ -1,0 +1,1013 @@
+#+TITLE:     Org-Beamer Reference Card
+#+AUTHOR:    Fabrice Niessen
+#+EMAIL:     fni@pirilampo.org
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  en
+
+#+SETUPFILE: ~/org/theme-readtheorg.setup
+
+#+startup: beamer
+#+LaTeX_CLASS_OPTIONS: [presentation,t]
+
+#+BEAMER_THEME: mc
+#+BEAMER_COLOR_THEME: default
+#+COLUMNS: %40ITEM %10BEAMER_env(Env) %10BEAMER_envargs(Env Args) %4BEAMER_col(Col) %8BEAMER_extra(Extra)
+#+OPTIONS:   H:2
+
+#+BEAMER_HEADER_EXTRA: \usetheme{default}\usecolortheme{default}
+#+BEAMER_FRAME_LEVEL: 2
+#+BEAMER_HEADER_EXTRA: \logo{\includegraphics[width=2cm]{Pirilampo}}
+
+* Tasks                                                               :noexport:
+
+# If we let "TODO Tasks" as heading, LaTeX error...
+
+** TODO Check out changes in org-beamer-environments-extra
+   [2015-06-16 Tue]
+
+#+begin_verse
+>> Perhaps these days it would be nice to allow the third element of
+>> org-beamer-environments-extra to be a λ taking either the object or so.
+>> Then again, perhaps this is an overkill and too low-level.
+>
+> More simply, we can also add placeholders in templates, e.g.,
+>
+>   %R raw action specification
+>   %O raw options argument
+#+end_verse
+
+#+begin_verse
+Works great!  I went with this template:
+
+(add-to-list 'org-beamer-environments-extra
+             '("minipage" "m" "\\begin{minipage}%O{%R}" "\\end{minipage}%"))
+
+For my use case, I rarely use overlay actions, so I repurposed it for
+environment arguments.
+
+Thanks a lot!
+
+PS: OT, within beamer I find minipage is easier to manage than columns.
+#+end_verse
+
+** Check out "Emacs" Beamer theme
+
+> Marcin Borkowski <mbork@wmi.amu.edu.pl> writes:
+> > https://twitter.com/marcin_mbork/status/335890494980767746
+> > http://mbork.pl/2013-05-18_A_presentation_on_LaTeX_editing_%28en%29
+> > https://github.com/mbork/beamerorgtheme
+>
+> Excellent!  It reminds me of brain-damage.sty ¹ :)
+>
+> Here's Marcin's pdf example:
+>
+>    http://mbork.pl/download/Slides_about_LaTeX_editing.pdf
+
+** TODO Allow inlinetasks (as Beamer boxes?)
+
+without shadow
+
+** TODO See how to get the notes on another screen, during the presentation
+
+** TODO Make a maximal complete example
+
+** TODO Questions about overlay, background image, spacing between bullet points, and footnote
+
+http://www.mail-archive.com/emacs-orgmode@gnu.org/msg35304.html
+http://www.lesfichesabebert.fr/index.php/Beamer/Overlay
+http://orgmode.org/worg/exporters/beamer/ox-beamer.html
+
+** TODO Check similar RefCards and important Org-e-beamer documentation
+
+- http://draketo.de/files/2012-08-08-Mi-recipes-for-beamer-latex-presentation-using-emacs-org-mode_1.pdf
+- http://permalink.gmane.org/gmane.emacs.orgmode/57421
+- http://www.crashcourse.ca/wiki/index.php/Using_Beamer_and_org_mode_to_write_slide_shows
+
+** TODO Check important tips and tricks about Beamer
+
+- http://www.developpez.net/forums/d608128/autres-langages/autres-langages/latex/beamer/beamer-positionner-objets/
+- http://tex.stackexchange.com/questions/54205/org-mode-export-to-latex-temptation-or-nuisance/54211#54211
+- [[https://lists.gnu.org/archive/html/emacs-orgmode/2012-09/msg01099.html][new exporter: exporting subtree as beamer]]
+
+** TODO Answer common question (FAQ, tips and tricks)
+
+http://angel-de-vicente.blogspot.com.es/2013/04/presentations-with-org-mode-beamer.html
+
+- To get movie playbacks in PDFs in Linux
+- To shorten the titles, etc. in the footer
+- To get rid of navigation symbols
+- For semi-transparency
+- To scale images
+- Greying-out images
+
+** TODO Get nice fonts
+
+http://www.stanford.edu/~dgleich/notebook/2008/11/latex_presentation_fonts.html
+
+** TODO Use RefTex
+
+http://osdir.com/ml/tex.latex.beamer.general/2006-01/msg00013.html
+
+** TODO Use XeLaTeX and many fonts...
+
+http://www.scribd.com/doc/25036676/Usando-XeLaTeX-con-Beamer-en-SWP-5-5
+
+* Getting Started
+
+** [New exporter] Wrong export to LaTeX (from Nicolas Goaziou)            :mail:
+   [2012-10-11 Thu 15:21]
+
+Beamer is now a back-end on its own, not a patch over the
+LaTeX one. In the old exporter, Beamer translation was triggered with
+#+latex_class: beamer. This is not necessary anymore.
+
+All you have to do is to (require 'org-e-beamer) and use the appropriate
+entry in the dispatcher menu. You can have a Beamer translation on any
+class, including article and so on.
+
+That's why (add-to-list 'org-e-latex-classes "beamer" ...) doesn't make
+much sense anyway (as suggested in another post).
+
+From [[gnus:nnimap%2Bmc:INBOX#86mwsuu4o1.fsf@totally-fudged-out-message-id][Email from Nicolas Goaziou: **: Re: {New exporter} Wrong e]]
+
+** Installation
+
+- You need a =beamer= entry in =org-e-latex-classes=
+
+  #+begin_src emacs-lisp :eval no
+  (add-to-list 'org-e-latex-classes
+               '("beamer"
+                 "\\documentclass[presentation,t]{beamer}
+                  [DEFAULT-PACKAGES]
+                  [PACKAGES]
+                  [EXTRA]"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+  #+end_src
+
+  + Name =beamer= isn't mandatory
+  + But it has to match the class requested by =#+LaTeX_CLASS:=
+
+** Testing the Installation
+
+- Install LaTeX and the Beamer class[fn:3]
+
+- Do
+
+  #+begin_src emacs-lisp
+  (require 'org-e-beamer)
+  #+end_src
+
+- Use the appropriate entry in the dispatcher menu
+  + C-c E l O :: Export to LaTeX Beamer, as PDF file and open
+  + C-c E l P :: Export to LaTeX Beamer, as PDF file
+
+- You can have a Beamer translation on any class, including =article=
+  + =C-c E l p=
+    * Use given class
+    * Macro usetheme is not inserted (BEAMER_THEME ignored)
+    * Convert headings as *sections*
+  + =C-c E l P=
+    * Use given class
+    * Macro usetheme is well inserted
+    * Convert headings as *frames*
+
+** Basic steps to create a Beamer presentation
+
+- Specify =beamer= as document class (instead of =article=)
+
+  #+begin_src org
+  ,#+LaTeX_CLASS: beamer
+  #+end_src
+
+- Optionally, override *all* the class options given in =org-e-latex-classes=
+
+  #+begin_src org
+  ,#+LaTeX_CLASS_OPTIONS: [presentation,c]
+  #+end_src
+
+- Structure your LaTeX text using sections (= frame title)
+
+  #+begin_src org
+  ,* Context
+  #+end_src
+
+- Place the text of the individual slides inside the sections
+
+  #+begin_src org
+  Why?
+  #+end_src
+
+* Other notes
+
+- M-x org-beamer-insert-options-template
+
+* Why LaTeX Beamer?
+
+** What is LaTeX Beamer?
+
+The [[https://bitbucket.org/rivanvx/beamer/wiki/Home][LaTeX ~beamer~ class]] allows you to create slides, and export them to PDF.
+
+If you need a WYSIWYG software, don't use LaTeX Beamer. Use the [[http://www.wired.com/wired/archive/11.09/ppt2.html][evil
+PowerPoint]] -- though, one must admit, it's more how people use it which is the
+problem.
+
+** Useful features
+
+The beamer class has several useful features:
+
+- You can easily and intuitively create sophisticated overlays.
+- Finally, you can easily change the whole slide theme or only parts of it.
+
+** Useful advantages
+
+The beamer class has several useful advantages:
+
+- You only need a text editor and LaTeX to create a slideshow
+- You only need a PDF reader to show it[fn:1]
+- Your presentation is in a light text file (+ media if present)
+- There are plenty of themes readily available
+- Big letters[fn:2] = less text = more easy to read / understand
+
+You make sure that your presentation can run on any computer.
+
+** Why Org-Beamer?
+
+*** Why Org-Beamer?
+
+Much better for Beamer.
+See discussion http://tex.stackexchange.com/questions/1264/typing-and-editing-beamer-presentations
+
+*** Examples
+
+In the next few slides, you'll find some examples showing that everything you
+can do with Beamer, you can also do it with Org-Beamer.
+
+Other good example are available on the [[https://bitbucket.org/rivanvx/beamer/wiki/Home][LaTeX Beamer homepage]][fn:4].
+
+* Discovering Beamer
+
+** First example
+
+*** Headlines
+
+- Headlines fall into three categories:
+  1. Sectioning elements
+  2. Frames (at =org-beamer-frame-level= or at =H= value in the =#+OPTIONS:= line)
+  3. Blocks
+
+*** Basic steps
+
+Use =C-c C-b= to *select the environment* to be used for an entry, which will set
+both its =:BEAMER_env:= /property/ value and a /tag/ (only a visual aid, it has no
+semantic meaning).
+
+This requires =#+startup: beamer=.
+
+*** Properties in column view
+
+- Env
+- Env Args
+- Col
+- Extra
+
+> Along with "BEAMER_env", headlines also support "BEAMER_act" and
+> "BEAMER_opt" properties.  The former is translated as an overlay/action
+> specification (or a default overlay specification when enclosed within
+> square brackets) whereas the latter specifies options for the current
+> frame ("fragile" option is added automatically, though).
+
+*** Org-Beamer-environments-default
+
+- "frame"          "f"
+- "columns"        "C"
+- "column"         "c"
+- "block"          "b"
+- "alertblock"     "a"
+- "verse"          "v"
+- "quotation"      "q"
+- "quote"          "Q"
+- "structureenv"   "s"
+- "theorem"        "t"
+- "definition"     "d"
+- "example"        "e"
+- "proof"          "p"
+- "beamercolorbox" "o"
+- "normal"         "h"
+- "note"           "n"
+- "noteNH"         "N"
+- "ignoreheading"  "i"
+
+Blocs are ended by opening a new block, or opening a new heading -- which can
+be ignored.
+
+*** Alternative
+
+There is a more natural mapping of constructs from Org to Beamer: you can use
+special Org blocks; for example:
+
+#+begin_src org
+Some text...
+
+,#+begin_theorem
+...
+,#+end_theorem
+
+...text continues here
+#+end_src
+
+You could use subsections for columns or nested structure and blocks for simple
+"boxes" in your frame.
+
+*** Columns
+
+- "BMCOL"          "|"
+
+- If you use a headline with only a =BEAMER_col= property (which requires a
+  decimal number as value), its title will be ignored and can be used as a
+  container.
+
+- If you provide it an additional environment (like block), the new
+  environment will be put in the column and will fill it.
+
+** Frame and layers
+
+pause
+visible
+
+*** Frame
+
+- action/overlay specification
+- default action/overlay specification
+- option argument of the template
+- frame title --> for no title, simple use "** " heading
+- frame subtitle --> use =** title \\ subtitle= headings
+- extra
+
+*** Frame options                                                     :noexport:
+
+The =frame= environment accepts options which we place like that:
+
+#+begin_src latex :exports code
+\begin{frame}[frame options]
+Le texte de ma diapo.
+\end{frame}
+#+end_src
+
+Common examples of frame options are:
+- =[plain]= if you don't want to have the bottom and the top of the slides
+- =[allowframebreaks]=
+- =[allowframebreaks=0.9]=
+- =[c]= to specify *vertical* center alignment
+- =[<+->]= to pause after items
+- =[shrink=5]= to shrink the text of the frame /at least/ by 5% (using this option
+  is /very evil/ as it results in changes of the font size from slide to slide)
+
+In LaTeX, you can add them to the frame:
+
+#+begin_src latex :exports code
+%\begin{frame}[allowframebreaks]
+#+end_src
+
+So, in org-mode, you should modify =:BEAMER_envargs:=.
+
+#+begin_src org
+,* A slide
+,  :PROPERTIES:
+,  :BEAMER_envargs: [allowframebreaks]
+,  :END:
+#+end_src
+
+To edit those special properties used by Beamer, go to *column view*. In this
+case, you need to edit the 3^rd column (~Env Args~).
+
+Well ... using BEAMER_envargs is for the old exporter. BEAMER_opt should be
+recognized by the new exporter.
+
+** Standard commands
+
+*** Standard commands
+
+agenda
+visible/invisible
+uncover
+alert
+
+#+begin_src org
+,*@@e-beamer:<2->@@some emphasized text*
+#+end_src
+
+will be translated as
+
+#+begin_src latex :exports code
+\alert<2->{some emphasized text}
+#+end_src
+
+in the LaTeX file, and produces:
+
+*@@e-beamer:<2->@@some emphasized text*
+
+in the resultant PDF file.
+
+*** Lists
+
+Lists can be unordered:
+
+- blond
+- black
+
+or ordered:
+
+1. order
+2. pay
+
+*** Include a table in your slideshow
+
+\begin{table}
+\centering
+\begin{tabular}{|c|c|c|} \hline \hline
+Restrained     & Swivel         & Telemetry      \\ \hline \hline
+$\sim$ 400bpm  & $\sim$ 380bpm  & $\sim$ 310 bpm \\
+$\sim$ 140mmHg & $\sim$ 120mmHg & $\sim$ 100mmHg \\ \hline \hline
+\end{tabular}
+\caption{Heart beat and blood pressure using different monitoring methods}
+\label{tbl:kramer}
+\end{table}
+
+*** Math equations                                                    :noexport:
+
+\[8 / 4 = \frac{8}{4} = 8 \cdot \frac{1}{4} = 8 \cdot 4^{-1}\]
+
+\[\left( \begin{array}{cc}
+2 & 1 \\
+0 & 1 \\
+1 & 4 \\
+\end{array} \right)\]
+
+x^{3^2} vs
+\[x^{3^2}\]
+
+2^a_i vs
+\[2^a_i\]
+
+\sqrt{n_{i-1}} vs
+\[\sqrt{n_{i-1}}\]
+
+*** What is x?                                                        :noexport:
+
+# #+begin_src c
+# char (*(*x())[])();
+# #+end_src
+#
+# #+LaTeX: \pause
+#
+# #+LaTeX: char \fbox{\fbox{(*\fbox{\fbox{(*\fbox{x()})}[]})}()};
+
+** Advanced
+
+- Sectioning
+- Animations
+- Button
+  \frametitle{Démarrer une application Java ou autre}
+  \href{run:c:/WINDOWS/explorer.exe}{\beamerbutton{Test1}} marche à merveille.
+
+Note: for a *secret* section or frame (not referenced in the TOC), *don't put* a
+section/frame title... Leave it blank.
+
+** Overlays (=uncover=... not =only=)
+
+- <1-> One item
+- <2-> Another one, after one click
+- <3-> Last one, after another click
+
+** Overlays
+   :PROPERTIES:
+   :BEAMER_envargs: [<+->]
+   :END:
+
+- One item
+- Another one, after one click
+- Last one, after another click
+
+** Time bomb
+
+1. <2-> Two more to go
+2. <3-> One more to go
+3. <4-> Last chance...
+4. <5-> BOOM!
+
+Note: You must have a space between the number and overlay spec.
+
+** Overlays
+
+The XXX pause XXX command will create an overlay \pause wherever we place it.
+
+A much more flexible way to create overlays is to use \uncover. For instance
+\uncover<3->{The dog jumped the fence.}
+would display that sentence in the third and all subsequent slides in the
+current frame.
+
+=only= et =uncover= qui prennent un argument entre <>, puis un argument normal
+entre ={}=, qu'elles n'affichent que sur les slides spécifiées. La différence
+entre les deux est qu'avec =only=, le texte est jeté, tandis qu'avec =uncover=, il
+occupe sa place mais est transparent. Par exemple, avec :
+
+pif \uncover<2>{paf} Abcd-Efgh \only<1>{Ijklmn} ouais!
+
+Par défaut, le texte caché est complètement invisible. Il est possible de
+l'avoir en grisé en mettant un :
+
+#+begin_src latex :exports code
+\setbeamercovered{transparent}
+#+end_src
+
+If you always want to pause after items, place the command
+
+#+begin_src latex :exports code
+\beamerdefaultoverlayspecification{<+->}
+#+end_src
+
+* Particular compositions
+
+** Blocs
+
+** Columns
+
+* Themes
+
+** General themes
+
+For alternative Beamer themes, check out:
+- Matrix of all the standard themes: http://www.hartwork.org/beamer-theme-matrix/
+- Nice compilation of custom themes: http://latex.simon04.net/
+- http://www.pletscher.org/writings/latex/beamerthemes.php
+
+... or create your own theme with http://titilog.free.fr/index.htm.
+
+With the old exporter:
+
+#+begin_src org
+,#+BEAMER_HEADER_EXTRA: \usetheme{default}\usecolortheme{default}
+#+end_src
+
+With the new exporter:
+
+#+begin_src org
+,#+BEAMER_THEME: mc
+,#+BEAMER_COLOR_THEME: default
+,#+BEAMER_HEADER: % just in case
+#+end_src
+
+** General themes
+
+All accept *options in square brackets*.
+
+#+begin_src org
+,#+BEAMER_THEME: [secheader]Madrid
+#+end_src
+
+produces:
+
+#+begin_src latex :exports code
+\usetheme[secheader]{Madrid}
+#+end_src
+
+in the resultant LaTeX file.
+
+** Colors
+
+#+begin_src org
+,#+BEAMER_COLOR_THEME: crane
+#+end_src
+
+produces:
+
+#+begin_src latex :exports code
+\usecolortheme{crane}
+#+end_src
+
+in the resultant LaTeX file.
+
+** Fonts
+
+#+begin_src org
+,#+BEAMER_FONT_THEME:
+#+end_src
+
+** Interior
+
+#+begin_src org
+,#+BEAMER_INNER_THEME:
+#+end_src
+
+** Exterior
+
+#+begin_src org
+,#+BEAMER_OUTER_THEME:
+#+end_src
+
+* Special functionality
+
+** Special functionality
+
+* Org-beamer specific settings
+
+** Template
+
+Direct export to HTML (thanks to Org)
+
+*** Startup: beamer
+
+*** LaTeX class
+
+Beamer, of course.
+
+*** LaTeX class options
+
+- =bigger=
+- =t= specify *top* /vertical alignment/ for all frames
+- hyperref
+- draft
+- trans
+- handout
+- hideothersubsections
+
+*** Frame level
+
+- Tell the exporter what level of headlines correspond to frames with
+  =#+OPTIONS: H:2=.
+
+;; - Headlines become frames when their level is equal to
+;;   `org-beamer-frame-level' (or "H" value in the OPTIONS line).
+;;   Though, if an headline in the current tree has a "BEAMER_env"
+;;   (see below) property set to either "frame" or "fullframe", its
+;;   level overrides the variable.  A "fullframe" is a frame with an
+;;   empty (ignored) title.
+;;
+;; - All frames' children become block environments.  Special block
+;;   types can be enforced by setting headline's "BEAMER_env" property
+;;   to an appropriate value (see `org-beamer-environments-default'
+;;   for supported value and `org-beamer-environments-extra' for
+;;   adding more).
+
+In particular, "All frames children become block environments". So in
+your example Third-level is a block environment and Fourth-level is
+a block within it. There's no flattening going on (look at the tex file
+to convince yourself).
+
+- Special case: Frame level = 0
+
+*** Column view format
+
+** Frame template
+
+#+begin_src emacs-lisp
+  (setq in (org-fill-template
+            "\\begin{frame}%a%A%o%T%S%x"
+            (list (cons "a" (or org-beamer-action ""))
+                  (cons "A" (or org-beamer-defaction ""))
+                  (cons "o" (or org-beamer-option org-beamer-frame-default-options ""))
+                  (cons "x" (if org-beamer-extra (concat "\n" org-beamer-extra) ""))
+                  (cons "h" "%s")
+                  (cons "T" (if (string-match "\\S-" text)
+                                "\n\\frametitle{%s}" ""))
+#+end_src
+
+* Pictures
+
+** Include a picture in your slideshow                                :noexport:
+
+#+begin_LaTeX
+\begin{figure}
+\begin{center}
+\includegraphics[width=5cm]{~/Pictures/Dock.jpg}
+\caption{Our own test of downsampling}
+\label{fig:test_down_sampling}
+\end{center}
+\end{figure}
+#+end_LaTeX
+
+** Resize an image
+
+*** Column 1                                             :BMCOL:B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_col: 0.45
+    :BEAMER_env: ignoreheading
+    :END:
+
+You can *scale an image* by:
+
+- explicitly setting its =scale= factor
+
+  : #+ATTR_LaTeX: :options "scale=1.0"
+
+- matching a given =width= or =height= while keeping the aspect ratio
+
+  : #+ATTR_LaTeX: :options "width=0.95\\linewidth"
+
+  Note -- Any backslashes inside the double quotes need to escaped.
+
+*** Column 2                                             :BMCOL:B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_col: 0.45
+    :BEAMER_env: ignoreheading
+    :END:
+
+#+ATTR_LaTeX: width=0.95\linewidth
+[[~/Pictures/Dock.jpg]]
+
+** How to center images horizontally?
+
+By default, images are not centered horizontally.
+
+#+ATTR_LaTeX: width=0.5\linewidth
+[[~/Pictures/Dock.jpg]]
+
+** How to center images horizontally?
+
+- Place each graphic inside a =center= environment
+
+#+begin_src org
+,#+LaTeX: \begin{center}
+,#+ATTR_LaTeX: width=0.5\linewidth
+[[~/Pictures/Dock.jpg]]
+,#+LaTeX: \end{center}
+#+end_src
+
+#+LaTeX: \begin{center}
+#+ATTR_LaTeX: width=0.5\linewidth
+[[~/Pictures/Dock.jpg]]
+#+LaTeX: \end{center}
+
+** How to center images horizontally?
+
+- Add a caption
+
+#+begin_src org
+,#+CAPTION: Dock
+,#+ATTR_LaTeX: width=0.5\linewidth
+[[~/Pictures/Dock.jpg]]
+#+end_src
+
+#+CAPTION: Dock
+#+ATTR_LaTeX: width=0.5\linewidth
+[[~/Pictures/Dock.jpg]]
+
+* Symbols                                                             :noexport:
+
+** Symbols                                                               :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: 0.3
+   :END:
+
+rightarrow \rightarrow to \to is different... but they look the same...
+
+* Table of Contents
+
+** Agenda (Outline)
+
+To get a *table of contents* (or "Agenda" section), you need both =num= and =toc=
+set to =t= in your options -- as the =toc:t= setting is actually ignored as you
+have not asked for numbering...
+
+#+begin_src org :exports code
+,#+OPTIONS:   num:t toc:t
+#+end_src
+
+** Recurrent slides
+
+Tell Beamer to insert the outline (or any other recurrent slide) at each
+beginning of section:
+
+#+begin_src latex :exports code
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Layout}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+#+end_src
+
+Here, the table of contents will be displayed, with the current section being
+highlighted.
+
+* Notes
+
+** Notes
+
+Using a subtree with a =B_note= or a =B_noteNH= property would do this.
+
+Three alternatives to tell beamer (not) to include note slides in the
+presentation:
+
+#+begin_src latex :exports code
+\setbeameroptions{show notes}
+\setbeameroptions{show only notes}
+\setbeameroptions{hide notes}
+#+end_src
+
+*** Notes just for me                                                   :B_note:
+    :PROPERTIES:
+    :BEAMER_env: note
+    :END:
+
+- Make sure to point out some key messages
+- Anticipate questions that might be raised
+
+*** Some other notes (with no heading)                                :B_noteNH:
+    :PROPERTIES:
+    :BEAMER_env: noteNH
+    :END:
+
+- whatever you want to put in notes basically...
+- bla bla
+
+* Tips & Tricks
+
+** How to center image with text?                                     :noexport:
+
+This is an inline image:
+#+LaTeX: \raisebox{-\height / 2}{\includegraphics{scomp3.png}}
+. It should not be scaled.
+
+** How to resize slides to A4 page?
+
+See http://tex.stackexchange.com/questions/9750/page-size-too-small-when-using-beamer-class
+
+** Agenda in 2 columns?
+
+** How to hide the subsections from the navigation sidebar?
+
+hideothersubsections
+
+** How to make the lower left corner of my picture start exactly at the lower left corner of my slide?
+
+You have to set it as background and insert an empty slide - then you have it.
+
+** Image on full slide -- Full frame (no title)
+
+- Put =plain= option to frame, and
+
+- Use:
+
+  #+name: fullwidthgraphic
+  #+begin_src latex :var yourimage="" :results latex :exports none
+  \setbeamertemplate{navigation symbols}{}
+  \begin{tikzpicture}[remember picture,overlay]
+      \node at (current page.center) {
+          \includegraphics[width=\paperwidth]{yourimage}
+      };
+  \end{tikzpicture}
+  #+end_src
+
+> That would be definitely nice. I think it is quite common that you want to
+> get rid of everything to have more space for a big drawing
+> (moreover it breaks the monotony of the layout)
+
+There is now a "fullframe" environment.
+
+PS-- For inner size graphic, use:
+
+#+begin_src latex
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{images/successful}}
+#+end_src
+
+* A trier                                                             :noexport:
+
+handout????
+
+You can add LaTeX class options to org-mode, and so you could export
+once for the beamer presentation and then export again with the
+handout class option added?
+
+I haven't made handouts before, but this email got me interested. It
+seems that all this option does is "flatten" the transitions and
+overlays and whatnot? From there it seems one still needs to do
+something to the file to layout the handouts n-up on a page.
+
+
+See template in menu
+     ["Template for BEAMER" org-insert-beamer-options-template t])
+
+#+begin_src org
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [presentation]
+#+BEAMER_FRAME_LEVEL: 1
+
+#+BEAMER_HEADER_EXTRA: \usetheme{default}\usecolortheme{default}
+#+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_envargs(Env Args) %4BEAMER_col(Col) %8BEAMER_extra(Extra)
+#+PROPERTY: BEAMER_col_ALL 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 :ETC
+#+end_src
+
+** Incompatible list can't be unboxed -- Workaround for beamer
+   [2010-02-26 Fri]
+
+incompatible list can't be unboxed with every beamer document
+
+I had the same problem and after googling at comp.text.tex I found that
+the problem is related with hyperref.
+The solution is replace \documenclass{beamer} with
+
+#+begin_src latex :exports code
+\RequirePackage{atbegshi}
+\documentclass{beamer}
+#+end_src
+
+It works for me.
+From the page [[http://old.nabble.com/incompatible-list-can%27t-be-unboxed-with-every-beamer-document-td24108128.html][Nabble - latex-beamer-users - incompatible list can't be unboxed with every beamer document]]
+
+** Exclude certain overlays from the handout
+   [2011-05-30 Mon]
+
+There exists as well the possibility to exclude certain overlays from the
+handout. So if you have for example two graphics on a frame, where one
+replaces the other during the presentation, Beamer would still include both
+graphics in the handout version. It is perhaps desirable to only include the
+second of these graphics. The example below shows how to achieve this, by
+using the \only-option handout.
+
+From [[http://www.pletscher.org/writings/latex/beamer.php][Patrick Pletscher : LaTeX - Creating Slides with Beamer]]
+
+* More information                                                    :noexport:
+
+** Beamer Documentation
+  :PROPERTIES:
+  :BEAMER_envargs: [<+->]
+  :END:
+
+- http://www.tex.ac.uk/tex-archive/macros/latex/contrib/beamer/doc/beameruserguide.pdf
+
+- http://www.uncg.edu/cmp/reu/presentations/Charles%20Batts%20-%20Beamer%20Tutorial.pdf
+  Tutorial très complet montrant le code et le résultat de tout ce qui existe
+  sous Beamer
+
+- http://www.scribd.com/doc/28011/beamer-guide
+  Idem
+
+- Très chouette présentation
+  http://zrno.fsb.hr/katedra/download/materijali/1082.pdf
+  avec dynaminc highlighting (page 42)
+
+- https://subversion.assembla.com/svn/saintamh/emacs/.emacsd/org-6.36c/lisp/org-beamer.el
+  (le fichier source)
+
+- http://mcclinews.free.fr/latex/introbeamer/index.html (plein de trucs et
+  astuces sur les petits bugs ou features, voir sur les blocks, les uncover et
+  visible, etc.)
+
+- [[http://www.matthiaspospiech.de/latex/vorlagen/beamer/][Beamer (Vortrag)- Matthias Pospiech]]
+  Un jeu de slides impressionnant, avec tous les effets, toutes les options...
+
+- http://www.tuteurs.ens.fr/logiciels/latex/beamer.html (droit à l'essentiel,
+  assez court)
+
+- http://www.math-linux.com/spip.php?article77 (exemple très complet)
+
+- http://orgmode.org/worg/org-tutorials/org-beamer/tutorial.html (le tutorial
+  de Fraga)
+
+- http://orgmode.org/manual/Beamer-class-export.html#Beamer-class-export (le
+  tutorial de Carsten)
+
+- http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme_and_color.html
+  (Beamer theme and color gallery)
+
+- http://www.math.utah.edu/~smith/AmberSmith_GSAC_Beamer.pdf
+  Lots of Beamer features
+
+- http://petereisentraut.blogspot.com/2009/09/how-to-make-latex-beamer-prettier.html
+  How to make LaTeX Beamer prettier
+
+- http://emacs-fu.blogspot.com/2009/10/writing-presentations-with-org-mode-and.html
+
+- [[http://www.math.umbc.edu/~rouben/beamer/][A Beamer Quickstart]]
+
+** Org Beamer Examples
+
+- http://orgmode.org/worg/exporters/beamer/ox-beamer.html
+
+- Here's an Org-mode Beamer example including the required Emacs/Org-mode
+  customization, the Org file and the resulting pdf.
+  http://cs.unm.edu/~eschulte/data/org-beamer-example/
+
+- http://salomie.ro/tudor/wp-content/uploads/2010/10/orgmode_presentation.jpg
+  (very nice, and from Org!)
+
+- http://cl.ly/3PjB (extra space with math display)
+
+* Documentation
+
+- ~ox-beamer.el~
+
+* Footnotes
+
+[fn:1] they are nearly everywhere
+
+[fn:2] you can of course apply any LaTeX cosmetic modification to your text
+
+[fn:3] It is installed by default in TeX Live
+
+[fn:4] as you can already see, you can easily add hyperlinks
