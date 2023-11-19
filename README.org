@@ -157,7 +157,7 @@ The obvious advantages of this approach are that:
 - For nice code blocks, use Listings instead of Verbatim:
 
   #+begin_src emacs-lisp
-  (setq org-latex-listings t)
+  (setq org-latex-src-block-backend 'listings)
   #+end_src
 
 * Authoring presentations
@@ -1457,7 +1457,7 @@ change that as follows:
 
 XXX
 
-** ~columns~                                                         :B_columns:
+** ~columns~                                                           :B_columns:
 :PROPERTIES:
 :BEAMER_env: columns
 :BEAMER_opt: [c]
@@ -2073,6 +2073,6 @@ this file. If not, see http://www.gnu.org/licenses/.
 
 # This is for the sake of Emacs.
 # Local Variables:
-# org-latex-listings: t
+# org-latex-src-block-backend: 'listings
 # eval: (org-shifttab 2)
 # End:
