@@ -82,7 +82,7 @@ Seats are limited, so reserve yours today.
 Visit https://emacsboost.com/en/ for more information, other dates and other
 locations, and to *reserve your seat*.
 
-/See you in Rotterdam!/  [[https://emacsboost.com/en/][#EmacsBoostRotterdamn]]
+/See you in Rotterdam!/  [[https://emacsboost.com/en/][#EmacsBoostRotterdam]]
 
 * Overview
 
@@ -1453,7 +1453,7 @@ change that as follows:
 
 XXX
 
-** ~columns~                                                         :B_columns:
+** ~columns~                                                           :B_columns:
 :PROPERTIES:
 :BEAMER_env: columns
 :BEAMER_opt: [c]
