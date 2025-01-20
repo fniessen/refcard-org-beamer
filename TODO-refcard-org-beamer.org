@@ -208,6 +208,6 @@ plus https://bitbucket.org/rivanvx/beamer/src/876db01f1cba91f62254805d059f210548
 http://mcclinews.free.fr/latex/beamergalerie/completsgalerie.html
 http://www.hartwork.org/beamer-theme-matrix/
 
-** SDAY Look at Git prezzi
+** MAYB Look at Git prezzi
 
 https://www.youtube.com/watch?v=KDUtjZHIx44&feature=youtu.be
