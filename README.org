@@ -9,7 +9,7 @@
 #+PROPERTY:  header-args :eval no
 #+SETUPFILE: ~/org/theme-readtheorg.setup
 
-#+LaTeX_CLASS_OPTIONS: [presentation, t]
+#+LATEX_CLASS_OPTIONS: [presentation, t]
 #+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
 #+PROPERTY: BEAMER_col_ALL 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0.0 :ETC
 
@@ -645,13 +645,13 @@ Common options:
 - ~handout~: no overlays
 
 #+begin_src org
-,#+LaTeX_CLASS_options: [bigger,allowframebreaks]
+,#+LATEX_CLASS_options: [bigger,allowframebreaks]
 #+end_src
 
 Beamer now supports the 16:9 aspect ratio with the ~aspectratio~ option:
 
 #+begin_src org
-,#+LaTeX_CLASS_options: [aspectratio=169]
+,#+LATEX_CLASS_options: [aspectratio=169]
 #+end_src
 
 ** LaTeX preamble
@@ -1784,7 +1784,7 @@ number*.
 You can specify /top/ *vertical alignment* globally by the ~t~ class option:
 
 #+begin_src org
-,#+LaTeX_CLASS_OPTIONS: [t]
+,#+LATEX_CLASS_OPTIONS: [t]
 #+end_src
 
 For single frames, you can use the same option locally:

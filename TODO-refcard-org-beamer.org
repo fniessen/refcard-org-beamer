@@ -108,8 +108,8 @@ etc.
 
 The obvious way to do this was as follows:
 
-  #+LaTeX_CLASS: beamer
-  #+LaTeX_CLASS_OPTIONS: [presentation,14pt]
+  #+LATEX_CLASS: beamer
+  #+LATEX_CLASS_OPTIONS: [presentation,14pt]
   #+BEAMER_THEME: Pittsburgh
   #+BEAMER_COLOR_THEME: orchid
   #+BEAMER_FONT_THEME: serif [stillsansserifsmall,stillsansseriflarge,structure]

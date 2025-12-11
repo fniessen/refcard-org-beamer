@@ -8,7 +8,7 @@
 #+SETUPFILE: ~/org/theme-readtheorg.setup
 
 #+startup: beamer
-#+LaTeX_CLASS_OPTIONS: [presentation,t]
+#+LATEX_CLASS_OPTIONS: [presentation,t]
 
 #+BEAMER_THEME: mc
 #+BEAMER_COLOR_THEME: default
@@ -148,7 +148,7 @@ From [[gnus:nnimap%2Bmc:INBOX#86mwsuu4o1.fsf@totally-fudged-out-message-id][Emai
   #+end_src
 
   + Name =beamer= isn't mandatory
-  + But it has to match the class requested by =#+LaTeX_CLASS:=
+  + But it has to match the class requested by =#+LATEX_CLASS:=
 
 ** Testing the Installation
 
@@ -179,13 +179,13 @@ From [[gnus:nnimap%2Bmc:INBOX#86mwsuu4o1.fsf@totally-fudged-out-message-id][Emai
 - Specify =beamer= as document class (instead of =article=)
 
   #+begin_src org
-  ,#+LaTeX_CLASS: beamer
+  ,#+LATEX_CLASS: beamer
   #+end_src
 
 - Optionally, override *all* the class options given in =org-e-latex-classes=
 
   #+begin_src org
-  ,#+LaTeX_CLASS_OPTIONS: [presentation,c]
+  ,#+LATEX_CLASS_OPTIONS: [presentation,c]
   #+end_src
 
 - Structure your LaTeX text using sections (= frame title)
@@ -893,8 +893,8 @@ See template in menu
      ["Template for BEAMER" org-insert-beamer-options-template t])
 
 #+begin_src org
-#+LaTeX_CLASS: beamer
-#+LaTeX_CLASS_OPTIONS: [presentation]
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [presentation]
 #+BEAMER_FRAME_LEVEL: 1
 
 #+BEAMER_HEADER_EXTRA: \usetheme{default}\usecolortheme{default}
