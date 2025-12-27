@@ -1,8 +1,8 @@
 #+TITLE:     Org Beamer reference card
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+DESCRIPTION:
-#+KEYWORDS:
+#+DESCRIPTION: A comprehensive reference card for creating and customizing high-quality PDF presentations using Org mode and the LaTeX Beamer class, covering authoring, export, frames, blocks, overlays, themes, columns, and advanced features.
+#+KEYWORDS: org-mode, Beamer, LaTeX, presentations, PDF, export, slides, frames, blocks, overlays, animations, themes, environments, columns, org-beamer, reference
 #+LANGUAGE:  en
 #+OPTIONS:   H:2 num:nil ^:{}
 
@@ -46,7 +46,7 @@
 # For every picture that defines or uses external nodes, you'll have to
 # apply the 'remember picture' style. To avoid some typing, we'll apply
 # the style to all pictures.
-#+LaTeX: \tikzstyle{every picture}+=[remember picture]
+#+LATEX: \tikzset{every picture/.append style={remember picture}}
 
 #+EXCLUDE_TAGS: noexport
 
@@ -531,7 +531,7 @@ You do not need to set ~LaTeX_CLASS~ to ~beamer~.
 #+end_note
 
 #+begin_note
-YYou do not need to set ~LaTeX_CLASS~ to ~beamer~.
+You do not need to set ~LaTeX_CLASS~ to ~beamer~.
 #+end_note
 
 ** Support editing
