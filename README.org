@@ -7,13 +7,13 @@
 #+OPTIONS:   H:2 num:nil ^:{}
 
 #+PROPERTY:  header-args :eval no
-#+SETUPFILE: ~/org/theme-readtheorg.setup
+#+SETUPFILE: ~/org/html-theme-readtheorg.setup
 
 #+LATEX_CLASS_OPTIONS: [presentation, t]
 #+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
 #+PROPERTY: BEAMER_col_ALL 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0.0 :ETC
 
-#+LaTeX_HEADER: \setbeamertemplate{navigation symbols}{}
+#+LATEX_HEADER: \setbeamertemplate{navigation symbols}{}
 
 #+BEAMER_THEME: Boadilla
 # #+BEAMER_THEME: AnnArbor
@@ -35,9 +35,7 @@
 #+BEAMER_HEADER: \usepackage{lxfonts}
 #+BEAMER_HEADER: \usefonttheme{professionalfonts}
 
-#+INCLUDE: "./listings.org"
-
-#+LATEX_HEADER: \lstdefinelanguage{R}{}
+#+SETUPFILE: ~/org/latex-listings.setup
 
 #+LATEX_HEADER: \definecolor{mylinkcolor}{HTML}{006DAF}
 #+LATEX_HEADER: \hypersetup{colorlinks=true, linkcolor=mylinkcolor, urlcolor=mylinkcolor}
@@ -198,7 +196,7 @@ The insertion of ~\author~ can be turned off with:
 ,#+OPTIONS: author:nil
 #+end_src
 
-#+beamer: \framebreak
+#+BEAMER: \framebreak
 
 The author's email can be included with:
 
@@ -219,6 +217,33 @@ can be included with the following commands:
 ,#+BEAMER_HEADER: \institute[INST]{Institute\\\url{http://www.institute.edu}}
 ,#+BEAMER_HEADER: \titlegraphic{\includegraphics[height=1.5cm]{InstLogo}}
 #+end_src
+
+# Here is a somewhat more elaborate set-up.
+#
+# In customize org-export-latex-classes (or add to appropriate place in
+# .emacs):
+#
+# \documentclass{beamer}
+# \mode<{{{beamermode}}}>
+# {
+#  \usetheme{{{{beamertheme}}}}
+#  \usecolortheme{{{{beamercolortheme}}}}
+# }
+# \usepackage[english]{babel}
+# \usepackage[latin1]{inputenc}
+# \usepackage{times}
+# \usepackage[T1]{fontenc}
+# \institute{{{{beamerinstitute}}}}
+# \subject{{{{beamersubject}}}}
+#
+# The macros here let me specify things that I like to change on a per-
+# file basis.  So, in my org file there is this:
+#
+# #+MACRO: BEAMERMODE presentation
+# #+MACRO: BEAMERTHEME Malmoe
+# #+MACRO: BEAMERCOLORTHEME tsdye
+# #+MACRO: BEAMERSUBJECT Evolutionary archaeology
+# #+MACRO: BEAMERINSTITUTE T. S. Dye \& Colleagues \\ B. P. Bishop Museum
 
 # #+begin_note
 # On [2015-03-21 Sat], Rasmus sent a patch to add the ~#+SUBTITLE~ keyword to
@@ -302,11 +327,11 @@ How to center pictures horizontally?
 
 - Figures
 
-  #+ATTR_LaTeX: :width 3cm
+  #+ATTR_LATEX: :width 3cm
   [[file:images/dot.png]]
   # \pgfuseimage{myfigure}
 
-  #+ATTR_LaTeX: :width 3cm
+  #+ATTR_LATEX: :width 3cm
   #+CAPTION: The caption is /always/ placed *below* the figure.
   [[file:images/square.png]]
   # myotherfigure
@@ -384,12 +409,6 @@ summary(cars)
 | 3rd Qu.:19.0 | 3rd Qu.: 56.00 |
 | Max.   :25.0 | Max.   :120.00 |
 
-XXX Is this needed?
-
-#+begin_src org
-,#+LATEX_HEADER: \lstdefinelanguage{R}{}
-#+end_src
-
 ** Frame with code only
 
 To display a code block without evaluating it, you specify the ~:eval no~ option:
@@ -453,7 +472,7 @@ plot(cars)
 #+end_src
 
 #+begin_center
-#+ATTR_LaTeX: :height 4.5cm
+#+ATTR_LATEX: :height 4.5cm
 #+results:
 [[file:qplot.png]]
 #+end_center
@@ -481,7 +500,7 @@ then:
 
 XXX Misplaced footnote!
 
-#+beamer: \framebreak
+#+BEAMER: \framebreak
 
 If you set the ~H~ value to ~3~ in the ~OPTIONS~ line:
 
@@ -527,11 +546,7 @@ export menu:
      Export as PDF file and *open* (Beamer).
 
 #+begin_note
-You do not need to set ~LaTeX_CLASS~ to ~beamer~.
-#+end_note
-
-#+begin_note
-You do not need to set ~LaTeX_CLASS~ to ~beamer~.
+You do not need to set ~LATEX_CLASS~ to ~beamer~.
 #+end_note
 
 ** Support editing
@@ -690,7 +705,7 @@ LaTeX when it's exported.
 #+end_src
 
 #+begin_src org
-,#+LaTeX: \parbox{4cm}{...}
+,#+LATEX: \parbox{4cm}{...}
 #+end_src
 
 Such LaTeX code will only be present in the exports to *LaTeX and Beamer*.
@@ -719,7 +734,7 @@ Such LaTeX code will *only* be present in the export to *Beamer*.
 :BEAMER_env: ignoreheading
 :END:
 
-#+beamer: \framebreak
+#+BEAMER: \framebreak
 
 It is especially useful for more *advanced stuff* like images or tables where you
 need more control of the LaTeX options than Org mode actually gives you.
@@ -799,9 +814,9 @@ Font Risque.
 Something along these lines will work:
 
 #+begin_src org
-,#+LaTeX: {\footnotesize
+,#+LATEX: {\footnotesize
 ... Org stuff here ...
-,#+LaTeX: }
+,#+LATEX: }
 #+end_src
 
 Choose the font size you want.
@@ -819,10 +834,10 @@ property to the frame's headline.  You can also specify a percentage, as in
 
 # You can also use LaTeX ~resizebox~ to shrink table fonts:
 
-# #+LaTeX: \resizebox{\textwidth}{!}{
+# #+LATEX: \resizebox{\textwidth}{!}{
 # | 124.195 | 310.528 |
 # | 120.848 | 122.702 |
-# #+LaTeX: }
+# #+LATEX: }
 
 ** Column view
 
@@ -973,7 +988,7 @@ Create *colored boxes* whose "beamer color" to use (= a *pair of colors*: ~bg~ +
 is defined by the heading text, for example ~title in head/foot~ or ~myblockcolor~.
 
 #+begin_src org
-,#+LaTeX: \setbeamercolor{myblockcolor}{bg=magenta,fg=white}
+,#+LATEX: \setbeamercolor{myblockcolor}{bg=magenta,fg=white}
 
 ,*** myblockcolor                                             :B_beamercolorbox:
 :PROPERTIES:
@@ -984,7 +999,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua.
 #+end_src
 
-#+LaTeX: \setbeamercolor{myblockcolor}{bg=magenta,fg=white}
+#+LATEX: \setbeamercolor{myblockcolor}{bg=magenta,fg=white}
 
 *** myblockcolor                                              :B_beamercolorbox:
 :PROPERTIES:
@@ -996,7 +1011,7 @@ tempor incididunt ut labore et dolore magna aliqua.
 
 ** ~beamercolorbox~ environment
 
-#+LaTeX: \setbeamercolor{myblockcolor}{bg=magenta,fg=white}
+#+LATEX: \setbeamercolor{myblockcolor}{bg=magenta,fg=white}
 
 #+begin_src org
 ,*** myblockcolor                                             :B_beamercolorbox:
@@ -1020,7 +1035,7 @@ tempor incididunt ut labore et dolore magna aliqua.
 
 ** ~beamercolorbox~ environment
 
-#+LaTeX: \setbeamercolor{myblockcolor}{bg=magenta,fg=white}
+#+LATEX: \setbeamercolor{myblockcolor}{bg=magenta,fg=white}
 
 #+begin_src org
 ,*** myblockcolor                                             :B_beamercolorbox:
@@ -1044,7 +1059,7 @@ tempor incididunt ut labore et dolore magna aliqua.
 
 ** ~beamercolorbox~ environment
 
-#+LaTeX: \setbeamercolor{myblockcolor}{bg=magenta,fg=white}
+#+LATEX: \setbeamercolor{myblockcolor}{bg=magenta,fg=white}
 
 #+begin_src org
 ,*** myblockcolor                                             :B_beamercolorbox:
@@ -1196,14 +1211,14 @@ If you want to place the source or the author's name at the right, after the
 quote, you can use these commands:
 
 #+begin_src org
-,#+LaTeX: \begin{raggedleft}
+,#+LATEX: \begin{raggedleft}
 (Albert Einstein)
-,#+LaTeX: \par\end{raggedleft}
+,#+LATEX: \par\end{raggedleft}
 #+end_src
 
-#+LaTeX: \begin{raggedleft}
+#+LATEX: \begin{raggedleft}
 (Albert Einstein)
-#+LaTeX: \par\end{raggedleft}
+#+LATEX: \par\end{raggedleft}
 
 ** ~quotation~ environment
 
@@ -1435,7 +1450,7 @@ a 2-column layout.
 :BEAMER_col: 0.39
 :END:
 
-#+ATTR_LaTeX: :width 3cm
+#+ATTR_LATEX: :width 3cm
 [[file:images/square.png]]
 # mygraphic.jpg
 
@@ -1485,7 +1500,7 @@ Balancing text in columns.
 
 #+LATEX_HEADER: \usepackage{multicol}
 
-#+LaTeX: \begin{multicols}{2}
+#+LATEX: \begin{multicols}{2}
 
 # ... a fancy verbatim block ...
 
@@ -1501,7 +1516,7 @@ Balancing text in columns.
 - Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
   deserunt mollit anim id est laborum.
 
-#+LaTeX: \end{multicols}
+#+LATEX: \end{multicols}
 
 * Special cases
 
@@ -1818,12 +1833,12 @@ break up the frame into several frames, is set the option ~allowframebreaks~.
 
 - You might want to put ~allowframebreaks=0.9~ there
 
-#+beamer: \framebreak
+#+BEAMER: \framebreak
 
 - To add an explicit page break:
 
   #+begin_src org
-  ,#+beamer: \framebreak
+  ,#+BEAMER: \framebreak
   #+end_src
 
 - To allow frame breaks for *all frames* of the *whole* document[fn:: Till Tantau
@@ -1961,7 +1976,7 @@ Here an example using ~tikz~:
 
 ** Multimedia
 
-# #+LaTeX: \movie[externalviewer]{\beamergotobutton{Start movie}}{cc.mp4}
+# #+LATEX: \movie[externalviewer]{\beamergotobutton{Start movie}}{cc.mp4}
 
 ** More on Org: Exporting a subtree
 
