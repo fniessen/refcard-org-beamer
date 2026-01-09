@@ -1841,6 +1841,10 @@ break up the frame into several frames, is set the option ~allowframebreaks~.
   ,#+BEAMER: \framebreak
   #+end_src
 
+  As an alternative, it is also possible to insert a frame break using the
+  ~{{{framebreak}}}~ macro (if you use my Org-macros), which can be placed inline
+  anywhere in the text.
+
 - To allow frame breaks for *all frames* of the *whole* document[fn:: Till Tantau
   (author of Beamer) was really not keen on the idea of setting the
   auto-breaking frames option globally.]:
